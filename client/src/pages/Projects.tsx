@@ -1,7 +1,14 @@
 import { useEffect, useState} from 'react';
 
+interface Project {
+    _id: string;
+    title: string;
+    description: string;
+    date_created: string;
+}
+
 const Projects = ()=>{
-    const [projects, setProjects] = useState(null);
+    const [projects, setProjects] = useState<Array<Project>>([]);
     useEffect(()=>{//go back to previous tutorial and fix how the api outputs data
         const fetchProjects = async ()=> {
             const response = await fetch('http://localhost:3001/api/projects');
