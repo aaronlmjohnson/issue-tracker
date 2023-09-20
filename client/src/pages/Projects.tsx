@@ -11,7 +11,7 @@ const Projects = ()=>{
     const [projects, setProjects] = useState<Array<Project>>([]);
     useEffect(()=>{//go back to previous tutorial and fix how the api outputs data
         const fetchProjects = async ()=> {
-            const response = await fetch('http://localhost:3001/api/projects');
+            const response = await fetch('http://localhost:3001/projects');
             const json = await response.json();
 
             if(response.ok){
