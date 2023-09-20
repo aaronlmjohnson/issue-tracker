@@ -1,7 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-const projectController = require("../controllers/projectController");
+console.log("hi");
+import  {projectList} from "../controllers/projectController";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -9,6 +10,6 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET all projects */
-router.get('/projects', projectController.projectList);
+router.get('/projects', projectList);
 
 export default router;
