@@ -10,7 +10,6 @@ import mongoose  from "mongoose";
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 
-
 const app = express();
 dotenv.config();
 // Set up mongoose connection

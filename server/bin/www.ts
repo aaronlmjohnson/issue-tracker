@@ -13,7 +13,6 @@ import app from '../app';
 import Debug from 'debug';
 import http from 'http';
 
-
 const debug = Debug('server:server');
 
 /**

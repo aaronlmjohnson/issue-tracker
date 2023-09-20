@@ -1,7 +1,6 @@
 import express from 'express';
 const router = express.Router();
 
-console.log("hi");
 import  {projectList} from "../controllers/projectController";
 
 /* GET home page. */

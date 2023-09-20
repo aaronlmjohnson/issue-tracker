@@ -2,11 +2,11 @@
     "compilerOptions": {
         "module": "NodeNext",
         "moduleResolution": "node",
-        "baseUrl": "bin",
+        "baseUrl": "server",
         "outDir": "dist",
         "sourceMap": true,
         "noImplicitAny": true,
         
     },
-    "include":["bin/**/*"]
+    "include":["bin/**/*", "routes/**/*", "controllers/**/*"]
 }
