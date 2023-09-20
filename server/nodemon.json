@@ -1,0 +1,5 @@
+{
+    "watch": ["bin"],
+    "ext": ".ts, .js",
+    "exec": "ts-node ./bin/www.ts"
+}
