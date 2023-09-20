@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 const projectController = require("../controllers/projectController");
@@ -11,4 +11,4 @@ router.get('/', function(req, res, next) {
 /* GET all projects */
 router.get('/projects', projectController.projectList);
 
-module.exports = router;
+export default router;
