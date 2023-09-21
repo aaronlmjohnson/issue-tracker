@@ -1,8 +1,13 @@
-import mongoose from "mongoose";
+import {Schema, model} from "mongoose"
 
-const Schema = mongoose.Schema;
+interface IUser {
+    username: String,
+    password: String,
+    role: String,
+    date_created: Date,
+}
 
-const UserSchema = new Schema({
+const userSchema = new Schema<IUser>({
     username: { type: String, required: true, maxLength: 32 },
     password: { type: String, required: true },
     role: { 
@@ -14,4 +19,10 @@ const UserSchema = new Schema({
     date_created: { type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model("User", UserSchema);
+const User = model<IUser>("User", userSchema);
+
+export default User;
+
+
+
+

@@ -1,11 +1,17 @@
-import mongoose from "mongoose";
+import {Schema, model, connect} from "mongoose";
 
-const Schema = mongoose.Schema;
+interface IProject {
+    title: String,
+    description: String,
+    date_created: Date
+}
 
-const ProjectSchema = new Schema({
+const projectSchema = new Schema<IProject>({
     title: { type: String, required: true, maxLength: 32 },
     description: { type: String, required: true, maxLength: 100 },
-    date_created: { type: Date }
+    date_created: { type: Date, default: Date.now() }
 });
 
-module.exports = mongoose.model("Project", ProjectSchema);
+const Project = model<IProject>("Project", projectSchema);
+
+export default Project;
