@@ -5,7 +5,9 @@
   dotenv.config();
 
   import Project from "./project";
+  import User from './user';
   const projects = [];
+  const users = [];
   
   import mongoose from "mongoose";
   mongoose.set("strictQuery", false);
@@ -21,7 +23,7 @@
       await mongoose.connect(connectionString);
     }
     console.log("Debug: Should be connected?");
-    await createProjects();
+    await createUsers();
 
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
@@ -36,8 +38,22 @@
     projects[index] = project;
     console.log(`Added project: ${title}`);
   }
+
+  async function userCreate(index, username, password, role, date_created) {
+    const user = new User({ username, password, role, date_created});
+    await user.save();
+    users[index] = user;
+    console.log(`Added user: ${username}`);
+  }
   
   
+  async function createUsers() {
+    console.log("Adding users");
+    await Promise.all([
+      userCreate(0, "Aaron","password","Administrator", Date.now()),
+    ]);
+  }
+
   async function createProjects() {
     console.log("Adding projects");
     await Promise.all([

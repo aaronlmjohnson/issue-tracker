@@ -41,7 +41,9 @@ exports.__esModule = true;
 var dotenv = require("dotenv");
 dotenv.config();
 var project_1 = require("./project");
+var user_1 = require("./user");
 var projects = [];
+var users = [];
 var mongoose_1 = require("mongoose");
 mongoose_1["default"].set("strictQuery", false);
 main()["catch"](function (err) { return console.log(err); });
@@ -67,7 +69,7 @@ function main() {
                     connectionString = process.env.ATLAS_URI || "";
                     main()["catch"](function (err) { return console.log(err); });
                     console.log("Debug: Should be connected?");
-                    return [4 /*yield*/, createProjects()];
+                    return [4 /*yield*/, createUsers()];
                 case 1:
                     _a.sent();
                     console.log("Debug: Closing mongoose");
@@ -92,6 +94,39 @@ function projectCreate(index, title, description, date_created) {
                     _a.sent();
                     projects[index] = project;
                     console.log("Added project: ".concat(title));
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function userCreate(index, username, password, role, date_created) {
+    return __awaiter(this, void 0, void 0, function () {
+        var user;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    user = new user_1["default"]({ username: username, password: password, role: role, date_created: date_created });
+                    return [4 /*yield*/, user.save()];
+                case 1:
+                    _a.sent();
+                    users[index] = user;
+                    console.log("Added user: ".concat(username));
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function createUsers() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    console.log("Adding users");
+                    return [4 /*yield*/, Promise.all([
+                            userCreate(0, "Aaron", "password", "Administrator", Date.now()),
+                        ])];
+                case 1:
+                    _a.sent();
                     return [2 /*return*/];
             }
         });
