@@ -5,6 +5,9 @@ import logger from 'morgan';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose  from "mongoose";
+import session from "express-session";
+import passport from "passport";
+import LocalStratetgy from "passport-local";
 
 
 import indexRouter from './routes/index';
