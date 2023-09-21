@@ -1,4 +1,4 @@
-const Project = require("../models/project");
+import Project from "../models/project";
 import  asyncHandler from "express-async-handler";
 
 export const projectList = asyncHandler(async(req, res, next)=>{

@@ -1,22 +1,25 @@
 #! /usr/bin/env node
 
   // Get arguments passed on command line
-  const dotenv = require('dotenv');
+  import * as dotenv from 'dotenv';
   dotenv.config();
 
-  
-  const Project = require("./models/project");
-
+  import Project from "./project";
   const projects = [];
   
-  const mongoose = require("mongoose");
+  import mongoose from "mongoose";
   mongoose.set("strictQuery", false);
     
   main().catch((err) => console.log(err));
   
   async function main() {
     console.log("Debug: About to connect");
-    await mongoose.connect(process.env.ATLAS_URI);
+    const connectionString = process.env.ATLAS_URI || "";
+
+    main().catch((err) => console.log(err));
+    async function main() {
+      await mongoose.connect(connectionString);
+    }
     console.log("Debug: Should be connected?");
     await createProjects();
 
