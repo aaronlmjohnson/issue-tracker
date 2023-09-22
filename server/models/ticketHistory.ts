@@ -4,7 +4,8 @@ interface ITicketHistory {
     fieldToUpdate: {
         type: String,
         required: true,
-        enum: ["Prioirity", "Status", "Assignee"]
+        enum: ["Creation", "Prioirity", "Status", "Assignee"],
+        default: "Creation"
     },
     previousValue: Schema.Types.Mixed,
     updatedValue: Schema.Types.Mixed,
@@ -15,8 +16,8 @@ interface ITicketHistory {
 const ticketHistorySchema = new Schema<ITicketHistory>({
     fieldToUpdate: {type: String, ref: "User", required: true},
     ticket: {type: Schema.Types.ObjectId, ref: "Ticket", required: true},
-    previousValue: { any: Schema.Types.Mixed, default: null},
-    updatedValue: { any: Schema.Types.Mixed, required: true},
+    previousValue: { type: Schema.Types.Mixed, default: null},
+    updatedValue: { type: Schema.Types.Mixed, required: true},
     date_updated: { type: Date, default: Date.now()},
 });
 

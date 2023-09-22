@@ -9,6 +9,7 @@
   import User from './user';
   import Ticket from './ticket';
   import Comment from './comment';
+  import TicketHistory from './ticketHistory';
 
   const projects: any[] = [];
   const users: any[] = [];
@@ -24,10 +25,8 @@
     return new Promise(r => setTimeout(r, ms));
   }
 
-
   main().catch((err) => console.log(err));
 
-  
   async function main() {
     console.log("Debug: About to connect");
 
@@ -62,6 +61,12 @@
     console.log(`Added project: ${title}`);
   }
 
+  async function ticketHistoryCreate(fieldToUpdate, previousValue, updatedValue, ticket, date_updated){
+    const history = new TicketHistory({fieldToUpdate, previousValue, updatedValue, ticket, date_updated});
+    await history.save();
+    console.log(`Added Ticket History for Ticket: ${ticket.title}`);
+  }
+
   async function ticketCreate(index, title, description, project, date_created, author, priority, status, type, assignee){
     const ticket = new Ticket({
       title,
@@ -77,6 +82,7 @@
 
     await ticket.save();
     tickets[index] = ticket;
+    ticketHistoryCreate("Creation", null, Date.now(), ticket._id, Date.now());
     console.log(`Added ticket: ${title}`);
   }
 
@@ -113,7 +119,7 @@
     console.log("Adding Tickets");
     await Promise.all([
       ticketCreate(0, "Track Ticket History", "Being able to see the history of all of the changes of a Ticket.", projects[0], Date.now(),
-                    users[1], "Medium", "Not Assigned", "Feature", "")
+                    users[1], "Medium", "Not Assigned", "Feature", ""),
     ]);
   }
 

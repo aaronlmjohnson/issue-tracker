@@ -45,6 +45,7 @@ var project_1 = require("./project");
 var user_1 = require("./user");
 var ticket_1 = require("./ticket");
 var comment_1 = require("./comment");
+var ticketHistory_1 = require("./ticketHistory");
 var projects = [];
 var users = [];
 var tickets = [];
@@ -133,6 +134,22 @@ function projectCreate(index, title, description, date_created, project_lead, de
         });
     });
 }
+function ticketHistoryCreate(fieldToUpdate, previousValue, updatedValue, ticket, date_updated) {
+    return __awaiter(this, void 0, void 0, function () {
+        var history;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    history = new ticketHistory_1["default"]({ fieldToUpdate: fieldToUpdate, previousValue: previousValue, updatedValue: updatedValue, ticket: ticket, date_updated: date_updated });
+                    return [4 /*yield*/, history.save()];
+                case 1:
+                    _a.sent();
+                    console.log("Added Ticket History for Ticket: ".concat(ticket.title));
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 function ticketCreate(index, title, description, project, date_created, author, priority, status, type, assignee) {
     return __awaiter(this, void 0, void 0, function () {
         var ticket;
@@ -154,6 +171,7 @@ function ticketCreate(index, title, description, project, date_created, author, 
                 case 1:
                     _a.sent();
                     tickets[index] = ticket;
+                    ticketHistoryCreate("Creation", null, Date.now(), ticket._id, Date.now());
                     console.log("Added ticket: ".concat(title));
                     return [2 /*return*/];
             }
@@ -177,7 +195,7 @@ function commentCreate(index, author, message, project, date_created, ticket) {
                 case 1:
                     _a.sent();
                     comments[index] = comment;
-                    console.log("Added comment from : ".concat(author));
+                    console.log("Added comment from : ".concat(author.username));
                     return [2 /*return*/];
             }
         });
@@ -225,7 +243,7 @@ function createTickets() {
                 case 0:
                     console.log("Adding Tickets");
                     return [4 /*yield*/, Promise.all([
-                            ticketCreate(0, "Track Ticket History", "Being able to see the history of all of the changes of a Ticket.", projects[0], Date.now(), users[1], "Medium", "Not Assigned", "Feature", "")
+                            ticketCreate(0, "Track Ticket History", "Being able to see the history of all of the changes of a Ticket.", projects[0], Date.now(), users[1], "Medium", "Not Assigned", "Feature", ""),
                         ])];
                 case 1:
                     _a.sent();
