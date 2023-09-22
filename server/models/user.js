@@ -12,5 +12,8 @@ var userSchema = new mongoose_1.Schema({
     },
     date_created: { type: Date, "default": Date.now }
 });
+userSchema.virtual("url").get(function () {
+    return "/users/".concat(this._id);
+});
 var User = (0, mongoose_1.model)("User", userSchema);
 exports["default"] = User;

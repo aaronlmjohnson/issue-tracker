@@ -7,14 +7,24 @@
 
   import Project from "./project";
   import User from './user';
-  const projects = [];
+  import Ticket from './ticket';
+
+  const projects: any[] = [];
   const users: any[] = [];
+  const tickets: any[] = [];
   
   import mongoose, { Number } from "mongoose";
   mongoose.set("strictQuery", false);
     const connectionString = process.env.ATLAS_URI || "";
 
+    const timeOut = async(ms:any)=>{
+      console.log("waiting...");
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+
   main().catch((err) => console.log(err));
+
   
   async function main() {
     console.log("Debug: About to connect");
@@ -23,17 +33,13 @@
     console.log("Debug: Should be connected?");
 
     await createUsers();
+    //to prevent error of projects being created first
+    await timeOut(3000);
     await createProjects();
+    await createTickets();
 
     console.log("Debug: Closing mongoose");
     mongoose.connection.close();
-  }
-
-  async function projectCreate(index:any, title:String, description:String, date_created:number, project_lead:any, developers_assigned_to:any) {
-    const project = new Project({ title, description, date_created, project_lead, developers_assigned_to});
-    await project.save();
-    projects[index] = project;
-    console.log(`Added project: ${title}`);
   }
 
   async function userCreate(index, username, password, role, date_created) {
@@ -43,9 +49,35 @@
       await user.save();
       users[index] = user;
       console.log(`Added user: ${username}`);
-      // if err, do something
-      // otherwise, store hashedPassword in DB
     });
+  }
+
+  async function projectCreate(index:any, title:String, description:String, date_created:number, project_lead:any, developers_assigned_to:any) {
+    const project = new Project({ title, description, date_created, project_lead, developers_assigned_to});
+    await project.save();
+    projects[index] = project;
+    console.log(`Added project: ${title}`);
+  }
+
+
+
+  async function ticketCreate(index, title, description, project, date_created, author, priority, status, type, assignee, comments){
+    const ticket = new Ticket({
+      title,
+      description,
+      project,
+      date_created,
+      author,
+      priority,
+      status,
+      type,
+      assignee,
+      comments
+    });
+
+    await ticket.save();
+    tickets[index] = ticket;
+    console.log(`Added ticket: ${title}`);
   }
   
   async function createUsers() {
@@ -61,6 +93,14 @@
   async function createProjects() {
     const lead = await User.findOne({role: "Project Lead"}).exec();
     await projectCreate(0, "Issue Tracker", "An app for tracking bugs and features.", Date.now(), users[2], [users[1], users[3]]);
+  }
+
+  async function createTickets(){
+    console.log("Adding Tickets");
+    await Promise.all([
+      ticketCreate(0, "Track Ticket History", "Being able to see the history of all of the changes of a Ticket.", projects[0], Date.now(),
+                    users[1], "Medium", "Not Assigned", "Feature", "", [""])
+    ]);
   }
   
  

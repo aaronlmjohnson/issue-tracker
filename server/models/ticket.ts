@@ -9,8 +9,8 @@ interface ITicket {
     priority: String,
     status: String,
     type: String,
-    assignee: Schema.Types.ObjectId,
-    comments: Schema.Types.ObjectId[]
+    // assignee: Schema.Types.ObjectId,
+    // comments: Schema.Types.ObjectId[]
 }
 
 const ticketSchema = new Schema<ITicket>({
@@ -35,8 +35,8 @@ const ticketSchema = new Schema<ITicket>({
         enum: ["Feature", "Bug"],
         default: "Feature",
     },
-    assignee:{ type: Schema.Types.ObjectId, ref: "User"},
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment"}]
+    // assignee:{ type: Schema.Types.ObjectId, ref: "User"},
+    // comments: [{ type: Schema.Types.ObjectId, ref: "Comment"}]
 });
 
 ticketSchema.virtual("url").get(function(){

@@ -43,11 +43,19 @@ var bcrypt = require("bcryptjs");
 dotenv.config();
 var project_1 = require("./project");
 var user_1 = require("./user");
+var ticket_1 = require("./ticket");
 var projects = [];
 var users = [];
+var tickets = [];
 var mongoose_1 = require("mongoose");
 mongoose_1["default"].set("strictQuery", false);
 var connectionString = process.env.ATLAS_URI || "";
+var timeOut = function (ms) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        console.log("waiting...");
+        return [2 /*return*/, new Promise(function (r) { return setTimeout(r, ms); })];
+    });
+}); };
 main()["catch"](function (err) { return console.log(err); });
 function main() {
     return __awaiter(this, void 0, void 0, function () {
@@ -62,28 +70,19 @@ function main() {
                     return [4 /*yield*/, createUsers()];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, createProjects()];
+                    //to prevent error of projects being created first
+                    return [4 /*yield*/, timeOut(3000)];
                 case 3:
+                    //to prevent error of projects being created first
+                    _a.sent();
+                    return [4 /*yield*/, createProjects()];
+                case 4:
+                    _a.sent();
+                    return [4 /*yield*/, createTickets()];
+                case 5:
                     _a.sent();
                     console.log("Debug: Closing mongoose");
                     mongoose_1["default"].connection.close();
-                    return [2 /*return*/];
-            }
-        });
-    });
-}
-function projectCreate(index, title, description, date_created, project_lead, developers_assigned_to) {
-    return __awaiter(this, void 0, void 0, function () {
-        var project;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    project = new project_1["default"]({ title: title, description: description, date_created: date_created, project_lead: project_lead, developers_assigned_to: developers_assigned_to });
-                    return [4 /*yield*/, project.save()];
-                case 1:
-                    _a.sent();
-                    projects[index] = project;
-                    console.log("Added project: ".concat(title));
                     return [2 /*return*/];
             }
         });
@@ -109,6 +108,51 @@ function userCreate(index, username, password, role, date_created) {
                 });
             }); });
             return [2 /*return*/];
+        });
+    });
+}
+function projectCreate(index, title, description, date_created, project_lead, developers_assigned_to) {
+    return __awaiter(this, void 0, void 0, function () {
+        var project;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    project = new project_1["default"]({ title: title, description: description, date_created: date_created, project_lead: project_lead, developers_assigned_to: developers_assigned_to });
+                    return [4 /*yield*/, project.save()];
+                case 1:
+                    _a.sent();
+                    projects[index] = project;
+                    console.log("Added project: ".concat(title));
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function ticketCreate(index, title, description, project, date_created, author, priority, status, type, assignee, comments) {
+    return __awaiter(this, void 0, void 0, function () {
+        var ticket;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    ticket = new ticket_1["default"]({
+                        title: title,
+                        description: description,
+                        project: project,
+                        date_created: date_created,
+                        author: author,
+                        priority: priority,
+                        status: status,
+                        type: type,
+                        assignee: assignee,
+                        comments: comments
+                    });
+                    return [4 /*yield*/, ticket.save()];
+                case 1:
+                    _a.sent();
+                    tickets[index] = ticket;
+                    console.log("Added ticket: ".concat(title));
+                    return [2 /*return*/];
+            }
         });
     });
 }
@@ -141,6 +185,22 @@ function createProjects() {
                     lead = _a.sent();
                     return [4 /*yield*/, projectCreate(0, "Issue Tracker", "An app for tracking bugs and features.", Date.now(), users[2], [users[1], users[3]])];
                 case 2:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function createTickets() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    console.log("Adding Tickets");
+                    return [4 /*yield*/, Promise.all([
+                            ticketCreate(0, "Track Ticket History", "Being able to see the history of all of the changes of a Ticket.", projects[0], Date.now(), users[1], "Medium", "Not Assigned", "Feature", "", [""])
+                        ])];
+                case 1:
                     _a.sent();
                     return [2 /*return*/];
             }
