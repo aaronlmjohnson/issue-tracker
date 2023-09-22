@@ -39,6 +39,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 // Get arguments passed on command line
 var dotenv = require("dotenv");
+var bcrypt = require("bcryptjs");
 dotenv.config();
 var project_1 = require("./project");
 var user_1 = require("./user");
@@ -73,15 +74,11 @@ function main() {
                 case 1:
                     _a.sent();
                     console.log("Debug: Closing mongoose");
-                    mongoose_1["default"].connection.close();
                     return [2 /*return*/];
             }
         });
     });
 }
-// We pass the index to the ...Create functions so that, for example,
-// genre[0] will always be the Fantasy genre, regardless of the order
-// in which the elements of promise.all's argument complete.
 function projectCreate(index, title, description, date_created) {
     return __awaiter(this, void 0, void 0, function () {
         var project;
@@ -101,18 +98,24 @@ function projectCreate(index, title, description, date_created) {
 }
 function userCreate(index, username, password, role, date_created) {
     return __awaiter(this, void 0, void 0, function () {
-        var user;
+        var _this = this;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    user = new user_1["default"]({ username: username, password: password, role: role, date_created: date_created });
-                    return [4 /*yield*/, user.save()];
-                case 1:
-                    _a.sent();
-                    users[index] = user;
-                    console.log("Added user: ".concat(username));
-                    return [2 /*return*/];
-            }
+            bcrypt.hash(password, 10, function (err, hashedPassword) { return __awaiter(_this, void 0, void 0, function () {
+                var user;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            user = new user_1["default"]({ username: username, password: hashedPassword, role: role, date_created: date_created });
+                            return [4 /*yield*/, user.save()];
+                        case 1:
+                            _a.sent();
+                            users[index] = user;
+                            console.log("Added user: ".concat(username));
+                            return [2 /*return*/];
+                    }
+                });
+            }); });
+            return [2 /*return*/];
         });
     });
 }

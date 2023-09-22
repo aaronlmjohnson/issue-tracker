@@ -2,6 +2,7 @@
 
   // Get arguments passed on command line
   import * as dotenv from 'dotenv';
+  import * as bcrypt from 'bcryptjs';
   dotenv.config();
 
   import Project from "./project";
@@ -26,12 +27,9 @@
     await createUsers();
 
     console.log("Debug: Closing mongoose");
-    mongoose.connection.close();
+    // mongoose.connection.close();
   }
-  
-  // We pass the index to the ...Create functions so that, for example,
-  // genre[0] will always be the Fantasy genre, regardless of the order
-  // in which the elements of promise.all's argument complete.
+
   async function projectCreate(index, title, description, date_created) {
     const project = new Project({ title, description, date_created});
     await project.save();
@@ -40,10 +38,16 @@
   }
 
   async function userCreate(index, username, password, role, date_created) {
-    const user = new User({ username, password, role, date_created});
-    await user.save();
-    users[index] = user;
-    console.log(`Added user: ${username}`);
+    bcrypt.hash(password, 10, async (err, hashedPassword) => {
+      
+      const user = new User({ username, password: hashedPassword, role, date_created});
+      await user.save();
+      users[index] = user;
+      console.log(`Added user: ${username}`);
+      // if err, do something
+      // otherwise, store hashedPassword in DB
+    });
+    
   }
   
   

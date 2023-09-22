@@ -6,5 +6,5 @@ export const projectList = asyncHandler(async(req, res, next)=>{
         .sort({title: 1})
         .exec();
     res.status(200).json(projects);
-})
+});
 
