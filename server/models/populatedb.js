@@ -47,45 +47,38 @@ var projects = [];
 var users = [];
 var mongoose_1 = require("mongoose");
 mongoose_1["default"].set("strictQuery", false);
+var connectionString = process.env.ATLAS_URI || "";
 main()["catch"](function (err) { return console.log(err); });
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        function main() {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, mongoose_1["default"].connect(connectionString)];
-                        case 1:
-                            _a.sent();
-                            return [2 /*return*/];
-                    }
-                });
-            });
-        }
-        var connectionString;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     console.log("Debug: About to connect");
-                    connectionString = process.env.ATLAS_URI || "";
-                    main()["catch"](function (err) { return console.log(err); });
-                    console.log("Debug: Should be connected?");
-                    return [4 /*yield*/, createUsers()];
+                    return [4 /*yield*/, mongoose_1["default"].connect(connectionString)];
                 case 1:
                     _a.sent();
+                    console.log("Debug: Should be connected?");
+                    return [4 /*yield*/, createUsers()];
+                case 2:
+                    _a.sent();
+                    return [4 /*yield*/, createProjects()];
+                case 3:
+                    _a.sent();
                     console.log("Debug: Closing mongoose");
+                    mongoose_1["default"].connection.close();
                     return [2 /*return*/];
             }
         });
     });
 }
-function projectCreate(index, title, description, date_created) {
+function projectCreate(index, title, description, date_created, project_lead, developers_assigned_to) {
     return __awaiter(this, void 0, void 0, function () {
         var project;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    project = new project_1["default"]({ title: title, description: description, date_created: date_created });
+                    project = new project_1["default"]({ title: title, description: description, date_created: date_created, project_lead: project_lead, developers_assigned_to: developers_assigned_to });
                     return [4 /*yield*/, project.save()];
                 case 1:
                     _a.sent();
@@ -127,6 +120,9 @@ function createUsers() {
                     console.log("Adding users");
                     return [4 /*yield*/, Promise.all([
                             userCreate(0, "Aaron", "password", "Administrator", Date.now()),
+                            userCreate(1, "DeveloperBob", "password", "Developer", Date.now()),
+                            userCreate(2, "ProjectLeadSue", "password", "Project Lead", Date.now()),
+                            userCreate(3, "DeveloperMike", "password", "Developer", Date.now()),
                         ])];
                 case 1:
                     _a.sent();
@@ -137,16 +133,14 @@ function createUsers() {
 }
 function createProjects() {
     return __awaiter(this, void 0, void 0, function () {
+        var lead;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    console.log("Adding projects");
-                    return [4 /*yield*/, Promise.all([
-                            projectCreate(0, "Issue Tracker", "An app for tracking bugs and features.", "09-16-2023"),
-                            projectCreate(1, "Cool Game", "A cool new game.", "03-07-2023"),
-                            projectCreate(2, "Video Game Display App", "A project that displays video game data from RAWG API", "09-01-2022"),
-                        ])];
+                case 0: return [4 /*yield*/, user_1["default"].findOne({ role: "Project Lead" }).exec()];
                 case 1:
+                    lead = _a.sent();
+                    return [4 /*yield*/, projectCreate(0, "Issue Tracker", "An app for tracking bugs and features.", Date.now(), users[2], [users[1], users[3]])];
+                case 2:
                     _a.sent();
                     return [2 /*return*/];
             }

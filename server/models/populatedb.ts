@@ -8,30 +8,29 @@
   import Project from "./project";
   import User from './user';
   const projects = [];
-  const users = [];
+  const users: any[] = [];
   
-  import mongoose from "mongoose";
+  import mongoose, { Number } from "mongoose";
   mongoose.set("strictQuery", false);
-    
+    const connectionString = process.env.ATLAS_URI || "";
+
   main().catch((err) => console.log(err));
   
   async function main() {
     console.log("Debug: About to connect");
-    const connectionString = process.env.ATLAS_URI || "";
 
-    main().catch((err) => console.log(err));
-    async function main() {
-      await mongoose.connect(connectionString);
-    }
+    await mongoose.connect(connectionString);
     console.log("Debug: Should be connected?");
+
     await createUsers();
+    await createProjects();
 
     console.log("Debug: Closing mongoose");
-    // mongoose.connection.close();
+    mongoose.connection.close();
   }
 
-  async function projectCreate(index, title, description, date_created) {
-    const project = new Project({ title, description, date_created});
+  async function projectCreate(index:any, title:String, description:String, date_created:number, project_lead:any, developers_assigned_to:any) {
+    const project = new Project({ title, description, date_created, project_lead, developers_assigned_to});
     await project.save();
     projects[index] = project;
     console.log(`Added project: ${title}`);
@@ -47,24 +46,21 @@
       // if err, do something
       // otherwise, store hashedPassword in DB
     });
-    
   }
-  
   
   async function createUsers() {
     console.log("Adding users");
     await Promise.all([
       userCreate(0, "Aaron","password","Administrator", Date.now()),
+      userCreate(1, "DeveloperBob","password","Developer", Date.now()),
+      userCreate(2, "ProjectLeadSue","password","Project Lead", Date.now()),
+      userCreate(3, "DeveloperMike","password","Developer", Date.now()),
     ]);
   }
 
   async function createProjects() {
-    console.log("Adding projects");
-    await Promise.all([
-      projectCreate(0, "Issue Tracker", "An app for tracking bugs and features.", "09-16-2023"),
-      projectCreate(1, "Cool Game", "A cool new game.", "03-07-2023"),
-      projectCreate(2, "Video Game Display App", "A project that displays video game data from RAWG API", "09-01-2022"),
-    ]);
+    const lead = await User.findOne({role: "Project Lead"}).exec();
+    await projectCreate(0, "Issue Tracker", "An app for tracking bugs and features.", Date.now(), users[2], [users[1], users[3]]);
   }
   
  
