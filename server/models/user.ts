@@ -19,6 +19,10 @@ const userSchema = new Schema<IUser>({
     date_created: { type: Date, default: Date.now}
 });
 
+userSchema.virtual("url").get(function(){
+    return `/users/${this._id}`;
+});
+
 const User = model<IUser>("User", userSchema);
 
 export default User;
