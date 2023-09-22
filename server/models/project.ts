@@ -5,7 +5,7 @@ interface IProject {
     description: String,
     date_created: Date,
     project_lead: Schema.Types.ObjectId,
-    developers_assigned_to: Schema.Types.ObjectId
+    developers_assigned_to: Schema.Types.ObjectId[]
 };
 
 const projectSchema = new Schema<IProject>({
