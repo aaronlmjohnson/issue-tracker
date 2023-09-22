@@ -44,9 +44,11 @@ dotenv.config();
 var project_1 = require("./project");
 var user_1 = require("./user");
 var ticket_1 = require("./ticket");
+var comment_1 = require("./comment");
 var projects = [];
 var users = [];
 var tickets = [];
+var comments = [];
 var mongoose_1 = require("mongoose");
 mongoose_1["default"].set("strictQuery", false);
 var connectionString = process.env.ATLAS_URI || "";
@@ -80,6 +82,9 @@ function main() {
                     _a.sent();
                     return [4 /*yield*/, createTickets()];
                 case 5:
+                    _a.sent();
+                    return [4 /*yield*/, createComments()];
+                case 6:
                     _a.sent();
                     console.log("Debug: Closing mongoose");
                     mongoose_1["default"].connection.close();
@@ -128,7 +133,7 @@ function projectCreate(index, title, description, date_created, project_lead, de
         });
     });
 }
-function ticketCreate(index, title, description, project, date_created, author, priority, status, type, assignee, comments) {
+function ticketCreate(index, title, description, project, date_created, author, priority, status, type, assignee) {
     return __awaiter(this, void 0, void 0, function () {
         var ticket;
         return __generator(this, function (_a) {
@@ -143,14 +148,36 @@ function ticketCreate(index, title, description, project, date_created, author, 
                         priority: priority,
                         status: status,
                         type: type,
-                        assignee: assignee,
-                        comments: comments
+                        assignee: assignee
                     });
                     return [4 /*yield*/, ticket.save()];
                 case 1:
                     _a.sent();
                     tickets[index] = ticket;
                     console.log("Added ticket: ".concat(title));
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function commentCreate(index, author, message, project, date_created, ticket) {
+    return __awaiter(this, void 0, void 0, function () {
+        var comment;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    comment = new comment_1["default"]({
+                        author: author,
+                        message: message,
+                        project: project,
+                        date_created: date_created,
+                        ticket: ticket
+                    });
+                    return [4 /*yield*/, comment.save()];
+                case 1:
+                    _a.sent();
+                    comments[index] = comment;
+                    console.log("Added comment from : ".concat(author));
                     return [2 /*return*/];
             }
         });
@@ -198,9 +225,39 @@ function createTickets() {
                 case 0:
                     console.log("Adding Tickets");
                     return [4 /*yield*/, Promise.all([
-                            ticketCreate(0, "Track Ticket History", "Being able to see the history of all of the changes of a Ticket.", projects[0], Date.now(), users[1], "Medium", "Not Assigned", "Feature", "", [""])
+                            ticketCreate(0, "Track Ticket History", "Being able to see the history of all of the changes of a Ticket.", projects[0], Date.now(), users[1], "Medium", "Not Assigned", "Feature", "")
                         ])];
                 case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function createComments() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    console.log("Adding Comments");
+                    /*
+                      author,
+                      message,
+                      project,
+                      date_created
+                    */
+                    return [4 /*yield*/, Promise.all([
+                            commentCreate(0, users[2], "Is anyone available to work on this?", projects[0], Date.now(), tickets[0]),
+                            commentCreate(1, users[1], "I'm already working on a ticket.", projects[0], Date.now(), tickets[0]),
+                            commentCreate(2, users[3], "I'm available to work on it.", projects[0], Date.now(), tickets[0])
+                        ])];
+                case 1:
+                    /*
+                      author,
+                      message,
+                      project,
+                      date_created
+                    */
                     _a.sent();
                     return [2 /*return*/];
             }
