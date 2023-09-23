@@ -3,7 +3,7 @@ const FormInput = (props: any)=>{
     return (
         <div className= {props.classValue}>
             <label htmlFor={props.forValue}>{props.content}</label>
-            <input className={styling} name={props.nameValue} type={props.type} />
+            <input className={styling} name={props.nameValue} type={props.type} onChange={(e:any) => props.setter(e.target.value)} />
         </div>
     );
 }
