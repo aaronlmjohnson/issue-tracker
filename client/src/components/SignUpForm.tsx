@@ -10,16 +10,16 @@ const SignUpForm = ()=>{
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
         
-        const formContent = {username, password}
-
-        const response = await fetch('http://localhost:3001/sign-up', {
+        const formContent =  { username, password, role: "developer" }
+        const response = await fetch("http://localhost:3001/sign-up", {
             method: "POST",
-            body: JSON.stringify(formContent),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(formContent),
+            
         });
-
+        
         const json = await response.json();
 
         if(!response.ok) setError(json.error);
@@ -30,6 +30,7 @@ const SignUpForm = ()=>{
             setPassword('');
         }
     }
+
 
     return (
         <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
