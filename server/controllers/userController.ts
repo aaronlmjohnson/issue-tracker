@@ -14,10 +14,10 @@ export const createUser = asyncHandler(async (req, res, next)=>{
                 role: req.body.role
             });
 
+            const result = await user.save();
             const token = createToken(user._id);
             res.status(200).json({user: user.username ,token});
         });
-
     } catch(err) {
         res.status(400).json({error: err.message});
         return next(err);
