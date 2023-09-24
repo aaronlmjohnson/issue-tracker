@@ -2,7 +2,7 @@ import {Schema, model} from "mongoose"
 
 interface IUser {
     username: String,
-    password: String,
+    password: string,
     role: String,
     date_created: Date,
 }
