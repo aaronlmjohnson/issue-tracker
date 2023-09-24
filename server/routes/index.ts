@@ -1,8 +1,10 @@
 import express from 'express';
+import asyncHandler from 'express-async-handler';
 const router = express.Router();
 
 import  {projectList} from "../controllers/projectController";
 import User from '../models/user';
+import { createUser } from '../controllers/userController';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,10 +13,7 @@ router.get('/', function(req, res, next) {
 
 /* Sign Up */
 
-router.post('/sign-up', (req:express.Request, res, next)=>{
-  console.log(req.body);
-  res.send(req.body);
-});
+router.post('/sign-up', createUser);
 
 /* GET all projects */
 router.get('/projects', projectList);

@@ -10,19 +10,23 @@ const SignUpForm = ()=>{
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
         
-        const formContent =  { username, password, role: "developer" }
+        const formContent =  { username, password, role: "Developer" }
         const response = await fetch("http://localhost:3001/sign-up", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formContent),
-            
         });
-        
-        const json = await response.json();
+        console.log(response)
 
-        if(!response.ok) setError(json.error);
+        //const json = await response.json();
+
+
+        if(!response.ok){
+            console.log('hold up now you got an error')
+            // setError(json.error);
+        } 
         if(response.ok){
             console.log(`Welcome to Issue Tracker ${username}.`)
             setError(null);
@@ -30,7 +34,6 @@ const SignUpForm = ()=>{
             setPassword('');
         }
     }
-
 
     return (
         <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
