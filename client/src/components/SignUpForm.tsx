@@ -1,38 +1,41 @@
 import FormInput from "./FormInput";
 import { useState } from "react";
-
+import { useSignup } from "../hooks/useSignup";
 const SignUpForm = ()=>{
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    //const [error, setError] = useState(null);
+    const {signup, isLoading, error} = useSignup();
 
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
         
-        const formContent =  { username, password, role: "Developer" }
-        const response = await fetch("http://localhost:3001/sign-up", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formContent),
-        });
-        console.log(response)
-
+        // const formContent =  { username, password, role: "Developer" }
+        // const response = await fetch("http://localhost:3001/sign-up", {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(formContent),
+        // });
+        // console.log(response)
+        await signup(username, password, "Developer");
         //const json = await response.json();
+        if(error) console.log(error);
+        else console.log(`Welcome to Issue Tracker ${username}.`);
 
 
-        if(!response.ok){
-            console.log('hold up now you got an error')
-            // setError(json.error);
-        } 
-        if(response.ok){
-            console.log(`Welcome to Issue Tracker ${username}.`)
-            setError(null);
-            setUsername('');
-            setPassword('');
-        }
+        // if(!response.ok){
+        //     console.log('hold up now you got an error')
+        //     // setError(json.error);
+        // } 
+        // if(response.ok){
+        //     console.log(`Welcome to Issue Tracker ${username}.`)
+        //     setError(null);
+        //     setUsername('');
+        //     setPassword('');
+        // }
     }
 
     return (

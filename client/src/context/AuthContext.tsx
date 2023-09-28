@@ -2,7 +2,20 @@ import { createContext, useReducer } from 'react';
 
 export const AuthContext = createContext(null);
 
-export const authReducer = (state:any, action:any)=>{
+type AuthContextProviderProps = {
+    children: React.ReactNode
+}
+
+type State = {
+    user: string | null
+}
+
+type AuthAction = 
+    | {type: "LOGIN", payload: {user: string, action: AuthAction}}
+    | {type: "LOGOUT", payload: {user: string, action: AuthAction}}
+
+
+export const authReducer = (state:any, action:AuthAction)=>{
     switch(action.type) {
         case 'LOGIN':
             return {user: action.payload}
@@ -13,10 +26,8 @@ export const authReducer = (state:any, action:any)=>{
     }
 }
 
-export const AuthContextProvider = ({children}:any)=>{
-    const [state, dispatch] = useReducer(authReducer, {
-        user: null
-    });
+export const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
+    const [state, dispatch] = useReducer(authReducer, {user: null});
 
     console.log('AuthContext state:', state);
 
