@@ -9,8 +9,8 @@ const FormInput = (props: any)=>{
     const selectInput = (optionsArr: Option[])=>{
         return (
             <select name={props.nameValue} id={props.nameValue} onChange={(e:any) => props.setter(e.target.value)} >
-                {optionsArr.map((option)=>  
-                    <option value={option.value} key={Math.random()}>
+                {optionsArr.map((option)=> 
+                    <option value={option.value} key={crypto.randomUUID()}>
                         {option.value}
                     </option>
                 )}
@@ -23,7 +23,7 @@ const FormInput = (props: any)=>{
             <input className={styling} name={props.nameValue} type={props.type} onChange={(e:any) => props.setter(e.target.value)} />
         )
     }
-    
+
     return (
         <div className= {props.classValue}>
             <label htmlFor={props.forValue}>{props.content}</label>
