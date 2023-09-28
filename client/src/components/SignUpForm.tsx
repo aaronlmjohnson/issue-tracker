@@ -5,37 +5,15 @@ const SignUpForm = ()=>{
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('Developer');
+    const roleOptions = [{value: "Admin", content: "Admin"}, {value: "Project Lead", content: "Project Lead"}, {value: "Developer", content: "Developer"}];
     //const [error, setError] = useState(null);
     const {signup, isLoading, error} = useSignup();
 
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
-        
-        // const formContent =  { username, password, role: "Developer" }
-        // const response = await fetch("http://localhost:3001/sign-up", {
-        //     method: "POST",
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(formContent),
-        // });
-        // console.log(response)
-        await signup(username, password, "Developer");
-        //const json = await response.json();
-        if(error) console.log(error);
-        else console.log(`Welcome to Issue Tracker ${username}.`);
-
-
-        // if(!response.ok){
-        //     console.log('hold up now you got an error')
-        //     // setError(json.error);
-        // } 
-        // if(response.ok){
-        //     console.log(`Welcome to Issue Tracker ${username}.`)
-        //     setError(null);
-        //     setUsername('');
-        //     setPassword('');
-        // }
+        await signup(username, password, role);
+        console.log(`Welcome to Issue Tracker ${username}.`);
     }
 
     return (
@@ -48,7 +26,6 @@ const SignUpForm = ()=>{
                 type={"text"}
                 content={"Username:"}
                 setter = {setUsername}
-
             />
             <FormInput 
                 forValue={"password"}
@@ -57,7 +34,14 @@ const SignUpForm = ()=>{
                 type={"password"}
                 content={"Password:"}
                 setter = {setPassword}
-                onChange={(e:any) => setPassword(e.target.value)}
+            />
+            <FormInput 
+                forValue={"select"}
+                classValue={""}
+                nameValue={"select"}
+                type={"select"}
+                setter = {setRole}
+                options = {roleOptions}
             />
             <FormInput 
                 forValue={"submit"}
@@ -67,6 +51,7 @@ const SignUpForm = ()=>{
                 content={""}
                 styling = {"border px-5 py-1"}
             />
+            
         </form>
     );
 }
