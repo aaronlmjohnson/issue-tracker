@@ -17,7 +17,7 @@ const SignUpForm = ()=>{
     }
 
     return (
-        <div className="signup-form-container w-1/3 h-screen bg-primary px-12 py-48">
+        <div className="signup-form-container w-1/4 h-screen bg-primary px-12 py-48">
             <h1 className ="signup-form-header font-primary text-white xl:text-6xl lg:text-5xl">Sign Up</h1>
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <FormInput 
