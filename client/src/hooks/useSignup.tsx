@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
 export const useSignup = ()=>{
-    const [error, setError] = useState(false);
+    const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
 
 
     const signup = async(username:String, password:string, role:String)=>{
         setIsLoading(true);
-        setError(false);
+        setError("");
         const response = await fetch("http://localhost:3001/sign-up", {
             method: "POST",
             headers: {
@@ -27,6 +27,7 @@ export const useSignup = ()=>{
 
         if(response.ok){
             setIsLoading(false);
+            setError("")
             localStorage.setItem('user', JSON.stringify(json));
             console.log(`Welcome to Issue Tracker ${username}.`);
             dispatch({type: 'LOGIN', payload: json})

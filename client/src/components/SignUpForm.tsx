@@ -1,6 +1,7 @@
 import FormInput from "./FormInput";
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
+import FormError from "./FormError";
 const SignUpForm = ()=>{
 
     const [username, setUsername] = useState('');
@@ -17,7 +18,6 @@ const SignUpForm = ()=>{
 
     return (
         <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
-            {error ? <h1 className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-auto" role="alert">{error}</h1> : <></>}
             <FormInput 
                 forValue={"username"}
                 classValue={"username-input"}
@@ -50,7 +50,7 @@ const SignUpForm = ()=>{
                 content={""}
                 styling = {"border px-5 py-1"}
             />
-            
+            {error && <FormError error= {error}/>}
         </form>
     );
 }
