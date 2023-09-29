@@ -21,11 +21,11 @@ function App() {
 
             <Route
               path="/sign-up"
-              element={<SignUp />}
+              element={<SignUp  page={"signup"}/>}
             />
             <Route
               path="/login"
-              element={<Login />}
+              element={<SignUp  page={"login"}/>}
             />
           </Routes>
         </div>
