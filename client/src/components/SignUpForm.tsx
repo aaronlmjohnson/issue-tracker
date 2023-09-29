@@ -13,12 +13,11 @@ const SignUpForm = ()=>{
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
         await signup(username, password, role);
-        console.log(`Welcome to Issue Tracker ${username}.`);
     }
 
     return (
         <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
-            <h1>{error ? error : ""}</h1>
+            {error ? <h1 className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-auto" role="alert">{error}</h1> : <></>}
             <FormInput 
                 forValue={"username"}
                 classValue={"username-input"}

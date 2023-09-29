@@ -4,7 +4,7 @@ const router = express.Router();
 
 import  {projectList} from "../controllers/projectController";
 import User from '../models/user';
-import { createUser, loginUser } from '../controllers/userController';
+import { createUser, loginUser, createUserPost } from '../controllers/userController';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
 /* Sign Up */
 
-router.post('/sign-up', createUser);
+router.post('/sign-up', createUserPost);
 
 /* Login */
 

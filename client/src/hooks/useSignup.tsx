@@ -21,13 +21,16 @@ export const useSignup = ()=>{
         const json = await response.json();
         if(!response.ok){
             setIsLoading(false);
-            setError(true);
+            console.log(json);
+            setError(json.error);
         }
 
         if(response.ok){
             setIsLoading(false);
             localStorage.setItem('user', JSON.stringify(json));
+            console.log(`Welcome to Issue Tracker ${username}.`);
             dispatch({type: 'LOGIN', payload: json})
+
         }
     }
     return {
