@@ -46,7 +46,7 @@ export const createUserPost = [
     
                 const result = await user.save();
                 const token = createToken(user._id);
-                res.status(200).json({user: user.username ,token});
+                res.status(200).json({user: user.username ,token, redirectUrl:"/"});
             });
         } catch(err) {
             res.status(400).send({error: err.message});

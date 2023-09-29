@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from './useAuthContext';
 
 export const useSignup = ()=>{
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
-
+    const navigate = useNavigate();
 
     const signup = async(username:String, password:string, role:String)=>{
         setIsLoading(true);
@@ -30,7 +31,8 @@ export const useSignup = ()=>{
             setError("")
             localStorage.setItem('user', JSON.stringify(json));
             console.log(`Welcome to Issue Tracker ${username}.`);
-            dispatch({type: 'LOGIN', payload: json})
+            dispatch({type: 'LOGIN', payload: json});
+            navigate(json.redirectUrl);
 
         }
     }
