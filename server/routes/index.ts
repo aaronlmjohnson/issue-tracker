@@ -4,7 +4,7 @@ const router = express.Router();
 
 import  {projectList} from "../controllers/projectController";
 import User from '../models/user';
-import { createUser, loginUser, createUserPost } from '../controllers/userController';
+import { loginUser, createUserPost } from '../controllers/userController';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

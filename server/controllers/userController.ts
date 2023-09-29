@@ -54,24 +54,6 @@ export const createUserPost = [
         }
     })
 ]
-export const createUser = asyncHandler(async (req, res, next)=>{
-    try{
-        bcrypt.hash(req.body.password, 10, async(err, hashedPassword)=>{
-            const user = new User({
-                username: req.body.username,
-                password: hashedPassword,
-                role: req.body.role
-            });
-
-            const result = await user.save();
-            const token = createToken(user._id);
-            res.status(200).json({user: user.username ,token});
-        });
-    } catch(err) {
-        res.status(400).json({error: err.message});
-        return next(err);
-    }
-});
 
 export const loginUser = asyncHandler(async (req, res, next)=>{
     try{
