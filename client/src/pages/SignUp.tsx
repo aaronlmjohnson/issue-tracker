@@ -2,8 +2,7 @@ import SignUpForm from "../components/SignUpForm";
 
 const SignUp = ()=>{
     return (
-        <div className="sign-up-form-container text-3xl font-bold underline">
-            <h1 >Sign Up</h1>
+        <div className="sign-up-form-container h-screen w-screen ">
             <SignUpForm />
         </div>
     );

@@ -1,5 +1,5 @@
 const FormInput = (props: any)=>{
-    const styling = props.styling || "inline border border-gray-300";
+    const styling = props.styling || "block bg-transparent border font-secondary text-white text-2xl p-2 rounded-2xl";
 
     interface Option {
         value: string
@@ -8,9 +8,9 @@ const FormInput = (props: any)=>{
 
     const selectInput = (optionsArr: Option[])=>{
         return (
-            <select name={props.nameValue} id={props.nameValue} onChange={(e:any) => props.setter(e.target.value)} >
+            <select className="p-2 bg-transparent border text-white"name={props.nameValue } id={props.nameValue} onSelect={(e:any) => props.setter(e.target.value)} >
                 {optionsArr.map((option)=> 
-                    <option value={option.value} key={crypto.randomUUID()}>
+                    <option className="bg-primary" value={option.value} key={crypto.randomUUID()}>
                         {option.value}
                     </option>
                 )}
@@ -20,13 +20,13 @@ const FormInput = (props: any)=>{
 
     const formInput = ()=>{
         return (
-            <input className={styling} name={props.nameValue} type={props.type} onChange={(e:any) => props.setter(e.target.value)} />
+            <input className={styling } name={props.nameValue} type={props.type} onChange={(e:any) => props.setter(e.target.value)} />
         )
     }
 
     return (
-        <div className= {props.classValue}>
-            <label htmlFor={props.forValue}>{props.content}</label>
+        <div className= {props.classValue + "form-input-container my-6"}>
+            <label htmlFor={props.forValue} className="text-white font-secondary block">{props.content}</label>
             {props.type === "select" ? selectInput(props.options) : formInput()}
         </div>
     );

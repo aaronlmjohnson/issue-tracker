@@ -17,41 +17,46 @@ const SignUpForm = ()=>{
     }
 
     return (
-        <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
-            <FormInput 
-                forValue={"username"}
-                classValue={"username-input"}
-                nameValue={"username"}
-                type={"text"}
-                content={"Username:"}
-                setter = {setUsername}
-            />
-            <FormInput 
-                forValue={"password"}
-                classValue={"password-input"}
-                nameValue={"password"}
-                type={"password"}
-                content={"Password:"}
-                setter = {setPassword}
-            />
-            <FormInput 
-                forValue={"select"}
-                classValue={""}
-                nameValue={"select"}
-                type={"select"}
-                setter = {setRole}
-                options = {roleOptions}
-            />
-            <FormInput 
-                forValue={"submit"}
-                classValue={"submit-button"}
-                nameValue={"submit"}
-                type={"submit"}
-                content={""}
-                styling = {"border px-5 py-1"}
-            />
-            {error && <FormError error= {error}/>}
-        </form>
+        <div className="signup-form-container w-1/3 h-screen bg-primary px-12 py-48">
+            <h1 className ="signup-form-header font-primary text-white xl:text-6xl lg:text-5xl">Sign Up</h1>
+            <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
+                <FormInput 
+                    forValue={"username"}
+                    classValue={"username-input"}
+                    nameValue={"username"}
+                    type={"text"}
+                    content={"Username:"}
+                    setter = {setUsername}
+                />
+                <FormInput 
+                    forValue={"password"}
+                    classValue={"password-input"}
+                    nameValue={"password"}
+                    type={"password"}
+                    content={"Password:"}
+                    setter = {setPassword}
+                />
+                <FormInput 
+                    forValue={"select"}
+                    classValue={""}
+                    nameValue={"select"}
+                    type={"select"}
+                    setter = {setRole}
+                    content={"Role:"}
+                    options = {roleOptions}
+                />
+                <FormInput 
+                    forValue={"submit"}
+                    classValue={"submit-button"}
+                    nameValue={"submit"}
+                    type={"submit"}
+                    content={""}
+                    styling = {"border px-5 py-1 text-white rounded-md"}
+                />
+                {error && <FormError error= {error}/>}
+            </form>
+        </div>
+        
     );
 }
 
