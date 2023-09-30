@@ -64,7 +64,7 @@ export const loginUser = asyncHandler(async (req, res, next)=>{
         if(!match) throw Error("Incorrect password.");
 
         const token = createToken(user._id);
-        res.status(200).json({user, token});
+        res.status(200).json({user, token, redirectUrl: "/"});
     }catch(err){
         res.status(400).json({error: err.message});
         return next(err);

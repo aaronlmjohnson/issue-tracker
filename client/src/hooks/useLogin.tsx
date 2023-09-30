@@ -30,10 +30,9 @@ export const useLogin = ()=>{
             setIsLoading(false);
             setError("")
             localStorage.setItem('user', JSON.stringify(json));
-            console.log(`Welcome to Issue Tracker ${username}.`);
+            console.log(`Logged in as ${username}.`);
             dispatch({type: 'LOGIN', payload: json});
             navigate(json.redirectUrl);
-
         }
     }
     return {

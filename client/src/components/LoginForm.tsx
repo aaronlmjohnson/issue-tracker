@@ -1,6 +1,7 @@
 import FormInput from "./FormInput";
 import { useLogin } from "../hooks/useLogin";
 import { useState } from "react";
+import FormError from "./FormError";
 
 const LoginForm = ()=>{
 
@@ -15,7 +16,6 @@ const LoginForm = ()=>{
 
     return (
         <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
-            <h1>{error ? error : ""}</h1>
             <FormInput 
                 forValue={"username"}
                 classValue={"username-input"}
@@ -42,6 +42,9 @@ const LoginForm = ()=>{
                 content={""}
                 styling = {"border px-5 py-1"}
             />
+            {error && <FormError error= {error}/>}
+
+
         </form>
     );
 }

@@ -32,11 +32,10 @@ const displayLogin = ()=>{
 }
 
 const SignUp = (props: any)=>{
-    console.log(props.page);
     return (
         <div className="sign-up-form-container h-screen w-screen ">
             <div className="signup-form-container w-1/4 h-screen bg-primary px-12 py-48">
-                {props.page === "signup" && displaySignup()} ||
+                {props.page === "signup" && displaySignup()} 
                 {props.page === "login" && displayLogin()}
             </div>
         </div>
