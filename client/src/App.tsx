@@ -4,13 +4,15 @@ import Projects from "./pages/Projects";
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
+      <Navbar />
       <BrowserRouter>
-        <div className="pages">
-          <Navbar />
+        <div className="pages flex ">
+          <Sidebar links={[{name:"All Projects", url:"/projects"}, {name: "Create Project", url:"/projects/create"}]}/>
           <Routes>
               <Route
                 path="/"

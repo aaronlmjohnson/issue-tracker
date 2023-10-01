@@ -8,6 +8,10 @@ module.exports = {
       colors: {
         'primary': '#27005d',
         'secondary': '#ffed4a',
+      },
+      height: {
+        'navbar': '3rem',
+        'sidebar': 'calc(100vh - 3rem)'
       }
     },
     fontFamily: {
