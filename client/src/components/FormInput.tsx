@@ -24,10 +24,40 @@ const FormInput = (props: any)=>{
         )
     }
 
+    const textArea = ()=>{
+        return (
+            <textarea className={styling} name={props.nameValue} onChange={(e:any)=> props.setter(e.target.value)} rows={props.rows} cols={props.cols}></textarea>
+        )
+    }
+
+    const checkBoxes = ()=>{
+        return (
+                <fieldset>
+                    <legend>{props.legend}</legend>
+                    <div>
+                        {props.checkboxes.map((checkbox: any)=>{   
+                           return ( 
+                                <div className="checkbox" key={crypto.randomUUID()}>
+                                    <input type="checkbox"  name={checkbox.name} />
+                                    <label htmlFor={checkbox.name}>{checkbox.content}</label>
+                                </div>
+                            );
+                        })}
+                        
+                    </div>
+                </fieldset>
+        )
+    }
+
     return (
         <div className= {props.classValue + "form-input-container my-6"}>
-            <label htmlFor={props.forValue} className="text-white font-secondary block">{props.content}</label>
-            {props.type === "select" ? selectInput(props.options) : formInput()}
+            <label htmlFor={props.forValue} className={ props.labelStyle || "text-white font-secondary block"}>{props.content}</label>
+            {
+                (props.type === "select" && selectInput(props.options)) ||
+                (props.type === "textarea" && textArea()) ||
+                (props.type === "checkbox" && checkBoxes()) ||
+                (formInput())
+            }
         </div>
     );
 }
