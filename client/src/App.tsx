@@ -18,7 +18,6 @@ function App() {
               path="/projects"
               element={<Projects />}
             />
-
             <Route
               path="/sign-up"
               element={<SignUp  page={"signup"}/>}
