@@ -12,6 +12,7 @@ import LocalStratetgy from "passport-local";
 
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
+import projectRouter from './routes/projects';
 
 const app = express();
 dotenv.config();
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use(projectRouter);
 
 app.use((session({ secret: "daisy", resave: false, saveUninitialized: true })));
 app.use(passport.initialize());
