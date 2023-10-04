@@ -10,7 +10,6 @@ const controller = ProjectController();
 router.get('/projects', controller.getAll);
 router.get('/projects/:id', controller.getSelected);
 
-router.get('/projects/create', controller.createGet);
 router.post('/projects/create', controller.createPost);
 
 router.get('/projects/:id/delete', controller.deleteGet);
