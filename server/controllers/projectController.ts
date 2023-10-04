@@ -4,14 +4,29 @@ import  asyncHandler from "express-async-handler";
 const projectController = ()=> {
 
     const getAll = asyncHandler(async(req, res, next)=>{
-        const projects = await Project.find({})
+        try{
+            const projects = await Project.find({})
             .sort({title: 1})
             .exec();
-        res.status(200).json(projects);
+            if(!projects){
+                throw Error("No Projects Found");
+            } else
+                res.status(200).json(projects);
+        }catch(e){
+            console.log(e);
+        }
+        
     });
 
     const getSelected = asyncHandler(async(req, res, next)=>{
-        res.send('Get this project');
+        const project = await Project.findById(req.params.id).exec();
+        
+        if(!project){
+            const error = new Error("Project not found");
+            res.status(404);
+            next(error);
+        } else
+            res.status(200).json(project);
     });
 
     const createGet = asyncHandler(async(req, res, next)=>{
