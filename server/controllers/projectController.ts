@@ -56,7 +56,7 @@ const projectController = ()=> {
                 });
 
                 await project.save();
-                res.status(200).json({redirectUrl: "/projects/:id"});
+                res.status(200).json({redirectUrl: `/projects/${project._id}`});
 
             } catch(err) {
                 res.status(400).send({error: err.message});
@@ -65,12 +65,21 @@ const projectController = ()=> {
         })
     ]
 
-    const deleteGet = asyncHandler(async(req, res, next)=>{
-        res.send('Delete a project view');
-    });
-
     const deletePost = asyncHandler(async(req, res, next)=>{
-        res.send('Delete a project send response');
+        const project = await Project.findById(req.body.id).exec();
+        /*** When I add Tickets and Comments, in the future, i'll need to remove them too
+         * when deleting a project
+         */
+        if(!project){
+            const error = new Error("Project not found");
+            res.status(404);
+            next(error);
+        } else{
+            await Project.findByIdAndRemove(project.id);
+            res.status(200).json({redirectUrl: `/projects`});
+        }
+            
+
     });
 
     const updateGet = asyncHandler(async(req, res, next)=>{
@@ -85,7 +94,6 @@ const projectController = ()=> {
         getAll,
         getSelected,
         createPost,
-        deleteGet,
         deletePost,
         updateGet,
         updatePost

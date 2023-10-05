@@ -12,7 +12,6 @@ router.get('/projects/:id', controller.getSelected);
 
 router.post('/projects/create', controller.createPost);
 
-router.get('/projects/:id/delete', controller.deleteGet);
 router.post('/projects/:id/delete', controller.deletePost);
 
 router.get('/projects/:id/update', controller.updateGet);
