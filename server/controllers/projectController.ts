@@ -19,7 +19,7 @@ const projectController = ()=> {
         
     });
 
-    const getSelected = asyncHandler(async(req, res, next)=>{
+    const get = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.id).exec();
 
         if(!project){
@@ -82,20 +82,49 @@ const projectController = ()=> {
 
     });
 
-    const updateGet = asyncHandler(async(req, res, next)=>{
-        res.send('Update a project view');
-    });
 
-    const updatePost = asyncHandler(async(req, res, next)=>{
-        res.send('Update a project send response');
-    });
+    const updatePost = [
+        body("title")
+        .trim()
+        .isLength({min: 1})
+        .escape()
+        .withMessage("You must provide a title."),
+        body("description")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("You must provide a description."),
+        asyncHandler(async (req, res, next)=>{
+            const validationErrors = validationResult(req);
+            try{
+                if(!validationErrors.isEmpty())
+                    throw new TypeError(validationErrors.array()[0].msg);
+
+                //instead of new project find current one
+                const project = new Project({
+                    title: req.body.title,
+                    description: req.body.description,
+                    date_created: req.body.date_created,
+                    project_lead: req.body.project_lead,
+                    developers_assigned_to: req.body.developers_assigned_to,
+                    _id: req.params.id,
+                });
+
+                await Project.findByIdAndUpdate(req.params.id, project, {});
+                res.status(200).json({redirectUrl: `/projects/${project._id}`});
+
+            } catch(err) {
+                res.status(400).send({error: err.message});
+                return next(err);
+            }
+        })
+    ]
 
     return{
         getAll,
-        getSelected,
+        get,
         createPost,
         deletePost,
-        updateGet,
         updatePost
     };
 }

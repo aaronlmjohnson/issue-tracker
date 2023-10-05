@@ -8,13 +8,12 @@ const controller = ProjectController();
 
 /* GET all projects */
 router.get('/projects', controller.getAll);
-router.get('/projects/:id', controller.getSelected);
+router.get('/projects/:id', controller.get);
 
 router.post('/projects/create', controller.createPost);
 
 router.post('/projects/:id/delete', controller.deletePost);
 
-router.get('/projects/:id/update', controller.updateGet);
 router.post('/projects/:id/update', controller.updatePost);
 
 export default router;
