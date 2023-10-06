@@ -1,12 +1,18 @@
 import FormInput from "../components/FormInput";
 import FormError from "../components/FormError";
+import { useFetchData } from "../hooks/useFetchData";
+import { useEffect } from "react";
 
 const CreateProjectForm = ()=>{
     const handleSubmit = (e:any)=> console.log(e)
     const leadOptions = [{value: "Aaron", content: "Aaron"}];
-    const developers = [{name: "Developer1", content: "Developer1"}, {name: "Developer2", content: "Developer2"}];
+    const {data, loading, apiCall} = useFetchData();
+
+    useEffect(()=>{
+        apiCall("http://localhost:3001/users/developers");
+    }, [])
     return(
-        <div className="create-project-form">
+        !loading && <div className="create-project-form">
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <FormInput 
                     forValue={"title"}
@@ -42,7 +48,8 @@ const CreateProjectForm = ()=>{
                     type={"checkbox"}
                     legend={"Select developers for the project:"}
                     labelStyle = {"text-black"}
-                    checkboxes={developers}
+                    checkboxes={data}
+                    labelKey={"username"}
                 />
                 {/* <FormInput 
                     forValue={"select"}

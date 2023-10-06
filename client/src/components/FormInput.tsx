@@ -39,7 +39,7 @@ const FormInput = (props: any)=>{
                            return ( 
                                 <div className="checkbox" key={crypto.randomUUID()}>
                                     <input type="checkbox"  name={checkbox.name} />
-                                    <label htmlFor={checkbox.name}>{checkbox.content}</label>
+                                    <label htmlFor={checkbox.name}>{checkbox[props.labelKey]}</label>
                                 </div>
                             );
                         })}
