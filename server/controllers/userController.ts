@@ -9,8 +9,44 @@ const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, pr
 const userController = ()=>{
 
     const getUsers = asyncHandler(async(req, res, next)=>{
-        res.send("All of the users");
+        try{
+            const users = await User.find({}, {password: 0});
+            console.log(users);
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
+
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
     });
+
+    const getDevelopers = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({role:"Developer"}, {password: 0});
+            console.log(users);
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
+
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
+
+    const getProjectLeads = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({role:"Project Lead"}, {password: 0});
+            console.log(users);
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
+
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
+
 
     const createUserPost = [
         body("username")
@@ -82,7 +118,9 @@ const userController = ()=>{
     return{
         createUserPost,
         loginUser,
-        getUsers
+        getUsers,
+        getDevelopers,
+        getProjectLeads
     }
 }
 
