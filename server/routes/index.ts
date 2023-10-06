@@ -8,15 +8,15 @@ import  UserController from '../controllers/userController';
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-const userController = UserController();
+// const userController = UserController();
 
-/* Sign Up */
+// /* Sign Up */
 
-router.post('/sign-up', userController.createUserPost);
+// router.post('/sign-up', userController.createUserPost);
 
-/* Login */
+// /* Login */
 
-router.post('/login', userController.loginUser);
+// router.post('/login', userController.loginUser);
 
 /* will need to prevent user's with certain roles from being able to change certain things such as:
   *user's can't delete projects unless created by that user or by an admin

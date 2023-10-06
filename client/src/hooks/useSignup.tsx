@@ -11,7 +11,7 @@ export const useSignup = ()=>{
     const signup = async(username:String, password:string, role:String)=>{
         setIsLoading(true);
         setError("");
-        const response = await fetch("http://localhost:3001/sign-up", {
+        const response = await fetch("http://localhost:3001/users/sign-up", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

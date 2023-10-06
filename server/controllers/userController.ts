@@ -8,6 +8,10 @@ const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, pr
 
 const userController = ()=>{
 
+    const getUsers = asyncHandler(async(req, res, next)=>{
+        res.send("All of the users");
+    });
+
     const createUserPost = [
         body("username")
         .custom( async (value) =>{
@@ -77,7 +81,8 @@ const userController = ()=>{
 
     return{
         createUserPost,
-        loginUser
+        loginUser,
+        getUsers
     }
 }
 
