@@ -1,17 +1,17 @@
 const FormInput = (props: any)=>{
     const styling = props.styling || "block bg-transparent border font-secondary text-white text-2xl p-2 rounded-2xl";
 
-    interface Option {
-        value: string
-        content: string
-    }
+    // interface Option {
+    //     value: string
+    //     content: string
+    // }
 
-    const selectInput = (optionsArr: Option[])=>{
+    const selectInput = (optionsArr: any)=>{
         return (
             <select className="p-2 bg-transparent border text-white"name={props.nameValue } id={props.nameValue} onSelect={(e:any) => props.setter(e.target.value)} >
-                {optionsArr.map((option)=> 
+                {optionsArr.map((option:any)=> 
                     <option className="bg-primary" value={option.value} key={crypto.randomUUID()}>
-                        {option.value}
+                        {option[props.optionsKey]}
                     </option>
                 )}
             </select>
@@ -35,7 +35,7 @@ const FormInput = (props: any)=>{
                 <fieldset>
                     <legend>{props.legend}</legend>
                     <div>
-                        {props.checkboxes.map((checkbox: any)=>{   
+                        {props.checkboxes && props.checkboxes.map((checkbox: any)=>{   
                            return ( 
                                 <div className="checkbox" key={crypto.randomUUID()}>
                                     <input type="checkbox"  name={checkbox.name} />
