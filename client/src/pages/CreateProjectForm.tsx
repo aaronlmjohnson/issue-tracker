@@ -1,14 +1,54 @@
 import FormInput from "../components/FormInput";
 import FormError from "../components/FormError";
+import { useState, useEffect } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
 
 const CreateProjectForm = ()=>{
     const handleSubmit = (e:any)=> console.log(e)
-    const leadOptions = [{value: "Aaron", content: "Aaron"}];
     const {developers, leads, loading} = useUserInfo();
 
+    interface FormObj {
+    title: string,
+    description: string,
+    projectLead: string,
+    developers: string[]
+}
+    const [form, setForm] = useState<FormObj>({
+        title: "",
+        description:"",
+        projectLead: "",
+        developers: []
+    });
+
+    const [checkState, setCheckState] = useState<string[]>([]);
+    
+    useEffect(()=>{
+        
+        console.log(form);
+
+    }, [form])
+
+    const handleCheckbox = (e:any, i:number)=>{
+        if(!form.developers.includes(e.target.value)){
+            setCheckState((prevState:string[])=>{
+                const newState = [...prevState, e.target.value];
+                setForm({...form, developers:newState})
+                return newState;
+            });
+        } else{
+            setCheckState((prevState:string[])=>{
+                const newState = prevState.filter((value)=> value !== e.target.value);
+                setForm({...form, developers:newState})
+                return newState
+            })
+        }
+            
+        
+        
+    }
+
     return(
-        !loading && <div className="create-project-form">
+        !loading  && <div className="create-project-form">
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <FormInput 
                     forValue={"title"}
@@ -16,7 +56,9 @@ const CreateProjectForm = ()=>{
                     nameValue={"title"}
                     type={"text"}
                     content={"Title:"}
+                    styling={"border"}
                     labelStyle = {"text-black"}
+                    setter={(e: any )=> {setForm({...form, title: e.target.value});}}
                 />
                 <FormInput 
                     forValue={"description"}
@@ -25,8 +67,10 @@ const CreateProjectForm = ()=>{
                     type={"textarea"}
                     content={"Description:"}
                     labelStyle = {"text-black"}
+                    styling={"border"}
                     rows={10}
                     cols={30}
+                    setter={(e: any )=> {setForm({...form, description: e.target.value});}}
                 />
                  <FormInput 
                     forValue={"project-lead"}
@@ -35,8 +79,10 @@ const CreateProjectForm = ()=>{
                     type={"select"}
                     content={"Select lead for project:"}
                     labelStyle = {"text-black"}
+                    styling={"border"}
                     options={leads}
                     optionsKey={"username"}
+                    setter={(e: any )=> {setForm({...form, projectLead: e.target.value});}}
                 />
                 <FormInput 
                     forValue={"developers"}
@@ -45,16 +91,14 @@ const CreateProjectForm = ()=>{
                     type={"checkbox"}
                     legend={"Select developers for the project:"}
                     labelStyle = {"text-black"}
+                    styling={"border"}
                     checkboxes={developers}
                     labelKey={"username"}
+                    setter={handleCheckbox}
+                    checkState={checkState}
+
                 />
-                {/* <FormInput 
-                    forValue={"select"}
-                    classValue={""}
-                    nameValue={"select"}
-                    type={"select"}
-                    content={"Role:"}
-                /> */}
+
                 <FormInput 
                     forValue={"submit"}
                     classValue={"submit-button"}
