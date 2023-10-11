@@ -2,31 +2,27 @@ import FormInput from "../components/FormInput";
 import FormError from "../components/FormError";
 import { useState, useEffect } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
+import { useFormSubmit } from "../hooks/useFormSubmit";
 
 const CreateProjectForm = ()=>{
-    const handleSubmit = (e:any)=> console.log(e)
+    
     const {developers, leads, loading} = useUserInfo();
+    const { submitForm } = useFormSubmit();
 
     interface FormObj {
     title: string,
     description: string,
-    projectLead: string,
+    project_lead: string,
     developers: string[]
 }
     const [form, setForm] = useState<FormObj>({
         title: "",
         description:"",
-        projectLead: "",
+        project_lead: "",
         developers: []
     });
 
     const [checkState, setCheckState] = useState<string[]>([]);
-    
-    useEffect(()=>{
-        
-        console.log(form);
-
-    }, [form])
 
     const handleCheckbox = (e:any, i:number)=>{
         if(!form.developers.includes(e.target.value)){
@@ -42,9 +38,11 @@ const CreateProjectForm = ()=>{
                 return newState
             })
         }
-            
-        
-        
+    }
+
+    const handleSubmit = (e:any)=> {
+        e.preventDefault();
+        submitForm(form, "http://localhost:3001/projects/create");
     }
 
     return(
@@ -82,7 +80,7 @@ const CreateProjectForm = ()=>{
                     styling={"border"}
                     options={leads}
                     optionsKey={"username"}
-                    setter={(e: any )=> {setForm({...form, projectLead: e.target.value});}}
+                    setter={(e: any )=> {setForm({...form, project_lead: e.target.value});}}
                 />
                 <FormInput 
                     forValue={"developers"}
