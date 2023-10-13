@@ -9,6 +9,7 @@ export const useLogin = ()=>{
     const navigate = useNavigate();
 
     const login = async(username:String, password:string)=>{
+        console.log(username);
         setIsLoading(true);
         setError("");
         const response = await fetch("http://localhost:3001/users/login", {

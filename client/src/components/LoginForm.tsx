@@ -11,6 +11,7 @@ const LoginForm = ()=>{
 
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
+        console.log(username);
         await login(username, password);
     }
 
@@ -23,7 +24,7 @@ const LoginForm = ()=>{
                 type={"text"}
                 content={"Username:"}
                 setter = {setUsername}
-
+                onChange={(e:any) => setUsername(e.target.value)}
             />
             <FormInput 
                 forValue={"password"}
