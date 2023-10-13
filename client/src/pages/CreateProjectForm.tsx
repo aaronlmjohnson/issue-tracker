@@ -13,28 +13,32 @@ const CreateProjectForm = ()=>{
     title: string,
     description: string,
     project_lead: string,
-    developers: string[]
+    developers_assigned_to: string[]
 }
     const [form, setForm] = useState<FormObj>({
         title: "",
         description:"",
         project_lead: "",
-        developers: []
+        developers_assigned_to: []
     });
+
+    useEffect(()=>{
+        console.log(form)
+    }, [form])
 
     const [checkState, setCheckState] = useState<string[]>([]);
 
     const handleCheckbox = (e:any, i:number)=>{
-        if(!form.developers.includes(e.target.value)){
+        if(!form.developers_assigned_to.includes(e.target.value)){
             setCheckState((prevState:string[])=>{
                 const newState = [...prevState, e.target.value];
-                setForm({...form, developers:newState})
+                setForm({...form, developers_assigned_to:newState})
                 return newState;
             });
         } else{
             setCheckState((prevState:string[])=>{
                 const newState = prevState.filter((value)=> value !== e.target.value);
-                setForm({...form, developers:newState})
+                setForm({...form, developers_assigned_to:newState})
                 return newState
             })
         }

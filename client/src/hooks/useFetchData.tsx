@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useFetchData = (url:string)=>{
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<any>([]);//<{title:string}>({title:""})
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
