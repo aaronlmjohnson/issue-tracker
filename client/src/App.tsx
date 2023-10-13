@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import CreateProject from './pages/CreateProject';
+import ProjectPage from './pages/ProjectPage';
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
                 path="/projects"
                 element={<Projects />}
               />
-
+              <Route
+                path="/projects/:projectId"
+                element={<ProjectPage />}
+              />
             <Route
               path="/sign-up"
               element={<SignUp  page={"signup"}/>}

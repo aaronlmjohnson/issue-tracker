@@ -28,7 +28,7 @@ const Projects = ()=>{
                 {projects && projects.map((project)=>{
                     return(
                         <div className="project" key={project._id}>
-                            <h1>{project.title}</h1>
+                            <h1><a href={`/projects/${project._id}`}>{project.title}</a></h1>
                             <p>{project.date_created}</p>
                             <p>{project.description}</p>
                         </div>

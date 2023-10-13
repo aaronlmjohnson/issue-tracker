@@ -5,7 +5,7 @@ const Navbar = ()=>{
     const { user } = useAuthContext();
     const { logout } = useLogout();
     return(
-        <nav className="border 1-">
+        <nav className="border-b-4 border-t-0 border-x-0  border-black">
             <p className=""><a href="/">Home</a></p>
             <p className=""><a href="/projects">Projects</a></p>
             {user ? <p>Logged in As: {user.user.username}</p> : <></>}
