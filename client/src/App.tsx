@@ -12,8 +12,7 @@ function App() {
     <div className="App ">
       <Navbar />
       <BrowserRouter>
-        <div className="pages flex ">
-          <Sidebar links={[{name:"All Projects", url:"/projects"}, {name: "Create Project", url:"/projects/create"}]}/>
+        <div className="">
           <Routes>
               <Route
                 path="/"
