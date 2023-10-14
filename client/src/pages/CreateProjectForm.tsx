@@ -4,11 +4,9 @@ import { useState, useEffect } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
 import { useFormSubmit } from "../hooks/useFormSubmit";
 
-const CreateProjectForm = ()=>{
-    
+const CreateProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm } = useFormSubmit();
-
     interface FormObj {
     title: string,
     description: string,
@@ -23,8 +21,19 @@ const CreateProjectForm = ()=>{
     });
 
     useEffect(()=>{
-        console.log(form)
-    }, [form])
+        if(props.project){
+            setForm((prevState) =>{
+                return {
+                    title: props.project.title,
+                    description: props.project.description,
+                    project_lead: props.project.project_lead,
+                    developers_assigned_to: props.project.developers_assigned_to
+            }});
+            setCheckState((prevState:string[])=>{
+                return props.project.developers_assigned_to;
+            });
+        }
+    }, []);
 
     const [checkState, setCheckState] = useState<string[]>([]);
 
@@ -46,11 +55,21 @@ const CreateProjectForm = ()=>{
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
-        submitForm(form, "http://localhost:3001/projects/create");
+        if(props.formActive){
+            // props.setFormActive(false);
+            //make sure to provide id for this url path should have update appended to id ex. projects/:id/update
+            submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`);
+        }
+        else{
+            console.log("creating...");
+            submitForm(form, "http://localhost:3001/projects/create");
+
+        }
     }
 
     return(
         !loading  && <div className="create-project-form">
+            <h1>{props.update ? "Update Project" : "Create Project"}</h1>
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <FormInput 
                     forValue={"title"}
@@ -60,6 +79,7 @@ const CreateProjectForm = ()=>{
                     content={"Title:"}
                     styling={"border"}
                     labelStyle = {"text-black"}
+                    value={form.title}
                     setter={(e: any )=> {setForm({...form, title: e.target.value});}}
                 />
                 <FormInput 
@@ -72,6 +92,7 @@ const CreateProjectForm = ()=>{
                     styling={"border"}
                     rows={10}
                     cols={30}
+                    value={form.description}
                     setter={(e: any )=> {setForm({...form, description: e.target.value});}}
                 />
                  <FormInput 
@@ -98,7 +119,6 @@ const CreateProjectForm = ()=>{
                     labelKey={"username"}
                     setter={handleCheckbox}
                     checkState={checkState}
-
                 />
 
                 <FormInput 

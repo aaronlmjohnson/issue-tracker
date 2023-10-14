@@ -6,7 +6,7 @@ const FormInput = (props: any)=>{
         return (
             <select name={props.nameValue } id={props.nameValue} onChange={props.setter} >
                 <option>Select Project Lead</option>
-                {optionsArr.map((option:any, i:number)=> 
+                {optionsArr && optionsArr.map((option:any, i:number)=> 
                     <option value={option._id} key={crypto.randomUUID()}>
                         {option[props.optionsKey]}
                     </option>
@@ -17,13 +17,13 @@ const FormInput = (props: any)=>{
 
     const formInput = ()=>{
         return (
-            <input className={styling}name={props.nameValue} type={props.type} onChange={props.setter} />
+            <input className={styling}name={props.nameValue} type={props.type} onChange={props.setter} value={props.value}/>
         )
     }
 
     const textArea = ()=>{
         return (
-            <textarea className={styling} name={props.nameValue} onChange={(e:any)=> props.setter(e)} rows={props.rows} cols={props.cols}></textarea>
+            <textarea className={styling} name={props.nameValue} onChange={(e:any)=> props.setter(e)} rows={props.rows} cols={props.cols} value ={props.value}></textarea>
         )
     }
 

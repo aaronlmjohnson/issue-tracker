@@ -18,6 +18,7 @@ export const useFormSubmit = ()=>{
         })
 
         const json = await response.json();
+
         if(!response.ok){
             setIsLoading(false);
             console.log(json);
@@ -27,7 +28,7 @@ export const useFormSubmit = ()=>{
         if(response.ok){
             setIsLoading(false);
             setError("")
-            navigate(json.redirectUrl);
+            navigate(0);
         }
     }
     return {
