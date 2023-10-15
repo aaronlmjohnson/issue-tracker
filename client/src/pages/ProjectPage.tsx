@@ -1,4 +1,4 @@
-import ProjectUpdateButton from "../components/ProjectUpdateButton";
+import useProjectUpdateButton from "../components/useProjectUpdateButton";
 import useProjectInfo from "../hooks/useProjectInfo";
 import { useState } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
@@ -8,13 +8,7 @@ import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
     const {leads, developers, loading:usersLoading} = useUserInfo();
-    const [formActive, setFormActive] = useState(false);
-
-    const handleUpdateButton = ()=>{
-        setFormActive((prevState:any)=>{
-            return prevState ? false : true;
-        });
-    }
+    const {updateButton, cancelButton, setFormActive, formActive} = useProjectUpdateButton();
 
     const getLeadName = ()=>{
         if(leads === null || project === null) return;  
@@ -30,6 +24,7 @@ const ProjectPage = ()=>{
         const devNames = filteredDevs.map((developer:any )=> developer && developer.username);
         return devNames;
     }
+    
     return (
         !loading && !usersLoading&& <div className="project-landing-page ">
             <p className="project-title">{project.title}</p>
@@ -40,9 +35,9 @@ const ProjectPage = ()=>{
             {getDeveloperNames().map((name:string)=>{
                 return(<p className="developer-name" key={crypto.randomUUID()}>{name}</p>)
             })}
-            <ProjectUpdateButton  handleUpdateButton={handleUpdateButton}/>
+            {formActive ? cancelButton() : updateButton()}
             <ProjectDeleteButton project = {project} />
-            { formActive && <CreateProjectForm update={true} project={project} setFormActive={setFormActive} formActive={formActive}/>} 
+            {formActive && <CreateProjectForm update={true} project={project} setFormActive={setFormActive} formActive={formActive}/>} 
         </div>
     );
 }
