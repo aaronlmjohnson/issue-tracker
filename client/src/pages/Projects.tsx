@@ -1,4 +1,5 @@
 import { useEffect, useState} from 'react';
+import ProjectListing from '../components/ProjectListing';
 
 interface Project {
     _id: string;
@@ -9,7 +10,7 @@ interface Project {
 
 const Projects = ()=>{
     const [projects, setProjects] = useState<Array<Project>>([]);
-    useEffect(()=>{//go back to previous tutorial and fix how the api outputs data
+    useEffect(()=>{
         const fetchProjects = async ()=> {
             const response = await fetch('http://localhost:3001/projects');
             const json = await response.json();
@@ -24,17 +25,9 @@ const Projects = ()=>{
 
     return(
         <div className="projects">
-            <h1>
                 {projects && projects.map((project)=>{
-                    return(
-                        <div className="project" key={project._id}>
-                            <h1><a href={`/projects/${project._id}`}>{project.title}</a></h1>
-                            <p>{project.date_created}</p>
-                            <p>{project.description}</p>
-                        </div>
-                    )
+                    return(<ProjectListing  project={project} key={project._id}/>)
                 })}
-            </h1>
         </div>
     );
 }

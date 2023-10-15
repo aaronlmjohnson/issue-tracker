@@ -26,7 +26,7 @@ export const useFormSubmit = ()=>{
         if(response.ok){
             setIsLoading(false);
             setError("")
-            if(method === "PATCH") navigate(0);
+            if(method === "PATCH" || method === "DELETE") navigate(0);
             else navigate(json.redirectUrl);
         }
     }
