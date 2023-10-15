@@ -48,7 +48,7 @@ const CreateProjectForm = (props:any)=>{
             setCheckState((prevState:string[])=>{
                 const newState = prevState.filter((value)=> value !== e.target.value);
                 setForm({...form, developers_assigned_to:newState})
-                return newState
+                return newState;
             })
         }
     }
@@ -59,7 +59,7 @@ const CreateProjectForm = (props:any)=>{
         if(props.formActive){
             // props.setFormActive(false);
             //make sure to provide id for this url path should have update appended to id ex. projects/:id/update
-            submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`);
+            submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`, "PATCH");
         }
         else{
             console.log("creating...");
