@@ -6,11 +6,11 @@ export const useFormSubmit = ()=>{
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    const submitForm = async(data:any, url:string)=>{
+    const submitForm = async(data:any, url:string, method="POST")=>{
         setIsLoading(true);
         setError("");
         const response = await fetch(url, {
-            method: "POST",
+            method: method,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -18,17 +18,17 @@ export const useFormSubmit = ()=>{
         })
 
         const json = await response.json();
-
+        console.log(json);
         if(!response.ok){
             setIsLoading(false);
-            console.log(json);
             setError(json.error);
         }
 
         if(response.ok){
             setIsLoading(false);
             setError("")
-            navigate(0);
+            if(method === "POST") navigate(0)
+            else navigate(json.redirectUrl);
         }
     }
     return {

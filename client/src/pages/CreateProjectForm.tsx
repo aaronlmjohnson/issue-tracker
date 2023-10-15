@@ -55,6 +55,7 @@ const CreateProjectForm = (props:any)=>{
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
+        console.log(props.formActive);
         if(props.formActive){
             // props.setFormActive(false);
             //make sure to provide id for this url path should have update appended to id ex. projects/:id/update

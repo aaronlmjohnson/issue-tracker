@@ -1,8 +1,9 @@
 import ProjectUpdateButton from "../components/ProjectUpdateButton";
 import useProjectInfo from "../hooks/useProjectInfo";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CreateProjectForm from "./CreateProjectForm";
+import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
 
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
@@ -40,6 +41,7 @@ const ProjectPage = ()=>{
                 return(<p className="developer-name" key={crypto.randomUUID()}>{name}</p>)
             })}
             <ProjectUpdateButton  handleUpdateButton={handleUpdateButton}/>
+            <ProjectDeleteButton project = {project} />
             { formActive && <CreateProjectForm update={true} project={project} setFormActive={setFormActive} formActive={formActive}/>} 
         </div>
     );
