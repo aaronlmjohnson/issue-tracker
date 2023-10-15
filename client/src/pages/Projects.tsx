@@ -12,7 +12,9 @@ interface Project {
 const Projects = ()=>{
     const [projects, setProjects] = useState<Array<Project>>([]);
     const [activeProject, setActiveProject] = useState(null);
-    const [formActive, setFormActive] = useState(null);
+    const [formActive, setFormActive] = useState(false);
+    const [toggleCreate, setToggleCreate] = useState(false);
+    const [toggleUpdate, setToggleUpdate] = useState(null);
 
     useEffect(()=>{
         const fetchProjects = async ()=> {
@@ -27,6 +29,11 @@ const Projects = ()=>{
         fetchProjects();
     }, []);
 
+    const handleCreateButton = ()=>{
+        setToggleCreate((prevState:boolean)=> prevState ? false : true);
+        setFormActive((prevState:boolean)=> prevState ? false : true);
+    }
+
     return(
         <div className="projects">
                 {projects && projects.map((project)=>{
@@ -35,11 +42,18 @@ const Projects = ()=>{
                                 project={project} 
                                 key={project._id} 
                                 setFormActive = {setFormActive}
+                                setToggleUpdate = {setToggleUpdate}
                                 setActiveProject = {setActiveProject}
                         />)
                 })}
-
-            {formActive && <CreateProjectForm update={true} project={activeProject} setFormActive={setFormActive} formActive={formActive}/>}
+            <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>
+            {formActive && <CreateProjectForm 
+                                title={toggleCreate ? "Create Project" : "Update Project"}
+                                update={toggleUpdate} 
+                                project={toggleCreate ? null : activeProject} 
+                                setFormActive={setFormActive} 
+                                formActive={formActive}
+                            />}
         </div>
     );
 }

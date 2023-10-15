@@ -9,6 +9,7 @@ const ProjectListing = (props:any)=>{
     useEffect(()=>{
         props.setFormActive((prevState:boolean)=> formActive);
         props.setActiveProject((prevState:any)=> project);
+        props.setToggleUpdate((prevState: any)=> prevState ? false : true);
     }, [formActive]);
     return(
         <div className="project-listing">

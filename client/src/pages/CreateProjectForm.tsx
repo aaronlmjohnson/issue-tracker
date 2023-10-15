@@ -55,14 +55,14 @@ const CreateProjectForm = (props:any)=>{
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
-        if(props.formActive)
+        if(props.toggleUpdate)
             submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`, "PATCH");
         else submitForm(form, "http://localhost:3001/projects/create");
     }
 
     return(
         !loading  && <div className="create-project-form">
-            <h1>{props.update ? "Update Project" : "Create Project"}</h1>
+            <h1>{props.title}</h1>
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <FormInput 
                     forValue={"title"}
