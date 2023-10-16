@@ -3,6 +3,7 @@ import FormError from "../components/FormError";
 import { useState, useEffect } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
 import { useFormSubmit } from "../hooks/useFormSubmit";
+import TextInput from "../components/TextInput";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
@@ -35,6 +36,10 @@ const ProjectForm = (props:any)=>{
         }
     }, []);
 
+    useEffect(()=>{
+        console.log(form);
+    },[form]);
+
     const [checkState, setCheckState] = useState<string[]>([]);
 
     const handleCheckbox = (e:any, i:number)=>{
@@ -64,14 +69,10 @@ const ProjectForm = (props:any)=>{
         !loading  && <div className="create-project-form">
             <h1>{props.title}</h1>
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
-                <FormInput 
+                <TextInput 
                     forValue={"title"}
                     classValue={"title-input"}
-                    nameValue={"title"}
-                    type={"text"}
-                    content={"Title:"}
-                    styling={"border"}
-                    labelStyle = {"text-black"}
+                    label={"Title:"}
                     value={form.title}
                     setter={(e: any )=> {setForm({...form, title: e.target.value});}}
                 />

@@ -5,7 +5,6 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import CreateProject from './pages/CreateProject';
 import ProjectPage from './pages/ProjectPage';
 
 function App() {
@@ -35,10 +34,6 @@ function App() {
               path="/login"
               element={<SignUp  page={"login"}/>}
             />
-            <Route 
-              path="/projects/create"
-              element={<CreateProject />}
-              />
           </Routes>
         </div>
       </BrowserRouter>
