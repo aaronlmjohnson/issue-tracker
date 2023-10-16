@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
 import { useFormSubmit } from "../hooks/useFormSubmit";
 
-const CreateProjectForm = (props:any)=>{
+const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm } = useFormSubmit();
     interface FormObj {
@@ -130,4 +130,4 @@ const CreateProjectForm = (props:any)=>{
     )
 }
 
-export default CreateProjectForm;
+export default ProjectForm;

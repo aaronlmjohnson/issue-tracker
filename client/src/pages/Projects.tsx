@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 import ProjectListing from '../components/ProjectListing';
-import CreateProjectForm from './CreateProjectForm';
+import ProjectForm from './ProjectForm';
 
 interface Project {
     _id: string;
@@ -47,7 +47,7 @@ const Projects = ()=>{
                         />)
                 })}
             <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>
-            {formActive && <CreateProjectForm 
+            {formActive && <ProjectForm 
                                 title={toggleCreate ? "Create Project" : "Update Project"}
                                 update={toggleUpdate} 
                                 project={toggleCreate ? null : activeProject} 

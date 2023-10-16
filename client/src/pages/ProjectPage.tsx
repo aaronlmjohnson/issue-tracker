@@ -2,7 +2,7 @@ import useProjectUpdateButton from "../components/useProjectUpdateButton";
 import useProjectInfo from "../hooks/useProjectInfo";
 import { useState } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
-import CreateProjectForm from "./CreateProjectForm";
+import ProjectForm from "./ProjectForm";
 import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
 
 const ProjectPage = ()=>{
@@ -37,7 +37,7 @@ const ProjectPage = ()=>{
             })}
             {formActive ? cancelButton() : updateButton()}
             <ProjectDeleteButton project = {project} />
-            {formActive && <CreateProjectForm update={true} project={project} setFormActive={setFormActive} formActive={formActive}/>} 
+            {formActive && <ProjectForm update={true} project={project} setFormActive={setFormActive} formActive={formActive}/>} 
         </div>
     );
 }
