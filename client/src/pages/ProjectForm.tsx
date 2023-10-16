@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
 import { useFormSubmit } from "../hooks/useFormSubmit";
 import TextInput from "../components/TextInput";
+import TextArea from "../components/TextArea";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
@@ -71,19 +72,13 @@ const ProjectForm = (props:any)=>{
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <TextInput 
                     forValue={"title"}
-                    classValue={"title-input"}
                     label={"Title:"}
                     value={form.title}
                     setter={(e: any )=> {setForm({...form, title: e.target.value});}}
                 />
-                <FormInput 
+                <TextArea 
                     forValue={"description"}
-                    classValue={"description"}
-                    nameValue={"description"}
-                    type={"textarea"}
-                    content={"Description:"}
-                    labelStyle = {"text-black"}
-                    styling={"border"}
+                    label={"Description:"}
                     rows={10}
                     cols={30}
                     value={form.description}
