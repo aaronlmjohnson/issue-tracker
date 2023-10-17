@@ -1,20 +1,4 @@
 const Checkboxes = (props:any)=>{
-    // { form } = props;
-    // const handleCheckbox = (e:any, i:number)=>{
-    //     if(!form.developers_assigned_to.includes(e.target.value)){
-    //         setCheckState((prevState:string[])=>{
-    //             const newState = [...prevState, e.target.value];
-    //             setForm({...form, developers_assigned_to:newState})
-    //             return newState;
-    //         });
-    //     } else{
-    //         setCheckState((prevState:string[])=>{
-    //             const newState = prevState.filter((value)=> value !== e.target.value);
-    //             setForm({...form, developers_assigned_to:newState})
-    //             return newState;
-    //         })
-    //     }
-    // }
 
     return (
         <fieldset>
