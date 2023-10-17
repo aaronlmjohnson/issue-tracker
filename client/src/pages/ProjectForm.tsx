@@ -5,6 +5,7 @@ import { useUserInfo } from "../hooks/useUserInfo";
 import { useFormSubmit } from "../hooks/useFormSubmit";
 import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
+import ComboBox from "../components/ComboBox";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
@@ -84,16 +85,11 @@ const ProjectForm = (props:any)=>{
                     value={form.description}
                     setter={(e: any )=> {setForm({...form, description: e.target.value});}}
                 />
-                 <FormInput 
+                 <ComboBox 
                     forValue={"project-lead"}
-                    classValue={"project-lead-input"}
-                    nameValue={"project-lead"}
-                    type={"select"}
-                    content={"Select lead for project:"}
-                    labelStyle = {"text-black"}
-                    styling={"border"}
                     options={leads}
                     optionsKey={"username"}
+                    selected = {form.project_lead}
                     setter={(e: any )=> {setForm({...form, project_lead: e.target.value});}}
                 />
                 <FormInput 
