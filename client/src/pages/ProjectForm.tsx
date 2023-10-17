@@ -6,6 +6,7 @@ import { useFormSubmit } from "../hooks/useFormSubmit";
 import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
 import ComboBox from "../components/ComboBox";
+import Checkboxes from "../components/Checkboxes";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
@@ -92,14 +93,10 @@ const ProjectForm = (props:any)=>{
                     selected = {form.project_lead}
                     setter={(e: any )=> {setForm({...form, project_lead: e.target.value});}}
                 />
-                <FormInput 
-                    forValue={"developers"}
-                    classValue={"developers-input"}
-                    nameValue={"developers"}
-                    type={"checkbox"}
-                    legend={"Select developers for the project:"}
-                    labelStyle = {"text-black"}
-                    styling={"border"}
+
+                <Checkboxes
+                    forValue= {"developers"}
+                    legend={"Select Developers for the project:"}
                     checkboxes={developers}
                     labelKey={"username"}
                     setter={handleCheckbox}
