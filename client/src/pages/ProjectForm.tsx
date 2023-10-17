@@ -33,9 +33,6 @@ const ProjectForm = (props:any)=>{
                     project_lead: props.project.project_lead,
                     developers_assigned_to: props.project.developers_assigned_to
             }});
-            setCheckState((prevState:string[])=>{
-                return props.project.developers_assigned_to;
-            });
         }
     }, []);
 
@@ -95,8 +92,12 @@ const ProjectForm = (props:any)=>{
                     legend={"Select Developers for the project:"}
                     checkboxes={developers}
                     labelKey={"username"}
-                    setter={handleCheckbox}
+                    setter={setForm}
+                    form={form}
                     checkState={checkState}
+                    checkBoxOptions = {props.project.developers_assigned_to}
+                    selectedOptions = {form.developers_assigned_to}
+                    checkboxProperty = {"developers_assigned_to"}
                 />
 
                 <FormInput 
