@@ -11,6 +11,7 @@ import Checkboxes from "../components/Checkboxes";
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm } = useFormSubmit();
+    
     interface FormObj {
     title: string,
     description: string,
@@ -35,24 +36,6 @@ const ProjectForm = (props:any)=>{
             }});
         }
     }, []);
-
-    useEffect(()=>{
-        console.log(form);
-    },[form]);
-
-    const [checkState, setCheckState] = useState<string[]>([]);
-
-    const handleCheckbox = (e:any, i:number)=>{
-        const isChecked = !form.developers_assigned_to.includes(e.target.value);
-
-        setCheckState((prevState:string[])=>{
-            const newState = isChecked ? [...prevState, e.target.value] :
-                    prevState.filter((value)=> value !== e.target.value);
-
-            setForm({...form, developers_assigned_to:newState})
-            return newState;
-        });        
-    }
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
@@ -94,7 +77,6 @@ const ProjectForm = (props:any)=>{
                     labelKey={"username"}
                     setter={setForm}
                     form={form}
-                    checkState={checkState}
                     checkBoxOptions = {props.project.developers_assigned_to}
                     selectedOptions = {form.developers_assigned_to}
                     checkboxProperty = {"developers_assigned_to"}
