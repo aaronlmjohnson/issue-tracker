@@ -37,7 +37,7 @@ const ProjectPage = ()=>{
             })}
             {formActive ? cancelButton() : updateButton()}
             <ProjectDeleteButton project = {project} />
-            {formActive && <ProjectForm update={true} project={project} setFormActive={setFormActive} formActive={formActive}/>} 
+            {formActive && <ProjectForm project={project || null}/>} 
         </div>
     );
 }

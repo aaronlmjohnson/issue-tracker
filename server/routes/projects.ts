@@ -12,8 +12,8 @@ router.get('/projects/:id', controller.get);
 
 router.post('/projects/create', controller.createPost);
 
-router.post('/projects/:id/delete', controller.deletePost);
+router.delete('/projects/:id/delete', controller.deletePost);
 
-router.post('/projects/:id/update', controller.updatePost);
+router.patch('/projects/:id/update', controller.updatePost);
 
 export default router;

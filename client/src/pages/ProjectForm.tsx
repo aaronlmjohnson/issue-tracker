@@ -11,7 +11,8 @@ import Checkboxes from "../components/Checkboxes";
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm } = useFormSubmit();
-    
+    const [developerNames, setDeveloperNames] = useState([]);
+
     interface FormObj {
     title: string,
     description: string,
@@ -26,6 +27,7 @@ const ProjectForm = (props:any)=>{
     });
 
     useEffect(()=>{
+        console.log(props.project);
         if(props.project){
             setForm((prevState) =>{
                 return {
@@ -34,14 +36,15 @@ const ProjectForm = (props:any)=>{
                     project_lead: props.project.project_lead,
                     developers_assigned_to: props.project.developers_assigned_to
             }});
+            setDeveloperNames(props.project.developers_assigned_to);
         }
     }, []);
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
-        if(props.toggleUpdate)
-            submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`, "PATCH");
-        else submitForm(form, "http://localhost:3001/projects/create");
+        if(props.project === null) submitForm(form, "http://localhost:3001/projects/create");
+        else submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`, "PATCH");
+         
     }
 
     return(
@@ -77,7 +80,7 @@ const ProjectForm = (props:any)=>{
                     labelKey={"username"}
                     setter={setForm}
                     form={form}
-                    checkBoxOptions = {props.project.developers_assigned_to}
+                    checkBoxOptions = {developerNames}
                     selectedOptions = {form.developers_assigned_to}
                     checkboxProperty = {"developers_assigned_to"}
                 />

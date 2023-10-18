@@ -66,7 +66,7 @@ const projectController = ()=> {
     ]
 
     const deletePost = asyncHandler(async(req, res, next)=>{
-        const project = await Project.findById(req.body.id).exec();
+        const project = await Project.findById(req.body._id).exec();
         /*** When I add Tickets and Comments, in the future, i'll need to remove them too
          * when deleting a project
          */
