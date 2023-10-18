@@ -27,7 +27,6 @@ const ProjectForm = (props:any)=>{
     });
 
     useEffect(()=>{
-        console.log(props.project);
         if(props.project){
             setForm((prevState) =>{
                 return {

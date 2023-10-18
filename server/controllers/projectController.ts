@@ -44,7 +44,6 @@ const projectController = ()=> {
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
             try{
-                console.log(req.body);
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
                 const project = new Project({
