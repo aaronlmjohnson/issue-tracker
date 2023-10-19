@@ -46,6 +46,10 @@ const ProjectForm = (props:any)=>{
          
     }
 
+    const handleCancel = ()=>{
+        props.setFormActive(false);
+    }
+
     return(
         !loading  && <div className="create-project-form">
             <h1>{props.title}</h1>
@@ -93,6 +97,7 @@ const ProjectForm = (props:any)=>{
                     styling = {"border px-5 py-1 text-black rounded-md"}
                     labelStyle = {"text-black"}
                 />
+                <button onClick={handleCancel}>Cancel</button>
                 
                 {/* {error && <FormError error= {error}/>} */}
             </form>

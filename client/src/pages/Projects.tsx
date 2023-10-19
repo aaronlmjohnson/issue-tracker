@@ -26,8 +26,12 @@ const Projects = ()=>{
             }
         }
 
+        if(!formActive){
+            setToggleCreate(false);
+        }
+
         fetchProjects();
-    }, []);
+    }, [formActive]);
 
     const handleCreateButton = ()=>{
         if(toggleCreate) return;
@@ -35,33 +39,30 @@ const Projects = ()=>{
         setFormActive(true);
     }
 
-    const handleCancelButton = ()=>{
-        setToggleCreate(false);
-        setFormActive(false);
-    }
 
     return(
         <div className="projects">
-                {projects && projects.map((project)=>{
-                    return(
-                        <ProjectListing  
-                                project={project} 
-                                key={project._id} 
-                                setFormActive = {setFormActive}
-                                setToggleUpdate = {setToggleUpdate}
-                                setActiveProject = {setActiveProject}
-                                toggleUpdate = {toggleUpdate}
-                                setToggleCreate = {setToggleCreate}
-                        />)
-                })}
+            {projects && projects.map((project)=>{
+                return(
+                    <ProjectListing  
+                            project={project} 
+                            key={project._id} 
+                            setFormActive = {setFormActive}
+                            setToggleUpdate = {setToggleUpdate}
+                            setActiveProject = {setActiveProject}
+                            toggleUpdate = {toggleUpdate}
+                            setToggleCreate = {setToggleCreate}
+                    />)
+            })}
+
             <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>
-            { toggleCreate && <button className="create-new-project-button" onClick={handleCancelButton}>Cancel</button> }
-            {formActive && <ProjectForm 
-                                title={toggleCreate ? "Create Project" : "Update Project"}
-                                project={toggleCreate ? null : activeProject} 
-                                setFormActive={setFormActive} 
-                                formActive={formActive}
-                            />}
+            {formActive && 
+                <ProjectForm 
+                    title={toggleCreate ? "Create Project" : "Update Project"}
+                    project={toggleCreate ? null : activeProject} 
+                    setFormActive={setFormActive} 
+                    formActive={formActive}
+            />}
         </div>
     );
 }

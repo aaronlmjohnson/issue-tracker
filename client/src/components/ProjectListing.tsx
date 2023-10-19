@@ -18,7 +18,7 @@ const ProjectListing = (props:any)=>{
             <h1><a href={`/projects/${project._id}`}>{project.title}</a></h1>
             <p>{project.date_created}</p>
             <p>{project.description}</p>
-            {formActive ? cancelButton() : updateButton()}
+            {updateButton()}
             <ProjectDeleteButton project = {project}/>
 
         </div>
