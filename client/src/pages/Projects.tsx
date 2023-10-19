@@ -30,8 +30,14 @@ const Projects = ()=>{
     }, []);
 
     const handleCreateButton = ()=>{
-        setToggleCreate((prevState:boolean)=> prevState ? false : true);
-        setFormActive((prevState:boolean)=> prevState ? false : true);
+        if(toggleCreate) return;
+        setToggleCreate(true);
+        setFormActive(true);
+    }
+
+    const handleCancelButton = ()=>{
+        setToggleCreate(false);
+        setFormActive(false);
     }
 
     return(
@@ -49,6 +55,7 @@ const Projects = ()=>{
                         />)
                 })}
             <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>
+            { toggleCreate && <button className="create-new-project-button" onClick={handleCancelButton}>Cancel</button> }
             {formActive && <ProjectForm 
                                 title={toggleCreate ? "Create Project" : "Update Project"}
                                 project={toggleCreate ? null : activeProject} 
