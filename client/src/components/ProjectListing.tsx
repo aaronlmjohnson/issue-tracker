@@ -10,6 +10,8 @@ const ProjectListing = (props:any)=>{
         props.setFormActive((prevState:boolean)=> formActive);
         props.setActiveProject((prevState:any)=> project);
         props.setToggleUpdate((prevState: any)=> prevState ? false : true);
+        if(props.toggleUpdate) props.setToggleCreate(false);
+        //if toggleUpdate true set toggle create to false
     }, [formActive]);
     return(
         <div className="project-listing">

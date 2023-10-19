@@ -44,12 +44,13 @@ const Projects = ()=>{
                                 setFormActive = {setFormActive}
                                 setToggleUpdate = {setToggleUpdate}
                                 setActiveProject = {setActiveProject}
+                                toggleUpdate = {toggleUpdate}
+                                setToggleCreate = {setToggleCreate}
                         />)
                 })}
             <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>
             {formActive && <ProjectForm 
                                 title={toggleCreate ? "Create Project" : "Update Project"}
-                                update={toggleUpdate} 
                                 project={toggleCreate ? null : activeProject} 
                                 setFormActive={setFormActive} 
                                 formActive={formActive}
