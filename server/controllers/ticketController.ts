@@ -126,21 +126,14 @@ const ticketController = ()=> {
     ]
 
     const deleteTicket = asyncHandler(async(req, res, next)=>{
-        res.send("Delete Ticket");
-        // const project = await Project.findById(req.body._id).exec();
-        // /*** When I add Tickets and Comments, in the future, i'll need to remove them too
-        //  * when deleting a project
-        //  */
-        // if(!project){
-        //     const error = new Error("Project not found");
-        //     res.status(404);
-        //     next(error);
-        // } else{
-        //     await Project.findByIdAndRemove(project.id);
-        //     res.status(200).json({redirectUrl: `/projects`});
-        // }
-            
-
+        const ticket = await Ticket.findById(req.body._id).exec();
+        console.log(ticket);
+        if(!ticket){
+            res.status(404).send("Ticket Not Found");
+        } else{
+            await Ticket.findByIdAndRemove(ticket.id);
+            res.status(200).json({redirectUrl: `/projects/652ff7351c79f67fa29b7ed9/tickets`});
+        }
     });
 
 
