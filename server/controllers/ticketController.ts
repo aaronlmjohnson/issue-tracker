@@ -23,23 +23,15 @@ const ticketController = ()=> {
     const getAllFromProject = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.projectId).exec();
         if(!project) res.status(404).send("Project Not Found.");
-        const tickets = await Ticket.find({project:project._id});
+        const tickets = await Ticket.find({project:project._id}).sort({title: 1}).exec();
         if(!tickets) res.status(404).send("Tickets Not Found.");
         else res.status(200).json(tickets);
     });
 
     const getTicket = asyncHandler(async(req, res, next)=>{
-        console.log(req);
-        res.send("get Ticket");
-
-        // const project = await Project.findById(req.params.id).exec();
-
-        // if(!project){
-        //     const error = new Error("Project not found");
-        //     res.status(404);
-        //     next(error);
-        // } else
-        //     res.status(200).json(project);
+        const ticket = await Ticket.findById(req.params.ticketId).exec();
+        if(!ticket) res.status(404).send("Ticket Not Found");
+        else res.status(200).json(ticket);
     });
 
     // title: String,
