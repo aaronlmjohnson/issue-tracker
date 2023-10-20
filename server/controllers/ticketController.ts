@@ -86,8 +86,38 @@ const ticketController = ()=> {
         .escape()
         .isLength({min: 1})
         .withMessage("You must provide a description."),
+        body("author")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("Author wasn't provided."),
+        body("project")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("Project wasn't provided."),
+        body("priority")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("You must select the priority of the ticket."),
+        body("status")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("The ticket status wasn't set."),
+        body("type")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("You must select the type of ticket."),
+        body("date_created")
+        .isISO8601()
+        .toDate()
+        .withMessage("Creation date isn't properly formatted."),
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
+            console.log(req.body.date_created);
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
