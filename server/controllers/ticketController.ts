@@ -215,7 +215,5 @@ const ticketController = ()=> {
     };
 }
 
- 
-
 export default ticketController;
 

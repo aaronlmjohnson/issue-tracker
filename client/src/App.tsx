@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import ProjectPage from './pages/ProjectPage';
+import AllTickets from './pages/AllTickets';
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
             <Route
               path="/login"
               element={<SignUp  page={"login"}/>}
+            />
+            <Route
+              path="/tickets"
+              element={<AllTickets  />}
             />
           </Routes>
         </div>
