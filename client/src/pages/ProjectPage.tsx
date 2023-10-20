@@ -12,7 +12,7 @@ const ProjectPage = ()=>{
     const {developers, loading:usersLoading} = useUserInfo();
     const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);
     const {updateButton, cancelButton, setFormActive, formActive} = useProjectUpdateButton();
-    const [toggleTickets, setToggleTickets] = useState(false);
+    const [toggleTickets, setToggleTickets] = useState(false);//This will be handled in a navbar component in the future
 
     const getDeveloperNames = ()=>{
         const filteredDevs = developers.filter((developer: any)=>{
@@ -38,7 +38,9 @@ const ProjectPage = ()=>{
             })}
             {formActive ? cancelButton() : updateButton()}
             <ProjectDeleteButton project = {project} />
+            <button onClick={handleTicketsPage}>tickets</button>
             {formActive && <ProjectForm project={project || null}/>} 
+            {toggleTickets && <AllProjectTickets project = {project} />} 
         </div>
     );
 }
