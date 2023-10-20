@@ -6,18 +6,17 @@ import Ticket from "../models/ticketModel";
 const ticketController = ()=> {
 
     const getAllTickets = asyncHandler(async(req, res, next)=>{
-        res.send("get all tickets");
-        // try{
-        //     const projects = await Project.find({})
-        //     .sort({title: 1})
-        //     .exec();
-        //     if(!projects){
-        //         throw Error("No Projects Found");
-        //     } else
-        //         res.status(200).json(projects);
-        // }catch(e){
-        //     console.log(e);
-        // }
+        try{
+            const tickets = await Ticket.find({})
+            .sort({title: 1})
+            .exec();
+            if(!tickets){
+                throw Error("No Projects Found");
+            } else
+                res.status(200).json(tickets);
+        }catch(e){
+            console.log(e);
+        }
         
     });
 
