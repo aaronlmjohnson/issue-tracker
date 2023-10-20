@@ -1,21 +1,18 @@
 import useProjectUpdateButton from "../components/useProjectUpdateButton";
 import useProjectInfo from "../hooks/useProjectInfo";
 import { useState } from "react";
+import { useFetchData } from "../hooks/useFetchData";
 import { useUserInfo } from "../hooks/useUserInfo";
 import ProjectForm from "./ProjectForm";
 import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
+import AllProjectTickets from "../components/AllProjectTickets";
 
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
-    const {leads, developers, loading:usersLoading} = useUserInfo();
+    const {developers, loading:usersLoading} = useUserInfo();
+    const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);
     const {updateButton, cancelButton, setFormActive, formActive} = useProjectUpdateButton();
-
-    const getLeadName = ()=>{
-        if(leads === null || project === null) return;  
-        return leads && leads.filter((lead:any)=> {
-            return lead._id === project.project_lead;
-        })[0].username;
-    }
+    const [toggleTickets, setToggleTickets] = useState(false);
 
     const getDeveloperNames = ()=>{
         const filteredDevs = developers.filter((developer: any)=>{
@@ -24,13 +21,17 @@ const ProjectPage = ()=>{
         const devNames = filteredDevs.map((developer:any )=> developer && developer.username);
         return devNames;
     }
+
+    const handleTicketsPage = ()=>{
+        setToggleTickets((prevState)=> prevState ? false : true);
+    }
     
     return (
         !loading && !usersLoading&& <div className="project-landing-page ">
             <p className="project-title">{project.title}</p>
             <p className="project-description">{project.description}</p>
             <p className="project-date-created">Started on: {project.date_created}</p>
-            <p className="project-date-created">Project Lead: {getLeadName()}</p>
+            <p className="project-date-created">Project Lead: {lead.username}</p>
             <p>Developers:</p>
             {getDeveloperNames().map((name:string)=>{
                 return(<p className="developer-name" key={crypto.randomUUID()}>{name}</p>)

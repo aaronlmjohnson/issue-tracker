@@ -2,7 +2,7 @@ import { useFetchData } from '../hooks/useFetchData';
 
 const Ticket = (props:any)=>{
     const { ticket } = props;
-    const {data:author, loading:authorLoading, error:authorError, refetch:authorRefetch} = useFetchData(`http://localhost:3001/users/${ticket.author}`);
+    const {data:author, loading:authorLoading} = useFetchData(`http://localhost:3001/users/${ticket.author}`);
 
     return (
         !authorLoading && <div className="ticket">

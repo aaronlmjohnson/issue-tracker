@@ -6,10 +6,9 @@ const router = express.Router();
 const userController = UserController();
 
 router.get('/', userController.getUsers);
-router.get('/:userId', userController.getUser);
 router.get('/developers', userController.getDevelopers);
 router.get('/project-leads', userController.getProjectLeads);
-
+router.get('/:userId', userController.getUser);
 
 /* Sign Up */
 router.post('/sign-up', userController.createUserPost);
