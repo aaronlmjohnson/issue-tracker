@@ -21,20 +21,11 @@ const ticketController = ()=> {
     });
 
     const getAllFromProject = asyncHandler(async(req, res, next)=>{
-        res.send("get all tickets from project");
-        console.log(req);
-        // try{
-        //     const projects = await Project.find({})
-        //     .sort({title: 1})
-        //     .exec();
-        //     if(!projects){
-        //         throw Error("No Projects Found");
-        //     } else
-        //         res.status(200).json(projects);
-        // }catch(e){
-        //     console.log(e);
-        // }
-        
+        const project = await Project.findById(req.params.projectId).exec();
+        if(!project) res.status(404).send("Project Not Found.");
+        const tickets = await Ticket.find({project:project._id});
+        if(!tickets) res.status(404).send("Tickets Not Found.");
+        else res.status(200).json(tickets);
     });
 
     const getTicket = asyncHandler(async(req, res, next)=>{
