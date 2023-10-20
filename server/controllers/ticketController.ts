@@ -1,6 +1,7 @@
 import Project from "../models/project";
 import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
+import Ticket from "../models/ticketModel";
 
 const ticketController = ()=> {
 
@@ -51,6 +52,29 @@ const ticketController = ()=> {
         //     res.status(200).json(project);
     });
 
+    // title: String,
+    // description: String,
+    // project: Schema.Types.ObjectId,
+    // date_created: Date,
+    // author: Schema.Types.ObjectId,
+    // priority: String,
+    // status: String,
+    // type: String,
+    // assignee: Schema.Types.ObjectId,
+    // comments: Schema.Types.ObjectId[]
+        /*{
+    "title": "Add a comment section",
+    "description": "Developers should be able to comment on tickets",
+    "date_create":"10/20/2023",
+    "author":"65173c56d34c0105811159e1",
+    "project": "6519bb8b3fb55acd186c86e4",
+    "priority":"High",
+    "status":"Not Assigned",
+    "type": "Feature",
+    "comments":[],
+    "assignee": ""
+} */
+
     const createTicket = [
         body("title")
         .trim()
@@ -67,16 +91,20 @@ const ticketController = ()=> {
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
-                const project = new Project({
+                const ticket = new Ticket({
                     title: req.body.title,
                     description: req.body.description,
                     date_created: req.body.date_created,
-                    project_lead: req.body.project_lead,
-                    developers_assigned_to: req.body.developers_assigned_to
+                    author: req.body.author,
+                    project: req.body.project,
+                    priority: req.body.priority,
+                    status: req.body.status,
+                    type: req.body.type,
+                    assignee: req.body.assignee
                 });
 
-                await project.save();
-                res.status(200).json({redirectUrl: `/projects/${project._id}`});
+                await ticket.save();
+                res.status(200).json({redirectUrl: `/tickets`});
 
             } catch(err) {
                 res.status(400).send({error: err.message});
