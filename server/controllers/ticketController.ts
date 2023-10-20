@@ -155,24 +155,55 @@ const ticketController = ()=> {
         .escape()
         .isLength({min: 1})
         .withMessage("You must provide a description."),
+        body("author")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("Author wasn't provided."),
+        body("project")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("Project wasn't provided."),
+        body("priority")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("You must select the priority of the ticket."),
+        body("status")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("The ticket status wasn't set."),
+        body("type")
+        .trim()
+        .escape()
+        .isLength({min: 1})
+        .withMessage("You must select the type of ticket."),
+        body("date_created")
+        .isISO8601()
+        .toDate()
+        .withMessage("Creation date isn't properly formatted."),
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
 
-                //instead of new project find current one
-                const project = new Project({
+                const ticket = new Ticket({
                     title: req.body.title,
                     description: req.body.description,
                     date_created: req.body.date_created,
-                    project_lead: req.body.project_lead,
-                    developers_assigned_to: req.body.developers_assigned_to,
-                    _id: req.params.id,
+                    author: req.body.author,
+                    project: req.body.project,
+                    priority: req.body.priority,
+                    status: req.body.status,
+                    type: req.body.type,
+                    assignee: req.body.assignee,
+                    _id: req.params.ticketId
                 });
-
-                await Project.findByIdAndUpdate(req.params.id, project, {});
-                res.status(200).json({redirectUrl: `/projects/${project._id}`});
+                await Ticket.findByIdAndUpdate(req.params.ticketId, ticket, {});
+                res.status(200).json({redirectUrl: `/projects/${req.params.projectId}/tickets/${ticket._id}`});
 
             } catch(err) {
                 res.status(400).send({error: err.message});
