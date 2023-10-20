@@ -21,6 +21,19 @@ const userController = ()=>{
         }
     });
 
+    const getUser = asyncHandler(async(req, res, next)=>{
+        try{
+            const user = await User.findById(req.params.userId);
+            console.log(user);
+            if(!user) throw Error("User Not Found");
+            res.status(200).json(user);
+
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
+
     const getDevelopers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({role:"Developer"}, {password: 0});
@@ -111,12 +124,11 @@ const userController = ()=>{
             res.status(400).json({error: err.message});
             return next(err);
         }
-        
     });
-
 
     return{
         createUserPost,
+        getUser,
         loginUser,
         getUsers,
         getDevelopers,
