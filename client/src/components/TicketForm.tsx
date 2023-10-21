@@ -14,12 +14,14 @@ const TicketForm = (props:any)=>{
         priority: string,
         status: string,
         type: string,
-        assignee: string[]
+        assignee: string
     }
 
     const { method, project } = props;
     const {data:projectOptions, loading:optionsLoading } = useFetchData("http://localhost:3001/projects/all-project-names");
-    const {data:ticketEnums, loading:enumsLoading} = useFetchData("http://localhost:3001/tickets/ticket-enums")
+    const {data:ticketEnums, loading:enumsLoading} = useFetchData("http://localhost:3001/tickets/ticket-enums");
+    const {data:developers, loading:loadingDevs} = useFetchData("http://localhost:3001/users/developers-by-name");
+
     const { user } = useAuthContext();
     const [form, setForm ] = useState<FormObj>({
         title:"",
@@ -29,19 +31,20 @@ const TicketForm = (props:any)=>{
         priority: "",
         status:"",
         type:"",
-        assignee:[]
+        assignee:""
     });
-
-    useEffect(()=>{
-        console.log(form);
-    }, [form])
 
     const handleFormChange = (e:any, formProperty:any)=>{
         setForm({...form, [formProperty]: e.target.value});
     }
+
+    const handleSubmit = (e:any)=>{
+        e.preventDefault();
+        console.log(form);
+    }
     
     return (
-        !optionsLoading && !enumsLoading && <form method={method} >
+        !optionsLoading && !enumsLoading && <form method={method} onSubmit={handleSubmit}>
             <TextInput 
                 forValue={"ticket-title"}
                 label={"Title:"}
@@ -86,6 +89,15 @@ const TicketForm = (props:any)=>{
                     setter={(e:Event)=> handleFormChange(e, "type")}
                     disabled = {false}
             />
+            <ComboBox 
+                    forValue={"ticket-assignee"}
+                    options={developers}
+                    optionsKey={"username"}
+                    selected = {form.assignee}
+                    setter={(e:Event)=> handleFormChange(e, "assignee")}
+                    disabled = {false}
+            />
+            <button>Submit</button>
         </form>
     )
 }

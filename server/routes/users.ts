@@ -7,6 +7,7 @@ const userController = UserController();
 
 router.get('/', userController.getUsers);
 router.get('/developers', userController.getDevelopers);
+router.get('/developers-by-name', userController.getDevelopersByName);
 router.get('/project-leads', userController.getProjectLeads);
 router.get('/:userId', userController.getUser);
 

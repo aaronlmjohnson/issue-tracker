@@ -47,6 +47,19 @@ const userController = ()=>{
         }
     });
 
+    const getDevelopersByName = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({role:"Developer"}, {password: 0, role:0, date_created: 0});
+            console.log(users);
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
+
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
+
     const getProjectLeads = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({role:"Project Lead"}, {password: 0});
@@ -132,7 +145,8 @@ const userController = ()=>{
         loginUser,
         getUsers,
         getDevelopers,
-        getProjectLeads
+        getProjectLeads,
+        getDevelopersByName
     }
 }
 
