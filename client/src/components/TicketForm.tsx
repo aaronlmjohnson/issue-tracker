@@ -34,6 +34,16 @@ const TicketForm = (props:any)=>{
         assignee:""
     });
 
+    useEffect(()=>{
+        //for when someone is assigned to the project...change form to
+        if(form.assignee && !form.status) setForm({...form, status: ticketEnums.statuses[1]});
+        //reverse assigned status to not assigned if developer removed
+        if(!form.assignee && form.status) setForm({...form, status: ''});
+
+
+        //else setForm({...form, status: ticketEnums.statuses[0]});
+    },[form])
+
     const handleFormChange = (e:any, formProperty:any)=>{
         setForm({...form, [formProperty]: e.target.value});
     }
