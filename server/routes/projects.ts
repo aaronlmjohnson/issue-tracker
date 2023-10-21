@@ -7,7 +7,11 @@ import  ProjectController from "../controllers/projectController";
 const controller = ProjectController();
 
 /* GET all projects */
+
 router.get('/projects', controller.getAll);
+router.get('/projects/all-project-names', controller.getNamesAndIds);
+
+
 router.get('/projects/:id', controller.get);
 
 router.post('/projects/create', controller.createPost);

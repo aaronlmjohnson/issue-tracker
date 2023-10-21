@@ -6,6 +6,7 @@ import { useUserInfo } from "../hooks/useUserInfo";
 import ProjectForm from "./ProjectForm";
 import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
 import AllProjectTickets from "../components/AllProjectTickets";
+import TicketForm from "../components/TicketForm";
 
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
@@ -41,6 +42,7 @@ const ProjectPage = ()=>{
             <button onClick={handleTicketsPage}>tickets</button>
             {formActive && <ProjectForm project={project || null}/>} 
             {toggleTickets && <AllProjectTickets project = {project} />} 
+            <TicketForm project={project}/>
         </div>
     );
 }

@@ -19,6 +19,22 @@ const projectController = ()=> {
         
     });
 
+    const getNamesAndIds = asyncHandler(async(req, res, next)=>{
+        try{
+            const projects = await Project.aggregate()
+            .project({title: 1, id: 1})
+            .sort({title: 1})
+            .exec();
+            if(!projects){
+                throw Error("No Projects Found");
+            } else
+                res.status(200).json(projects);
+        }catch(e){
+            console.log(e);
+        }
+        
+    });
+
     const get = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.id).exec();
 
@@ -124,6 +140,7 @@ const projectController = ()=> {
     return{
         getAll,
         get,
+        getNamesAndIds,
         createPost,
         deletePost,
         updatePost
