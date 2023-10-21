@@ -19,12 +19,13 @@ const TicketForm = (props:any)=>{
 
     const { method, project } = props;
     const {data:projectOptions, loading:optionsLoading } = useFetchData("http://localhost:3001/projects/all-project-names");
+    const {data:ticketEnums, loading:enumsLoading} = useFetchData("http://localhost:3001/tickets/ticket-enums")
     const { user } = useAuthContext();
     const [form, setForm ] = useState<FormObj>({
         title:"",
         description:"",
         project:project ? project._id : null,
-        author:user.user._id,
+        author:user ? user.user._id : null,
         priority: "",
         status:"",
         type:"",
@@ -40,7 +41,7 @@ const TicketForm = (props:any)=>{
     }
     
     return (
-        !optionsLoading && <form method={method} >
+        !optionsLoading && !enumsLoading && <form method={method} >
             <TextInput 
                 forValue={"ticket-title"}
                 label={"Title:"}
@@ -60,8 +61,30 @@ const TicketForm = (props:any)=>{
                     options={projectOptions}
                     optionsKey={"title"}
                     selected = {form.project}
-                    setter={(e: any )=> {setForm({...form, project: e.target.value});}}
+                    setter={(e:Event)=> handleFormChange(e, "project")}
                     disabled = {true}
+            />
+
+            <ComboBox 
+                    forValue={"ticket-priority"}
+                    options={ticketEnums.priorities}
+                    selected = {form.priority}
+                    setter={(e:Event)=> handleFormChange(e, "priority")}
+                    disabled = {false}
+            />
+            <ComboBox 
+                    forValue={"ticket-status"}
+                    options={ticketEnums.statuses}
+                    selected = {form.status}
+                    setter={(e:Event)=> handleFormChange(e, "status")}
+                    disabled = {false}
+            />
+            <ComboBox 
+                    forValue={"ticket-type"}
+                    options={ticketEnums.types}
+                    selected = {form.type}
+                    setter={(e:Event)=> handleFormChange(e, "type")}
+                    disabled = {false}
             />
         </form>
     )

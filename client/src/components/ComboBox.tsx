@@ -6,7 +6,7 @@ const ComboBox = (props:any)=>{
             {options && options.map((option:any, i:number)=> 
                 {
                     return(<option value={option._id} key={crypto.randomUUID()}>
-                        {option[props.optionsKey]}
+                        {props.optionsKey ? option[props.optionsKey] : option}
                     </option>)
                 }
             )}
