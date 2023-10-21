@@ -42,7 +42,7 @@ const ProjectPage = ()=>{
             <button onClick={handleTicketsPage}>tickets</button>
             {formActive && <ProjectForm project={project || null}/>} 
             {toggleTickets && <AllProjectTickets project = {project} />} 
-            <TicketForm project={project}/>
+            <TicketForm project={project} />
         </div>
     );
 }

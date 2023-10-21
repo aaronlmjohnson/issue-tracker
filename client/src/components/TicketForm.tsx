@@ -3,6 +3,7 @@ import TextInput from "./TextInput";
 import TextArea from "./TextArea";
 import ComboBox from "./ComboBox";
 import { useFetchData } from "../hooks/useFetchData";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const TicketForm = (props:any)=>{
     interface FormObj {
@@ -16,13 +17,14 @@ const TicketForm = (props:any)=>{
         assignee: string[]
     }
 
-    const { method, project, author } = props;
+    const { method, project } = props;
     const {data:projectOptions, loading:optionsLoading } = useFetchData("http://localhost:3001/projects/all-project-names");
+    const { user } = useAuthContext();
     const [form, setForm ] = useState<FormObj>({
         title:"",
         description:"",
         project:project ? project._id : null,
-        author:author ? author._id : null,
+        author:user.user._id,
         priority: "",
         status:"",
         type:"",
@@ -30,7 +32,7 @@ const TicketForm = (props:any)=>{
     });
 
     useEffect(()=>{
-        console.log(form)
+        console.log(form);
     }, [form])
 
     const handleFormChange = (e:any, formProperty:any)=>{
