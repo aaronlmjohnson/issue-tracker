@@ -10,6 +10,8 @@ const ticketController = ()=> {
             const tickets = await Ticket.find({})
             .sort({title: 1})
             .exec();
+            console.log();
+
             if(!tickets){
                 throw Error("No Projects Found");
             } else
@@ -19,6 +21,15 @@ const ticketController = ()=> {
         }
         
     });
+
+    const getTicketEnums = asyncHandler(async(req, res, next)=>{
+        const priorities = (await Ticket.findOne()).priorities;
+        const statuses = (await Ticket.findOne()).statuses;
+        const types = (await Ticket.findOne()).types;
+
+        res.status(200).json({priorities, statuses, types});
+    });
+
 
     const getAllFromProject = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.projectId).exec();
@@ -211,7 +222,8 @@ const ticketController = ()=> {
         getAllFromProject,
         createTicket,
         deleteTicket,
-        updateTicket
+        updateTicket,
+        getTicketEnums
     };
 }
 

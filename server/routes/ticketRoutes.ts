@@ -7,6 +7,8 @@ import  TicketHandler from "../controllers/ticketController";
 const controller = TicketHandler();
 
 router.get('/tickets', controller.getAllTickets);
+router.get('/tickets/ticket-enums', controller.getTicketEnums);
+
 
 /*GET all the tickets for a select project */
 router.get('/projects/:projectId/tickets', controller.getAllFromProject);

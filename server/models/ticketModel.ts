@@ -10,7 +10,10 @@ interface ITicket {
     status: String,
     type: String,
     assignee: Schema.Types.ObjectId,
-    comments: Schema.Types.ObjectId[]
+    comments: Schema.Types.ObjectId[],
+    priorities: any,
+    statuses: any,
+    types: any
 }
 
 const ticketSchema = new Schema<ITicket>({
@@ -39,8 +42,16 @@ const ticketSchema = new Schema<ITicket>({
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment"}]
 });
 
-ticketSchema.virtual("url").get(function(){
-    return `/tickets/${this._id}`;
+ticketSchema.virtual('priorities').get(function() {
+    return ticketSchema.path('priority').options.enum;
+});
+
+ticketSchema.virtual('types').get(function() {
+    return ticketSchema.path('type').options.enum;
+});
+
+ticketSchema.virtual('statuses').get(function() {
+    return ticketSchema.path('status').options.enum;
 });
 
 const Ticket = model<ITicket>("Ticket", ticketSchema);
