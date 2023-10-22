@@ -19,25 +19,29 @@ const TicketForm = (props:any)=>{
         date_created: Date
     }
 
-    const { method, project } = props;
+    const { method, project, ticket } = props;
     const {data:projectOptions, loading:optionsLoading } = useFetchData("http://localhost:3001/projects/all-project-names");
     const {data:ticketEnums, loading:enumsLoading} = useFetchData("http://localhost:3001/tickets/ticket-enums");
     const {data:developers} = useFetchData("http://localhost:3001/users/developers-by-name");
     const {submitForm} = useFormSubmit();
 
     const { user } = useAuthContext();
-    
+
     const [form, setForm ] = useState<FormObj>({
         title:"",
         description:"",
-        project:project ? project._id : null,
-        author:user ? user.user._id : null,
+        project:project ? project._id : "",
+        author:user ? user.user._id : "",
         priority: "",
         status:"",
         type:"",
         assignee:"",
         date_created: new Date(Date.now())
     });
+
+    useEffect(()=>{
+        if(props.ticket) setForm(ticket);
+    },[]);
 
     useEffect(()=>{
         //for when someone is assigned to the project...change form to
@@ -52,7 +56,8 @@ const TicketForm = (props:any)=>{
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
-        submitForm(form, "http://localhost:3001/projects/652ff7351c79f67fa29b7ed9/tickets/create", "POST"); //deal with this
+        const endpoint = method === "PATCH" ? `${ticket._id}/update` : 'create';
+        submitForm(form, `http://localhost:3001/projects/${project._id}/tickets/${endpoint}`, method);
     }
     
     return (
@@ -110,7 +115,7 @@ const TicketForm = (props:any)=>{
                     disabled = {false}
             />
             
-            <button>Submit</button>
+            <button>{props.ticket ? "Update" : "Add"}</button>
         </form>
     )
 }

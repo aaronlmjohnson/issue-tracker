@@ -1,5 +1,5 @@
 import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
-import useProjectUpdateButton from "./useProjectUpdateButton";
+import useProjectUpdateButton from "../hooks/useProjectUpdateButton";
 import { useEffect } from "react";
 
 const ProjectListing = (props:any)=>{

@@ -1,4 +1,4 @@
-import useProjectUpdateButton from "../components/useProjectUpdateButton";
+import useProjectUpdateButton from "../hooks/useProjectUpdateButton";
 import useProjectInfo from "../hooks/useProjectInfo";
 import { useState } from "react";
 import { useFetchData } from "../hooks/useFetchData";
@@ -42,7 +42,6 @@ const ProjectPage = ()=>{
             <button onClick={handleTicketsPage}>tickets</button>
             {formActive && <ProjectForm project={project || null}/>} 
             {toggleTickets && <AllProjectTickets project = {project} />} 
-            <TicketForm project={project} />
         </div>
     );
 }
