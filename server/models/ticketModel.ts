@@ -21,7 +21,7 @@ const ticketSchema = new Schema<ITicket>({
     description: { type: String, required: true },
     project: {type: Schema.Types.ObjectId, ref: "Project", required: true},
     author: {type: Schema.Types.ObjectId, ref: "User", required: true},
-    date_created: { type: Date, default: Date.now},
+    date_created: { type: Date, default: Date.now()},
     priority: { 
         type: String,
         required: true,

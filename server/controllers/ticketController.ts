@@ -44,30 +44,7 @@ const ticketController = ()=> {
         if(!ticket) res.status(404).send("Ticket Not Found");
         else res.status(200).json(ticket);
     });
-
-    // title: String,
-    // description: String,
-    // project: Schema.Types.ObjectId,
-    // date_created: Date,
-    // author: Schema.Types.ObjectId,
-    // priority: String,
-    // status: String,
-    // type: String,
-    // assignee: Schema.Types.ObjectId,
-    // comments: Schema.Types.ObjectId[]
-        /*{
-    "title": "Add a comment section",
-    "description": "Developers should be able to comment on tickets",
-    "date_create":"10/20/2023",
-    "author":"65173c56d34c0105811159e1",
-    "project": "6519bb8b3fb55acd186c86e4",
-    "priority":"High",
-    "status":"Not Assigned",
-    "type": "Feature",
-    "comments":[],
-    "assignee": ""
-} */
-
+    
     const createTicket = [
         body("title")
         .trim()
@@ -105,12 +82,12 @@ const ticketController = ()=> {
         .isLength({min: 1})
         .withMessage("You must select the type of ticket."),
         body("date_created")
-        .isISO8601()
         .toDate()
+        .isISO8601()
         .withMessage("Creation date isn't properly formatted."),
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
-            console.log(req.body.date_created);
+            console.log(req.body);
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
@@ -191,6 +168,7 @@ const ticketController = ()=> {
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
             try{
+                console.log("howdy!", req);
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
 

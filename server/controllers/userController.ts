@@ -11,7 +11,6 @@ const userController = ()=>{
     const getUsers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({}, {password: 0});
-            console.log(users);
             if(!users) throw Error("No users found");
             res.status(200).json(users);
 
@@ -24,7 +23,6 @@ const userController = ()=>{
     const getUser = asyncHandler(async(req, res, next)=>{
         try{
             const user = await User.findById(req.params.userId);
-            console.log(user);
             if(!user) throw Error("User Not Found");
             res.status(200).json(user);
 
@@ -37,7 +35,6 @@ const userController = ()=>{
     const getDevelopers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({role:"Developer"}, {password: 0});
-            console.log(users);
             if(!users) throw Error("No users found");
             res.status(200).json(users);
 
@@ -50,7 +47,6 @@ const userController = ()=>{
     const getDevelopersByName = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({role:"Developer"}, {password: 0, role:0, date_created: 0});
-            console.log(users);
             if(!users) throw Error("No users found");
             res.status(200).json(users);
 
@@ -63,7 +59,6 @@ const userController = ()=>{
     const getProjectLeads = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({role:"Project Lead"}, {password: 0});
-            console.log(users);
             if(!users) throw Error("No users found");
             res.status(200).json(users);
 

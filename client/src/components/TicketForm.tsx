@@ -1,9 +1,10 @@
-import { ReactEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "./TextInput";
 import TextArea from "./TextArea";
 import ComboBox from "./ComboBox";
 import { useFetchData } from "../hooks/useFetchData";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useFormSubmit } from "../hooks/useFormSubmit";
 
 const TicketForm = (props:any)=>{
     interface FormObj {
@@ -14,15 +15,18 @@ const TicketForm = (props:any)=>{
         priority: string,
         status: string,
         type: string,
-        assignee: string
+        assignee: string,
+        date_created: Date
     }
 
     const { method, project } = props;
     const {data:projectOptions, loading:optionsLoading } = useFetchData("http://localhost:3001/projects/all-project-names");
     const {data:ticketEnums, loading:enumsLoading} = useFetchData("http://localhost:3001/tickets/ticket-enums");
-    const {data:developers, loading:loadingDevs} = useFetchData("http://localhost:3001/users/developers-by-name");
+    const {data:developers} = useFetchData("http://localhost:3001/users/developers-by-name");
+    const {submitForm} = useFormSubmit();
 
     const { user } = useAuthContext();
+    
     const [form, setForm ] = useState<FormObj>({
         title:"",
         description:"",
@@ -31,7 +35,8 @@ const TicketForm = (props:any)=>{
         priority: "",
         status:"",
         type:"",
-        assignee:""
+        assignee:"",
+        date_created: new Date(Date.now())
     });
 
     useEffect(()=>{
@@ -39,9 +44,6 @@ const TicketForm = (props:any)=>{
         if(form.assignee && !form.status) setForm({...form, status: ticketEnums.statuses[1]});
         //reverse assigned status to not assigned if developer removed
         if(!form.assignee && form.status) setForm({...form, status: ''});
-
-
-        //else setForm({...form, status: ticketEnums.statuses[0]});
     },[form])
 
     const handleFormChange = (e:any, formProperty:any)=>{
@@ -50,7 +52,7 @@ const TicketForm = (props:any)=>{
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
-        console.log(form);
+        submitForm(form, "http://localhost:3001/projects/652ff7351c79f67fa29b7ed9/tickets/create", "POST"); //deal with this
     }
     
     return (
@@ -86,6 +88,14 @@ const TicketForm = (props:any)=>{
                     disabled = {false}
             />
             <ComboBox 
+                    forValue={"ticket-assignee"}
+                    options={developers}
+                    optionsKey={"username"}
+                    selected = {form.assignee}
+                    setter={(e:Event)=> handleFormChange(e, "assignee")}
+                    disabled = {false}
+            />
+            <ComboBox 
                     forValue={"ticket-status"}
                     options={ticketEnums.statuses}
                     selected = {form.status}
@@ -99,14 +109,7 @@ const TicketForm = (props:any)=>{
                     setter={(e:Event)=> handleFormChange(e, "type")}
                     disabled = {false}
             />
-            <ComboBox 
-                    forValue={"ticket-assignee"}
-                    options={developers}
-                    optionsKey={"username"}
-                    selected = {form.assignee}
-                    setter={(e:Event)=> handleFormChange(e, "assignee")}
-                    disabled = {false}
-            />
+            
             <button>Submit</button>
         </form>
     )

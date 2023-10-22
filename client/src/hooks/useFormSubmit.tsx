@@ -7,6 +7,7 @@ export const useFormSubmit = ()=>{
     const navigate = useNavigate();
 
     const submitForm = async(data:any, url:string, method="POST")=>{
+        console.log(data);
         setIsLoading(true);
         setError("");
         const response = await fetch(url, {
@@ -16,8 +17,8 @@ export const useFormSubmit = ()=>{
             },
             body: JSON.stringify(data),
         })
-
         const json = await response.json();
+        console.log(json);
         if(!response.ok){
             setIsLoading(false);
             setError(json.error);
