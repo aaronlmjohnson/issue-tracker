@@ -7,12 +7,18 @@ const LoginForm = ()=>{
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [form, setForm] = useState(
+        {
+            username:'',
+            password:'',
+        }
+    )
     const {login, isLoading, error} = useLogin();
 
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
         console.log(username);
-        await login(username, password);
+        //await login(username, password);
     }
 
     return (

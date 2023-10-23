@@ -6,7 +6,7 @@
   dotenv.config();
 
   import Project from "./project";
-  import User from './user';
+  import User from './userModel';
   import Ticket from './ticketModel';
   import Comment from './comment';
   import TicketHistory from './ticketHistory';
