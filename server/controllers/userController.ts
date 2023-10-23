@@ -8,80 +8,79 @@ const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, pr
 
 const userController = ()=>{
 
-    const getUsers = asyncHandler(async(req, res, next)=>{
-        try{
-            const users = await User.find({}, {password: 0});
-            if(!users) throw Error("No users found");
-            res.status(200).json(users);
+    // const getUsers = asyncHandler(async(req, res, next)=>{
+    //     try{
+    //         const users = await User.find({}, {password: 0});
+    //         if(!users) throw Error("No users found");
+    //         res.status(200).json(users);
 
-        }catch(e){
-            res.status(400).send({error: e.message});
-            return next(e);
-        }
-    });
+    //     }catch(e){
+    //         res.status(400).send({error: e.message});
+    //         return next(e);
+    //     }
+    // });
 
-    const getUser = asyncHandler(async(req, res, next)=>{
-        try{
-            const user = await User.findById(req.params.userId);
-            if(!user) throw Error("User Not Found");
-            res.status(200).json(user);
+    // const getUser = asyncHandler(async(req, res, next)=>{
+    //     try{
+    //         const user = await User.findById(req.params.userId);
+    //         if(!user) throw Error("User Not Found");
+    //         res.status(200).json(user);
 
-        }catch(e){
-            res.status(400).send({error: e.message});
-            return next(e);
-        }
-    });
+    //     }catch(e){
+    //         res.status(400).send({error: e.message});
+    //         return next(e);
+    //     }
+    // });
 
-    const getDevelopers = asyncHandler(async(req, res, next)=>{
-        try{
-            const users = await User.find({role:"Developer"}, {password: 0});
-            if(!users) throw Error("No users found");
-            res.status(200).json(users);
+    // const getDevelopers = asyncHandler(async(req, res, next)=>{
+    //     try{
+    //         const users = await User.find({role:"Developer"}, {password: 0});
+    //         if(!users) throw Error("No users found");
+    //         res.status(200).json(users);
 
-        }catch(e){
-            res.status(400).send({error: e.message});
-            return next(e);
-        }
-    });
+    //     }catch(e){
+    //         res.status(400).send({error: e.message});
+    //         return next(e);
+    //     }
+    // });
 
-    const getDevelopersByName = asyncHandler(async(req, res, next)=>{
-        try{
-            const users = await User.find({role:"Developer"}, {password: 0, role:0, date_created: 0});
-            if(!users) throw Error("No users found");
-            res.status(200).json(users);
+    // const getDevelopersByName = asyncHandler(async(req, res, next)=>{
+    //     try{
+    //         const users = await User.find({role:"Developer"}, {password: 0, role:0, date_created: 0});
+    //         if(!users) throw Error("No users found");
+    //         res.status(200).json(users);
 
-        }catch(e){
-            res.status(400).send({error: e.message});
-            return next(e);
-        }
-    });
+    //     }catch(e){
+    //         res.status(400).send({error: e.message});
+    //         return next(e);
+    //     }
+    // });
 
-    const getProjectLeads = asyncHandler(async(req, res, next)=>{
-        try{
-            const users = await User.find({role:"Project Lead"}, {password: 0});
-            if(!users) throw Error("No users found");
-            res.status(200).json(users);
+    // const getProjectLeads = asyncHandler(async(req, res, next)=>{
+    //     try{
+    //         const users = await User.find({role:"Project Lead"}, {password: 0});
+    //         if(!users) throw Error("No users found");
+    //         res.status(200).json(users);
 
-        }catch(e){
-            res.status(400).send({error: e.message});
-            return next(e);
-        }
-    });
+    //     }catch(e){
+    //         res.status(400).send({error: e.message});
+    //         return next(e);
+    //     }
+    // });
 
 
-    const createUserPost = [
-        body("username")
+    const signUp = [
+        body("email")
         .custom( async (value) =>{
-            const existingUser = await User.findOne({username: value}).exec()
+            const existingUser = await User.findOne({email: value}).exec()
             if(existingUser) 
-                throw new Error("Username already exists.")
+                throw new Error("Email already exists.")
         })
         .trim()
         .isLength({min: 1})
         .escape()
-        .withMessage("You must provide a username.")
-        .isAlphanumeric()
-        .withMessage("Username contains non-alphanumeric characters."),
+        .isEmail()
+        .withMessage("You must provide an email."),
         body("password")
         .trim()
         .isStrongPassword(
@@ -102,14 +101,16 @@ const userController = ()=>{
             
                 bcrypt.hash(req.body.password, 10, async(err, hashedPassword)=>{
                     const user = new User({
-                        username: req.body.username,
+                        email: req.body.email,
+                        first_name: req.body.first_name,
+                        last_name: req.body.last_name,
                         password: hashedPassword,
                         role: req.body.role
                     });
         
                     const result = await user.save();
                     const token = createToken(user._id);
-                    res.status(200).json({user: user.username ,token, redirectUrl:"/"});
+                    res.status(200).json({user: user.email ,token, redirectUrl:"/"});
                 });
             } catch(err) {
                 res.status(400).send({error: err.message});
@@ -118,30 +119,30 @@ const userController = ()=>{
         })
     ]
 
-    const loginUser = asyncHandler(async (req, res, next)=>{
-        try{
-            const user = await User.findOne({username: req.body.username})
-            if(!user) throw Error("No user with that username exists.");
+    // const loginUser = asyncHandler(async (req, res, next)=>{
+    //     try{
+    //         const user = await User.findOne({username: req.body.username})
+    //         if(!user) throw Error("No user with that username exists.");
 
-            const match = await bcrypt.compare(req.body.password, user.password);
-            if(!match) throw Error("Incorrect password.");
+    //         const match = await bcrypt.compare(req.body.password, user.password);
+    //         if(!match) throw Error("Incorrect password.");
 
-            const token = createToken(user._id);
-            res.status(200).json({user, token, redirectUrl: "/"});
-        }catch(err){
-            res.status(400).json({error: err.message});
-            return next(err);
-        }
-    });
+    //         const token = createToken(user._id);
+    //         res.status(200).json({user, token, redirectUrl: "/"});
+    //     }catch(err){
+    //         res.status(400).json({error: err.message});
+    //         return next(err);
+    //     }
+    // });
 
     return{
-        createUserPost,
-        getUser,
-        loginUser,
-        getUsers,
-        getDevelopers,
-        getProjectLeads,
-        getDevelopersByName
+        signUp,
+        // getUser,
+        // loginUser,
+        // getUsers,
+        // getDevelopers,
+        // getProjectLeads,
+        // getDevelopersByName
     }
 }
 
