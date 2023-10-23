@@ -110,7 +110,7 @@ const userController = ()=>{
         
                     const result = await user.save();
                     const token = createToken(user._id);
-                    res.status(200).json({user: user.email ,token, redirectUrl:"/"});
+                    res.status(200).json({user: user.email ,token, redirectUrl: user.url});
                 });
             } catch(err) {
                 res.status(400).send({error: err.message});
@@ -119,26 +119,26 @@ const userController = ()=>{
         })
     ]
 
-    // const loginUser = asyncHandler(async (req, res, next)=>{
-    //     try{
-    //         const user = await User.findOne({username: req.body.username})
-    //         if(!user) throw Error("No user with that username exists.");
+    const loginUser = asyncHandler(async (req, res, next)=>{
+        try{
+            const user = await User.findOne({email: req.body.email})
+            if(!user) throw Error("Incorrect email.");
 
-    //         const match = await bcrypt.compare(req.body.password, user.password);
-    //         if(!match) throw Error("Incorrect password.");
+            const match = await bcrypt.compare(req.body.password, user.password);
+            if(!match) throw Error("Incorrect password.");
 
-    //         const token = createToken(user._id);
-    //         res.status(200).json({user, token, redirectUrl: "/"});
-    //     }catch(err){
-    //         res.status(400).json({error: err.message});
-    //         return next(err);
-    //     }
-    // });
+            const token = createToken(user._id);
+            res.status(200).json({user, token, redirectUrl: "/"});
+        }catch(err){
+            res.status(400).json({error: err.message});
+            return next(err);
+        }
+    });
 
     return{
         signUp,
         // getUser,
-        // loginUser,
+        loginUser,
         // getUsers,
         // getDevelopers,
         // getProjectLeads,

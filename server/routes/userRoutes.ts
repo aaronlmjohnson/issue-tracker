@@ -16,6 +16,6 @@ router.post('/sign-up', userController.signUp);
 
 /* Login */
 
-// router.post('/login', userController.loginUser);
+router.post('/login', userController.loginUser);
 
 export default router;
