@@ -5,11 +5,12 @@ const router = express.Router();
 
 const userController = UserController();
 
-// router.get('/', userController.getUsers);
-// router.get('/developers', userController.getDevelopers);
-// router.get('/developers-by-name', userController.getDevelopersByName);
-// router.get('/project-leads', userController.getProjectLeads);
-// router.get('/:userId', userController.getUser);
+router.get('/', userController.getUsers);
+router.get('/developers', userController.getDevelopers);
+router.get('/developers-by-name', userController.getDevelopersByName);
+router.get('/project-leads', userController.getProjectLeads);
+router.get('/roles', userController.getRoles);
+router.get('/:userId', userController.getUser);
 
 /* Sign Up */
 router.post('/sign-up', userController.signUp);

@@ -8,65 +8,77 @@ const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, pr
 
 const userController = ()=>{
 
-    // const getUsers = asyncHandler(async(req, res, next)=>{
-    //     try{
-    //         const users = await User.find({}, {password: 0});
-    //         if(!users) throw Error("No users found");
-    //         res.status(200).json(users);
+    const getUsers = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({}, {password: 0});
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
 
-    //     }catch(e){
-    //         res.status(400).send({error: e.message});
-    //         return next(e);
-    //     }
-    // });
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
 
-    // const getUser = asyncHandler(async(req, res, next)=>{
-    //     try{
-    //         const user = await User.findById(req.params.userId);
-    //         if(!user) throw Error("User Not Found");
-    //         res.status(200).json(user);
+    const getUser = asyncHandler(async(req, res, next)=>{
+        try{
+            const user = await User.findById(req.params.userId);
+            if(!user) throw Error("User Not Found");
+            res.status(200).json(user);
 
-    //     }catch(e){
-    //         res.status(400).send({error: e.message});
-    //         return next(e);
-    //     }
-    // });
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
 
-    // const getDevelopers = asyncHandler(async(req, res, next)=>{
-    //     try{
-    //         const users = await User.find({role:"Developer"}, {password: 0});
-    //         if(!users) throw Error("No users found");
-    //         res.status(200).json(users);
+    const getRoles = asyncHandler(async(req, res, next)=>{
+        try{
+            const user = await User.findOne();
+            if(!user) throw Error("No roles listed.");
+            res.status(200).json(user.roles);
 
-    //     }catch(e){
-    //         res.status(400).send({error: e.message});
-    //         return next(e);
-    //     }
-    // });
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
 
-    // const getDevelopersByName = asyncHandler(async(req, res, next)=>{
-    //     try{
-    //         const users = await User.find({role:"Developer"}, {password: 0, role:0, date_created: 0});
-    //         if(!users) throw Error("No users found");
-    //         res.status(200).json(users);
+    const getDevelopers = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({role:"Developer"}, {password: 0});
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
 
-    //     }catch(e){
-    //         res.status(400).send({error: e.message});
-    //         return next(e);
-    //     }
-    // });
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
 
-    // const getProjectLeads = asyncHandler(async(req, res, next)=>{
-    //     try{
-    //         const users = await User.find({role:"Project Lead"}, {password: 0});
-    //         if(!users) throw Error("No users found");
-    //         res.status(200).json(users);
+    const getDevelopersByName = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({role:"Developer"}, {password: 0, role:0, date_created: 0});
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
 
-    //     }catch(e){
-    //         res.status(400).send({error: e.message});
-    //         return next(e);
-    //     }
-    // });
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
+
+    const getProjectLeads = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({role:"Project Lead"}, {password: 0});
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
+
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
 
 
     const signUp = [
@@ -137,12 +149,13 @@ const userController = ()=>{
 
     return{
         signUp,
-        // getUser,
+        getUser,
         loginUser,
-        // getUsers,
-        // getDevelopers,
-        // getProjectLeads,
-        // getDevelopersByName
+        getUsers,
+        getDevelopers,
+        getProjectLeads,
+        getDevelopersByName,
+        getRoles
     }
 }
 
