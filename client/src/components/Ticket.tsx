@@ -3,7 +3,7 @@ import { useFetchData } from '../hooks/useFetchData';
 import TicketDetail from './TicketDetail';
 
 const Ticket = (props:any)=>{
-    const { ticket, project } = props;
+    const { ticket } = props;
     const {data:author, loading:authorLoading} = useFetchData(`http://localhost:3001/users/${ticket.author}`);
     const [toggleDetail, setToggleDetail] = useState(false);
 
@@ -18,7 +18,7 @@ const Ticket = (props:any)=>{
             <p>{ticket.feature}</p>
             <p>{ticket.priority}</p>
             <p>{ticket.status}</p>
-            {toggleDetail && <TicketDetail ticket = {ticket}  project={project}/>}
+            {toggleDetail && <TicketDetail ticket = {ticket} />}
         </div>
     )
 }

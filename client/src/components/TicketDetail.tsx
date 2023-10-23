@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import useTicketUpdateButton from "../hooks/useTicketUpdateButton";
 import TicketForm from "./TicketForm";
 import TicketDeleteButton from "./TicketDeleteButton";
+import useProjectInfo from "../hooks/useProjectInfo";
 
 const TicketDetail = (props:any)=>{
     const {updateButton, cancelButton, setFormActive, formActive } = useTicketUpdateButton();
-    const { ticket, project } = props;
+    const { ticket } = props;
+    const { project } = useProjectInfo(ticket.project);
     return(
         <div className="ticket-detail">
             <h1>{ticket.title}</h1>
