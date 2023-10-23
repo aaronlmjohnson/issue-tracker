@@ -10,7 +10,7 @@ const Ticket = (props:any)=>{
     const handleTicketDetail = ()=>{
         setToggleDetail((prevState:any) => prevState ? false : true);
     }
-
+    
     return (
         !authorLoading && <div className="ticket">
             <button onClick={handleTicketDetail}>{ticket.title}</button>

@@ -2,3 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+div{
+    margin: 20px 0;
+}
+
+form {
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+}
+
+button{
+    background: blue;
+    color: white;
+}
+
+a{
+    color: violet;
+}
+

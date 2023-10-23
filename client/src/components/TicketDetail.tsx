@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import useTicketUpdateButton from "../hooks/useTicketUpdateButton";
 import TicketForm from "./TicketForm";
+import TicketDeleteButton from "./TicketDeleteButton";
 
 const TicketDetail = (props:any)=>{
     const {updateButton, cancelButton, setFormActive, formActive } = useTicketUpdateButton();
     const { ticket, project } = props;
-
     return(
         <div className="ticket-detail">
             <h1>{ticket.title}</h1>
@@ -17,6 +17,7 @@ const TicketDetail = (props:any)=>{
             <p>{ticket.type}</p>
             <p>{ticket.assignee}</p>
             {formActive ? cancelButton() : updateButton()}
+            <TicketDeleteButton project={project} ticket={ticket} />
             {formActive && <TicketForm project = {project} ticket={ticket} method={"PATCH"}/>}
         </div>
     )
