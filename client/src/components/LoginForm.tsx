@@ -9,8 +9,12 @@ const LoginForm = ()=>{
     const [password, setPassword] = useState('');
     const [form, setForm] = useState(
         {
-            username:'',
+            email:'',
+            first_name: '',
+            last_name: '',
+            role:'',
             password:'',
+
         }
     )
     const {login, isLoading, error} = useLogin();
