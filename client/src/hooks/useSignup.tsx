@@ -28,7 +28,6 @@ export const useSignup = ()=>{
         const json = await response.json();
         if(!response.ok){
             setIsLoading(false);
-            console.log(json);
             setError(json.error);
         }
 
@@ -36,10 +35,8 @@ export const useSignup = ()=>{
             setIsLoading(false);
             setError("")
             localStorage.setItem('user', JSON.stringify(json));
-            // console.log(`Welcome to Issue Tracker ${json.fullName}.`);
-            console.log("welcome")
             dispatch({type: 'LOGIN', payload: json});
-            navigate(json.redirectUrl);
+            navigate("/");
 
         }
     }

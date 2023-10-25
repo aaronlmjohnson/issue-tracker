@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import FormError from "./FormError";
 import useFormHandler from "../hooks/useFormHandler";
@@ -18,7 +17,7 @@ const SignUpForm = ()=>{
         
     })
 
-    const {signup, isLoading, error} = useSignup();
+    const {signup, error} = useSignup();
     const {data:roles, loading:rolesLoading} = useFetchData("http://localhost:3001/users/roles");
 
     const handleSubmit =  (e:any)=>{
@@ -26,8 +25,7 @@ const SignUpForm = ()=>{
         signup(form);
     }
 
-    return (
-        
+    return (  
             !rolesLoading && <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <TextInput 
                     forValue={"email"}
@@ -68,5 +66,3 @@ const SignUpForm = ()=>{
 }
 
 export default SignUpForm;
-
-

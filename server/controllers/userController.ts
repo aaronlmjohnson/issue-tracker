@@ -122,7 +122,6 @@ const userController = ()=>{
                     
                     const result = await user.save();
                     const token = createToken(user._id);
-                    console.log(user.fullName);
                     res.status(200).json({user, ["fullName"]: user.fullName, token, redirectUrl: user.url});
                 });
             } catch(err) {
