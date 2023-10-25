@@ -122,8 +122,8 @@ const userController = ()=>{
                     
                     const result = await user.save();
                     const token = createToken(user._id);
-                    console.log(user)
-                    res.status(200).json({user, token, redirectUrl: user.url});
+                    console.log(user.fullName);
+                    res.status(200).json({user, ["fullName"]: user.fullName, token, redirectUrl: user.url});
                 });
             } catch(err) {
                 res.status(400).send({error: err.message});
