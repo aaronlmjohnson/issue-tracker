@@ -2,57 +2,44 @@ import FormInput from "./FormInput";
 import { useLogin } from "../hooks/useLogin";
 import { useState } from "react";
 import FormError from "./FormError";
+import useFormHandler from "../hooks/useFormHandler";
+import TextInput from "./TextInput";
+import PasswordInput from "./PasswordInput";
 
 const LoginForm = ()=>{
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [form, setForm] = useState(
-        {
-            email:'',
-            first_name: '',
-            last_name: '',
-            role:'',
-            password:'',
+    const {form, handleChange} = useFormHandler({
+        email:'',
+        password:'',
+    });
 
-        }
-    )
     const {login, isLoading, error} = useLogin();
 
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
-        console.log(username);
-        //await login(username, password);
+        console.log(form);
+        await login(form);
     }
 
     return (
         <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
-            <FormInput 
-                forValue={"username"}
-                classValue={"username-input"}
-                nameValue={"username"}
-                type={"text"}
-                content={"Username:"}
-                setter = {setUsername}
-                onChange={(e:any) => setUsername(e.target.value)}
+            <TextInput 
+                forValue={"email"}
+                classValue={"email-input"}
+                label={"Email:"}
+                value={form.email}
+                setter={(e:any) => handleChange(e, 'email')}
             />
-            <FormInput 
+            <PasswordInput 
                 forValue={"password"}
                 classValue={"password-input"}
-                nameValue={"password"}
-                type={"password"}
-                content={"Password:"}
-                setter = {setPassword}
-                onChange={(e:any) => setPassword(e.target.value)}
+                value={form.password}
+                label={"Password:"}
+                setter={(e:any) => handleChange(e, 'password')}
             />
-            <FormInput 
-                forValue={"submit"}
-                classValue={"submit-button"}
-                nameValue={"submit"}
-                type={"submit"}
-                content={""}
-                styling = {"border px-5 py-1"}
-            />
+            <button>Submit</button>
             {error && <FormError error= {error}/>}
 
 

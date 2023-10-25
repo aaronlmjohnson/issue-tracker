@@ -140,7 +140,7 @@ const userController = ()=>{
             if(!match) throw Error("Incorrect password.");
 
             const token = createToken(user._id);
-            res.status(200).json({user, token, redirectUrl: "/"});
+            res.status(200).json({user, ["fullName"]:user.fullName, token, redirectUrl: "/"});
         }catch(err){
             res.status(400).json({error: err.message});
             return next(err);

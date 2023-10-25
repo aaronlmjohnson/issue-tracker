@@ -9,7 +9,8 @@ interface IUser {
     date_created: Date,
     url: String,
     firstName: String,
-    roles: String[]
+    roles: String[],
+    fullName: String
 }
 
 //remove username 

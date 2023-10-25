@@ -8,8 +8,11 @@ export const useLogin = ()=>{
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
 
-    const login = async(username:String, password:string)=>{
-        console.log(username);
+    interface LoginFormObj {
+        email:String,
+        password:string,
+    }
+    const login = async(form:LoginFormObj)=>{
         setIsLoading(true);
         setError("");
         const response = await fetch("http://localhost:3001/users/login", {
@@ -17,7 +20,7 @@ export const useLogin = ()=>{
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify(form),
         })
 
         const json = await response.json();
@@ -31,7 +34,7 @@ export const useLogin = ()=>{
             setIsLoading(false);
             setError("")
             localStorage.setItem('user', JSON.stringify(json));
-            console.log(`Logged in as ${username}.`);
+            console.log(json);
             dispatch({type: 'LOGIN', payload: json});
             navigate(json.redirectUrl);
         }
