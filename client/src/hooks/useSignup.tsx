@@ -7,8 +7,14 @@ export const useSignup = ()=>{
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
-
-    const signup = async(username:String, password:string, role:String)=>{
+    interface FormObject {
+        email:String,
+        first_name:String,
+        last_name:String,
+        role:String,
+        password:string
+    }
+    const signup = async(form:FormObject)=>{
         setIsLoading(true);
         setError("");
         const response = await fetch("http://localhost:3001/users/sign-up", {
@@ -16,7 +22,7 @@ export const useSignup = ()=>{
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username, password, role}),
+            body: JSON.stringify(form),
         })
 
         const json = await response.json();
@@ -30,7 +36,8 @@ export const useSignup = ()=>{
             setIsLoading(false);
             setError("")
             localStorage.setItem('user', JSON.stringify(json));
-            console.log(`Welcome to Issue Tracker ${username}.`);
+            // console.log(`Welcome to Issue Tracker ${json.fullName}.`);
+            console.log("welcome")
             dispatch({type: 'LOGIN', payload: json});
             navigate(json.redirectUrl);
 

@@ -1,57 +1,65 @@
-import FormInput from "./FormInput";
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import FormError from "./FormError";
+import useFormHandler from "../hooks/useFormHandler";
+import TextInput from "./TextInput";
+import PasswordInput from "./PasswordInput";
+import ComboBox from "./ComboBox";
+import { useFetchData } from "../hooks/useFetchData";
+
 const SignUpForm = ()=>{
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('Developer');
-    const roleOptions = [{value: "Admin", content: "Admin"}, {value: "Project Lead", content: "Project Lead"}, {value: "Developer", content: "Developer"}];
-    //const [error, setError] = useState(null);
-    const {signup, isLoading, error} = useSignup();
+    const {handleChange, form } = useFormHandler({
+        email:"",
+        first_name: "",
+        last_name:"",
+        password:"",
+        role:"",
+        
+    })
 
-    const handleSubmit =  async (e:any)=>{
+    const {signup, isLoading, error} = useSignup();
+    const {data:roles, loading:rolesLoading} = useFetchData("http://localhost:3001/users/roles");
+
+    const handleSubmit =  (e:any)=>{
         e.preventDefault();
-        await signup(username, password, role);
+        signup(form);
     }
 
     return (
         
-            <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
-                <FormInput 
-                    forValue={"username"}
-                    classValue={"username-input"}
-                    nameValue={"username"}
-                    type={"text"}
-                    content={"Username:"}
-                    setter = {setUsername}
+            !rolesLoading && <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
+                <TextInput 
+                    forValue={"email"}
+                    classValue={"email-input"}
+                    label={"Email:"}
+                    setter = {(e:any)=> handleChange(e, "email")}
                 />
-                <FormInput 
+                <TextInput 
+                    forValue={"first-name"}
+                    classValue={"first-name-input"}
+                    label={"First Name:"}
+                    setter = {(e:any)=> handleChange(e, "first_name")}
+                />
+                <TextInput 
+                    forValue={"last-name"}
+                    classValue={"last-name-input"}
+                    label={"Last Name:"}
+                    setter = {(e:any)=> handleChange(e, "last_name")}
+                />
+                <ComboBox 
+                    forValue={"roles"}
+                    options={roles}
+                    selected = {form.role}
+                    setter={(e:Event)=> handleChange(e, "role")}
+            />
+                <PasswordInput 
                     forValue={"password"}
                     classValue={"password-input"}
-                    nameValue={"password"}
-                    type={"password"}
-                    content={"Password:"}
-                    setter = {setPassword}
+                    label={"Password:"}
+                    setter = {(e:any)=> handleChange(e, "password")}
                 />
-                <FormInput 
-                    forValue={"select"}
-                    classValue={""}
-                    nameValue={"select"}
-                    type={"select"}
-                    setter = {setRole}
-                    content={"Role:"}
-                    options = {roleOptions}
-                />
-                <FormInput 
-                    forValue={"submit"}
-                    classValue={"submit-button"}
-                    nameValue={"submit"}
-                    type={"submit"}
-                    content={""}
-                    styling = {"border px-5 py-1 text-white rounded-md"}
-                />
+                <button>Sign up</button>
                 {error && <FormError error= {error}/>}
             </form>
         
@@ -61,5 +69,4 @@ const SignUpForm = ()=>{
 
 export default SignUpForm;
 
-//forValue:string, classValue:string, nameValue:string, type:string, content:string
 

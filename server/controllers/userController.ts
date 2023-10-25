@@ -119,10 +119,11 @@ const userController = ()=>{
                         password: hashedPassword,
                         role: req.body.role
                     });
-        
+                    
                     const result = await user.save();
                     const token = createToken(user._id);
-                    res.status(200).json({user: user.email ,token, redirectUrl: user.url});
+                    console.log(user)
+                    res.status(200).json({user, token, redirectUrl: user.url});
                 });
             } catch(err) {
                 res.status(400).send({error: err.message});
