@@ -9,6 +9,7 @@ const Navbar = ()=>{
             <p className=""><a href="/">Home</a></p>
             <p className=""><a href="/projects">Projects</a></p>
             <p className=""><a href="/users">Users</a></p>
+            <p className=""><a href="/tickets">Tickets</a></p>
             {user ? <p>Logged in As: {user.fullName}</p> : <></>}
             {user && <button onClick={logout}>Log out</button>}
             {!user && <p><a href="/login">Sign in</a></p>}

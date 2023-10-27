@@ -1,11 +1,11 @@
-import { useFormSubmit } from "../hooks/useFormSubmit";
+import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import { useParams } from "react-router-dom";
 
  const TicketDeleteButton = (props:any)=> {
-    const {submitForm} = useFormSubmit();
 
     const handleDelete = ()=> {
-        submitForm(props.ticket, `http://localhost:3001/projects/${props.project._id}/tickets/${props.ticket._id}/delete`, "DELETE");
+        props.setDisplay(true);
+        //submitForm(props.ticket, `http://localhost:3001/projects/${props.project._id}/tickets/${props.ticket._id}/delete`, "DELETE");
     };
 
     return(

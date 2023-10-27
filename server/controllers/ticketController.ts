@@ -10,6 +10,7 @@ const ticketController = ()=> {
             const tickets = await Ticket.find({})
             .populate('author')
             .populate('assignee')
+            .populate('project')
             .sort({title: 1})
             .exec();
             console.log();
@@ -36,7 +37,10 @@ const ticketController = ()=> {
     const getAllFromProject = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.projectId).exec();
         if(!project) res.status(404).send("Project Not Found.");
-        const tickets = await Ticket.find({project:project._id}).populate('author').populate('assignee').sort({title: 1}).exec();
+        const tickets = await Ticket.find({project:project._id})
+                                    .populate('author')
+                                    .populate('assignee')
+                                    .sort({title: 1}).exec();
         if(!tickets) res.status(404).send("Tickets Not Found.");
         else res.status(200).json(tickets);
     });
@@ -89,7 +93,6 @@ const ticketController = ()=> {
         .withMessage("Creation date isn't properly formatted."),
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
-            console.log(req.body);
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
@@ -170,7 +173,6 @@ const ticketController = ()=> {
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
             try{
-                console.log("howdy!", req);
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
 
