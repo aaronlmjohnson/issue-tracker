@@ -47,6 +47,7 @@ const userController = ()=>{
     const getDevelopers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({role:"Developer"}, {password: 0});
+
             if(!users) throw Error("No users found");
             res.status(200).json(users);
 

@@ -16,6 +16,7 @@ interface IUser {
 //remove username 
 //add email, first name, last name
 //virtual for full name
+const opts = { toJSON: {virtuals: true} };
 
 const userSchema = new Schema<IUser>({
     email: { type: String, required: true, unique: true},
@@ -29,7 +30,7 @@ const userSchema = new Schema<IUser>({
         default: "Developer",
     },
     date_created: { type: Date, default: Date.now}
-});
+}, opts);
 
 userSchema.virtual("url").get(function(){
     return `/users/${this._id}`;

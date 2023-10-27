@@ -14,7 +14,6 @@ const SignUpForm = ()=>{
         last_name:"",
         password:"",
         role:"",
-        
     })
 
     const {signup, error} = useSignup();
@@ -60,8 +59,6 @@ const SignUpForm = ()=>{
                 <button>Sign up</button>
                 {error && <FormError error= {error}/>}
             </form>
-        
-        
     );
 }
 

@@ -7,7 +7,6 @@ export const useFormSubmit = ()=>{
     const navigate = useNavigate();
 
     const submitForm = async(data:any, url:string, method="POST")=>{
-        console.log(data);
         setIsLoading(true);
         setError("");
         const response = await fetch(url, {

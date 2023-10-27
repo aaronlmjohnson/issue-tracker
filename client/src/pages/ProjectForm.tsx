@@ -7,11 +7,18 @@ import TextInput from "../components/TextInput";
 import TextArea from "../components/TextArea";
 import ComboBox from "../components/ComboBox";
 import Checkboxes from "../components/Checkboxes";
+import useFormHandler from "../hooks/useFormHandler";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm } = useFormSubmit();
     const [developerNames, setDeveloperNames] = useState([]);
+    const {handleChange, form, setForm} = useFormHandler({
+        title: "",
+        description:"",
+        project_lead: "",
+        developers_assigned_to: []
+    });
 
     interface FormObj {
     title: string,
@@ -19,22 +26,10 @@ const ProjectForm = (props:any)=>{
     project_lead: string,
     developers_assigned_to: string[]
 }
-    const [form, setForm] = useState<FormObj>({
-        title: "",
-        description:"",
-        project_lead: "",
-        developers_assigned_to: []
-    });
-
     useEffect(()=>{
+        console.log(developers);
         if(props.project){
-            setForm((prevState) =>{
-                return {
-                    title: props.project.title,
-                    description: props.project.description,
-                    project_lead: props.project.project_lead,
-                    developers_assigned_to: props.project.developers_assigned_to
-            }});
+            setForm(props.project);
             setDeveloperNames(props.project.developers_assigned_to);
         }
     }, []);
@@ -58,7 +53,7 @@ const ProjectForm = (props:any)=>{
                     forValue={"title"}
                     label={"Title:"}
                     value={form.title}
-                    setter={(e: any )=> {setForm({...form, title: e.target.value});}}
+                    setter={(e: any )=> {handleChange(e, "title");}}
                 />
                 <TextArea 
                     forValue={"description"}
@@ -66,21 +61,21 @@ const ProjectForm = (props:any)=>{
                     rows={10}
                     cols={30}
                     value={form.description}
-                    setter={(e: any )=> {setForm({...form, description: e.target.value});}}
+                    setter={(e: any )=> {handleChange(e, "description")}}
                 />
                  <ComboBox 
                     forValue={"project-lead"}
                     options={leads}
-                    optionsKey={"username"}
+                    optionsKey={"first_name"}
                     selected = {form.project_lead}
-                    setter={(e: any )=> {setForm({...form, project_lead: e.target.value});}}
+                    setter={(e: any )=> {handleChange(e, "project_lead")}}                
                 />
 
                 <Checkboxes
                     forValue= {"developers"}
                     legend={"Select Developers for the project:"}
                     checkboxes={developers}
-                    labelKey={"username"}
+                    labelKey={"first_name"}
                     setter={setForm}
                     form={form}
                     checkBoxOptions = {developerNames}
