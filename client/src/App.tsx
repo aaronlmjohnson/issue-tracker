@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import ProjectPage from './pages/ProjectPage';
 import AllTickets from './pages/AllTickets';
 import UserDetail from './components/UserDetail';
+import UsersPage from './pages/UsersPage';
 
 function App() {
   return (
@@ -16,22 +17,26 @@ function App() {
       <BrowserRouter>
         <div className="">
           <Routes>
-              <Route
-                path="/"
-                element={<Dashboard />}
-              />
-              <Route
-                path="/projects"
-                element={<Projects />}
-              />
-              <Route
-                path="/projects/:projectId"
-                element={<ProjectPage />}
-              />
-              <Route
-                path="/users/:userId"
-                element={<UserDetail />}
-              />
+            <Route
+              path="/"
+              element={<Dashboard />}
+            />
+            <Route
+              path="/projects"
+              element={<Projects />}
+            />
+            <Route
+              path="/projects/:projectId"
+              element={<ProjectPage />}
+            />
+            <Route
+              path="/users"
+              element={<UsersPage />}
+            />
+            <Route
+              path="/users/:userId"
+              element={<UserDetail />}
+            />
             <Route
               path="/sign-up"
               element={<SignUp  page={"signup"}/>}

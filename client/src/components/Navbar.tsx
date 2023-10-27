@@ -8,6 +8,7 @@ const Navbar = ()=>{
         <nav className="border-b-4 border-t-0 border-x-0  border-black">
             <p className=""><a href="/">Home</a></p>
             <p className=""><a href="/projects">Projects</a></p>
+            <p className=""><a href="/users">Users</a></p>
             {user ? <p>Logged in As: {user.fullName}</p> : <></>}
             {user && <button onClick={logout}>Log out</button>}
             {!user && <p><a href="/login">Sign in</a></p>}
