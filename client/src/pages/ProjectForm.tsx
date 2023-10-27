@@ -1,5 +1,3 @@
-import FormInput from "../components/FormInput";
-import FormError from "../components/FormError";
 import { useState, useEffect } from "react";
 import { useUserInfo } from "../hooks/useUserInfo";
 import { useFormSubmit } from "../hooks/useFormSubmit";
@@ -20,12 +18,12 @@ const ProjectForm = (props:any)=>{
         developers_assigned_to: []
     });
 
-    interface FormObj {
-    title: string,
-    description: string,
-    project_lead: string,
-    developers_assigned_to: string[]
-}
+//     interface FormObj {
+//     title: string,
+//     description: string,
+//     project_lead: string,
+//     developers_assigned_to: string[]
+// }
     useEffect(()=>{
         console.log(developers);
         if(props.project){
@@ -66,7 +64,7 @@ const ProjectForm = (props:any)=>{
                  <ComboBox 
                     forValue={"project-lead"}
                     options={leads}
-                    optionsKey={"first_name"}
+                    optionsKey={"fullName"}
                     selected = {form.project_lead}
                     setter={(e: any )=> {handleChange(e, "project_lead")}}                
                 />
@@ -75,7 +73,7 @@ const ProjectForm = (props:any)=>{
                     forValue= {"developers"}
                     legend={"Select Developers for the project:"}
                     checkboxes={developers}
-                    labelKey={"first_name"}
+                    labelKey={"fullName"}
                     setter={setForm}
                     form={form}
                     checkBoxOptions = {developerNames}
@@ -83,15 +81,7 @@ const ProjectForm = (props:any)=>{
                     checkboxProperty = {"developers_assigned_to"}
                 />
 
-                <FormInput 
-                    forValue={"submit"}
-                    classValue={"submit-button"}
-                    nameValue={"submit"}
-                    type={"submit"}
-                    content={""}
-                    styling = {"border px-5 py-1 text-black rounded-md"}
-                    labelStyle = {"text-black"}
-                />
+                <button>Submit</button>
                 <button onClick={handleCancel}>Cancel</button>
                 
                 {/* {error && <FormError error= {error}/>} */}
