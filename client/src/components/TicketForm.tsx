@@ -44,7 +44,6 @@ const TicketForm = (props:any)=>{
     },[]);
 
     useEffect(()=>{
-        console.log(form)
         //for when someone is assigned to the project...change form to
         if(form.assignee && !form.status) setForm({...form, status: ticketEnums.statuses[1]});
         //reverse assigned status to not assigned if developer removed
@@ -92,7 +91,7 @@ const TicketForm = (props:any)=>{
             <ComboBox 
                     forValue={"ticket-assignee"}
                     options={developers}
-                    optionsKey={"username"}
+                    optionsKey={"fullName"}
                     selected = {form.assignee}
                     setter={(e:Event)=> handleChange(e, "assignee")}
                     disabled = {false}

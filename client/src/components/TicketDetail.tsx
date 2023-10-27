@@ -8,6 +8,7 @@ const TicketDetail = (props:any)=>{
     const {updateButton, cancelButton, setFormActive, formActive } = useTicketUpdateButton();
     const { ticket } = props;
     const { project } = useProjectInfo(ticket.project);
+    console.log(ticket);
     return(
         <div className="ticket-detail">
             <h1>{ticket.title}</h1>

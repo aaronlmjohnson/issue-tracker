@@ -41,6 +41,7 @@ const ProjectPage = ()=>{
             <ProjectDeleteButton project = {project} />
             <button onClick={handleTicketsPage}>tickets</button>
             {formActive && <ProjectForm project={project || null}/>} 
+            <TicketForm project={project}/>
             {toggleTickets && <AllProjectTickets project = {project} />} 
         </div>
     );

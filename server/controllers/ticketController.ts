@@ -23,9 +23,9 @@ const ticketController = ()=> {
     });
 
     const getTicketEnums = asyncHandler(async(req, res, next)=>{
-        const priorities = (await Ticket.findOne()).priorities;
-        const statuses = (await Ticket.findOne()).statuses;
-        const types = (await Ticket.findOne()).types;
+        const priorities = Ticket.schema.path('priority').options.enum;
+        const statuses = Ticket.schema.path('status').options.enum;
+        const types = Ticket.schema.path('type').options.enum;
 
         res.status(200).json({priorities, statuses, types});
     });

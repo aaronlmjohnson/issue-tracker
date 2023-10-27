@@ -4,7 +4,6 @@ import Ticket from './Ticket';
 
 const AllProjectTickets = (props:any)=>{
     const { project } = props;
-
     const {data:tickets, loading:ticketsLoading, error } = useFetchData(`http://localhost:3001/projects/${project._id}/tickets`);
     
     return(
