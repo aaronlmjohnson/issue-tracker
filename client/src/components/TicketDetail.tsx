@@ -9,8 +9,7 @@ const TicketDetail = (props:any)=>{
     const {updateButton, cancelButton, setFormActive, formActive } = useTicketUpdateButton();
     const { ticket } = props;
     let url = `http://localhost:3001/projects/${ticket.project._id}/tickets/${props.ticket._id}/delete`;
-    const { display:showDeleteConfirmation, setDisplay, deleteObj, setDeleteObj, confirmationForm} = useDeleteConfirmation(url, ticket);
-
+    const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, ticket);
 
     return(
         <div className="ticket-detail">

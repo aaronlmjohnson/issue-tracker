@@ -7,6 +7,7 @@ import ProjectForm from "./ProjectForm";
 import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
 import AllProjectTickets from "../components/AllProjectTickets";
 import TicketForm from "../components/TicketForm";
+import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
@@ -14,6 +15,8 @@ const ProjectPage = ()=>{
     const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);
     const {updateButton, cancelButton, setFormActive, formActive} = useProjectUpdateButton();
     const [toggleTickets, setToggleTickets] = useState(false);//This will be handled in a navbar component in the future
+    const url = `http://localhost:3001/projects/${project._id}/delete`;
+    const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
 
     const getDeveloperNames = ()=>{
         const filteredDevs = developers.filter((developer: any)=>{
@@ -38,7 +41,8 @@ const ProjectPage = ()=>{
                 return(<p className="developer-name" key={crypto.randomUUID()}>{name}</p>)
             })}
             {formActive ? cancelButton() : updateButton()}
-            <ProjectDeleteButton project = {project} />
+            <ProjectDeleteButton project = {project} setDisplay={setDisplay}/>
+            {showDeleteConfirmation && confirmationForm()}
             <button onClick={handleTicketsPage}>tickets</button>
             {formActive && <ProjectForm project={project || null}/>} 
             <TicketForm project={project}/>

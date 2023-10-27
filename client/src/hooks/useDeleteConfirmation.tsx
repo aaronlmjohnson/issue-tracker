@@ -1,13 +1,12 @@
 import { useState } from "react"
 import { useFormSubmit } from "../hooks/useFormSubmit";
 
-
-
 const useDeleteConfirmation = (url:string, obj:any)=>{
 
     const [display, setDisplay] = useState(false);
     const [deleteObj, setDeleteObj] = useState(false);
     const { submitForm } = useFormSubmit();
+    
 
     const handleDelete = (e:any)=>{
         e.preventDefault();
