@@ -8,17 +8,16 @@ const TicketDetail = (props:any)=>{
     const {updateButton, cancelButton, setFormActive, formActive } = useTicketUpdateButton();
     const { ticket } = props;
     const { project } = useProjectInfo(ticket.project);
-    console.log(ticket);
     return(
         <div className="ticket-detail">
             <h1>{ticket.title}</h1>
-            <p>{ticket.author}</p>
+            <p>{ticket.author.fullName}</p>
             <p>{ticket.date_created}</p>
             <p>{ticket.description}</p>
             <p>{ticket.priority}</p>
             <p>{ticket.status}</p>
             <p>{ticket.type}</p>
-            <p>{ticket.assignee}</p>
+            <p>{ticket.assignee.fullName}</p>
             {formActive ? cancelButton() : updateButton()}
             <TicketDeleteButton project={project} ticket={ticket} />
             {formActive && <TicketForm project = {project} ticket={ticket} method={"PATCH"}/>}

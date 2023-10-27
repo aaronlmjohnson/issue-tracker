@@ -7,7 +7,9 @@ const ticketController = ()=> {
 
     const getAllTickets = asyncHandler(async(req, res, next)=>{
         try{
-            const tickets = await Ticket.find({}).populate('author')
+            const tickets = await Ticket.find({})
+            .populate('author')
+            .populate('assignee')
             .sort({title: 1})
             .exec();
             console.log();
@@ -34,7 +36,7 @@ const ticketController = ()=> {
     const getAllFromProject = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.projectId).exec();
         if(!project) res.status(404).send("Project Not Found.");
-        const tickets = await Ticket.find({project:project._id}).populate('author').sort({title: 1}).exec();
+        const tickets = await Ticket.find({project:project._id}).populate('author').populate('assignee').sort({title: 1}).exec();
         if(!tickets) res.status(404).send("Tickets Not Found.");
         else res.status(200).json(tickets);
     });
