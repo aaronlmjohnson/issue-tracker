@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import ProjectPage from './pages/ProjectPage';
 import AllTickets from './pages/AllTickets';
+import UserDetail from './components/UserDetail';
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
               <Route
                 path="/projects/:projectId"
                 element={<ProjectPage />}
+              />
+              <Route
+                path="/users/:userId"
+                element={<UserDetail />}
               />
             <Route
               path="/sign-up"
