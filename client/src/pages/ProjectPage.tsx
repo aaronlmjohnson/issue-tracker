@@ -19,7 +19,7 @@ const ProjectPage = ()=>{
         const filteredDevs = developers.filter((developer: any)=>{
             return project.developers_assigned_to.includes(developer._id);
         })
-        const devNames = filteredDevs.map((developer:any )=> developer && developer.username);
+        const devNames = filteredDevs.map((developer:any )=> developer && developer.fullName);
         return devNames;
     }
 
@@ -32,7 +32,7 @@ const ProjectPage = ()=>{
             <p className="project-title">{project.title}</p>
             <p className="project-description">{project.description}</p>
             <p className="project-date-created">Started on: {project.date_created}</p>
-            <p className="project-date-created">Project Lead: {lead.username}</p>
+            <p className="project-date-created">Project Lead: {lead.fullName}</p>
             <p>Developers:</p>
             {getDeveloperNames().map((name:string)=>{
                 return(<p className="developer-name" key={crypto.randomUUID()}>{name}</p>)
