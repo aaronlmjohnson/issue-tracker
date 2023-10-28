@@ -149,15 +149,13 @@ const userController = ()=>{
     });
 
     const guestLogin = asyncHandler(async (req, res, next)=>{
-        //form will be three buttons that represent the three roles admin, developer, lead
-        //clicking the button will send the appropriate response to the backend
-        //first will try to see if guest account already exists with that role
-        // if it does, it will log the user into that account
-        //if it doesn't it will create that account with that role
-        let guest = await User.findOne({firstName: "Guest", lastName: req.body.role});
+        const count = await User.count({first_name:"Guest", last_name:req.body.role}).exec();
+        let guest = await User.findOne({email:`guest-${req.body.role}-${count - 1}@email.com`});
+        console.log(count);
+    
         if(!guest){
             guest = new User({
-                email: "guest@email.com",
+                email: `guest-${req.body.role}-${count}`,
                 first_name: "Guest",
                 last_name: req.body.role,
                 password: "Password1",
@@ -167,6 +165,7 @@ const userController = ()=>{
         }
 
         const token = createToken(guest._id);
+        console.log("welcome", guest.url);
         res.status(200).json({guest, token, redirectUrl: guest.url})
     });
 

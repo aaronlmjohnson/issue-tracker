@@ -9,7 +9,7 @@ import ProjectPage from './pages/ProjectPage';
 import AllTickets from './pages/AllTickets';
 import UserDetail from './components/UserDetail';
 import UsersPage from './pages/UsersPage';
-import GuestLogin from './pages/GuestLogin';
+import GuestLoginPage from './pages/GuestLoginPage';
 
 function App() {
   return (
@@ -48,7 +48,7 @@ function App() {
             />
             <Route
               path="/guest-login"
-              element={<GuestLogin />}
+              element={<GuestLoginPage />}
             />
             <Route
               path="/tickets"

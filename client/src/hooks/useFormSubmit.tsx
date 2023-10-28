@@ -10,6 +10,7 @@ export const useFormSubmit = ()=>{
     const submitForm = async(data:any, url:string, method="POST")=>{
         setIsLoading(true);
         setError("");
+
         const response = await fetch(url, {
             method: method,
             headers: {
@@ -18,7 +19,6 @@ export const useFormSubmit = ()=>{
             body: JSON.stringify(data),
         })
         const json = await response.json();
-        console.log(json);
         if(!response.ok){
             setIsLoading(false);
             setError(json.error);
@@ -27,11 +27,12 @@ export const useFormSubmit = ()=>{
         if(response.ok){
             setIsLoading(false);
             setError("");
-
+            console.log(response);
             if(method === "DELETE" && projectId) navigate(json.redirectUrl);
-            if(method === "PATCH" || "DELETE") navigate(0);
-            else navigate(json.redirectUrl);}
+            if(method === "PATCH" || method === "DELETE") navigate(0);
+            else navigate(json.redirectUrl);
         }
+    }
 
     return {
         submitForm,
