@@ -9,6 +9,7 @@ import ProjectPage from './pages/ProjectPage';
 import AllTickets from './pages/AllTickets';
 import UserDetail from './components/UserDetail';
 import UsersPage from './pages/UsersPage';
+import GuestLogin from './pages/GuestLogin';
 
 function App() {
   return (
@@ -44,6 +45,10 @@ function App() {
             <Route
               path="/login"
               element={<SignUp  page={"login"}/>}
+            />
+            <Route
+              path="/guest-login"
+              element={<GuestLogin />}
             />
             <Route
               path="/tickets"

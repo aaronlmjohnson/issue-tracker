@@ -1,11 +1,4 @@
-import { useState } from "react"
-import { useFormSubmit } from "./useFormSubmit";
-import useDeleteConfirmation from "./useDeleteConfirmation";
-
-
  const ProjectDeleteButton = (props:any)=> {
-    const {submitForm} = useFormSubmit();
-
     const handleDelete = ()=> {
         props.setDisplay(true);
     };

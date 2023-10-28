@@ -11,12 +11,8 @@ router.get('/developers-by-name', userController.getDevelopersByName);
 router.get('/project-leads', userController.getProjectLeads);
 router.get('/roles', userController.getRoles);
 router.get('/:userId', userController.getUser);
-
-/* Sign Up */
 router.post('/sign-up', userController.signUp);
-
-/* Login */
-
 router.post('/login', userController.loginUser);
+router.post('/guest-login', userController.guestLogin)
 
 export default router;
