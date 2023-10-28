@@ -1,15 +1,15 @@
 import useFormHandler from "../hooks/useFormHandler";
-import { useFormSubmit } from "../hooks/useFormSubmit";
+import { useLogin } from "../hooks/useLogin";
 
 const GuestLoginForm = ()=>{
     const {form, handleChange} = useFormHandler({
         role:""
     });
-    const {submitForm} = useFormSubmit();
+    const {login} = useLogin();
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
-        submitForm(form, "http://localhost:3001/users/guest-login", "POST");
+        login(form, "http://localhost:3001/users/guest-login");
     }
 
     return (

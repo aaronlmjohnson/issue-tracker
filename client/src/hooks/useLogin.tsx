@@ -12,10 +12,10 @@ export const useLogin = ()=>{
         email:String,
         password:string,
     }
-    const login = async(form:LoginFormObj)=>{
+    const login = async(form:LoginFormObj, url="")=>{
         setIsLoading(true);
         setError("");
-        const response = await fetch("http://localhost:3001/users/login", {
+        const response = await fetch(url || "http://localhost:3001/users/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

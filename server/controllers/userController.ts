@@ -123,7 +123,7 @@ const userController = ()=>{
                     
                     const result = await user.save();
                     const token = createToken(user._id);
-                    res.status(200).json({user, ["fullName"]: user.fullName, token, redirectUrl: user.url});
+                    res.status(200).json({user, token, redirectUrl: user.url});
                 });
             } catch(err) {
                 res.status(400).send({error: err.message});
@@ -141,7 +141,7 @@ const userController = ()=>{
             if(!match) throw Error("Incorrect password.");
 
             const token = createToken(user._id);
-            res.status(200).json({user, ["fullName"]:user.fullName, token, redirectUrl: "/"});
+            res.status(200).json({user, token, redirectUrl: "/"});
         }catch(err){
             res.status(400).json({error: err.message});
             return next(err);
@@ -150,23 +150,23 @@ const userController = ()=>{
 
     const guestLogin = asyncHandler(async (req, res, next)=>{
         const count = await User.count({first_name:"Guest", last_name:req.body.role}).exec();
-        let guest = await User.findOne({email:`guest-${req.body.role}-${count - 1}@email.com`});
+        let user = await User.findOne({email:`guest-${req.body.role}-${count - 1}@email.com`});
         console.log(count);
     
-        if(!guest){
-            guest = new User({
+        if(!user){
+            user = new User({
                 email: `guest-${req.body.role}-${count}`,
                 first_name: "Guest",
                 last_name: req.body.role,
                 password: "Password1",
                 role: req.body.role
             });
-            await guest.save();
+            await user.save();
         }
 
-        const token = createToken(guest._id);
-        console.log("welcome", guest.url);
-        res.status(200).json({guest, token, redirectUrl: guest.url})
+        const token = createToken(user._id);
+        console.log("welcome", user.url);
+        res.status(200).json({user, token, redirectUrl: user.url})
     });
 
     return{
