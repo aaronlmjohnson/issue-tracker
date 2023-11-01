@@ -151,11 +151,10 @@ const userController = ()=>{
     const guestLogin = asyncHandler(async (req, res, next)=>{
         const count = await User.count({first_name:"Guest", last_name:req.body.role}).exec();
         let user = await User.findOne({email:`guest-${req.body.role}-${count - 1}@email.com`});
-        console.log(count);
-    
+        
         if(!user){
             user = new User({
-                email: `guest-${req.body.role}-${count}`,
+                email: `guest-${req.body.role}-${count ? count : 0}@email.com`,
                 first_name: "Guest",
                 last_name: req.body.role,
                 password: "Password1",
