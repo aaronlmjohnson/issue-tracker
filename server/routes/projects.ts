@@ -1,5 +1,7 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
+import requireAuth from '../middleware/requireAuth';
+
 const router = express.Router();
 
 import  ProjectController from "../controllers/projectController";
@@ -8,6 +10,8 @@ const controller = ProjectController();
 
 /* GET all projects */
 
+
+//router.use(requireAuth);
 router.get('/projects', controller.getAll);
 router.get('/projects/all-project-names', controller.getNamesAndIds);
 
