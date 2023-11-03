@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuthContext } from './useAuthContext';
 
 export const useFormSubmit = ()=>{
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const { projectId } = useParams();
+    const { user, loading:userDataLoading } = useAuthContext();
+
 
     const submitForm = async(data:any, url:string, method="POST")=>{
         setIsLoading(true);
@@ -14,10 +17,12 @@ export const useFormSubmit = ()=>{
         const response = await fetch(url, {
             method: method,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer: ${user.token}`
             },
             body: JSON.stringify(data),
-        })
+        });
+        
         const json = await response.json();
         if(!response.ok){
             setIsLoading(false);

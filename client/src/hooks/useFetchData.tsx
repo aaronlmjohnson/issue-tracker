@@ -16,7 +16,6 @@ export const useFetchData = (url:string)=>{
     }, [url, userDataLoading]);
 
     const refetch = async (url:string)=>{
-        // if(!user) return;
         try{
             setLoading(true);
             const response:any = await fetch(url, {
