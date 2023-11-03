@@ -26,7 +26,6 @@ export const useLogin = ()=>{
         const json = await response.json();
         if(!response.ok){
             setIsLoading(false);
-            console.log(json);
             setError(json.error);
         }
 
@@ -34,7 +33,6 @@ export const useLogin = ()=>{
             setIsLoading(false);
             setError("")
             localStorage.setItem('user', JSON.stringify(json));
-            console.log(json);
             dispatch({type: 'LOGIN', payload: json});
             navigate(json.redirectUrl);
         }

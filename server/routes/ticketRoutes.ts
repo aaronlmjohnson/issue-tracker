@@ -3,9 +3,11 @@ import asyncHandler from 'express-async-handler';
 const router = express.Router();
 
 import  TicketHandler from "../controllers/ticketController";
+import requireAuth from '../middleware/requireAuth';
 
 const controller = TicketHandler();
 
+router.use(requireAuth);
 router.get('/tickets', controller.getAllTickets);
 router.get('/tickets/ticket-enums', controller.getTicketEnums);
 

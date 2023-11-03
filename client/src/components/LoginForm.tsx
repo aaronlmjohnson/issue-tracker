@@ -19,7 +19,6 @@ const LoginForm = ()=>{
 
     const handleSubmit =  async (e:any)=>{
         e.preventDefault();
-        console.log(form);
         await login(form);
     }
 

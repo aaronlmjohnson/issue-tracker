@@ -8,18 +8,14 @@ export const useFetchData = (url:string)=>{
     const { user, loading:userDataLoading } = useAuthContext();
 
     useEffect(()=>{
-
         if(userDataLoading) return;
-        refetch(url); 
-
-         
+            refetch(url);   
     }, [url, userDataLoading]);
 
     const refetch = async (url:string)=>{
+        if(!user) return;
         try{
-            
             setLoading(true);
-            // Figure out why the user is null initially
             const response:any = await fetch(url, {
                 method: "GET",
                 headers: {
@@ -32,7 +28,7 @@ export const useFetchData = (url:string)=>{
             const apiData = await response.json();
             setData(apiData);
         }catch(e){
-            console.log(e);
+            console.error(e);
             setError(true);
         }finally{
             setLoading(false);
