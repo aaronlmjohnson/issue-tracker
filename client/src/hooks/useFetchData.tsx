@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from './useAuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 export const useFetchData = (url:string)=>{
     const [data, setData] = useState<any>([]);//<{title:string}>({title:""})
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const { user, loading:userDataLoading } = useAuthContext();
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(userDataLoading) return;
@@ -13,7 +16,7 @@ export const useFetchData = (url:string)=>{
     }, [url, userDataLoading]);
 
     const refetch = async (url:string)=>{
-        if(!user) return;
+        // if(!user) return;
         try{
             setLoading(true);
             const response:any = await fetch(url, {
@@ -30,6 +33,7 @@ export const useFetchData = (url:string)=>{
         }catch(e){
             console.error(e);
             setError(true);
+            if(!user) navigate("/401");
         }finally{
             setLoading(false);
         }

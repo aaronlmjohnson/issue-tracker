@@ -10,6 +10,7 @@ import AllTickets from './pages/AllTickets';
 import UserDetail from './components/UserDetail';
 import UsersPage from './pages/UsersPage';
 import GuestLoginPage from './pages/GuestLoginPage';
+import Page401 from './pages/401';
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
             <Route
               path="/"
               element={<Dashboard />}
+            />
+            <Route
+              path="/401"
+              element={<Page401 />}
             />
             <Route
               path="/users"
