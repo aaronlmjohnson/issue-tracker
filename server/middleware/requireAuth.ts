@@ -5,7 +5,6 @@ import * as dotenv from 'dotenv';
 const requireAuth = async (req:any, res:any, next:any)=>{
     console.log(req.headers);
     const { authorization } = req.headers;
-    console.log(authorization);
     if(!authorization) return res.status(401).json({error: 'Auth required'});
 
     const token = authorization.split(' ')[1];

@@ -19,7 +19,6 @@ const Projects = ()=>{
     const { data:projects, loading, error } = useFetchData("http://localhost:3001/projects")
 
     useEffect(()=>{
-
         if(!formActive){
             setToggleCreate(false);
         }
@@ -31,7 +30,6 @@ const Projects = ()=>{
         setToggleCreate(true);
         setFormActive(true);
     }
-
 
     return(
         !loading && <div className="projects">

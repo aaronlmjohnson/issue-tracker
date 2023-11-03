@@ -23,14 +23,6 @@ function App() {
               element={<Dashboard />}
             />
             <Route
-              path="/projects"
-              element={<Projects />}
-            />
-            <Route
-              path="/projects/:projectId"
-              element={<ProjectPage />}
-            />
-            <Route
               path="/users"
               element={<UsersPage />}
             />
@@ -54,6 +46,15 @@ function App() {
               path="/tickets"
               element={<AllTickets  />}
             />
+            <Route
+              path="/projects"
+              element={<Projects />}
+            />
+            <Route
+              path="/projects/:projectId"
+              element={<ProjectPage />}
+            />
+            
           </Routes>
         </div>
       </BrowserRouter>
