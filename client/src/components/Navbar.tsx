@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
 
 const Navbar = ()=>{
     const { user } = useAuthContext();
     const { logout } = useLogout();
+    
     return(
         <nav className="border-b-4 border-t-0 border-x-0  border-black">
             <p className=""><a href="/">Home</a></p>

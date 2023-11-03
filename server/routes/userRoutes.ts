@@ -12,7 +12,7 @@ router.post('/sign-up', userController.signUp);
 router.post('/login', userController.loginUser);
 router.post('/guest-login', userController.guestLogin);
 
-//router.use(requireAuth);
+router.use(requireAuth);
 //protected routes
 router.get('/', userController.getUsers);
 router.get('/developers', userController.getDevelopers);

@@ -17,7 +17,7 @@ const SignUpForm = ()=>{
     })
 
     const {signup, error} = useSignup();
-    const {data:roles, loading:rolesLoading} = useFetchData("http://localhost:3001/users/roles");
+    const {data:roles, loading:rolesLoading} = useFetchData("http://localhost:3001/users/roles", true);
 
     const handleSubmit =  (e:any)=>{
         e.preventDefault();
