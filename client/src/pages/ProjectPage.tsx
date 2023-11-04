@@ -19,9 +19,14 @@ const ProjectPage = ()=>{
     const url = `http://localhost:3001/projects/${project._id}/delete`;
     const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
     const {isAuthed, isLeadOfProject} = useCheckAuthorization();
+    const {isAuthed:canMakeTicket, isAuthedToMakeTicket} =  useCheckAuthorization();
 
     useEffect(()=>{
-        if(!loading) isLeadOfProject(project.project_lead);
+        if(!loading){
+            isLeadOfProject(project.project_lead);
+            isAuthedToMakeTicket(project);
+        } 
+        
     },[loading])
     
     const getDeveloperNames = ()=>{
@@ -60,7 +65,7 @@ const ProjectPage = ()=>{
             {showDeleteConfirmation && confirmationForm()}
             <button onClick={handleTicketsPage}>tickets</button>
             {formActive && <ProjectForm project={project || null}/>} 
-            <TicketForm project={project}/>
+            {canMakeTicket && <TicketForm project={project}/>}
             {toggleTickets && <AllProjectTickets project = {project} />} 
         </div>
     );
