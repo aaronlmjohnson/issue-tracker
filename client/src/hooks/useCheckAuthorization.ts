@@ -5,6 +5,11 @@ const useCheckAuthorization = ()=>{
     const [isAuthed, setIsAuthed] = useState(false);
     const {user, loading:userLoading} = useAuthContext();
 
+    const isAdmin = ()=>{
+        if(!user) return;
+        if(user.user.role === "Administrator") setIsAuthed(true);
+    }
+    
     const isLeadOfProject = (providedId:string)=>{
         if(!user) return;
         setIsAuthed(user.user._id === providedId || user.user.role === "Administrator");
@@ -25,10 +30,20 @@ const useCheckAuthorization = ()=>{
             setIsAuthed(project.developers_assigned_to.some((_id:any) => _id === user.user._id));
     }
 
+    const isAuthedToEditProject = (project:any)=>{
+        if(!user) return;
+        if(user.user.role === "Administrator") setIsAuthed(true);
+        else if(project.project_lead === user.user._id) setIsAuthed(true);
+    }
+
+    
+
     return {
         isLeadOfProject,
         isAuthedToEditTicket,
         isAuthedToMakeTicket,
+        isAuthedToEditProject,
+        isAdmin,
         isAuthed
     }
 }

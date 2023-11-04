@@ -2,6 +2,7 @@ import { useEffect, useState} from 'react';
 import ProjectListing from '../components/ProjectListing';
 import ProjectForm from './ProjectForm';
 import { useFetchData } from '../hooks/useFetchData';
+import useCheckAuthorization from '../hooks/useCheckAuthorization';
 
 interface Project {
     _id: string;
@@ -11,18 +12,16 @@ interface Project {
 }
 
 const Projects = ()=>{
-    // const [projects, setProjects] = useState<Array<Project>>([]);
     const [activeProject, setActiveProject] = useState(null);
     const [formActive, setFormActive] = useState(false);
     const [toggleCreate, setToggleCreate] = useState(false);
     const [toggleUpdate, setToggleUpdate] = useState(null);
-    const { data:projects, loading, error } = useFetchData("http://localhost:3001/projects")
+    const { data:projects, loading, error } = useFetchData("http://localhost:3001/projects");
+    const {isAuthed:canCreateProject, isAdmin} = useCheckAuthorization();
 
     useEffect(()=>{
-        if(!formActive){
-            setToggleCreate(false);
-        }
-
+        if(!formActive) setToggleCreate(false);
+        isAdmin();
     }, [formActive]);
 
     const handleCreateButton = ()=>{
@@ -46,7 +45,7 @@ const Projects = ()=>{
                     />)
             })}
 
-            <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>
+            {canCreateProject && <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>}
             {formActive && 
                 <ProjectForm 
                     title={toggleCreate ? "Create Project" : "Update Project"}
