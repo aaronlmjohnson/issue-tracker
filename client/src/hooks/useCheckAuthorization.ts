@@ -8,7 +8,7 @@ const useCheckAuthorization = ()=>{
     
     const compare = (providedId:string)=>{
         if(!user) return;
-        setIsAuthed(user.user._id === providedId);
+        setIsAuthed(user.user._id === providedId || user.user.role === "Administrator");
     }
 
     return {
