@@ -12,7 +12,6 @@ const useCheckAuthorization = ()=>{
     }
 
     const isAuthedToEditTicket = (ticket:any) =>{
-        console.log(ticket);
         if(!user) return;
         if(user.user.role === "Administrator") setIsAuthed(true);
         else if(ticket.author._id === user.user._id) setIsAuthed(true);
