@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useFetchData } from "../hooks/useFetchData";
 
 const UsersPage = (props:any)=>{
@@ -7,7 +8,8 @@ const UsersPage = (props:any)=>{
         !loading && <div className="ticket-detail">
             {users.map((user:any)=>{
                 return <div key={user.id}>
-                    <h1><a href={user.url}>{user.fullName}</a></h1>
+                    {/* <h1><a href={user.url}>{user.fullName}</a></h1> */}
+                    <h1><Link to={user.url}>{user.fullName}</Link></h1>
                     <p className="role">{user.role}</p>
                 </div>
             })}

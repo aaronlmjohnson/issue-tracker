@@ -9,12 +9,37 @@ import SignUp from './pages/SignUp';
 import GuestLoginPage from './pages/GuestLoginPage';
 import UsersPage from './pages/UsersPage';
 import UserDetail from './components/UserDetail';
+import Dashboard from './pages/Dashboard';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectPage from './pages/ProjectPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path:"/dashboard",
+        element: <Dashboard />
+      },
+      {
+        path:"/users",
+        element: <UsersPage />
+      },
+      {
+        path:"/users/:userId",
+        element: <UserDetail />
+      },
+      {
+        path:"/projects",
+        element: <ProjectsPage />
+      },
+      {
+        path:"/projects/:projectId",
+        element: <ProjectPage />
+      }
+    ]
   },
   {
     path: "/sign-up",
@@ -28,14 +53,6 @@ const router = createBrowserRouter([
     path: "/guest-login",
     element: <GuestLoginPage />,
   },
-  {
-    path:"/users",
-    element: <UsersPage />
-  },
-  {
-    path:"/users/:userId",
-    element: <UserDetail />
-  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);

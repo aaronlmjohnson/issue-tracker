@@ -11,7 +11,7 @@ interface Project {
     date_created: string;
 }
 
-const Projects = ()=>{
+const ProjectsPage = ()=>{
     const [activeProject, setActiveProject] = useState(null);
     const [formActive, setFormActive] = useState(false);
     const [toggleCreate, setToggleCreate] = useState(false);
@@ -57,4 +57,4 @@ const Projects = ()=>{
     );
 }
 
-export default Projects;
+export default ProjectsPage;

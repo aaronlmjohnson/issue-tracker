@@ -8,7 +8,7 @@ const Navbar = ()=>{
     
     return(
         <nav className="border-b-4 border-t-0 border-x-0  border-black">
-            <p className=""><a href="/">Home</a></p>
+            <p className=""><a href="/dashboard">Home</a></p>
             <p className=""><a href="/projects">Projects</a></p>
             <p className=""><a href="/users">Users</a></p>
             <p className=""><a href="/tickets">Tickets</a></p>
