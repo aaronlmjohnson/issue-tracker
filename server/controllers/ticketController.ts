@@ -40,6 +40,7 @@ const ticketController = ()=> {
         const tickets = await Ticket.find({project:project._id})
                                     .populate('author')
                                     .populate('assignee')
+                                    .populate('project')
                                     .sort({title: 1}).exec();
         if(!tickets) res.status(404).send("Tickets Not Found.");
         else res.status(200).json(tickets);

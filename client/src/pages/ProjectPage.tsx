@@ -18,10 +18,10 @@ const ProjectPage = ()=>{
     const [toggleTickets, setToggleTickets] = useState(false);//This will be handled in a navbar component in the future
     const url = `http://localhost:3001/projects/${project._id}/delete`;
     const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
-    const {isAuthed, compare} = useCheckAuthorization();
+    const {isAuthed, isLeadOfProject} = useCheckAuthorization();
 
     useEffect(()=>{
-        if(!loading) compare(project.project_lead);
+        if(!loading) isLeadOfProject(project.project_lead);
     },[loading])
     
     const getDeveloperNames = ()=>{
