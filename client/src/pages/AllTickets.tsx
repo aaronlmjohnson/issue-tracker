@@ -8,7 +8,6 @@ const AllTickets = ()=>{
     return(
         !ticketsLoading && <div className="all-tickets-page">
             {tickets.map((ticket:any)=> <Ticket ticket={ticket} key={ticket._id}/>)}
-            {/* <TicketForm />  add button to toggle*/}
         </div>
     )
 }

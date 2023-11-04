@@ -12,6 +12,7 @@ import UserDetail from './components/UserDetail';
 import Dashboard from './pages/Dashboard';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
+import AllTickets from './pages/AllTickets';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path:"/projects/:projectId",
         element: <ProjectPage />
+      },
+      {
+        path:"/tickets",
+        element: <AllTickets />
       }
     ]
   },
