@@ -10,12 +10,19 @@ import AllTickets from './pages/AllTickets';
 import UserDetail from './components/UserDetail';
 import UsersPage from './pages/UsersPage';
 import GuestLoginPage from './pages/GuestLoginPage';
-import Page401 from './pages/401';
+import Page401 from './pages/errorPages/401';
 
 function App() {
   return (
     <div className="App ">
       <Navbar />
+
+    </div>
+  );
+}
+
+
+/*
       <BrowserRouter>
         <div className="">
           <Routes>
@@ -63,8 +70,5 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </div>
-  );
-}
-
+*/
 export default App;
