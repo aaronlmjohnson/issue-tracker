@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
 import AllTickets from './pages/AllTickets';
+import Page401 from './pages/errorPages/401';
 
 /* make sure to embed forms as children under respective parents ex. project form under project route */
 const router = createBrowserRouter([
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
     path: "/guest-login",
     element: <GuestLoginPage />,
   },
+  {
+    path: "/401",
+    element: <Page401 />,
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
