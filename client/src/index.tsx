@@ -14,6 +14,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
 import AllTickets from './pages/AllTickets';
 
+/* make sure to embed forms as children under respective parents ex. project form under project route */
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path:"/dashboard",
+        index:true,
+        path:"/",
         element: <Dashboard />
       },
       {

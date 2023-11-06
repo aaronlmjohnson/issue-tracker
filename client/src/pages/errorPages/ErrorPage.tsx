@@ -4,7 +4,7 @@ import Page404 from "./404"
 
 const ErrorPage = ()=>{
     const error:any = useRouteError();
-
+    console.log(error);
     const servePage = ()=>{
         switch(error.status){
             case 401: 
