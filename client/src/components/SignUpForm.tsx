@@ -7,7 +7,7 @@ import ComboBox from "./ComboBox";
 import { useFetchData } from "../hooks/useFetchData";
 import SubmitButton from "./SubmitButton";
 
-const SignUpForm = ()=>{
+const SignUpForm = (props:any)=>{
 
     const {handleChange, form } = useFormHandler({
         email:"",
@@ -18,7 +18,7 @@ const SignUpForm = ()=>{
     })
 
     const {signup, error} = useSignup();
-    const {data:roles, loading:rolesLoading} = useFetchData("http://localhost:3001/users/roles", true);
+    const {roles, loading} = props;
 
     const handleSubmit =  (e:any)=>{
         e.preventDefault();
@@ -26,7 +26,7 @@ const SignUpForm = ()=>{
     }
 
     return (  
-            !rolesLoading && <form action="" method="POST" className="flex flex-col gap-y-4 justify-center w-auto my-8" onSubmit={handleSubmit}>
+            !loading && <form action="" method="POST" className="flex flex-col gap-y-4 justify-center w-auto my-8" onSubmit={handleSubmit}>
                  <TextInput 
                     forValue={"first-name"}
                     classValue={"first-name-input"}
