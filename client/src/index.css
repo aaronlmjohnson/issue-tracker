@@ -2,33 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-div{
-    margin: 20px 0;
-}
 
-form {
-    border: 1px solid blue;
-    display: flex;
-    flex-direction: column;
-    max-width: fit-content;
-}
-
-button{
-    background: blue;
-    color: white;
-    font-size: 20px;
-    margin-right: 4px;
-}
-
-a{
-    color: violet;
-}
-
-h1{
-    font-size: 24px;
-}
-
-h2{
-    font-size: 20px;
-}
 

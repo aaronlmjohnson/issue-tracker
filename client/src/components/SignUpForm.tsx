@@ -56,6 +56,12 @@ const SignUpForm = ()=>{
                     label={"Password:"}
                     setter = {(e:any)=> handleChange(e, "password")}
                 />
+                <PasswordInput 
+                    forValue={"password-confirmation"}
+                    classValue={"password-confirm-input"}
+                    label={"Confirm Password:"}
+                    setter = {(e:any)=> handleChange(e, "password-confirmation")}
+                />
                 <button>Sign up</button>
                 {error && <FormError error= {error}/>}
             </form>

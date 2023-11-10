@@ -33,8 +33,10 @@ const displayLogin = ()=>{
 
 const SignUp = (props: any)=>{
     return (
-        <div className="sign-up-form-container">
-            <div className="signup-form-container">
+        <div className="bg-primary bg-opacity-20 h-screen flex justify-center content-center">
+            
+            <div className="border border-black h-fit py-8 px-12">
+                <h1>Tracker</h1>
                 {props.page === "signup" && displaySignup()} 
                 {props.page === "login" && displayLogin()}
             </div>
