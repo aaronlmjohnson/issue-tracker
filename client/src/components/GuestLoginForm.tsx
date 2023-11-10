@@ -1,5 +1,7 @@
 import useFormHandler from "../hooks/useFormHandler";
 import { useLogin } from "../hooks/useLogin";
+import GuestRoleButton from "./GuestRoleButton";
+import SubmitButton from "./SubmitButton";
 
 const GuestLoginForm = ()=>{
     const {form, handleChange} = useFormHandler({
@@ -13,16 +15,19 @@ const GuestLoginForm = ()=>{
     }
 
     return (
-        <form  method="POST"  onSubmit={handleSubmit}>
+        <form  method="POST" className="flex flex-col gap-y-4 justify-center w-auto mb-8 mt-4" onSubmit={handleSubmit}>
             {
                 ["Administrator", "Project Lead", "Developer"].map((roleName:string)=>{
                     return (
-                    <button onClick={(e:any)=> handleChange(e, "role")} value={roleName} key={crypto.randomUUID()}>
-                        {roleName}
-                    </button>);
+                        <GuestRoleButton 
+                            setter={(e:any)=> handleChange(e, "role")}
+                            key={crypto.randomUUID()}
+                            roleName={roleName}
+                        />
+                    )
                 })
             }
-            <button>Submit</button>
+            <SubmitButton content={"Login"}/>
         </form>
     );
 }

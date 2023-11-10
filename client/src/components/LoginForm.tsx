@@ -5,6 +5,7 @@ import FormError from "./FormError";
 import useFormHandler from "../hooks/useFormHandler";
 import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
+import SubmitButton from "./SubmitButton";
 
 const LoginForm = ()=>{
 
@@ -23,22 +24,24 @@ const LoginForm = ()=>{
     }
 
     return (
-        <form action="" method="POST" className="sign-up-form text-base font-normal" onSubmit={handleSubmit}>
+        <form action="" method="POST" className="flex flex-col gap-y-4 justify-center w-auto my-8" onSubmit={handleSubmit}>
             <TextInput 
                 forValue={"email"}
                 classValue={"email-input"}
-                label={"Email:"}
+                label={"Email"}
                 value={form.email}
+                placeholder={"Enter email"}
                 setter={(e:any) => handleChange(e, 'email')}
             />
             <PasswordInput 
                 forValue={"password"}
                 classValue={"password-input"}
                 value={form.password}
-                label={"Password:"}
+                label={"Password"}
+                placeholder={"Enter password"}
                 setter={(e:any) => handleChange(e, 'password')}
             />
-            <button>Submit</button>
+            <SubmitButton content={"Login"}/>
             {error && <FormError error= {error}/>}
 
 

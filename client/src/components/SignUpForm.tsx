@@ -5,6 +5,7 @@ import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
 import ComboBox from "./ComboBox";
 import { useFetchData } from "../hooks/useFetchData";
+import SubmitButton from "./SubmitButton";
 
 const SignUpForm = ()=>{
 
@@ -60,8 +61,7 @@ const SignUpForm = ()=>{
                     placeholder={"Enter password"}
                     setter = {(e:any)=> handleChange(e, "password")}
                 />
-
-                <button className="bg-primary text-white w-auto h-12 p-2.5 rounded">Sign up</button>
+                <SubmitButton content={"Sign Up"}/>
                 {error && <FormError error= {error}/>}
             </form>
     );
