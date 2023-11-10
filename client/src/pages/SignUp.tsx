@@ -32,7 +32,7 @@ const displayLogin = ()=>{
 
 const SignUp = (props: any)=>{
     return (
-        <div className="bg-primary bg-opacity-[4] flex h-screen">
+        <div className="bg-primary bg-opacity-[100] flex h-screen">
             <div className="m-auto bg-white h-fit max-w-lg min-w-xs w-1/2 py-8 px-12 ">
                 <div className="h-12 w-auto flex justify-center center-content">
                     <div className="flex center-content justify-content w-fit h-fit my-auto">{Logo}</div>
