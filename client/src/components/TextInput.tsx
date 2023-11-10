@@ -2,16 +2,17 @@ const TextInput = (props:any)=>{
     const styling = "border";
 
     return (
-        <>
-            <label htmlFor={props.forValue} className={"text-input-label"}>{props.label}</label>
+        <div className="flex flex-col">
+            <label htmlFor={props.forValue} className="font-secondary">{props.label}</label>
             <input 
-                className={"text-input" + styling}
+                className="border w-auto h-12 p-2.5 rounded"
                 name={props.forValue} 
                 type="text" 
                 onChange={props.setter} 
                 value={props.value}
+                placeholder={props.placeholder}
             />
-        </>
+        </div>
     )
 }
 

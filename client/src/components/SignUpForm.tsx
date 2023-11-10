@@ -25,24 +25,27 @@ const SignUpForm = ()=>{
     }
 
     return (  
-            !rolesLoading && <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
-                <TextInput 
-                    forValue={"email"}
-                    classValue={"email-input"}
-                    label={"Email:"}
-                    setter = {(e:any)=> handleChange(e, "email")}
-                />
-                <TextInput 
+            !rolesLoading && <form action="" method="POST" className="flex flex-col gap-y-4 justify-center w-auto my-8" onSubmit={handleSubmit}>
+                 <TextInput 
                     forValue={"first-name"}
                     classValue={"first-name-input"}
-                    label={"First Name:"}
+                    label={"First Name"}
+                    placeholder={"Enter first name"}
                     setter = {(e:any)=> handleChange(e, "first_name")}
                 />
                 <TextInput 
                     forValue={"last-name"}
                     classValue={"last-name-input"}
-                    label={"Last Name:"}
+                    label={"Last Name"}
+                    placeholder={"Enter last name"}
                     setter = {(e:any)=> handleChange(e, "last_name")}
+                />
+                <TextInput 
+                    forValue={"email"}
+                    classValue={"email-input"}
+                    label={"Email"}
+                    placeholder={"Enter email"}
+                    setter = {(e:any)=> handleChange(e, "email")}
                 />
                 <ComboBox 
                     forValue={"roles"}
@@ -53,16 +56,12 @@ const SignUpForm = ()=>{
                 <PasswordInput 
                     forValue={"password"}
                     classValue={"password-input"}
-                    label={"Password:"}
+                    label={"Password"}
+                    placeholder={"Enter password"}
                     setter = {(e:any)=> handleChange(e, "password")}
                 />
-                <PasswordInput 
-                    forValue={"password-confirmation"}
-                    classValue={"password-confirm-input"}
-                    label={"Confirm Password:"}
-                    setter = {(e:any)=> handleChange(e, "password-confirmation")}
-                />
-                <button>Sign up</button>
+
+                <button className="bg-primary text-white w-auto h-12 p-2.5 rounded">Sign up</button>
                 {error && <FormError error= {error}/>}
             </form>
     );
