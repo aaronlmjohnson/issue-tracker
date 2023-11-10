@@ -1,5 +1,10 @@
 import SignUpForm from "../components/SignUpForm";
 import LoginForm from "../components/LoginForm";
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBug } from '@fortawesome/free-solid-svg-icons'
+
+const Logo = <FontAwesomeIcon icon={faBug} className="rotate-45"/>
 
 const displaySignup = ()=>{
     return (
@@ -34,7 +39,7 @@ const displayLogin = ()=>{
 const SignUp = (props: any)=>{
     return (
         <div className="bg-primary bg-opacity-20 h-screen flex justify-center content-center">
-            
+            {Logo}
             <div className="border border-black h-fit py-8 px-12">
                 <h1>Tracker</h1>
                 {props.page === "signup" && displaySignup()} 
