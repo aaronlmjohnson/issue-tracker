@@ -31,7 +31,8 @@ const Root = ()=>{
         <div className="flex">
             <Sidebar 
                 section={content.section}
-                links={content.links}/>
+                links={content.links}
+            />
             <Outlet  />
         </div>
             
