@@ -42,9 +42,7 @@ const SignUp = (props: any)=>{
 
     return (
         rolesLoading ? 
-        <ContentLoading 
-            bg-color={"primary"}
-        />:
+        <ContentLoading />:
         <div className="bg-primary bg-opacity-[100] flex h-screen">
             <div className="m-auto bg-white h-fit max-w-lg min-w-fit w-1/2 py-8 px-12 ">
                 <FormLogo />
