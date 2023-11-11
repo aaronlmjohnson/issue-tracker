@@ -12,12 +12,18 @@ module.exports = {
       height: {
         'navbar': '3rem',
         'sidebar': 'calc(100vh - 3rem)'
+      },
+      animation: {
+        wiggle: 'wiggle 1s ease-in-out infinite',
       }
     },
     fontFamily: {
       primary:['Plus Jakarta Sans', 'sans-serif'],
       secondary:['DM Sans', 'sans-serif']
     },
+    variants:{
+      animation:['animation-spin']
+    }
   },
   plugins: [],
 }

@@ -3,6 +3,7 @@ import LoginForm from "../components/LoginForm";
 import AuthLinks from "../components/AuthLinks";
 import FormLogo from "../components/FormLogo";
 import { useFetchData } from "../hooks/useFetchData";
+import ContentLoading from "./ContentLoading";
 
 const displaySignup = (loading:any, roles:any)=>{
 
@@ -40,7 +41,10 @@ const SignUp = (props: any)=>{
     const {data:roles, loading:rolesLoading} = useFetchData("http://localhost:3001/users/roles", true);
 
     return (
-        rolesLoading ? <>Insert loading component here...</> :
+        rolesLoading ? 
+        <ContentLoading 
+            bg-color={"primary"}
+        />:
         <div className="bg-primary bg-opacity-[100] flex h-screen">
             <div className="m-auto bg-white h-fit max-w-lg min-w-fit w-1/2 py-8 px-12 ">
                 <FormLogo />

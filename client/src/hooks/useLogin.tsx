@@ -15,7 +15,8 @@ export const useLogin = ()=>{
     const login = async(form:LoginFormObj, url="")=>{
         setIsLoading(true);
         setError("");
-        const response = await fetch(url || "http://localhost:3001/users/login", {
+        console.log(url)
+        const response = await fetch(url || `${process.env.REACT_APP_CONNECTION_STRING}/users/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
