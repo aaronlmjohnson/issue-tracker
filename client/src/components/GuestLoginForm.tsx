@@ -2,6 +2,8 @@ import useFormHandler from "../hooks/useFormHandler";
 import { useLogin } from "../hooks/useLogin";
 import GuestRoleButton from "./GuestRoleButton";
 import SubmitButton from "./SubmitButton";
+import { v4 as uuid } from 'uuid';
+
 
 const GuestLoginForm = ()=>{
     const {form, handleChange} = useFormHandler({
@@ -21,7 +23,7 @@ const GuestLoginForm = ()=>{
                     return (
                         <GuestRoleButton 
                             setter={(e:any)=> handleChange(e, "role")}
-                            key={crypto.randomUUID()}
+                            key={uuid()}
                             roleName={roleName}
                         />
                     )

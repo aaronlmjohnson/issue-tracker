@@ -15,7 +15,6 @@ const GuestRoleButton = (props:any)=>{
                 className="h-24 font-secondary font-bold text-white text-3xl bg-primary rounded"
                 onClick={props.setter} 
                 value={props.roleName} 
-                key={crypto.randomUUID()}
         >
             {adminIcon}{props.roleName}
         </button>
