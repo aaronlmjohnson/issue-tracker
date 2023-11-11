@@ -22,12 +22,12 @@ const Sidebar = (props:any)=>{
                 <div className="mx-auto my-6">
                     {logo}
                 </div>
-                <div className="flex flex-col mx-auto gap-y-20">
-                    {home}
-                    {usersIcon}
-                    {projectsIcon}
-                    {ticketsIcon}
-                </div>
+                <ul className="flex flex-col mx-auto gap-y-20">
+                    <li key={uuid()}><a href="/">{home}</a></li>
+                    <li key={uuid()}><a href="/users">{usersIcon}</a></li>
+                    <li key={uuid()}><a href="/projects">{projectsIcon}</a></li>
+                    <li key={uuid()}><a href="/tickets">{ticketsIcon}</a></li>
+                </ul>
 
             </nav>
             <nav className="bg-primary bg-opacity-[.08] w-56 h-screen p-6">
