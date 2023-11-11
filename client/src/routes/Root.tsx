@@ -1,3 +1,4 @@
+import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 
@@ -33,7 +34,11 @@ const Root = ()=>{
                 section={content.section}
                 links={content.links}
             />
-            <Outlet  />
+            <div className="flex flex-col w-screen h-screen">
+                <Navbar />
+                <Outlet  />
+            </div>
+            
         </div>
             
     );

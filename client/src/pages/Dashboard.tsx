@@ -5,7 +5,7 @@ const Dashboard = ()=>{
                 <div className="">
                     
                 </div>
-            <h1 className="">Dashboard</h1>
+            <h1 className="">Dashboard content goes here...</h1>
         </div>
     );
 }
