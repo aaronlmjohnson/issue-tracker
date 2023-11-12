@@ -6,18 +6,20 @@ const Navbar = ()=>{
     const hamburgerIcon = <FontAwesomeIcon icon={faBars} className="text-primary text-4xl"/>
     const userPortrait = <FontAwesomeIcon icon={faCircleUser} className="text-primary text-4xl"/>
     const {user} = useAuthContext();
-    console.log(user);
+   console.log(user);
     return( 
         <nav className="flex border border-x-0 border-t-0 px-7 py-3 place-content-between">
-            <div>
+            <div className="my-auto">
                 {hamburgerIcon}
             </div>
             <div className="flex gap-x-[10px]">
                 {userPortrait}
-                <div>
+                
+                { user ?   <div>
                     <h3>{user.user.role}</h3>
                     <h4 className="font-bold">{user.user.fullName}</h4>
                 </div>
+                :<>Log in</>}
             </div>
         </nav>
     );
