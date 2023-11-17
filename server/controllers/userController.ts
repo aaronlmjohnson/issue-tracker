@@ -20,6 +20,18 @@ const userController = ()=>{
         }
     });
 
+    const newestUsers = asyncHandler(async(req, res, next)=>{
+        try{
+            const users = await User.find({first_name:{$ne:"Guest"}}, {first_name: 1, last_name: 1, date_created: 1}).sort("-date_created").limit(4);
+            if(!users) throw Error("No users found");
+            res.status(200).json(users);
+
+        }catch(e){
+            res.status(400).send({error: e.message});
+            return next(e);
+        }
+    });
+
     const getUser = asyncHandler(async(req, res, next)=>{
         try{
             const user = await User.findById(req.params.userId);
@@ -172,6 +184,7 @@ const userController = ()=>{
         signUp,
         guestLogin,
         getUser,
+        newestUsers,
         loginUser,
         getUsers,
         getDevelopers,

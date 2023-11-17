@@ -15,6 +15,7 @@ router.post('/guest-login', userController.guestLogin);
 router.use(requireAuth);
 //protected routes
 router.get('/', userController.getUsers);
+router.get('/date-created', userController.newestUsers);
 router.get('/developers', userController.getDevelopers);
 router.get('/developers-by-name', userController.getDevelopersByName);
 router.get('/project-leads', userController.getProjectLeads);
