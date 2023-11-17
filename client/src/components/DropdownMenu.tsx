@@ -8,7 +8,6 @@ const DropdownMenu = (props:any)=>{
         on: 'absolute border border-black  border-t-0 z-10 bg-white right-[28px] px-4',
         off: 'hidden'
     }
-    console.log(menuVariant[props.toggleDropdown])
 
     return (
         <ul className={menuVariant[props.toggleDropdown]}>    

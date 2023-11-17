@@ -7,7 +7,7 @@ import { useState } from 'react';
 const Navbar = ()=>{
     const hamburgerIcon = <FontAwesomeIcon icon={faBars} className="text-primary text-4xl"/>
     const userPortrait = <FontAwesomeIcon icon={faCircleUser} className="text-primary text-4xl"/>
-    const {user} = useAuthContext();
+    const {user, loading} = useAuthContext();
 
     const [toggleDropdown, setToggleDropdown] = useState("off")
 
@@ -15,9 +15,8 @@ const Navbar = ()=>{
         setToggleDropdown(prevState => prevState === "on" ? "off" : "on");
     }
 
-
     return( 
-        <nav className="relative group">
+        !loading && <nav className="relative group">
             <div className="flex border border-x-0 border-t-0 px-7 py-3 place-content-between">
                 <div className="my-auto">
                     {hamburgerIcon}
@@ -41,7 +40,7 @@ const Navbar = ()=>{
 
                 </div>
             </div>
-            <DropdownMenu toggleDropdown={toggleDropdown}/>
+            <DropdownMenu toggleDropdown={toggleDropdown} id={user.user.id}/>
 
         </nav>
     );
