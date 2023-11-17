@@ -13,6 +13,7 @@ const controller = ProjectController();
 
 router.use(requireAuth);
 router.get('/projects', controller.getAll);
+router.get('/projects/newest', controller.getNewestProjects);
 router.get('/projects/all-project-names', controller.getNamesAndIds);
 
 

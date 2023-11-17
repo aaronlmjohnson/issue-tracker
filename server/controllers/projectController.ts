@@ -19,11 +19,29 @@ const projectController = ()=> {
         
     });
 
+    const getNewestProjects = asyncHandler(async(req, res, next)=>{
+        try{
+            const projects = await Project.find({}, {title: 1, date_created:1})
+            .sort("-date_created")
+            .exec();
+            if(!projects){
+                throw Error("No Projects Found");
+            } else
+                res.status(200).json(projects);
+        }catch(e){
+            console.log(e);
+        }
+        
+    }); 
+
+    //const users = await User.find({first_name:{$ne:"Guest"}}, {first_name: 1, last_name: 1, date_created: 1}).sort("-date_created").limit(4);
+
+
     const getNamesAndIds = asyncHandler(async(req, res, next)=>{
         try{
             const projects = await Project.aggregate()
             .project({title: 1, id: 1})
-            .sort({title: 1})
+            .sort({})
             .exec();
             if(!projects){
                 throw Error("No Projects Found");
@@ -139,6 +157,7 @@ const projectController = ()=> {
 
     return{
         getAll,
+        getNewestProjects,
         get,
         getNamesAndIds,
         createPost,
