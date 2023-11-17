@@ -25,6 +25,37 @@ const ticketController = ()=> {
         
     });
 
+    const newestTickets = asyncHandler(async(req, res, next)=>{
+        try{
+            const tickets = await Ticket.find({}, {title:1, date_created:1})
+            .sort("-date_created")
+            .exec();
+
+            if(!tickets){
+                throw Error("No Projects Found");
+            } else
+                res.status(200).json(tickets);
+        }catch(e){
+            console.log(e);
+        }
+        
+    });
+
+    const getNewestProjects = asyncHandler(async(req, res, next)=>{
+        try{
+            const projects = await Project.find({}, {title: 1, date_created:1})
+            .sort("-date_created")
+            .exec();
+            if(!projects){
+                throw Error("No Projects Found");
+            } else
+                res.status(200).json(projects);
+        }catch(e){
+            console.log(e);
+        }
+        
+    }); 
+
     const getTicketEnums = asyncHandler(async(req, res, next)=>{
         const priorities = Ticket.schema.path('priority').options.enum;
         const statuses = Ticket.schema.path('status').options.enum;
@@ -201,6 +232,7 @@ const ticketController = ()=> {
 
     return{
         getAllTickets,
+        newestTickets,
         getTicket,
         getAllFromProject,
         createTicket,
