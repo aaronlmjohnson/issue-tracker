@@ -3,7 +3,6 @@ import { faAngleDown, faCircle} from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = ()=>{
     const arrowDown = <FontAwesomeIcon icon={faAngleDown} />
-    const dot = <FontAwesomeIcon icon={faCircle} size={"2xs"}/>
 
     const DashboardHeader = ()=>{
         return(
@@ -18,10 +17,21 @@ const Dashboard = ()=>{
     }
 
     const ActivityContainer = ()=>{
+        //<MyComponent text={["This is ", <strong>not</strong>,  "working."]} />
+        const projectTitle = "Issue Tracker";
+        const author = "John Doe";
+        const color = "text-pastel-0"
+        const description = [
+                                "Project titled ", 
+                                <strong className={color}>{projectTitle}</strong> ,
+                                " created by ", 
+                                <strong className={color}>{author}</strong>
+                            ]; //this value will be coming from a virtual from the backend. Think of how to assign colors
         return(
             <div className=" w-full h-full">
                 <Activity 
-                    description={"Project titled Issue Tracker created by John Doe"}
+                    color={color}
+                    description={description}
                     timestamp={"3:02PM"}
                 />
             </div>
@@ -29,12 +39,14 @@ const Dashboard = ()=>{
     }
 
     const Activity= (props:any)=>{
-        const {description, timestamp} = props;
+        const {description, timestamp, color} = props;
+        const dot = <FontAwesomeIcon icon={faCircle} size={"2xs"} className={color}/>
+
         return(
             <div className="flex items-center gap-2.5">
                 {dot}
                 <p className="w-full text-xl">{description}</p>
-                <p>{timestamp}</p>
+                <p className="text-non-focus text-xs">{timestamp}</p>
             </div>
         )
     }
