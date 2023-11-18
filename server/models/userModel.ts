@@ -44,6 +44,14 @@ userSchema.virtual('roles').get(function() {
     return userSchema.path('role').options.enum;
 });
 
+userSchema.virtual("actions").get(function() {
+    return {
+        signedIn: [`&lt;strong className=&quot;text-pastel-0&quot;&gt; ${this.fullName} &lt;strong&gt;`, 
+                    'signed in at',
+                    `&lt;strong className=&quot;text-pastel-0&quot;&gt;${Date.now()}&lt;strong&gt;`
+    ]
+    }
+})
 
 
 const User = model<IUser>("User", userSchema);
