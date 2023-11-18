@@ -1,11 +1,19 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown} from '@fortawesome/free-solid-svg-icons';
+
 const Dashboard = ()=>{
+    const arrowDown = <FontAwesomeIcon icon={faAngleDown} />
 
     return (
         <div className="dashboard ">
-                <div className="">
-                    
-                </div>
-            <h1 className="">Dashboard content goes here...</h1>
+            <div>
+                <h1>Recent Activity</h1>
+                <button>
+                    view all
+                    {arrowDown}
+                </button>
+            </div>
+            
         </div>
     );
 }
