@@ -17,7 +17,6 @@ const Dashboard = ()=>{
     }
 
     const ActivityContainer = ()=>{
-        //<MyComponent text={["This is ", <strong>not</strong>,  "working."]} />
         const projectTitle = "Issue Tracker";
         const author = "John Doe";
         const color = "text-pastel-0"
@@ -25,15 +24,18 @@ const Dashboard = ()=>{
                                 "Project titled ", 
                                 <strong className={color}>{projectTitle}</strong> ,
                                 " created by ", 
-                                <strong className={color}>{author}</strong>
+                                <strong className={color}>{author}</strong>,
+                                ". Extra placeholder text to make this long enough so I can see how it looks on my screen. Even more placeholder text. A little extra at the end."
                             ]; //this value will be coming from a virtual from the backend. Think of how to assign colors
         return(
-            <div className=" w-full h-full">
+            <div className="flex flex-col gap-10 w-full h-fit">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val)=> 
                 <Activity 
                     color={color}
                     description={description}
                     timestamp={"3:02PM"}
-                />
+                />)
+                }
             </div>
         );
     }
@@ -52,7 +54,7 @@ const Dashboard = ()=>{
     }
 
     return (
-        <div className="flex flex-col dashboard p-7 h-full gap-y-12">
+        <div className="flex flex-col dashboard p-7 h-fit gap-y-12 overflow-y-auto">
             <DashboardHeader />
             <ActivityContainer />
         </div>
