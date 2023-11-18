@@ -30,7 +30,7 @@ const Sidebar = (props:any)=>{
                 </ul>
 
             </nav>
-            <nav className="bg-primary bg-opacity-[.08] w-56 h-screen p-6">
+            <nav className="bg-primary bg-opacity-[.08] w-56 h-screen p-6 hidden lg:block">
                 <div className="">
                     <h1 className="text-primary font-secondary text-4xl font-bold">Tracker</h1>
                 
