@@ -25,7 +25,6 @@ const Dashboard = ()=>{
                                 <strong className={color}>{projectTitle}</strong> ,
                                 " created by ", 
                                 <strong className={color}>{author}</strong>,
-                                ". Extra placeholder text to make this long enough so I can see how it looks on my screen. Even more placeholder text. A little extra at the end."
                             ]; //this value will be coming from a virtual from the backend. Think of how to assign colors
         return(
             <div className="flex flex-col gap-10 w-full h-fit">
