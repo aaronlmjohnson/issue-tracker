@@ -46,13 +46,21 @@ userSchema.virtual('roles').get(function() {
 
 userSchema.virtual("actions").get(function() {
     return {
-        signedIn: [`&lt;strong className=&quot;text-pastel-0&quot;&gt; ${this.fullName} &lt;strong&gt;`, 
-                    'signed in at',
-                    `&lt;strong className=&quot;text-pastel-0&quot;&gt;${Date.now()}&lt;strong&gt;`
-    ]
+        loggedIn: {
+            strong:[this.fullName, Date.now()],
+            body: "# signed in at #"
+        },
+        loggedOut: {
+            strong:[this.fullName, Date.now()],
+            body: "# signed in at #"
+        },
+        signedUp: {
+            strong:[this.fullName],
+            body: "# has just signed up"
+        }
+
     }
 })
-
 
 const User = model<IUser>("User", userSchema);
 
