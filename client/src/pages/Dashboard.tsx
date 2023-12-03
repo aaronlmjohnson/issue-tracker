@@ -21,20 +21,13 @@ const Dashboard = ()=>{
 
     const ActivityContainer = ()=>{
         console.log(user.user.actions);
-        const projectTitle = "Issue Tracker";
-        const author = "John Doe";
-        const color = "text-pastel-0"
-        const description = [
-                                "Project titled ", 
-                                <strong className={color}>{projectTitle}</strong> ,
-                                " created by ", 
-                                <strong className={color}>{author}</strong>,
-                            ]; //this value will be coming from a virtual from the backend. Think of how to assign colors
+        const colors = ["text-pastel-0", "text-pastel-1", "text-pastel-2", "text-pastel-3", "text-pastel-4", "text-pastel-5"]
+
         return(
             <div className="flex flex-col gap-10 w-full h-fit">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((val)=> 
                 <Action 
-                    color={color}
+                    color={colors[Math.floor(Math.random() * 6)]}
                     body={user.user.actions.loggedIn.body}
                     strong={user.user.actions.loggedIn.strong}
                     timestamp={"3:02PM"}
