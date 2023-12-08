@@ -1,4 +1,5 @@
 import {Schema, model} from "mongoose"
+import date from "date-and-time";
 
 interface IUser {
     email: String,
@@ -46,13 +47,14 @@ userSchema.virtual('roles').get(function() {
 });
 
 userSchema.virtual("actions").get(function() {
+    const now = new Date();
     return {
         loggedIn: {
-            strong:[this.fullName, Date.now()],
+            strong:[this.fullName, date.format(now, 'hh:mm A')],
             body: "# signed in at #"
         },
         loggedOut: {
-            strong:[this.fullName, Date.now()],
+            strong:[this.fullName, date.format(now, 'hh:mm A')],
             body: "# signed in at #"
         },
         signedUp: {

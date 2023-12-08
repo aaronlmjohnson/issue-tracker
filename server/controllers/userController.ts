@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {body, validationResult} from "express-validator";
 import activityHandler from "./activityController";
+import date from "date-and-time";
 
 const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, process.env.SECRET, { expiresIn: '7d' });
 const activityController = activityHandler();
