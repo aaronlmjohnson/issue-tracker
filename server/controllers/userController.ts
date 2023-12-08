@@ -135,6 +135,8 @@ const userController = ()=>{
                     
                     const result = await user.save();
                     const token = createToken(user._id);
+
+                    activityController.createActivity(user.actions.signedUp);
                     res.status(200).json({user, token, redirectUrl: user.url});
                 });
             } catch(err) {
@@ -150,7 +152,7 @@ const userController = ()=>{
             if(!user) throw Error("Incorrect email.");
 
             const match = await bcrypt.compare(req.body.password, user.password);
-            
+
             if(!match) throw Error("Incorrect password.");
             const token = createToken(user._id);
 
@@ -178,6 +180,8 @@ const userController = ()=>{
         }
 
         const token = createToken(user._id);
+        activityController.createActivity(user.actions.loggedIn);
+        
         console.log("welcome", user.url);
         res.status(200).json({user, token, redirectUrl: user.url})
     });
