@@ -14,6 +14,7 @@ import indexRouter from './routes/index';
 import usersRouter from './routes/userRoutes';
 import projectRouter from './routes/projects';
 import ticketRouter from './routes/ticketRoutes';
+import activityRouter from './routes/activityRoutes';
 
 const app = express();
 dotenv.config();
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use(activityRouter);
 app.use('/users', usersRouter);
 app.use(projectRouter);
 app.use(ticketRouter);
