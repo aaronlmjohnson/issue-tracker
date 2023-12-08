@@ -1,13 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faCircle} from '@fortawesome/free-solid-svg-icons';
-import Action from '../components/Action';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useFetchData } from '../hooks/useFetchData';
+import ActivityContainer from '../components/ActivityContainer';
 
 const Dashboard = ()=>{
     const arrowDown = <FontAwesomeIcon icon={faAngleDown} />
     const {user, loading} = useAuthContext();
-    const {data:activities, loading:activitiesLoading} = useFetchData("http://localhost:3001/activities");
 
     const DashboardHeader = ()=>{
         return(
@@ -21,32 +19,8 @@ const Dashboard = ()=>{
         )   
     }
 
-    interface activity {
-        body:String,
-        createdAt: String,
-        emphasisText: String[],
-        updatedAt:String,
-        id:String
-    }
-
-    const ActivityContainer = ()=>{
-        const colors = ["text-shade-0", "text-shade-1", "text-shade-2", "text-shade-3", "text-shade-4"]
-        return(
-            <div className="flex flex-col gap-10 w-full h-fit">
-                {activities.map((activity:activity)=> 
-                <Action 
-                    color={colors[Math.floor(Math.random() * colors.length)]}
-                    body={activity.body}
-                    strong={activity.emphasisText}
-                    timestamp={activity.createdAt}
-                />)
-                }
-            </div>
-        );
-    }
-
     return (
-       !loading && !activitiesLoading && <div className="flex flex-col dashboard p-7 h-fit gap-y-12 overflow-y-auto">
+       !loading && <div className="flex flex-col dashboard p-7 h-fit gap-y-12 overflow-y-auto">
             <DashboardHeader />
             <ActivityContainer />
         </div>
