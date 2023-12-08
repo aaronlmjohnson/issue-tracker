@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faCircle} from '@fortawesome/free-solid-svg-icons';
 import date from 'date-and-time';
 
-const Action = (props:any)=>{
+const Activity = (props:any)=>{
     const {body, strong, color, timestamp} = props;
     const dot = <FontAwesomeIcon icon={faCircle} size={"2xs"} className={color}/>
     let strongI = 0;
     //'ddd, MMM DD YYYY hh:mm A
-    const actionParser = ()=>{
+    const activityParser = ()=>{
         const parsed = body.split('#').map((segment:string)=>{
             let newSegment = null;
             if(segment){
@@ -25,7 +25,7 @@ const Action = (props:any)=>{
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
                 {dot}
-                {actionParser()}
+                {activityParser()}
             </div>
             
             <div className="text-non-focus">
@@ -36,4 +36,4 @@ const Action = (props:any)=>{
     )
 }
 
-export default Action;
+export default Activity;

@@ -1,5 +1,5 @@
 import { useFetchData } from "../hooks/useFetchData";
-import Action from "./Action";
+import Activity from "./Activity";
 
 interface activity {
     body:String,
@@ -16,7 +16,7 @@ const ActivityContainer = ()=>{
     return(
         !activitiesLoading && <div className="flex flex-col gap-10 w-full h-fit">
             {activities.map((activity:activity)=> 
-            <Action 
+            <Activity 
                 color={colors[Math.floor(Math.random() * colors.length)]}
                 body={activity.body}
                 strong={activity.emphasisText}
