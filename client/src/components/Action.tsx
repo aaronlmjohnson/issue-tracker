@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faCircle} from '@fortawesome/free-solid-svg-icons';
 
 const Action = (props:any)=>{
-    const {body, strong, color} = props;
+    const {body, strong, color, timestamp} = props;
     const dot = <FontAwesomeIcon icon={faCircle} size={"2xs"} className={color}/>
     let strongI = 0;
     
@@ -21,9 +21,16 @@ const Action = (props:any)=>{
     }
 
     return(
-        <div className="flex items-center gap-2.5">
-            {dot}
-            {actionParser()}
+        <div className="flex items-center justify-between gap-2.5">
+            <div>
+                {dot}
+                {actionParser()}
+            </div>
+            
+            <div>
+                {timestamp}
+            </div>
+            
         </div>
     )
 }
