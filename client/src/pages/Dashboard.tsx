@@ -30,12 +30,12 @@ const Dashboard = ()=>{
     }
 
     const ActivityContainer = ()=>{
-        const colors = ["text-pastel-0", "text-pastel-1", "text-pastel-2", "text-pastel-3", "text-pastel-4", "text-pastel-5"]
+        const colors = ["text-shade-0", "text-shade-1", "text-shade-2", "text-shade-3", "text-shade-4"]
         return(
             <div className="flex flex-col gap-10 w-full h-fit">
                 {activities.map((activity:activity)=> 
                 <Action 
-                    color={colors[Math.floor(Math.random() * 6)]}
+                    color={colors[Math.floor(Math.random() * colors.length)]}
                     body={activity.body}
                     strong={activity.emphasisText}
                     timestamp={activity.createdAt}
