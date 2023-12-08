@@ -13,7 +13,7 @@ const Activity = (props:any)=>{
             if(segment){
                 newSegment = segment;
             } else{
-                newSegment = <strong className={color}>{strong[strongI]}</strong>;
+                newSegment = <strong className={color} key={crypto.randomUUID()}>{strong[strongI]}</strong>;
                 strongI++;
             }
            return newSegment

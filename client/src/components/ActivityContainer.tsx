@@ -6,7 +6,7 @@ interface activity {
     createdAt: String,
     emphasisText: String[],
     updatedAt:String,
-    id:String
+    _id:String
 }
 
 const ActivityContainer = ()=>{
@@ -21,6 +21,7 @@ const ActivityContainer = ()=>{
                 body={activity.body}
                 strong={activity.emphasisText}
                 timestamp={activity.createdAt}
+                key={activity._id}
             />)
             }
         </div>
