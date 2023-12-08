@@ -1,25 +1,16 @@
 import {Schema, model} from "mongoose";
 
 interface IActivity {
-    actions: ActionObject,
+    body: String,
+    emphasisText: String[]
 };
 
-type ActionObject = {
-    body: string,
-    emphsisContent: string[]
-}
+const activitySchema = new Schema<IActivity>({
+    body: { type: String, required: true},
+    emphasisText: { type: [String], required: true}
+}, {timestamps:true});
 
 
-const activityScehma = new Schema<IActivity>({
-    actions: {required: true},
-},     
-    {timestamps:true}
-);
+const Activity = model<IActivity>("Activity", activitySchema);
 
-// ticketHistorySchema.virtual("url").get(function(){
-//     return `/projects/${this._id}`;
-// });
-
-const TicketHistory = model<IActivity>("TicketHistory", activityScehma);
-
-export default TicketHistory; 
+export default Activity; 

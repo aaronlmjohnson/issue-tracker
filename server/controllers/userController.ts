@@ -3,11 +3,11 @@ import asyncHandler from "express-async-handler";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {body, validationResult} from "express-validator";
+import activityHandler from "./activityController";
 
 const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, process.env.SECRET, { expiresIn: '7d' });
-
+const activityController = activityHandler();
 const userController = ()=>{
-
     const getUsers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({}, {password: 0});
@@ -150,9 +150,11 @@ const userController = ()=>{
             if(!user) throw Error("Incorrect email.");
 
             const match = await bcrypt.compare(req.body.password, user.password);
+            
             if(!match) throw Error("Incorrect password.");
-
             const token = createToken(user._id);
+
+            activityController.createActivity(user.actions.loggedIn);
             res.status(200).json({user, token, redirectUrl: "/"});
         }catch(err){
             res.status(400).json({error: err.message});

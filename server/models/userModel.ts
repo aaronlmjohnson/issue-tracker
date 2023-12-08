@@ -10,7 +10,8 @@ interface IUser {
     url: String,
     firstName: String,
     roles: String[],
-    fullName: String
+    fullName: String,
+    actions:any
 }
 
 //remove username 
