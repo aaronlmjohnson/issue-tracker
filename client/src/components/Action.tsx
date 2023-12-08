@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faCircle} from '@fortawesome/free-solid-svg-icons';
+import date from 'date-and-time';
 
 const Action = (props:any)=>{
     const {body, strong, color, timestamp} = props;
     const dot = <FontAwesomeIcon icon={faCircle} size={"2xs"} className={color}/>
     let strongI = 0;
-    
+    //'ddd, MMM DD YYYY hh:mm A
     const actionParser = ()=>{
         const parsed = body.split('#').map((segment:string)=>{
             let newSegment = null;
@@ -27,8 +28,8 @@ const Action = (props:any)=>{
                 {actionParser()}
             </div>
             
-            <div>
-                {timestamp}
+            <div className="text-non-focus">
+                {date.format(new Date(timestamp), 'ddd, MMM DD YY hh:mm A')} 
             </div>
             
         </div>
