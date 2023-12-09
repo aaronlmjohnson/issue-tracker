@@ -34,12 +34,13 @@ const TicketDetail = (props:any)=>{
             <p>Priority: {ticket.priority}</p>
             <p>Status: {ticket.status}</p>
             <p>{ticket.type}</p>
-            <p>Assigned to: {ticket.assignee.fullName}</p>
+            <p>Assigned to: {ticket.assignee ? ticket.assignee.fullName : "Unassigned"}</p>
             {isAuthed && alterationButtons()}
             {showDeleteConfirmation && confirmationForm()}
             {formActive && <TicketForm project = {ticket.project} ticket={ticket} method={"PATCH"}/>}
         </div>
     )
 }
+//ticket.assignee.fullName || "Not Assigned"
 
 export default TicketDetail;
