@@ -3,29 +3,23 @@ import { faAngleDown, faCircle} from '@fortawesome/free-solid-svg-icons';
 import date from 'date-and-time';
 
 const Activity = (props:any)=>{
-    const {body, strong, color, timestamp} = props;
+    const {body, emphasisText, color, timestamp} = props;
     const dot = <FontAwesomeIcon icon={faCircle} size={"2xs"} className={color}/>
-    let strongI = 0;
+
     //'ddd, MMM DD YYYY hh:mm A
     const activityParser = ()=>{
-        const parsed = body.split('#').map((segment:string)=>{
-            let newSegment = null;
-            if(segment){
-                newSegment = segment;
-            } else{
-                newSegment = <strong className={color} key={crypto.randomUUID()}>{strong[strongI]}</strong>;
-                strongI++;
-            }
-           return newSegment
+        const parsedBody = body;
+        emphasisText.forEach((text:string)=>{
+            parsedBody[parsedBody.indexOf('')] = <strong className={color} key={crypto.randomUUID()}>{text}</strong>
         });
-        return parsed;
+        return parsedBody;
     }
 
     return(
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
                 {dot}
-                {"placeholder"}
+                {activityParser()}
             </div>
             
             <div className="text-non-focus">
