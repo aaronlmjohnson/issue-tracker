@@ -13,13 +13,6 @@ interface ProjectDoc {
 
 interface ProjectVirtuals {
     url:String,
-    activities:ActivitiesObject
-}
-
-interface ActivitiesObject {
-  create:ActivityObject,
-  update:ActivityObject,
-  delete:ActivityObject
 }
 
 interface ActivityObject {

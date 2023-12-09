@@ -1,8 +1,10 @@
 import Project from "../models/project";
 import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
+import Activity from "./activityController";
 
 const projectController = ()=> {
+    const activityHandler = Activity();
 
     const getAll = asyncHandler(async(req, res, next)=>{
         try{
@@ -89,6 +91,13 @@ const projectController = ()=> {
                 });
 
                 await project.save();
+                const activity = {
+                    body: ["", "has created the project titled", ""],
+                    emphasisText:[req.body.author, project.title], 
+                };
+
+                activityHandler.createActivity(activity);
+                
                 res.status(200).json({redirectUrl: `/projects/${project._id}`});
 
             } catch(err) {
