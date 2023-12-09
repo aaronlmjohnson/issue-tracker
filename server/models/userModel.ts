@@ -46,25 +46,6 @@ userSchema.virtual('roles').get(function() {
     return userSchema.path('role').options.enum;
 });
 
-userSchema.virtual("actions").get(function() {
-    const now = new Date();
-    return {
-        loggedIn: {
-            strong:[this.fullName, date.format(now, 'hh:mm A')],
-            body: "# signed in at #"
-        },
-        loggedOut: {
-            strong:[this.fullName, date.format(now, 'hh:mm A')],
-            body: "# signed in at #"
-        },
-        signedUp: {
-            strong:[this.fullName],
-            body: "# has just signed up"
-        }
-
-    }
-})
-
 const User = model<IUser>("User", userSchema);
 
 export default User;
