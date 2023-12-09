@@ -25,7 +25,7 @@ const Activity = (props:any)=>{
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
                 {dot}
-                {activityParser()}
+                {"placeholder"}
             </div>
             
             <div className="text-non-focus">

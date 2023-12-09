@@ -17,11 +17,13 @@ const activityController = ()=>{
         }
     });
 
-    const createActivity = async (activityObj:any)=>{
-        const activity = new Activity({
-            body: activityObj.body,
-            emphasisText:activityObj.strong,
-        });
+    interface IActivity {
+        body: String[],
+        emphasisText: String[]
+    };
+
+    const createActivity = async (activityObj:IActivity)=>{
+        const activity = new Activity(activityObj);
         await activity.save();
     }
 
