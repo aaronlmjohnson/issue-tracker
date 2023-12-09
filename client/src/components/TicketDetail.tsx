@@ -12,10 +12,10 @@ const TicketDetail = (props:any)=>{
     const {isAuthed, isAuthedToEditTicket} = useCheckAuthorization();
     let url = `http://localhost:3001/projects/${ticket.project._id}/tickets/${props.ticket._id}/delete`;
     const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, ticket);
-
     useEffect(()=>{
         isAuthedToEditTicket(ticket);
-    },[isAuthed]);
+        console.log(formActive)
+    },[isAuthed, formActive]);
     const alterationButtons = ()=>{
         return (
             <>

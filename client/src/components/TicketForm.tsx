@@ -57,7 +57,7 @@ const TicketForm = (props:any)=>{
     }
     
     return (
-        !optionsLoading && !enumsLoading && <form method={method} onSubmit={handleSubmit}>
+        <form method={method} onSubmit={handleSubmit}>
             <TextInput 
                 forValue={"ticket-title"}
                 label={"Title:"}
