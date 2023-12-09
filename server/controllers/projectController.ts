@@ -164,6 +164,15 @@ const projectController = ()=> {
                 });
 
                 await Project.findByIdAndUpdate(req.params.id, project, {});
+                console.log(req.body)
+                const updater = (await User.findById(req.body.updater)).fullName;
+                const activity = {
+                    body: ["", "has updated the project titled", ""],
+                    emphasisText:[updater, project.title], 
+                };
+
+            activityHandler.createActivity(activity);
+
                 res.status(200).json({redirectUrl: `/projects/${project._id}`});
 
             } catch(err) {

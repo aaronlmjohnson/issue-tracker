@@ -30,7 +30,7 @@ const ProjectForm = (props:any)=>{
     useEffect(()=>{
         console.log(developers);
         if(props.project){
-            setForm(props.project);
+            setForm({...props.project, updater:user.user._id});
             setDeveloperNames(props.project.developers_assigned_to);
         }
     }, []);
