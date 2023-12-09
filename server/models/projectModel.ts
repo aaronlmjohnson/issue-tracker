@@ -47,24 +47,6 @@ projectSchema.virtual("url").get(function(){
   return `/projects/${this._id}`;
 });
 
-projectSchema.virtual("activities").get( function(){
-  // console.log(this.url);
-  return {
-    create: {
-      emphasisText:[this.title, this.url],
-        body: "Project titled # was created with # as the lead"
-    },
-    update: {
-      emphasisText:[this.title],
-      body: "Project # was updated by #"
-    },
-    delete: {
-      emphasisText:[this.title],
-      body: "Project # was deleted by #"
-    }
-  }
-});
-
 const Project = model<ProjectDoc, ProjectModel>("Project", projectSchema);
 
 export default Project; 
