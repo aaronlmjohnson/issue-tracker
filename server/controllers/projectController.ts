@@ -121,6 +121,13 @@ const projectController = ()=> {
             res.status(404);
             next(error);
         } else{
+            const userWhoDeleted = (await User.findById(req.body.userWhoDeleted)).fullName;
+            const activity = {
+                body: ["", "has deleted the project titled", ""],
+                emphasisText:[userWhoDeleted, project.title], 
+            };
+
+            activityHandler.createActivity(activity);
             await Project.findByIdAndRemove(project.id);
             res.status(200).json({redirectUrl: `/projects`});
         }
