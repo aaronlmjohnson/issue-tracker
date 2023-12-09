@@ -165,7 +165,7 @@ const userController = ()=>{
 
             const activity = {
                 body: ["", "has logged in  at", ""],
-                emphasisText:[user.fullName, date.format(new Date(), 'HH:mm A')], 
+                emphasisText:[user.fullName, date.format(new Date(), 'hh:mm A')], 
             };
 
             activityController.createActivity(activity);
