@@ -137,7 +137,13 @@ const userController = ()=>{
                     const result = await user.save();
                     const token = createToken(user._id);
 
-                    activityController.createActivity(user.actions.signedUp);
+                    const activity = {
+                        body: ["", "has just signed up."],
+                        emphasisText:[user.fullName],
+                    };
+
+                    activityController.createActivity(activity);
+                    
                     res.status(200).json({user, token, redirectUrl: user.url});
                 });
             } catch(err) {
@@ -157,7 +163,12 @@ const userController = ()=>{
             if(!match) throw Error("Incorrect password.");
             const token = createToken(user._id);
 
-            activityController.createActivity(user.actions.loggedIn);
+            const activity = {
+                body: ["", "has logged in  at", ""],
+                emphasisText:[user.fullName, date.format(new Date(), 'HH:mm A')], 
+            };
+
+            activityController.createActivity(activity);
             res.status(200).json({user, token, redirectUrl: "/"});
         }catch(err){
             res.status(400).json({error: err.message});
