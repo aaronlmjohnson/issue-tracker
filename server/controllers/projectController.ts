@@ -92,7 +92,8 @@ const projectController = ()=> {
                 });
 
                 await project.save();
-                const author = (await User.findById(req.body.author)).fullName;
+                const author = (await User.findById(req.body.loggedInUser)).fullName;
+
                 const activity = {
                     body: ["", "has created the project titled", ""],
                     emphasisText:[author, project.title], 
@@ -109,8 +110,6 @@ const projectController = ()=> {
         })
     ]
 
-
-
     const deletePost = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.body._id).exec();
         /*** When I add Tickets and Comments, in the future, i'll need to remove them too
@@ -121,7 +120,8 @@ const projectController = ()=> {
             res.status(404);
             next(error);
         } else{
-            const userWhoDeleted = (await User.findById(req.body.userWhoDeleted)).fullName;
+            const userWhoDeleted = (await User.findById(req.body.loggedInUser)).fullName;
+
             const activity = {
                 body: ["", "has deleted the project titled", ""],
                 emphasisText:[userWhoDeleted, project.title], 

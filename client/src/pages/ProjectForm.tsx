@@ -18,7 +18,6 @@ const ProjectForm = (props:any)=>{
         description:"",
         project_lead: "",
         developers_assigned_to: [],
-        author: user
     });
 
 //     interface FormObj {
@@ -30,7 +29,7 @@ const ProjectForm = (props:any)=>{
     useEffect(()=>{
         console.log(developers);
         if(props.project){
-            setForm({...props.project, updater:user.user._id});
+            setForm(props.project);
             setDeveloperNames(props.project.developers_assigned_to);
         }
     }, []);

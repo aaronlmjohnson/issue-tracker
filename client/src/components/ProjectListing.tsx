@@ -10,7 +10,7 @@ const ProjectListing = (props:any)=>{
     const { user } = useAuthContext();
     const { updateButton, cancelButton, formActive, setFormActive} = useProjectUpdateButton();
     const url = `http://localhost:3001/projects/${project._id}/delete`;
-    const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, {...project, userWhoDeleted: user.user._id});
+    const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
     const {isAuthed, isAuthedToEditProject} = useCheckAuthorization();
 
     useEffect(()=>{
