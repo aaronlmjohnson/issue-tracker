@@ -20,7 +20,7 @@ export const useFormSubmit = ()=>{
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer: ${user.token}`
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({...data, loggedInUser:user.user._id}),
         });
         
         const json = await response.json();

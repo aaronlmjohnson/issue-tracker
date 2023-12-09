@@ -7,7 +7,7 @@ const activityController = ()=>{
 
     const getActivities = asyncHandler(async(req, res, next)=>{
         try{
-            const activities = await Activity.find({}).limit(15);
+            const activities = await Activity.find({}).limit(15).sort({createdAt: -1});
             if(!activities) throw Error("No activities found");
             res.status(200).json(activities);
 

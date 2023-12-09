@@ -165,7 +165,7 @@ const projectController = ()=> {
 
                 await Project.findByIdAndUpdate(req.params.id, project, {});
                 console.log(req.body)
-                const updater = (await User.findById(req.body.updater)).fullName;
+                const updater = (await User.findById(req.body.loggedInUser)).fullName;
                 const activity = {
                     body: ["", "has updated the project titled", ""],
                     emphasisText:[updater, project.title], 
