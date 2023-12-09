@@ -6,16 +6,19 @@ import TextArea from "../components/TextArea";
 import ComboBox from "../components/ComboBox";
 import Checkboxes from "../components/Checkboxes";
 import useFormHandler from "../hooks/useFormHandler";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm } = useFormSubmit();
     const [developerNames, setDeveloperNames] = useState([]);
+    const {user} = useAuthContext();
     const {handleChange, form, setForm} = useFormHandler({
         title: "",
         description:"",
         project_lead: "",
-        developers_assigned_to: []
+        developers_assigned_to: [],
+        author: user
     });
 
 //     interface FormObj {

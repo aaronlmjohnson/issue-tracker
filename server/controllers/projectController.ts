@@ -2,6 +2,7 @@ import Project from "../models/project";
 import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
 import Activity from "./activityController";
+import User from "../models/userModel";
 
 const projectController = ()=> {
     const activityHandler = Activity();
@@ -91,9 +92,10 @@ const projectController = ()=> {
                 });
 
                 await project.save();
+                const author = (await User.findById(req.body.author)).fullName;
                 const activity = {
                     body: ["", "has created the project titled", ""],
-                    emphasisText:[req.body.author, project.title], 
+                    emphasisText:[author, project.title], 
                 };
 
                 activityHandler.createActivity(activity);
