@@ -2,9 +2,11 @@ import Project from "../models/project";
 import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
 import Ticket from "../models/ticketModel";
+import User from "../models/userModel";
+import activityHandler from "./activityController";
 
 const ticketController = ()=> {
-
+    const activityController = activityHandler();
     const getAllTickets = asyncHandler(async(req, res, next)=>{
         try{
             const tickets = await Ticket.find({})
@@ -13,7 +15,6 @@ const ticketController = ()=> {
             .populate('project')
             .sort({title: 1})
             .exec();
-            console.log();
 
             if(!tickets){
                 throw Error("No Projects Found");
@@ -141,6 +142,15 @@ const ticketController = ()=> {
                 });
 
                 await ticket.save();
+                const projectTitle = (await Project.findById(ticket.project)).title;
+                const author = (await User.findById(req.body.loggedInUser)).fullName;
+
+                const activity = {
+                    body: ["Ticket titled","",  "was added by", "", "under ", ""],
+                    emphasisText:[ticket.title, author, projectTitle], 
+                };
+                
+                activityController.createActivity(activity);
                 res.status(200).json({redirectUrl: `/tickets`});
 
             } catch(err) {
@@ -152,10 +162,19 @@ const ticketController = ()=> {
 
     const deleteTicket = asyncHandler(async(req, res, next)=>{
         const ticket = await Ticket.findById(req.body._id).exec();
-        console.log(ticket);
         if(!ticket){
             res.status(404).send("Ticket Not Found");
         } else{
+            const projectTitle = (await Project.findById(ticket.project)).title;
+            const author = (await User.findById(req.body.loggedInUser)).fullName;
+            const ticketTitle = ticket.title;
+                
+                const activity = {
+                    body: ["Ticket titled ","",  " was deleted from ", "", " by ", ""],
+                    emphasisText:[ticketTitle, projectTitle, author], 
+                };
+
+                activityController.createActivity(activity);
             await Ticket.findByIdAndRemove(ticket.id);
             res.status(200).json({redirectUrl: `/projects/652ff7351c79f67fa29b7ed9/tickets`});
         }
@@ -220,7 +239,18 @@ const ticketController = ()=> {
                     assignee: req.body.assignee,
                     _id: req.params.ticketId
                 });
+
                 await Ticket.findByIdAndUpdate(req.params.ticketId, ticket, {});
+
+                const projectTitle = (await Project.findById(req.params.projectId)).title;
+                const author = (await User.findById(req.body.loggedInUser)).fullName;
+
+                const activity = {
+                    body: ["Ticket titled","",  "was updated by", "", "under ", ""],
+                    emphasisText:[ticket.title, author, projectTitle], 
+                };
+                
+                activityController.createActivity(activity);
                 res.status(200).json({redirectUrl: `/projects/${req.params.projectId}/tickets/${ticket._id}`});
 
             } catch(err) {
