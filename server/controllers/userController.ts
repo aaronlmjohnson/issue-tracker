@@ -177,9 +177,10 @@ const userController = ()=>{
     });
 
     const guestLogin = asyncHandler(async (req, res, next)=>{
+        
         const count = await User.count({first_name:"Guest", last_name:req.body.role}).exec();
         let user = await User.findOne({email:`guest-${req.body.role}-${count - 1}@email.com`});
-        
+
         if(!user){
             user = new User({
                 email: `guest-${req.body.role}-${count ? count : 0}@email.com`,
@@ -192,7 +193,13 @@ const userController = ()=>{
         }
 
         const token = createToken(user._id);
-        activityController.createActivity(user.actions.loggedIn);
+
+        const activity = {
+            body: ["", " logged in at ", "", "."],
+            emphasisText:[user.fullName, date.format(new Date(), 'hh:mm A')], 
+        };
+
+        activityController.createActivity(activity);
         
         console.log("welcome", user.url);
         res.status(200).json({user, token, redirectUrl: user.url})
