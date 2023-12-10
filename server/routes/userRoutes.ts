@@ -11,6 +11,7 @@ router.get('/roles', userController.getRoles);
 router.post('/sign-up', userController.signUp);
 router.post('/login', userController.loginUser);
 router.post('/guest-login', userController.guestLogin);
+router.post('/logout', userController.addActivityForLogout);
 
 //router.use(requireAuth);
 //protected routes

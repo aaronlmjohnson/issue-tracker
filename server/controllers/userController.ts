@@ -164,7 +164,7 @@ const userController = ()=>{
             const token = createToken(user._id);
 
             const activity = {
-                body: ["", " has logged in at ", "", "."],
+                body: ["", " logged in at ", "", "."],
                 emphasisText:[user.fullName, date.format(new Date(), 'hh:mm A')], 
             };
 
@@ -198,9 +198,21 @@ const userController = ()=>{
         res.status(200).json({user, token, redirectUrl: user.url})
     });
 
+    const addActivityForLogout = asyncHandler(async (req, res, next)=>{
+        const user = await User.findById(req.body.loggedInUser);
+        const activity = {
+            body: ["", " logged out at ", "", "."],
+            emphasisText:[user.fullName, date.format(new Date(), 'hh:mm A')], 
+        };
+
+        activityController.createActivity(activity);
+        next();
+    })
+
     return{
         signUp,
         guestLogin,
+        addActivityForLogout,
         getUser,
         newestUsers,
         loginUser,
