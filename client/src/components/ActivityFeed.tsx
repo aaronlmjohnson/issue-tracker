@@ -9,7 +9,7 @@ interface IActivity {
     _id:String
 }
 
-const ActivityContainer = ()=>{
+const ActivityFeed = ()=>{
     const {data:activities, loading:activitiesLoading} = useFetchData("http://localhost:3001/activities");
 
     const colors = ["text-shade-0", "text-shade-1", "text-shade-2", "text-shade-3", "text-shade-4"]
@@ -28,4 +28,4 @@ const ActivityContainer = ()=>{
     );
 }
 
-export default ActivityContainer;
+export default ActivityFeed;
