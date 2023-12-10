@@ -37,9 +37,6 @@ const projectController = ()=> {
         
     }); 
 
-    //const users = await User.find({first_name:{$ne:"Guest"}}, {first_name: 1, last_name: 1, date_created: 1}).sort("-date_created").limit(4);
-
-
     const getNamesAndIds = asyncHandler(async(req, res, next)=>{
         try{
             const projects = await Project.aggregate()
@@ -95,7 +92,7 @@ const projectController = ()=> {
                 const author = (await User.findById(req.body.loggedInUser)).fullName;
 
                 const activity = {
-                    body: ["", "has created the project titled", ""],
+                    body: ["", " has created the project titled ", "", "."],
                     emphasisText:[author, project.title], 
                 };
 
@@ -123,7 +120,7 @@ const projectController = ()=> {
             const userWhoDeleted = (await User.findById(req.body.loggedInUser)).fullName;
 
             const activity = {
-                body: ["", "has deleted the project titled", ""],
+                body: ["", " has deleted the project titled ", "", "."],
                 emphasisText:[userWhoDeleted, project.title], 
             };
 
@@ -167,7 +164,7 @@ const projectController = ()=> {
                 console.log(req.body)
                 const updater = (await User.findById(req.body.loggedInUser)).fullName;
                 const activity = {
-                    body: ["", "has updated the project titled", ""],
+                    body: ["", " has updated the project titled ", "", "."],
                     emphasisText:[updater, project.title], 
                 };
 
