@@ -12,11 +12,11 @@ const Activity = (props:any)=>{
         emphasisText.forEach((text:string)=>{
             parsedBody[parsedBody.indexOf('')] = <strong className={color} key={crypto.randomUUID()}>{text}</strong>
         });
-        return parsedBody;
+        return <p>{parsedBody}</p>;
     }
 
     return(
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between grow">
             <div className="flex items-center gap-2.5">
                 {dot}
                 {activityParser()}
