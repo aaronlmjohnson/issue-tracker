@@ -138,7 +138,7 @@ const userController = ()=>{
                     const token = createToken(user._id);
 
                     const activity = {
-                        body: ["", "has just signed up."],
+                        body: ["", " has just signed up."],
                         emphasisText:[user.fullName],
                     };
 
@@ -164,7 +164,7 @@ const userController = ()=>{
             const token = createToken(user._id);
 
             const activity = {
-                body: ["", "has logged in  at", ""],
+                body: ["", " has logged in at ", "", "."],
                 emphasisText:[user.fullName, date.format(new Date(), 'hh:mm A')], 
             };
 
