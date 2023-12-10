@@ -10,7 +10,7 @@ const DropdownMenu = (props:any)=>{
     }
 
     return (
-        <ul className={menuVariant[props.toggleDropdown]}>    
+        <ul className="absolute  bg-white px-4 hidden hover:block group-hover:block top-[48px] w-[160px] right-0 shadow-md">    
             <li><a href={`/users/${props.id}`}>Account Settings</a></li>
             <li><button onClick={logout}>Log out</button></li>
 

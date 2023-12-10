@@ -29,7 +29,7 @@ const Root = ()=>{
     }
     const content = linkHandler();
     return (
-        <div className="flex">
+        <div className="flex ">
             <Sidebar 
                 section={content.section}
                 links={content.links}

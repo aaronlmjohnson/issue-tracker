@@ -14,7 +14,7 @@ const ActivityContainer = ()=>{
 
     const colors = ["text-shade-0", "text-shade-1", "text-shade-2", "text-shade-3", "text-shade-4"]
     return(
-        !activitiesLoading && <div className="flex flex-col gap-10 w-full h-fit">
+        !activitiesLoading && <div className="flex flex-col gap-10 w-fit h-fit">
             {activities.map((activity:IActivity)=> 
             <Activity 
                 color={colors[Math.floor(Math.random() * colors.length)]}
