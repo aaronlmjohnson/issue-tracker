@@ -3,7 +3,7 @@ import { faBars, faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '../hooks/useAuthContext';
 import DropdownMenu from './DropdownMenu';
 
-const Navbar = ()=>{
+const Navbar = (props:any)=>{
     const hamburgerIcon = <FontAwesomeIcon icon={faBars} className="text-primary text-4xl"/>
     const userPortrait = <FontAwesomeIcon icon={faCircleUser} className="text-primary text-4xl"/>
     const {user, loading} = useAuthContext();
@@ -11,7 +11,7 @@ const Navbar = ()=>{
     return( 
         !loading && <nav className="">
             <div className="flex border border-x-0 border-t-0 px-7 py-3 place-content-between">
-                <div className="my-auto">
+                <div className="my-auto" onClick={()=> props.setSidebarVisible((prevState:boolean)=> prevState ? false : true)}>
                     {hamburgerIcon}
                 </div>
                 <div className="flex gap-x-[10px] h-full relative group">

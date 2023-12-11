@@ -1,9 +1,13 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 
 const Root = ()=>{
     // need to know what links to pass to Sidebar
+    const [sidebarVisible, setSidebarVisible] = useState(true);
+    
+
     const linkHandler = ()=>{
         const path = window.location.pathname;
         const projectsRe = /\/projects(.+)?/;
@@ -33,9 +37,12 @@ const Root = ()=>{
             <Sidebar 
                 section={content.section}
                 links={content.links}
+                sidebarVisible={sidebarVisible}
             />
             <div className="flex flex-col w-screen h-screen">
-                <Navbar />
+                <Navbar 
+                    setSidebarVisible={setSidebarVisible}
+                />
                 <Outlet  />
             </div>
             
