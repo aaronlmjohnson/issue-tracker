@@ -7,18 +7,17 @@ import date from 'date-and-time';
 
 const ProjectListing = (props:any)=>{
     const { project } = props;
-    const { updateButton, cancelButton, formActive, setFormActive} = useProjectUpdateButton();
+    const { updateButton, cancelButton} = useProjectUpdateButton();
     const url = `http://localhost:3001/projects/${project._id}/delete`;
     const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
     const {isAuthed, isAuthedToEditProject} = useCheckAuthorization();
 
     useEffect(()=>{
         isAuthedToEditProject(project);
-        props.setFormActive((prevState:boolean)=> formActive);
         props.setActiveProject((prevState:any)=> project);
         props.setToggleUpdate((prevState: any)=> prevState ? false : true);
         if(props.toggleUpdate) props.setToggleCreate(false);
-    }, [formActive]);
+    }, []);
 
     const alterationButtons = ()=>{
         return (
