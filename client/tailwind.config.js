@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         'primary': '#27005d',
         'secondary': '#ffed4a',
+        'delete': '#FF0000',
         'non-focus': '#a7a7a7',
         'shade-0': '#26005C',
         'shade-1': '#170038',
@@ -16,6 +17,7 @@ module.exports = {
         'shade-4': '#39008A',
       },
       gridTemplateColumns:{
+        'two': 'repeat(2, 40%)',
         'five': 'repeat(5, max-content)'
       },
       height: {

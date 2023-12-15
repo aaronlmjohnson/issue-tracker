@@ -4,7 +4,7 @@
     };
 
     return(
-        <button className="project-delete-button" onClick={handleDelete}>
+        <button className="px-4 py-1 border-2 border-delete rounded-lg font-secondary font-bold text-base text-delete" onClick={handleDelete}>
             Delete
         </button>
     )

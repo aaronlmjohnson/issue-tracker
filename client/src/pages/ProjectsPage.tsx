@@ -31,21 +31,24 @@ const ProjectsPage = ()=>{
     }
 
     return(
-        !loading && <div className="projects">
-            {projects && projects.map((project:any)=>{
-                return(
-                    <ProjectListing  
-                            project={project} 
-                            key={project._id} 
-                            setFormActive = {setFormActive}
-                            setToggleUpdate = {setToggleUpdate}
-                            setActiveProject = {setActiveProject}
-                            toggleUpdate = {toggleUpdate}
-                            setToggleCreate = {setToggleCreate}
-                    />)
-            })}
+        !loading && <div className="p-7 flex flex-col gap-y-12">
+            <h1 className="font-primary text-5xl font-extrabold">All Projects</h1>
+            <div className="grid grid-cols-two justify-between gap-y-8">
+                {projects && projects.map((project:any)=>{
+                    return(
+                        <ProjectListing  
+                                project={project} 
+                                key={project._id} 
+                                setFormActive = {setFormActive}
+                                setToggleUpdate = {setToggleUpdate}
+                                setActiveProject = {setActiveProject}
+                                toggleUpdate = {toggleUpdate}
+                                setToggleCreate = {setToggleCreate}
+                        />)
+                })}
+            </div>
 
-            {canCreateProject && <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>}
+            {/* {canCreateProject && <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>} */}
             {formActive && 
                 <ProjectForm 
                     title={toggleCreate ? "Create Project" : "Update Project"}

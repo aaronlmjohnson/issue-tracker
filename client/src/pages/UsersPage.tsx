@@ -31,9 +31,9 @@ const UsersPage = (props:any)=>{
     }
 
     return(
-        !loading && <div className="p-7 w-full">
+        <div className="p-7 w-full">
             <h1 className="font-primary text-5xl font-extrabold">All Accounts</h1>
-            <div className="py-12 grid xl:grid-cols-five lg:grid-cols-4 md:grid-cols-3 lg:justify-between gap-y-20">
+            {!loading && <div className="py-12 grid xl:grid-cols-five lg:grid-cols-4 md:grid-cols-3 lg:justify-between gap-y-20">
                 {users.map((user:IUser)=>{
                     return <div className="text-center" key={user.id}>
                         <Link to={user.url}>
@@ -43,7 +43,7 @@ const UsersPage = (props:any)=>{
                         </Link>
                     </div>
                 })}
-            </div>
+            </div>}
             
         </div>
     );
