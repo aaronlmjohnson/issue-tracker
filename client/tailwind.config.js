@@ -15,6 +15,9 @@ module.exports = {
         'shade-3': '#4A00B3',
         'shade-4': '#39008A',
       },
+      gridTemplateColumns:{
+        'five': 'repeat(5, max-content)'
+      },
       height: {
         'navbar': '3rem',
         'sidebar': 'calc(100vh - 3rem)'

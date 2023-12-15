@@ -31,15 +31,17 @@ const UsersPage = (props:any)=>{
     }
 
     return(
-        !loading && <div className="p-7">
+        !loading && <div className="p-7 w-full">
             <h1 className="font-primary text-5xl font-extrabold">All Accounts</h1>
-            <div className="py-12 grid grid-cols-4 justify-items-stretch">
+            <div className="py-12 grid grid-cols-five justify-between gap-y-20">
                 {users.map((user:IUser)=>{
                     console.log(user.role);
-                    return <div className="w-fit" key={user.id}>
-                        {userPortraits[user.role]}
-                        <h1 className="text-2xl font-semibold"><Link to={user.url}>{user.fullName}</Link></h1>
-                        <p className="text-base font-semibold">{user.role.split('_').join(' ')}</p>
+                    return <div className="text-center" key={user.id}>
+                        <Link to={user.url}>
+                            {userPortraits[user.role]}
+                            <h1 className="text-2xl font-semibold">{user.fullName}</h1>
+                            <p className="text-base font-semibold">{user.role.split('_').join(' ')}</p>
+                        </Link>
                     </div>
                 })}
             </div>
