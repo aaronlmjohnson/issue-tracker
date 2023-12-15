@@ -33,7 +33,7 @@ const ProjectsPage = ()=>{
     return(
         !loading && <div className="p-7 flex flex-col gap-y-12">
             <h1 className="font-primary text-5xl font-extrabold">All Projects</h1>
-            <div className="grid grid-cols-two justify-between gap-y-8">
+            <div className="grid md:grid-cols-two justify-between gap-y-8">
                 {projects && projects.map((project:any)=>{
                     return(
                         <ProjectListing  
