@@ -28,7 +28,7 @@ const userSchema = new Schema<IUser>({
     role: { 
         type: String,
         required: true,
-        enum: ["Administrator", "Project Lead", "Developer"],
+        enum: ["Administrator", "Project_Lead", "Developer"],
         default: "Developer",
     },
     date_created: { type: Date, default: Date.now}
