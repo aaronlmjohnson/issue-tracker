@@ -33,7 +33,7 @@ const UsersPage = (props:any)=>{
     return(
         !loading && <div className="p-7 w-full">
             <h1 className="font-primary text-5xl font-extrabold">All Accounts</h1>
-            <div className="py-12 grid grid-cols-five justify-between gap-y-20">
+            <div className="py-12 grid xl:grid-cols-five lg:grid-cols-4 md:grid-cols-3 lg:justify-between gap-y-20">
                 {users.map((user:IUser)=>{
                     console.log(user.role);
                     return <div className="text-center" key={user.id}>
