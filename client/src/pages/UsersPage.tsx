@@ -35,7 +35,6 @@ const UsersPage = (props:any)=>{
             <h1 className="font-primary text-5xl font-extrabold">All Accounts</h1>
             <div className="py-12 grid xl:grid-cols-five lg:grid-cols-4 md:grid-cols-3 lg:justify-between gap-y-20">
                 {users.map((user:IUser)=>{
-                    console.log(user.role);
                     return <div className="text-center" key={user.id}>
                         <Link to={user.url}>
                             {userPortraits[user.role]}
