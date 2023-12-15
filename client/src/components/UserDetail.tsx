@@ -13,7 +13,6 @@ const UserDetail = (props:any)=>{
             <p className="email"><span className="font-semibold">Email: </span>{user.email}</p>
             <p className="role"><span className="font-semibold">Role: </span>{user.role}</p>
             <h2>{user.role === "Project Lead" ? "Projects Leading" :  user.role === "Developer" ? "Projects Working On" : ""}</h2>
-            {/* Need to display tickets created, projects assigned/projects leading/ display tickets */}
         </div>
     );
 }
