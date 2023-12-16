@@ -15,9 +15,8 @@ const ProjectListing = (props:any)=>{
     useEffect(()=>{
         isAuthedToEditProject(project);
         props.setActiveProject((prevState:any)=> project);
-        props.setToggleUpdate((prevState: any)=> prevState ? false : true);
-        if(props.toggleUpdate) props.setToggleCreate(false);
-    }, []);
+        
+    }, [props.toggleUpdate]);
 
     const alterationButtons = ()=>{
         return (

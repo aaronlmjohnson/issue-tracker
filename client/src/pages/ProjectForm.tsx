@@ -27,7 +27,6 @@ const ProjectForm = (props:any)=>{
 //     developers_assigned_to: string[]
 // }
     useEffect(()=>{
-        console.log(developers);
         if(props.project){
             setForm(props.project);
             setDeveloperNames(props.project.developers_assigned_to);

@@ -13,19 +13,7 @@ interface Project {
 
 const ProjectsPage = ()=>{
     const [activeProject, setActiveProject] = useState(null);
-    const [toggleCreate, setToggleCreate] = useState(false);
-    const [toggleUpdate, setToggleUpdate] = useState(null);
     const { data:projects, loading, error } = useFetchData("http://localhost:3001/projects");
-    const {isAuthed:canCreateProject, isAdmin} = useCheckAuthorization();
-
-    useEffect(()=>{
-        isAdmin();
-    }, []);
-
-    const handleCreateButton = ()=>{
-        if(toggleCreate) return;
-        setToggleCreate(true);
-    }
 
     return(
         !loading && <div className="p-7 flex flex-col gap-y-12">
@@ -36,19 +24,15 @@ const ProjectsPage = ()=>{
                         <ProjectListing  
                                 project={project} 
                                 key={project._id} 
-                                setToggleUpdate = {setToggleUpdate}
                                 setActiveProject = {setActiveProject}
-                                toggleUpdate = {toggleUpdate}
-                                setToggleCreate = {setToggleCreate}
                         />)
                 })}
             </div>
 
-            {/* {canCreateProject && <button className="create-new-project-button" onClick={handleCreateButton}>Add Project</button>} */}
             {
                 <ProjectForm 
-                    title={toggleCreate ? "Create Project" : "Update Project"}
-                    project={toggleCreate ? null : activeProject} 
+                    title={true ? "Create Project" : "Update Project"}
+                    project={true ? null : activeProject} 
             />}
         </div>
     );
