@@ -84,7 +84,7 @@ const userController = ()=>{
 
     const getProjectLeads = asyncHandler(async(req, res, next)=>{
         try{
-            const users = await User.find({role:"Project Lead"}, {password: 0});
+            const users = await User.find({role:"Project_Lead"}, {password: 0});
             if(!users) throw Error("No users found");
             res.status(200).json(users);
 

@@ -7,11 +7,16 @@ import ComboBox from "../components/ComboBox";
 import Checkboxes from "../components/Checkboxes";
 import useFormHandler from "../hooks/useFormHandler";
 import CancelButton from "../components/CancelButton";
+import FormError from "../components/FormError";
+import { useActiveFormContext } from "../hooks/useActiveFormContext";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
-    const { submitForm } = useFormSubmit();
+    const { submitForm, error} = useFormSubmit();
     const [developerNames, setDeveloperNames] = useState([]);
+    const {activeForm} = useActiveFormContext();
+    console.log(props)
+
     const {handleChange, form, setForm} = useFormHandler({
         title: "",
         description:"",
@@ -19,28 +24,17 @@ const ProjectForm = (props:any)=>{
         developers_assigned_to: [],
     });
 
-//     interface FormObj {
-//     title: string,
-//     description: string,
-//     project_lead: string,
-//     developers_assigned_to: string[]
-// }
     useEffect(()=>{
-        if(props.project){
+        if(activeForm === "update-project"){
             setForm(props.project);
             setDeveloperNames(props.project.developers_assigned_to);
         }
-    }, []);
+    }, [props.project]);
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
         if(props.project === null) submitForm(form, "http://localhost:3001/projects/create");
-        else submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`, "PATCH");
-         
-    }
-
-    const handleCancel = ()=>{
-        props.setFormActive(false);
+        else submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`, "PATCH");  
     }
 
     return(
@@ -84,7 +78,7 @@ const ProjectForm = (props:any)=>{
                 <button>Submit</button>
                 <CancelButton />
                 
-                {/* {error && <FormError error= {error}/>} */}
+                {error && <FormError error= {error}/>}
             </form>
         </div>
     )

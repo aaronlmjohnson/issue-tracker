@@ -5,16 +5,19 @@ interface IUpdateButtonProps {
     "create-project" | 
     "create-ticket" | 
     "update-project" | 
-    "update-ticket";
+    "update-ticket",
+    project:any,
+    setActiveProject: any
 }
 
 const UpdateButton = (props:IUpdateButtonProps)=>{
-    const { formName } = props;
+    const { formName, project, setActiveProject} = props;
 
     const {activeForm, setActiveForm} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{
-        setActiveForm("create-project");
+        setActiveForm(formName);
+        setActiveProject(project);
     }
 
     return (

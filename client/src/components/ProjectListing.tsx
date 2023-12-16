@@ -12,14 +12,17 @@ const ProjectListing = (props:any)=>{
     const {isAuthed, isAuthedToEditProject} = useCheckAuthorization();
 
     useEffect(()=>{
-        isAuthedToEditProject(project);        
+        isAuthedToEditProject(project);
     }, []);
 
     const alterationButtons = ()=>{
         return (
             <div className="flex gap-x-2">
-                <UpdateButton formName={"create-project"} />
-                <ProjectDeleteButton project = {project} setDisplay={setDisplay}/>
+                <UpdateButton formName={"update-project"} project={project} setActiveProject={props.setActiveProject}/>
+                <ProjectDeleteButton 
+                    project = {project} 
+                    setDisplay={setDisplay}
+                />
             </div>
         )
     }

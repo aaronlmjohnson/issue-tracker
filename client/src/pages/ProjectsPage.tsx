@@ -33,10 +33,10 @@ const ProjectsPage = ()=>{
             </div>
 
             {
-                activeForm === "create-project" &&
+                (activeForm === "create-project" || activeForm === "update-project") &&
                 <ProjectForm 
-                    title={true ? "Create Project" : "Update Project"}
-                    project={true ? null : activeProject} 
+                    title={activeForm === "create-project" ? "Create Project" : "Update Project"}
+                    project={activeForm === "update-project" ? activeProject : null} 
             />}
         </div>
     );
