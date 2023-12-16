@@ -6,13 +6,12 @@ import TextArea from "../components/TextArea";
 import ComboBox from "../components/ComboBox";
 import Checkboxes from "../components/Checkboxes";
 import useFormHandler from "../hooks/useFormHandler";
-import { useAuthContext } from "../hooks/useAuthContext";
+import CancelButton from "../components/CancelButton";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm } = useFormSubmit();
     const [developerNames, setDeveloperNames] = useState([]);
-    const {user} = useAuthContext();
     const {handleChange, form, setForm} = useFormHandler({
         title: "",
         description:"",
@@ -45,7 +44,7 @@ const ProjectForm = (props:any)=>{
     }
 
     return(
-        !loading  && <div className="create-project-form">
+        !loading  && <div className="create-project-form fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white">
             <h1>{props.title}</h1>
             <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
                 <TextInput 
@@ -83,7 +82,7 @@ const ProjectForm = (props:any)=>{
                 />
 
                 <button>Submit</button>
-                <button onClick={handleCancel}>Cancel</button>
+                <CancelButton />
                 
                 {/* {error && <FormError error= {error}/>} */}
             </form>
