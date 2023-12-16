@@ -30,7 +30,7 @@ const Sidebar = (props:any)=>{
                 
                     <div className="pt-12">
                         <h2 className="text-[20px] font-bold">{props.section}</h2>
-                        <SidebarLinks  section={"project"}/>
+                        <SidebarLinks  section={props.section}/>
                     </div>
                 </div>
 

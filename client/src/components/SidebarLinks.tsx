@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
+import ProjectLinks from "./ProjectLinks";
+import UserLinks from "./UserLinks";
+import TicketLinks from "./TicketLinks";
 
 interface ISidebarLinksProps{
     section: string
@@ -7,22 +10,12 @@ interface ISidebarLinksProps{
 
 const SidebarLinks = (props:ISidebarLinksProps)=>{
     const {setActiveForm} = useActiveFormContext();
-    const ProjectLinks = ()=>{
-        return(
-            <ul>
-                <li>
-                    <Link to={"/projects"}>All</Link>
-                </li>
-                <li>
-                    <button onClick={()=>{setActiveForm("create-project")}}>Add</button>
-                </li>
-            </ul>
-        )
-    }
-    
+        
     return(
         <div>
-            <ProjectLinks />
+            {props.section === "Projects" && <ProjectLinks />}
+            {props.section === "Users" && <UserLinks />}
+            {props.section === "Tickets" && <TicketLinks />}
         </div>
     );
 }
