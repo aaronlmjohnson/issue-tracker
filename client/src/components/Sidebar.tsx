@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faDiagramProject, faClipboardList, faBug } from '@fortawesome/free-solid-svg-icons';
-import SidebarLink from "./SidebarLink";
 import { v4 as uuid } from 'uuid';
+import SidebarLinks from './SidebarLinks';
 
 const Sidebar = (props:any)=>{
     const home = <FontAwesomeIcon icon={faHouse} className="text-white text-2xl"/>
@@ -30,15 +30,7 @@ const Sidebar = (props:any)=>{
                 
                     <div className="pt-12">
                         <h2 className="text-[20px] font-bold">{props.section}</h2>
-                        <ul className="flex  flex-col gap-y-5 pl-5">
-                            {props.links.map((link:string)=> 
-                                <SidebarLink 
-                                    name={link} 
-                                    url={"/projects"} 
-                                    key={uuid()}
-                                />
-                            )}
-                        </ul>
+                        <SidebarLinks  section={"project"}/>
                     </div>
                 </div>
 

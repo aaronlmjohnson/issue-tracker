@@ -5,40 +5,22 @@ import { Outlet } from "react-router-dom";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
 
 const Root = ()=>{
-    // need to know what links to pass to Sidebar
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const {activeForm} = useActiveFormContext();
-    
-    const linkHandler = ()=>{
-        const path = window.location.pathname;
-        const projectsRe = /\/projects(.+)?/;
-        const usersRe = /\/users(.+)?/;
-        const ticketsRe = /\/tickets(.+)?/;
-        let links = null;
-        let section = null;
 
-        if(projectsRe.test(path)){
-            links = ["Add"];
-            section = "Projects";
-        }else if(usersRe.test(path)){
-            links = [""];
-            section = "Users";
-        }else if(ticketsRe.test(path)){
-            links = ["Add"];
-            section = "Tickets";
-        }else{
-            links = [""];
-            section = "Dashboard";
-        }
-        return {links, section}
+    const sectionName = ()=>{
+        const path = window.location.pathname;
+        if(/\/projects(.+)?/.test(path)) return "Projects";
+        else if(/\/users(.+)?/.test(path)) return "Users";
+        else if(/\/tickets(.+)?/.test(path)) return "Tickets";
+        else return "Dashboard";
     }
-    const content = linkHandler();
+
     return (
         <div className="flex">
             <div className={` bg-black/60 w-full h-full fixed ${activeForm === "none" ? 'hidden' : ''}`}></div>
             <Sidebar 
-                section={content.section}
-                links={content.links}
+                section={sectionName()}
                 sidebarVisible={sidebarVisible}
             />
             <div className="flex flex-col w-screen h-screen">
