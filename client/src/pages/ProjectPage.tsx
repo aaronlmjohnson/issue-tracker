@@ -14,7 +14,7 @@ const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
     const {developers, loading:usersLoading} = useUserInfo();
     const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);
-    const {updateButton, cancelButton, setFormActive, formActive} = useProjectUpdateButton();
+    // const {updateButton, cancelButton, setFormActive, formActive} = useProjectUpdateButton();
     const [toggleTickets, setToggleTickets] = useState(false);//This will be handled in a navbar component in the future
     const url = `http://localhost:3001/projects/${project._id}/delete`;
     const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
@@ -45,7 +45,7 @@ const ProjectPage = ()=>{
 
         return (
             <>
-                {formActive ? cancelButton() : updateButton()}
+                {/* {formActive ? cancelButton() : updateButton()} */}
                 <ProjectDeleteButton project = {project} setDisplay={setDisplay}/>
             </>
         )
@@ -64,7 +64,7 @@ const ProjectPage = ()=>{
             {isAuthed && alterationButtons()}
             {showDeleteConfirmation && confirmationForm()}
             <button onClick={handleTicketsPage}>tickets</button>
-            {formActive && <ProjectForm project={project || null}/>} 
+            {/* {formActive && <ProjectForm project={project || null}/>}  */}
             {canMakeTicket && <TicketForm project={project}/>}
             {toggleTickets && <AllProjectTickets project = {project} />} 
         </div>

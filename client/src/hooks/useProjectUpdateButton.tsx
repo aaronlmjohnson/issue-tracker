@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useActiveFormContext } from "./useActiveFormContext";
 
 const useProjectUpdateButton = ()=>{
 
     const [formActive, setFormActive] = useState(false);
+    const {activeForm, setActiveForm} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{
         setFormActive((prevState:any)=> prevState ? false : true);
@@ -29,8 +31,6 @@ const useProjectUpdateButton = ()=>{
         handleFormDisplay,
         updateButton,
         cancelButton,
-        formActive,
-        setFormActive
     }
 }
 

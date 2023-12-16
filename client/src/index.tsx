@@ -16,8 +16,6 @@ import AllTickets from './pages/AllTickets';
 import Page401 from './pages/errorPages/401';
 import { ActiveFormContextProvider } from './context/ActiveFormContext';
 
-
-
 /* make sure to embed forms as children under respective parents ex. project form under project route */
 const router = createBrowserRouter([
   {

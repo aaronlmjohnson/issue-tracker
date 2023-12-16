@@ -4,6 +4,7 @@ import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import useProjectUpdateButton from "../hooks/useProjectUpdateButton";
 import { useEffect } from "react";
 import date from 'date-and-time';
+import UpdateButton from "./UpdateButton";
 
 const ProjectListing = (props:any)=>{
     const { project } = props;
@@ -21,7 +22,7 @@ const ProjectListing = (props:any)=>{
     const alterationButtons = ()=>{
         return (
             <div className="flex gap-x-2">
-                {updateButton()}
+                <UpdateButton formName={"create-project"} />
                 <ProjectDeleteButton project = {project} setDisplay={setDisplay}/>
             </div>
         )

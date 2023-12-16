@@ -11,8 +11,8 @@ const Sidebar = (props:any)=>{
 
     const logo = <FontAwesomeIcon icon={faBug} className="rotate-45 text-white text-4xl"/>
     return(
-        <div className="flex">
-            <nav className="bg-primary w-16 h-screen flex flex-col gap-y-16">
+        <nav className="flex sticky bottom-0">
+            <div className="bg-primary w-16 flex h-screen flex-col gap-y-16">
                 <div className="mx-auto my-6">
                     {logo}
                 </div>
@@ -23,8 +23,8 @@ const Sidebar = (props:any)=>{
                     <li key={uuid()}><a href="/tickets">{ticketsIcon}</a></li>
                 </ul>
 
-            </nav>
-            <nav className={`bg-primary bg-opacity-[.08] w-56 h-screen p-6 hidden ${props.sidebarVisible ? 'lg:block' : ''}`}>
+            </div>
+            <div className={`bg-primary bg-opacity-[.08] w-56 h-full p-6 hidden ${props.sidebarVisible ? 'lg:block' : ''}`}>
                 <div className="">
                     <h1 className="text-primary font-secondary text-4xl font-bold">Tracker</h1>
                 
@@ -42,8 +42,8 @@ const Sidebar = (props:any)=>{
                     </div>
                 </div>
 
-            </nav>
-        </div>  
+            </div>
+        </nav>  
     )
 }
 export default Sidebar;

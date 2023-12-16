@@ -1,10 +1,14 @@
 import { createContext, useState} from 'react';
 
-type TActiveForm = "project" | "ticket"
+type TActiveForm = "create-project" | 
+                   "create-ticket" | 
+                   "update-project" | 
+                   "update-ticket" |
+                   "none";
 
 interface IActiveFormContext {
     activeForm: TActiveForm | null,
-    setActiveForm: React.Dispatch<React.SetStateAction<null>>
+    setActiveForm: React.Dispatch<React.SetStateAction<TActiveForm>>
 }
 
 export const ActiveFormContext = createContext<IActiveFormContext | null>(null);
@@ -14,7 +18,7 @@ interface IActiveFormProviderProps{
 }
 
 export const ActiveFormContextProvider = ({children}:IActiveFormProviderProps)=>{
-    const [activeForm, setActiveForm] = useState(null);
+    const [activeForm, setActiveForm] = useState<TActiveForm>("none");
 
     return(
         <ActiveFormContext.Provider value={{activeForm, setActiveForm}}>
