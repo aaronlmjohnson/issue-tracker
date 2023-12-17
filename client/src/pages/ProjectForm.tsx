@@ -14,7 +14,7 @@ const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm, error} = useFormSubmit();
     const [developerNames, setDeveloperNames] = useState([]);
-    const {activeForm} = useActiveFormContext();
+    const {activeForm, updateTarget} = useActiveFormContext();
 
     const {handleChange, form, setForm} = useFormHandler({
         title: "",

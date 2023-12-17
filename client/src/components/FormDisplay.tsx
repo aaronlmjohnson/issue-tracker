@@ -1,14 +1,16 @@
 import { useActiveFormContext } from '../hooks/useActiveFormContext';
 import ProjectForm from '../pages/ProjectForm';
+import TicketForm from './TicketForm';
 
 const FormDisplay = ()=>{
     const {activeForm} = useActiveFormContext();
-    // <ProjectForm 
-    //                 title={activeForm === "create-project" ? "Create Project" : "Update Project"}
-    //                 project={activeForm === "update-project" ? activeProject : null} 
-    //         />
+   
     return(
-        <div>hi</div>
+        <>
+        {activeForm === "create-project" && <ProjectForm  title={"Create Project"}/>}
+        {activeForm === "update-project" && <ProjectForm  title={"Update Project"}/>}
+
+        </>
     )
 }
 
