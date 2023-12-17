@@ -29,7 +29,6 @@ const Root = ()=>{
                 />
                 <Outlet  />
             </div>
-            
         </div>
             
     );
