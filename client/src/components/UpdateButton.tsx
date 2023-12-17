@@ -1,23 +1,22 @@
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
-
+import { TProject, TTicket } from "../lib/types";
 interface IUpdateButtonProps {
     formName: "none"|
     "create-project" | 
     "create-ticket" | 
     "update-project" | 
     "update-ticket",
-    project:any,
-    setActiveProject: any
+    formObj:TProject | TTicket,
 }
 
 const UpdateButton = (props:IUpdateButtonProps)=>{
-    const { formName, project, setActiveProject} = props;
+    const { formName, formObj} = props;
 
-    const {activeForm, setActiveForm} = useActiveFormContext();
+    const {setActiveForm, setUpdateTarget} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{
         setActiveForm(formName);
-        setActiveProject(project);
+        setUpdateTarget(formObj);
     }
 
     return (

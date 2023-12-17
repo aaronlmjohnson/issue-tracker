@@ -18,7 +18,7 @@ const ProjectListing = (props:any)=>{
     const alterationButtons = ()=>{
         return (
             <div className="flex gap-x-2">
-                <UpdateButton formName={"update-project"} project={project} setActiveProject={props.setActiveProject}/>
+                <UpdateButton formName={"update-project"} formObj={project}/>
                 <ProjectDeleteButton 
                     project = {project} 
                     setDisplay={setDisplay}

@@ -5,31 +5,22 @@ import { useFetchData } from '../hooks/useFetchData';
 import useCheckAuthorization from '../hooks/useCheckAuthorization';
 import { useActiveFormContext } from '../hooks/useActiveFormContext';
 import { useAuthContext } from '../hooks/useAuthContext';
-
-interface Project {
-    _id: string;
-    title: string;
-    description: string;
-    date_created: string;
-}
+import { TProject } from '../lib/types';
 
 const ProjectsPage = ()=>{
-    const [activeProject, setActiveProject] = useState(null);
     const { data:projects, loading:projectsLoading, error } = useFetchData("http://localhost:3001/projects");
     const {loading:navbarContentLoading} = useAuthContext()
-    
-    const {activeForm} = useActiveFormContext();
+    const {activeForm, updateTarget} = useActiveFormContext();
 
     return(
         !navbarContentLoading && <div className="p-7 flex flex-col gap-y-12">
             <h1 className="font-primary text-5xl font-extrabold">All Projects</h1>
             {!projectsLoading && <div className="grid md:grid-cols-two justify-between gap-y-8">
-                {projects && projects.map((project:any)=>{
+                {projects && projects.map((project:TProject)=>{
                     return(
                         <ProjectListing  
                                 project={project} 
                                 key={project._id} 
-                                setActiveProject = {setActiveProject}
                         />)
                 })}
             </div>}
@@ -38,7 +29,7 @@ const ProjectsPage = ()=>{
                 (activeForm === "create-project" || activeForm === "update-project") &&
                 <ProjectForm 
                     title={activeForm === "create-project" ? "Create Project" : "Update Project"}
-                    project={activeForm === "update-project" ? activeProject : null} 
+                    project={activeForm === "update-project" ? updateTarget : null} 
             />}
         </div>
     );

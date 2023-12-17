@@ -4,7 +4,7 @@ export interface TProject {
     description: string,
     date_created: string,
     project_lead:string,
-    developers_assigned_to: string[]
+    developers_assigned_to: string[] | []
 }
 
 export interface TUser {
