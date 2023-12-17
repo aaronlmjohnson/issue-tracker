@@ -1,13 +1,15 @@
-export interface TProject {
+export interface IProject {
+    kind:"project",
     _id: string,
     title: string,
     description: string,
     date_created: string,
     project_lead:string,
-    developers_assigned_to: string[] | []
+    developers_assigned_to: string[]
 }
 
-export interface TUser {
+export interface IUser {
+    kind:"user",
     _id: string,
     email: string,
     first_name: string,
@@ -20,12 +22,13 @@ export interface TUser {
 
 }
 
-export interface TTicket {
+export interface ITicket {
+    kind:"ticket",
     _id: string,
     title: string,
     description: string,
-    project: TProject,
-    author: TUser,
+    project: IProject,
+    author: IUser,
     date_created: string,
     priority: string,
     status: string,
@@ -34,3 +37,5 @@ export interface TTicket {
     comments: []
 
 }
+
+export type TFormObject = IProject | ITicket;

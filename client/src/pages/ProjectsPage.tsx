@@ -5,7 +5,7 @@ import { useFetchData } from '../hooks/useFetchData';
 import useCheckAuthorization from '../hooks/useCheckAuthorization';
 import { useActiveFormContext } from '../hooks/useActiveFormContext';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { TProject } from '../lib/types';
+import { IProject } from '../lib/types';
 
 const ProjectsPage = ()=>{
     const { data:projects, loading:projectsLoading, error } = useFetchData("http://localhost:3001/projects");
@@ -16,7 +16,7 @@ const ProjectsPage = ()=>{
         !navbarContentLoading && <div className="p-7 flex flex-col gap-y-12">
             <h1 className="font-primary text-5xl font-extrabold">All Projects</h1>
             {!projectsLoading && <div className="grid md:grid-cols-two justify-between gap-y-8">
-                {projects && projects.map((project:TProject)=>{
+                {projects && projects.map((project:IProject)=>{
                     return(
                         <ProjectListing  
                                 project={project} 

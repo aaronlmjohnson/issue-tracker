@@ -13,7 +13,7 @@ import { useActiveFormContext } from "../hooks/useActiveFormContext";
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm, error} = useFormSubmit();
-    const [developerNames, setDeveloperNames] = useState([]);
+    const [developerNames, setDeveloperNames] = useState<string[]>([]);
     const {activeForm, updateTarget} = useActiveFormContext();
 
     const {handleChange, form, setForm} = useFormHandler({
@@ -25,15 +25,17 @@ const ProjectForm = (props:any)=>{
 
     useEffect(()=>{
         if(activeForm === "update-project"){
-            setForm(props.project);
-            setDeveloperNames(props.project.developers_assigned_to);
+            setForm(updateTarget);
+            if(updateTarget)
+                if("developers_assigned_to" in updateTarget)
+                    setDeveloperNames(updateTarget.developers_assigned_to);
         }
-    }, [props.project]);
+    }, [updateTarget]);
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
-        if(props.project === null) submitForm(form, "http://localhost:3001/projects/create");
-        else submitForm(form, `http://localhost:3001/projects/${props.project._id}/update`, "PATCH");  
+        if(updateTarget === null) submitForm(form, "http://localhost:3001/projects/create");
+        else submitForm(form, `http://localhost:3001/projects/${updateTarget._id}/update`, "PATCH");  
     }
 
     return(

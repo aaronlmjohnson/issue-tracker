@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer } from 'react';
 import { useState } from 'react';
-
+import { IUser } from '../lib/types';
 export const AuthContext = createContext(null);
 
 type AuthContextProviderProps = {
@@ -12,8 +12,8 @@ type State = {
 }
 
 type AuthAction = 
-    | {type: "LOGIN", payload: {user: any, action: AuthAction}}
-    | {type: "LOGOUT", payload: {user: any, action: AuthAction}}
+    | {type: "LOGIN", payload: {user: IUser, action: AuthAction}}
+    | {type: "LOGOUT", payload: {user: IUser, action: AuthAction}}
 
 
 export const authReducer = (state:any, action:AuthAction)=>{

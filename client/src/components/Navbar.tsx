@@ -2,12 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import { useAuthContext } from '../hooks/useAuthContext';
 import DropdownMenu from './DropdownMenu';
+import { useEffect } from 'react';
 
 const Navbar = (props:any)=>{
     const hamburgerIcon = <FontAwesomeIcon icon={faBars} className="text-primary text-4xl"/>
     const userPortrait = <FontAwesomeIcon icon={faCircleUser} className="text-primary text-4xl"/>
     const {user, loading} = useAuthContext();
-   
+    
     return( 
         !loading && <nav className="">
             <div className="flex border border-x-0 border-t-0 px-7 py-3 place-content-between">

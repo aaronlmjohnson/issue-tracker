@@ -1,12 +1,12 @@
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
-import { TProject, TTicket } from "../lib/types";
+import { TFormObject} from "../lib/types";
 interface IUpdateButtonProps {
     formName: "none"|
     "create-project" | 
     "create-ticket" | 
     "update-project" | 
     "update-ticket",
-    formObj:TProject | TTicket,
+    formObj:TFormObject,
 }
 
 const UpdateButton = (props:IUpdateButtonProps)=>{

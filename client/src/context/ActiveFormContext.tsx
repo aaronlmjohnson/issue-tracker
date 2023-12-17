@@ -1,5 +1,5 @@
 import { createContext, useState} from 'react';
-import {TProject, TTicket} from '../lib/types';
+import {TFormObject} from '../lib/types';
 
 type TActiveForm = "create-project" | 
                    "create-ticket" | 
@@ -10,8 +10,8 @@ type TActiveForm = "create-project" |
 interface IActiveFormContext {
     activeForm: TActiveForm | null,
     setActiveForm: React.Dispatch<React.SetStateAction<TActiveForm>>
-    updateTarget: TProject | TTicket | null
-    setUpdateTarget: React.Dispatch<React.SetStateAction<TProject | TTicket | null>>
+    updateTarget: TFormObject | null
+    setUpdateTarget: React.Dispatch<React.SetStateAction<TFormObject | null>>
 }
 
 export const ActiveFormContext = createContext<IActiveFormContext | null>(null);
@@ -22,7 +22,7 @@ interface IActiveFormProviderProps{
 
 export const ActiveFormContextProvider = ({children}:IActiveFormProviderProps)=>{
     const [activeForm, setActiveForm] = useState<TActiveForm>("none");
-    const [updateTarget, setUpdateTarget] = useState<TProject | TTicket | null>(null);
+    const [updateTarget, setUpdateTarget] = useState<TFormObject | null>(null);
 
     return(
         <ActiveFormContext.Provider value={{activeForm, setActiveForm, updateTarget, setUpdateTarget}}>
