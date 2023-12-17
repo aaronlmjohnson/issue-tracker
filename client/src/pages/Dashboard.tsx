@@ -20,7 +20,7 @@ const Dashboard = ()=>{
     }
 
     return (
-       !loading && <div className="flex flex-col dashboard p-7 h-fit gap-y-12 overflow-y-auto w-full">
+       loading  ? <>Loading</> : <div className="flex flex-col dashboard p-7 h-fit gap-y-12 overflow-y-auto w-full">
             <DashboardHeader />
             <ActivityFeed />
         </div>

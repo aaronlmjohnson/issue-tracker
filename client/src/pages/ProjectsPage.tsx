@@ -4,6 +4,7 @@ import ProjectForm from './ProjectForm';
 import { useFetchData } from '../hooks/useFetchData';
 import useCheckAuthorization from '../hooks/useCheckAuthorization';
 import { useActiveFormContext } from '../hooks/useActiveFormContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 interface Project {
     _id: string;
@@ -14,14 +15,15 @@ interface Project {
 
 const ProjectsPage = ()=>{
     const [activeProject, setActiveProject] = useState(null);
-    const { data:projects, loading, error } = useFetchData("http://localhost:3001/projects");
+    const { data:projects, loading:projectsLoading, error } = useFetchData("http://localhost:3001/projects");
+    const {loading:navbarContentLoading} = useAuthContext()
     
     const {activeForm} = useActiveFormContext();
 
     return(
-        !loading && <div className="p-7 flex flex-col gap-y-12">
+        !navbarContentLoading && <div className="p-7 flex flex-col gap-y-12">
             <h1 className="font-primary text-5xl font-extrabold">All Projects</h1>
-            <div className="grid md:grid-cols-two justify-between gap-y-8">
+            {!projectsLoading && <div className="grid md:grid-cols-two justify-between gap-y-8">
                 {projects && projects.map((project:any)=>{
                     return(
                         <ProjectListing  
@@ -30,7 +32,7 @@ const ProjectsPage = ()=>{
                                 setActiveProject = {setActiveProject}
                         />)
                 })}
-            </div>
+            </div>}
 
             {
                 (activeForm === "create-project" || activeForm === "update-project") &&
