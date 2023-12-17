@@ -28,7 +28,7 @@ const ProjectForm = (props:any)=>{
             setForm(updateTarget);
             if(updateTarget)
                 if("developers_assigned_to" in updateTarget)
-                    setDeveloperNames(updateTarget.developers_assigned_to);
+                    setDeveloperNames(updateTarget.developers_assigned_to); //should just populate developer names in project to avoid this
         }
     }, [updateTarget]);
 
