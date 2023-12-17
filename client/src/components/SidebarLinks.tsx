@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import ProjectLinks from "./ProjectLinks";
 import UserLinks from "./UserLinks";
 import TicketLinks from "./TicketLinks";
@@ -8,9 +6,7 @@ interface ISidebarLinksProps{
     section: string
 }
 
-const SidebarLinks = (props:ISidebarLinksProps)=>{
-    const {setActiveForm} = useActiveFormContext();
-        
+const SidebarLinks = (props:ISidebarLinksProps)=>{        
     return(
         <div>
             {props.section === "Projects" && <ProjectLinks />}
