@@ -8,7 +8,7 @@ interface ISidebarLinksProps{
 
 const SidebarLinks = (props:ISidebarLinksProps)=>{        
     return(
-        <div>
+        <div className="px-3">
             {props.section === "Projects" && <ProjectLinks />}
             {props.section === "Users" && <UserLinks />}
             {props.section === "Tickets" && <TicketLinks />}

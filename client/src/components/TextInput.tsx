@@ -3,9 +3,9 @@ const TextInput = (props:any)=>{
 
     return (
         <div className="flex flex-col">
-            <label htmlFor={props.forValue} className="font-secondary">{props.label}</label>
+            <label htmlFor={props.forValue} className="font-secondary text-base">{props.label}</label>
             <input 
-                className="border w-auto h-12 p-2.5 rounded"
+                className="border-2 w-auto h-12 p-2.5 rounded"
                 name={props.forValue} 
                 type="text" 
                 onChange={props.setter} 

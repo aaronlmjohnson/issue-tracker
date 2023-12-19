@@ -9,6 +9,7 @@ import useFormHandler from "../hooks/useFormHandler";
 import CancelButton from "../components/CancelButton";
 import FormError from "../components/FormError";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
+import FormElement from "../components/FormElement";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
@@ -38,50 +39,64 @@ const ProjectForm = (props:any)=>{
         else submitForm(form, `http://localhost:3001/projects/${updateTarget._id}/update`, "PATCH");  
     }
 
-    return(
-        !loading  && <div className="create-project-form fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white">
-            <h1>{props.title}</h1>
-            <form action="" method="POST" className="signup-form text-base font-normal " onSubmit={handleSubmit}>
-                <TextInput 
-                    forValue={"title"}
-                    label={"Title:"}
-                    value={form.title}
-                    setter={(e: any )=> {handleChange(e, "title");}}
-                />
-                <TextArea 
-                    forValue={"description"}
-                    label={"Description:"}
-                    rows={10}
-                    cols={30}
-                    value={form.description}
-                    setter={(e: any )=> {handleChange(e, "description")}}
-                />
-                 <ComboBox 
-                    forValue={"project-lead"}
-                    options={leads}
-                    optionsKey={"fullName"}
-                    selected = {form.project_lead}
-                    setter={(e: any )=> {handleChange(e, "project_lead")}}                
-                />
-
-                <Checkboxes
-                    forValue= {"developers"}
-                    legend={"Select Developers for the project:"}
-                    checkboxes={developers}
-                    labelKey={"fullName"}
-                    setter={setForm}
-                    form={form}
-                    checkBoxOptions = {developerNames}
-                    selectedOptions = {form.developers_assigned_to}
-                    checkboxProperty = {"developers_assigned_to"}
-                />
-
-                <button>Submit</button>
-                <CancelButton />
-                
-                {error && <FormError error= {error}/>}
-            </form>
+    const inputs = [
+        <TextInput 
+            forValue={"title"}
+            label={"Title"}
+            placeholder={"Enter a title"}
+            value={form.title}
+            setter={(e: any )=> {handleChange(e, "title");}}
+        />,
+        <TextArea 
+            forValue={"description"}
+            label={"Description"}
+            placeholder={"Describe the project"}
+            rows={10}
+            cols={30}
+            value={form.description}
+            setter={(e: any )=> {handleChange(e, "description")}}
+        />,
+        <ComboBox 
+            forValue={"project-lead"}
+            options={leads}
+            optionsKey={"fullName"}
+            selected = {form.project_lead}
+            label={"Project Lead"}
+            placeholder={"Select the Project Lead"}
+            setter={(e: any )=> {handleChange(e, "project_lead")}}                
+        />,
+        <Checkboxes
+            forValue= {"developers"}
+            legend={"Select Developers for the project:"}
+            checkboxes={developers}
+            labelKey={"fullName"}
+            setter={setForm}
+            form={form}
+            checkBoxOptions = {developerNames}
+            selectedOptions = {form.developers_assigned_to}
+            checkboxProperty = {"developers_assigned_to"}
+        />,
+        <div className="flex gap-x-2">
+            <button className="px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary">Submit</button>
+            <CancelButton />
         </div>
+        
+
+
+    ]   
+
+    return(
+        !loading  && 
+        <>
+            <FormElement 
+                formObj = {form}
+                title={props.title}
+                method={"POST"}
+                inputs = {inputs}
+                handleSubmit = {handleSubmit}
+            /> 
+            {error && <FormError error= {error}/>}
+        </>
     )
 }
 

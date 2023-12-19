@@ -23,9 +23,9 @@ const Checkboxes = (props:any)=>{
     }
 
     return (
-        <fieldset>
-                <legend>{props.legend}</legend>
-                <div>
+        <fieldset className="">
+                <legend className="my-3">{props.legend}</legend>
+                <div className="grid lg:grid-cols-3 sm:grid-cols-2  gap-y-4">
                     {props.checkboxes && props.checkboxes.map((checkbox: any, i:number)=>{   
                         return ( 
                             <div key={crypto.randomUUID()}>
