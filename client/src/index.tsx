@@ -11,7 +11,7 @@ import UsersPage from './pages/UsersPage';
 import UserDetail from './components/UserDetail';
 import Dashboard from './pages/Dashboard';
 import ProjectsPage from './pages/ProjectsPage';
-import ProjectPage from './pages/ProjectPage';
+import ProjectDetail from './pages/ProjectDetail';
 import AllTickets from './pages/AllTickets';
 import Page401 from './pages/errorPages/401';
 import { ActiveFormContextProvider } from './context/ActiveFormContext';
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path:"/projects/:projectId",
-        element: <ProjectPage />
+        element: <ProjectDetail />
       },
       {
         path:"/tickets",

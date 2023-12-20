@@ -9,6 +9,7 @@ import AllProjectTickets from "../components/AllProjectTickets";
 import TicketForm from "../components/TicketForm";
 import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
+import UpdateButton from "../components/UpdateButton";
 
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
@@ -45,7 +46,10 @@ const ProjectPage = ()=>{
 
         return (
             <>
-                {/* {formActive ? cancelButton() : updateButton()} */}
+                <UpdateButton 
+                    formObj  = {project}
+                    formName= {"update-project"}
+                />
                 <ProjectDeleteButton project = {project} setDisplay={setDisplay}/>
             </>
         )
