@@ -41,7 +41,7 @@ const LoginForm = ()=>{
                 placeholder={"Enter password"}
                 setter={(e:any) => handleChange(e, 'password')}
             />
-            <SubmitButton content={"Login"}/>
+            <SubmitButton submitStyle={"submit-one"} content={"Login"}/>
             {error && <FormError error= {error}/>}
 
 

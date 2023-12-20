@@ -1,6 +1,14 @@
-const SubmitButton = (props:any)=>{
+interface IProps {
+    submitStyle: string
+    content: string
+}
+
+const SubmitButton = (props:IProps)=>{
+
+    const {content, submitStyle} = props;
+
     return (
-        <button className="bg-primary text-white w-auto h-12 p-2.5 rounded">
+        <button className="submit-two">
             {props.content}
         </button>
     )

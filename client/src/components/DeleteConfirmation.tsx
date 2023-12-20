@@ -6,6 +6,7 @@ import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import FormDisplay from "./FormDisplay";
 import FormElement from "./FormElement";
 import CancelButton from "./CancelButton";
+import SubmitButton from "./SubmitButton";
 
 // interface IProps {
 //     obj: TFormObject
@@ -18,9 +19,12 @@ const DeleteConfirmation = ()=>{
     const { setActiveForm, updateTarget } = useActiveFormContext();
     const { submitForm } = useFormSubmit();
 
+    //        <button onClick={(e:any)=> handleDelete(e)}>Yes</button>,
+
+
     const inputs = [
         <h2>Are you sure you want to delete this?</h2>,
-        <button onClick={(e:any)=> handleDelete(e)}>Yes</button>,
+        <SubmitButton submitStyle={"submit-one"} content={"Yes"}/>,
         <CancelButton />
     ]
     const handleDelete = (e:any)=>{

@@ -11,4 +11,26 @@
     background: green;
 }
 
+.submit-one{
+    @apply px-4;
+    @apply py-1;
+    @apply border-2;
+    @apply border-delete;
+    @apply rounded-lg;
+    @apply font-secondary;
+    @apply font-bold;
+    @apply text-base;
+    @apply text-delete;
+}
+
+.submit-two{
+    @apply bg-primary;
+    @apply text-white;
+    @apply w-auto;
+    @apply h-12;
+    @apply p-2.5;
+    @apply rounded;
+}
+
+
 

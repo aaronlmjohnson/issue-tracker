@@ -61,7 +61,7 @@ const SignUpForm = (props:any)=>{
                     placeholder={"Enter password"}
                     setter = {(e:any)=> handleChange(e, "password")}
                 />
-                <SubmitButton content={"Sign Up"}/>
+                <SubmitButton submitStyle={"submit-one"} content={"Sign Up"}/>
                 {error && <FormError error= {error}/>}
             </form>
     );

@@ -29,7 +29,7 @@ const GuestLoginForm = ()=>{
                     )
                 })
             }
-            <SubmitButton content={"Login"}/>
+            <SubmitButton submitStyle={"submit-one"} content={"Login"}/>
         </form>
     );
 }
