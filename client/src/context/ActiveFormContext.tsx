@@ -5,6 +5,7 @@ type TActiveForm = "create-project" |
                    "create-ticket" | 
                    "update-project" | 
                    "update-ticket" |
+                   "delete-confirmation" |
                    "none";
 
 interface IActiveFormContext {

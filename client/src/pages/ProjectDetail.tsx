@@ -1,9 +1,7 @@
-import useProjectUpdateButton from "../hooks/useProjectUpdateButton";
 import useProjectInfo from "../hooks/useProjectInfo";
 import { useState, useEffect } from "react";
 import { useFetchData } from "../hooks/useFetchData";
 import { useUserInfo } from "../hooks/useUserInfo";
-import ProjectForm from "./ProjectForm";
 import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
 import AllProjectTickets from "../components/AllProjectTickets";
 import TicketForm from "../components/TicketForm";
@@ -14,11 +12,10 @@ import UpdateButton from "../components/UpdateButton";
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
     const {developers, loading:usersLoading} = useUserInfo();
-    const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);
-    // const {updateButton, cancelButton, setFormActive, formActive} = useProjectUpdateButton();
-    const [toggleTickets, setToggleTickets] = useState(false);//This will be handled in a navbar component in the future
+    const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);//should be populated in project
+    const [toggleTickets, setToggleTickets] = useState(false);
     const url = `http://localhost:3001/projects/${project._id}/delete`;
-    const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
+    // const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
     const {isAuthed, isLeadOfProject} = useCheckAuthorization();
     const {isAuthed:canMakeTicket, isAuthedToMakeTicket} =  useCheckAuthorization();
 
@@ -50,7 +47,7 @@ const ProjectPage = ()=>{
                     formObj  = {project}
                     formName= {"update-project"}
                 />
-                <ProjectDeleteButton project = {project} setDisplay={setDisplay}/>
+                <ProjectDeleteButton obj = {project}/>
             </>
         )
     }
@@ -66,7 +63,6 @@ const ProjectPage = ()=>{
                 return(<p className="developer-name" key={crypto.randomUUID()}>{name}</p>)
             })}
             {isAuthed && alterationButtons()}
-            {showDeleteConfirmation && confirmationForm()}
             <button onClick={handleTicketsPage}>tickets</button>
             {/* {formActive && <ProjectForm project={project || null}/>}  */}
             {canMakeTicket && <TicketForm project={project}/>}

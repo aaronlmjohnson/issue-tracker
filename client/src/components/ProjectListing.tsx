@@ -20,8 +20,7 @@ const ProjectListing = (props:any)=>{
             <div className="flex gap-x-2">
                 <UpdateButton formName={"update-project"} formObj={project}/>
                 <ProjectDeleteButton 
-                    project = {project} 
-                    setDisplay={setDisplay}
+                    obj = {project} 
                 />
             </div>
         )

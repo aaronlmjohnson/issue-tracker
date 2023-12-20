@@ -8,15 +8,12 @@ const useDeleteConfirmation = (url:string, obj:any)=>{
     const { submitForm } = useFormSubmit();
     
 
-    const handleDelete = (e:any)=>{
-        e.preventDefault();
-        submitForm(obj, url, "DELETE");
-    }
+    
     const confirmationForm = ()=>{
         return (
             <form>
                 <h2>Are you sure you want to delete this?</h2>
-                <button onClick={(e:any)=> handleDelete(e)}>Yes</button>
+                {/* <button onClick={(e:any)=> handleDelete(e)}>Yes</button> */}
                 <button onClick={()=> setDisplay(false) }>Cancel</button>
             </form>
         )
