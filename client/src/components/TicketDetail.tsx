@@ -3,7 +3,7 @@ import useTicketUpdateButton from "../hooks/useTicketUpdateButton";
 import TicketForm from "./TicketForm";
 import TicketDeleteButton from "./TicketDeleteButton";
 import useProjectInfo from "../hooks/useProjectInfo";
-import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
+// import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
 
 const TicketDetail = (props:any)=>{
@@ -11,7 +11,7 @@ const TicketDetail = (props:any)=>{
     const { ticket } = props;
     const {isAuthed, isAuthedToEditTicket} = useCheckAuthorization();
     let url = `http://localhost:3001/projects/${ticket.project._id}/tickets/${props.ticket._id}/delete`;
-    const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, ticket);
+    // const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, ticket);
     useEffect(()=>{
         isAuthedToEditTicket(ticket);
         console.log(formActive)
@@ -20,7 +20,7 @@ const TicketDetail = (props:any)=>{
         return (
             <>
                 {formActive ? cancelButton() : updateButton()}
-                <TicketDeleteButton project={ticket.project} ticket={ticket} setDisplay={setDisplay}/>
+                {/* <TicketDeleteButton project={ticket.project} ticket={ticket} setDisplay={setDisplay}/> */}
             </>
         );
     }
@@ -36,7 +36,7 @@ const TicketDetail = (props:any)=>{
             <p>{ticket.type}</p>
             <p>Assigned to: {ticket.assignee ? ticket.assignee.fullName : "Unassigned"}</p>
             {isAuthed && alterationButtons()}
-            {showDeleteConfirmation && confirmationForm()}
+            {/* {showDeleteConfirmation && confirmationForm()} */}
             {formActive && <TicketForm project = {ticket.project} ticket={ticket} method={"PATCH"}/>}
         </div>
     )

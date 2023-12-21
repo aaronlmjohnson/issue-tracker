@@ -10,7 +10,7 @@ const FormDisplay = ()=>{
         <>
         {activeForm === "create-project" && <ProjectForm  title={"Create Project"}/>}
         {activeForm === "update-project" && <ProjectForm  title={"Update Project"}/>}
-        {activeForm === "delete-confirmation" && <DeleteConfirmation />}
+        {/* {activeForm === "delete-confirmation" && <DeleteConfirmation />} */}
 
         </>
     )

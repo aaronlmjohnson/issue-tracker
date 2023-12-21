@@ -5,7 +5,6 @@ import { useUserInfo } from "../hooks/useUserInfo";
 import DeleteButton from "../components/DeleteButton";
 import AllProjectTickets from "../components/AllProjectTickets";
 import TicketForm from "../components/TicketForm";
-import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import UpdateButton from "../components/UpdateButton";
 

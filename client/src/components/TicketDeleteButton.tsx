@@ -1,4 +1,4 @@
-import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
+// import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import { useParams } from "react-router-dom";
 
  const TicketDeleteButton = (props:any)=> {

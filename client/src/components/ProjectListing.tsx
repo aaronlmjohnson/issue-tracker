@@ -1,6 +1,5 @@
 import DeleteButton from "./DeleteButton";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
-import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import { useEffect } from "react";
 import date from 'date-and-time';
 import UpdateButton from "./UpdateButton";
@@ -8,7 +7,6 @@ import UpdateButton from "./UpdateButton";
 const ProjectListing = (props:any)=>{
     const { project } = props;
     const url = `http://localhost:3001/projects/${project._id}/delete`;
-    const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
     const {isAuthed, isAuthedToEditProject} = useCheckAuthorization();
 
     useEffect(()=>{
@@ -35,7 +33,6 @@ const ProjectListing = (props:any)=>{
             </div>  
             <p>{project.description}</p>
             {isAuthed && alterationButtons()}
-            {showDeleteConfirmation && confirmationForm()}
         </div>
     )
 }
