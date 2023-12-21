@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { TFormObject } from "../lib/types";
-import DeleteConfirmation from "../components/DeleteConfirmation";
-import { useActiveFormContext } from "./useActiveFormContext";
-import { useFormSubmit } from "./useFormSubmit";
+import DeleteConfirmation from "./DeleteConfirmation";
+import { useActiveFormContext } from "../hooks/useActiveFormContext";
 
 interface IProps {
     obj: TFormObject;

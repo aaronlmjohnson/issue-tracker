@@ -2,7 +2,7 @@ import useProjectInfo from "../hooks/useProjectInfo";
 import { useState, useEffect } from "react";
 import { useFetchData } from "../hooks/useFetchData";
 import { useUserInfo } from "../hooks/useUserInfo";
-import ProjectDeleteButton from "../hooks/ProjectDeleteButton";
+import DeleteButton from "../components/DeleteButton";
 import AllProjectTickets from "../components/AllProjectTickets";
 import TicketForm from "../components/TicketForm";
 import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
@@ -47,7 +47,7 @@ const ProjectPage = ()=>{
                     formObj  = {project}
                     formName= {"update-project"}
                 />
-                <ProjectDeleteButton obj = {project} url={`http://localhost:3001/projects/${project._id}/delete`}/>
+                <DeleteButton obj = {project} url={`http://localhost:3001/projects/${project._id}/delete`}/>
             </>
         )
     }
