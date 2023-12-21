@@ -24,7 +24,7 @@ type ProjectModel = Model<ProjectDoc, {}, ProjectVirtuals>
 
 const projectSchema = new Schema<ProjectDoc, ProjectModel, ProjectVirtuals>({
     title: { type: String, required: true, maxLength: 32 },
-    description: { type: String, required: true, maxLength: 100 },
+    description: { type: String, required: true},
     date_created: { type: Date, default: Date.now() },
     project_lead: {type: Schema.Types.ObjectId, ref: "User", required: true},
     developers_assigned_to: [{type: Schema.Types.ObjectId, ref: "User"}]
