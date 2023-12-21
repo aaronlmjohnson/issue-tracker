@@ -1,38 +1,30 @@
-import { useState } from "react";
-import { useFormSubmit } from "../hooks/useFormSubmit";
-import { IProject, TFormObject } from "../lib/types";
-import { ActiveFormContext } from "../context/ActiveFormContext";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
-import FormDisplay from "./FormDisplay";
 import FormElement from "./FormElement";
 import CancelButton from "./CancelButton";
 import SubmitButton from "./SubmitButton";
-
-// interface IProps {
-//     obj: TFormObject
-//     displayConfirmation: boolean
-// }
+import { useFormSubmit } from "../hooks/useFormSubmit";
+import { useLocation } from "react-router-dom";
 
 const DeleteConfirmation = ()=>{
-    // const [display, setDisplay] = useState(false);
-    // const [deleteObj, setDeleteObj] = useState(false);
-    const { setActiveForm, updateTarget } = useActiveFormContext();
+    const { updateTarget,  setDeletingTarget } = useActiveFormContext();
     const { submitForm } = useFormSubmit();
-
-    //        <button onClick={(e:any)=> handleDelete(e)}>Yes</button>,
-
+    const location = useLocation();
 
     const inputs = [
         <h2>Are you sure you want to delete this?</h2>,
-        <SubmitButton submitStyle={"submit-one"} content={"Yes"}/>,
-        <CancelButton />
+        <div className="flex justify-between">
+            <SubmitButton submitStyle={"submit-two"} content={"Yes"}/>
+            <CancelButton />
+        </div>
+        
     ]
-    const handleDelete = (e:any)=>{
-        
-        
+    const handleSubmit = (e:any)=>{
+        if(!updateTarget) return;
         e.preventDefault();
-        console.log(updateTarget);
-        // submitForm(obj, url, "DELETE");
+        const endpoint = location.pathname.split('/')[1] + '/' + updateTarget._id;
+        const path = process.env.REACT_APP_DEV_BACKEND_PATH + endpoint + '/delete';
+        
+        submitForm(updateTarget, path, 'DELETE');
     }
 
     return (
@@ -40,18 +32,10 @@ const DeleteConfirmation = ()=>{
         title = {"Delete"}
         method={"DELETE"}
         inputs = {inputs}
-        handleSubmit={handleDelete}
+        handleSubmit={handleSubmit}
         formObj={updateTarget}
        />
     )
 }
 
 export default DeleteConfirmation;
-
-//onClick={()=> setDisplay(false) }
-
-{/* <form>
-<h2>Are you sure you want to delete this?</h2>
-<button onClick={(e:any)=> handleDelete(e)}>Yes</button>
-<button onClick={(e:any)=> setActiveForm("none")}>Cancel</button>
-</form> */}

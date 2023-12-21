@@ -8,7 +8,7 @@ const SubmitButton = (props:IProps)=>{
     const {content, submitStyle} = props;
 
     return (
-        <button className="submit-two">
+        <button className={submitStyle}>
             {props.content}
         </button>
     )

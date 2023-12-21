@@ -20,7 +20,8 @@ const ProjectListing = (props:any)=>{
             <div className="flex gap-x-2">
                 <UpdateButton formName={"update-project"} formObj={project}/>
                 <ProjectDeleteButton 
-                    obj = {project} 
+                    obj = {project}
+                    url={`http://localhost:3001/projects/${project._id}/delete`}
                 />
             </div>
         )

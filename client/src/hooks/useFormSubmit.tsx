@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthContext } from './useAuthContext';
+import { useActiveFormContext } from './useActiveFormContext';
 
 export const useFormSubmit = ()=>{
     const [error, setError] = useState("");
@@ -8,7 +9,7 @@ export const useFormSubmit = ()=>{
     const navigate = useNavigate();
     const { projectId } = useParams();
     const { user, loading:userDataLoading } = useAuthContext();
-
+    const { reset } = useActiveFormContext();
 
     const submitForm = async(data:any, url:string, method="POST")=>{
         setIsLoading(true);
@@ -32,7 +33,7 @@ export const useFormSubmit = ()=>{
         if(response.ok){
             setIsLoading(false);
             setError("");
-            console.log(response);
+            reset();
             if(method === "DELETE" && projectId) navigate(json.redirectUrl);
             if(method === "PATCH" || method === "DELETE") navigate(0);
             else navigate(json.redirectUrl);

@@ -47,7 +47,7 @@ const ProjectPage = ()=>{
                     formObj  = {project}
                     formName= {"update-project"}
                 />
-                <ProjectDeleteButton obj = {project}/>
+                <ProjectDeleteButton obj = {project} url={`http://localhost:3001/projects/${project._id}/delete`}/>
             </>
         )
     }
