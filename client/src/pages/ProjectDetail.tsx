@@ -7,6 +7,8 @@ import AllProjectTickets from "../components/AllProjectTickets";
 import TicketForm from "../components/TicketForm";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import UpdateButton from "../components/UpdateButton";
+import SubmitButton from "../components/SubmitButton";
+import FormButton from "../components/FormButton";
 
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
@@ -14,7 +16,7 @@ const ProjectPage = ()=>{
     const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);//should be populated in project
     const [toggleTickets, setToggleTickets] = useState(false);
     const url = `http://localhost:3001/projects/${project._id}/delete`;
-    // const { display:showDeleteConfirmation, setDisplay, confirmationForm} = useDeleteConfirmation(url, project);
+    
     const {isAuthed, isLeadOfProject} = useCheckAuthorization();
     const {isAuthed:canMakeTicket, isAuthedToMakeTicket} =  useCheckAuthorization();
 
@@ -34,7 +36,8 @@ const ProjectPage = ()=>{
         return devNames;
     }
 
-    const handleTicketsPage = ()=>{
+    const handleTicketsDisplay = (e:React.MouseEvent<HTMLElement>)=>{
+        console.log("hi")
         setToggleTickets((prevState)=> prevState ? false : true);
     }
 
@@ -53,7 +56,7 @@ const ProjectPage = ()=>{
     
     return (
         !loading && !usersLoading&& <div className="project-landing-page ">
-            <p className="project-title">{project.title}</p>
+            <h1 className="project-title">{project.title}</h1>
             <p className="project-description">{project.description}</p>
             <p className="project-date-created">Started on: {project.date_created}</p>
             <p className="project-date-created">Project Lead: {lead.fullName}</p>
@@ -62,9 +65,8 @@ const ProjectPage = ()=>{
                 return(<p className="developer-name" key={crypto.randomUUID()}>{name}</p>)
             })}
             {isAuthed && alterationButtons()}
-            <button onClick={handleTicketsPage}>tickets</button>
-            {/* {formActive && <ProjectForm project={project || null}/>}  */}
-            {canMakeTicket && <TicketForm project={project}/>}
+            <FormButton content={toggleTickets ? "Hide Tickets" : "View Tickets"} handler={handleTicketsDisplay} />
+            {/* {canMakeTicket && <TicketForm project={project}/>} */}
             {toggleTickets && <AllProjectTickets project = {project} />} 
         </div>
     );

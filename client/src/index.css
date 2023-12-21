@@ -33,6 +33,19 @@
     @apply w-1/3;
 }
 
+.button-one{
+    @apply px-4;
+    @apply py-1;
+    @apply border-2;
+    @apply border-primary;
+    @apply rounded-lg;
+    @apply font-secondary;
+    @apply font-bold;
+    @apply text-base;
+    @apply text-primary;
+    @apply w-fit;
+}
+
 /* px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary */
 
 
