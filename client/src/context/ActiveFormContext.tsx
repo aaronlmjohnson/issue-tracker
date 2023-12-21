@@ -13,8 +13,6 @@ interface IActiveFormContext {
     setActiveForm: React.Dispatch<React.SetStateAction<TActiveForm>>
     updateTarget: TFormObject | null
     setUpdateTarget: React.Dispatch<React.SetStateAction<TFormObject | null>>
-    deletingTarget: boolean
-    setDeletingTarget: React.Dispatch<React.SetStateAction<boolean>>
     reset: ()=> void
 
 }
@@ -28,16 +26,14 @@ interface IActiveFormProviderProps{
 export const ActiveFormContextProvider = ({children}:IActiveFormProviderProps)=>{
     const [activeForm, setActiveForm] = useState<TActiveForm>("none");
     const [updateTarget, setUpdateTarget] = useState<TFormObject | null>(null);
-    const [deletingTarget, setDeletingTarget] = useState(false);
 
     const reset = ()=>{
         setActiveForm("none");
         setUpdateTarget(null);
-        setDeletingTarget(false);
     }
 
     return(
-        <ActiveFormContext.Provider value={{activeForm, setActiveForm, updateTarget, setUpdateTarget, deletingTarget, setDeletingTarget, reset}}>
+        <ActiveFormContext.Provider value={{activeForm, setActiveForm, updateTarget, setUpdateTarget, reset}}>
             {children}
         </ActiveFormContext.Provider>
     )

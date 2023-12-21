@@ -10,20 +10,13 @@ interface IProps {
 }
 
  const ProjectDeleteButton = (props:IProps)=> {
-    const { obj, url } = props;
-    const { submitForm } = useFormSubmit()
-    const {activeForm, setActiveForm, setUpdateTarget, deletingTarget} = useActiveFormContext();
+    const { obj } = props;
+    const {activeForm, setActiveForm, setUpdateTarget} = useActiveFormContext();
 
     const handleConfirmationDisplay = ()=> {
         setActiveForm("delete-confirmation");
         setUpdateTarget(obj);
     };
-
-    const handleDelete = ()=> submitForm(obj, `http://localhost:3001/projects/${obj._id}/delete`, 'DELETE');
-
-    useEffect(()=>{
-        if(deletingTarget) handleDelete(); //<<<< this deletes all projects
-    }, [deletingTarget]);
 
     return(
         <>

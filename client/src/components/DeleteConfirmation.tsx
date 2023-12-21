@@ -6,7 +6,7 @@ import { useFormSubmit } from "../hooks/useFormSubmit";
 import { useLocation } from "react-router-dom";
 
 const DeleteConfirmation = ()=>{
-    const { updateTarget,  setDeletingTarget } = useActiveFormContext();
+    const { updateTarget } = useActiveFormContext();
     const { submitForm } = useFormSubmit();
     const location = useLocation();
 
