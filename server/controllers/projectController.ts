@@ -10,9 +10,9 @@ const projectController = ()=> {
     const getAll = asyncHandler(async(req, res, next)=>{
         try{
             const projects = await Project.find({})
-            .populate('author')
-            .populate('developers_assigned_to')
-            .populate('project_lead')
+            .populate('author', {password: 0})
+            .populate('developers_assigned_to', {password: 0})
+            .populate('project_lead', {password: 0})
             .sort({title: 1})
             .exec();
             if(!projects){
@@ -58,9 +58,9 @@ const projectController = ()=> {
 
     const get = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.id)
-        .populate('author')
-        .populate('developers_assigned_to')
-        .populate('project_lead')
+        .populate('author', {password: 0})
+        .populate('developers_assigned_to', {password: 0})
+        .populate('project_lead', {password: 0})
         .exec();
 
         if(!project){
