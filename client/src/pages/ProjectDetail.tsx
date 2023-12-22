@@ -48,13 +48,17 @@ const ProjectPage = ()=>{
     const alterationButtons = ()=>{
 
         return (
-            <>
-                <UpdateButton 
-                    formObj  = {project}
-                    formName= {"update-project"}
-                />
-                <DeleteButton obj = {project} url={`http://localhost:3001/projects/${project._id}/delete`}/>
-            </>
+            <div className="flex flex-col gap-2">
+                <h2 className="flex flex-col font-secondary text-2xl font-bold">Options</h2>
+                <div className="flex flex-row gap-2">
+                    <FormButton content={toggleTickets ? "Hide Tickets" : "View Tickets"} handler={handleTicketsDisplay} />
+                    <UpdateButton 
+                        formObj  = {project}
+                        formName= {"update-project"}
+                    />
+                    <DeleteButton obj = {project} url={`http://localhost:3001/projects/${project._id}/delete`}/>
+                </div>
+            </div>
         )
     }
     <p className="project-date-created">{project.date_created}</p>
@@ -82,7 +86,7 @@ const ProjectPage = ()=>{
                 </div>
                 <div className="flex  flex-col gap-2">
                     <h2 className="flex flex-col font-secondary text-2xl font-bold">Team</h2>
-                    <div className="grid grid-flow-col justify-between">
+                    <div className="grid xl:grid-cols-five lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 sm:justify-between  justify-center">
                         <div className="text-center">
                             <Link to={project.project_lead.url} >
                                 {userPortraits["Project_Lead"]}
@@ -106,7 +110,6 @@ const ProjectPage = ()=>{
                 {/* return(<p className="developer-name" key={crypto.randomUUID()}>{developer.fullName}</p>) */}
 
                 {isAuthed && alterationButtons()}
-                <FormButton content={toggleTickets ? "Hide Tickets" : "View Tickets"} handler={handleTicketsDisplay} />
                 {/* {canMakeTicket && <TicketForm project={project}/>} */}
                 {toggleTickets && <AllProjectTickets project = {project} />}  
             </>}
