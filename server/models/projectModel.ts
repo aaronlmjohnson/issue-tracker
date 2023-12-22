@@ -8,6 +8,7 @@ interface ProjectDoc {
     date_created: Date,
     project_lead: Schema.Types.ObjectId,
     developers_assigned_to: Schema.Types.ObjectId[],
+    author: Schema.Types.ObjectId,
     _id:String
 };
 
@@ -27,6 +28,7 @@ const projectSchema = new Schema<ProjectDoc, ProjectModel, ProjectVirtuals>({
     description: { type: String, required: true},
     date_created: { type: Date, default: Date.now() },
     project_lead: {type: Schema.Types.ObjectId, ref: "User", required: true},
+    author:{type: Schema.Types.ObjectId, ref: "User",  required: true},
     developers_assigned_to: [{type: Schema.Types.ObjectId, ref: "User"}]
 }, opts);
 

@@ -1,4 +1,4 @@
-import Project from "../models/project";
+import Project from "../models/projectModel";
 import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
 import Activity from "./activityController";
@@ -75,25 +75,32 @@ const projectController = ()=> {
         .escape()
         .isLength({min: 1})
         .withMessage("You must provide a description."),
+        body("author")
+        .isMongoId()
+        .withMessage("You must provide a valid id for author"),
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
+            console.log(req.body);
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
-                const project = new Project({
+                const project =  new Project({
                     title: req.body.title,
                     description: req.body.description,
                     date_created: req.body.date_created,
                     project_lead: req.body.project_lead,
+                    author: req.body.author,
                     developers_assigned_to: req.body.developers_assigned_to
                 });
 
-                await project.save();
-                const author = (await User.findById(req.body.loggedInUser)).fullName;
 
+                await project.save();
+                console.log(project);
+                //const author = (await User.findById(req.body.loggedInUser)).fullName;
+                //console.log(project);
                 const activity = {
                     body: ["", " has created the project titled ", "", "."],
-                    emphasisText:[author, project.title], 
+                    emphasisText:["project.author.fullName", project.title], 
                 };
 
                 activityHandler.createActivity(activity);

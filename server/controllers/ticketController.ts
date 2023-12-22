@@ -1,4 +1,4 @@
-import Project from "../models/project";
+import Project from "../models/projectModel";
 import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
 import Ticket from "../models/ticketModel";

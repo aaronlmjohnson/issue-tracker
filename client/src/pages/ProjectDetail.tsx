@@ -57,6 +57,10 @@ const ProjectPage = ()=>{
     return (
         !loading && !usersLoading&& <div className="project-landing-page ">
             <h1 className="project-title">{project.title}</h1>
+            <div>
+                <p>Created By</p>
+                <p>{project.author}</p>
+            </div>
             <p className="project-description">{project.description}</p>
             <p className="project-date-created">Started on: {project.date_created}</p>
             <p className="project-date-created">Project Lead: {lead.fullName}</p>
