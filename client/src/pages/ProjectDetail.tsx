@@ -6,6 +6,7 @@ import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import UpdateButton from "../components/UpdateButton";
 import FormButton from "../components/FormButton";
 import { useParams } from "react-router-dom";
+import ContentLoading from "./ContentLoading";
 
 const ProjectPage = ()=>{
     const { projectId } = useParams();
@@ -43,7 +44,7 @@ const ProjectPage = ()=>{
     
     return (
         projectLoading ?
-        <>Loading Content</> :
+        <ContentLoading backgroundColor="bg-white" /> :
         <div className="project-landing-page ">
             {!project.author && !project.project_lead?
                 <>Loading Content</> :

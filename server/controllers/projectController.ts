@@ -103,11 +103,11 @@ const projectController = ()=> {
 
                 await project.save();
                 console.log(project);
-                //const author = (await User.findById(req.body.loggedInUser)).fullName;
+                const author = (await User.findById(project.author)).fullName;
                 //console.log(project);
                 const activity = {
                     body: ["", " has created the project titled ", "", "."],
-                    emphasisText:["project.author.fullName", project.title], 
+                    emphasisText:[author, project.title], 
                 };
 
                 activityHandler.createActivity(activity);
