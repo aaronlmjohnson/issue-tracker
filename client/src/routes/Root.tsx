@@ -18,21 +18,22 @@ const Root = ()=>{
     }
 
     return (
-        <div className="flex">
-            <div className={` bg-black/60 w-full h-full fixed ${activeForm === "none" ? 'hidden' : ''}`}></div>
-            <Sidebar 
-                section={sectionName()}
-                sidebarVisible={sidebarVisible}
-            />
-            <div className="flex flex-col w-screen h-screen">
-                <Navbar 
-                    setSidebarVisible={setSidebarVisible}
+        <>
+            <div className={`absolute top-0 left-0 bg-black/60 w-screen  ${activeForm === "none" ? 'hidden' : ''}`}></div> 
+            <div className="flex ">
+                <Sidebar 
+                    section={sectionName()}
+                    sidebarVisible={sidebarVisible}
                 />
-                <Outlet  />
+                <div className="flex flex-col w-screen">
+                    <Navbar 
+                        setSidebarVisible={setSidebarVisible}
+                    />
+                    <Outlet  />
+                </div>
+                <FormDisplay />
             </div>
-            <FormDisplay />
-        </div>
-            
+        </>
     );
 }
 
