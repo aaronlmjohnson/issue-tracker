@@ -7,6 +7,10 @@ import UpdateButton from "../components/UpdateButton";
 import FormButton from "../components/FormButton";
 import { useParams } from "react-router-dom";
 import ContentLoading from "./ContentLoading";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faUserTie, faUserCog, faUserShield} from '@fortawesome/free-solid-svg-icons';
+import date from "date-and-time";
+import { Link } from "react-router-dom";
 
 const ProjectPage = ()=>{
     const { projectId } = useParams();
@@ -15,6 +19,7 @@ const ProjectPage = ()=>{
     const {data:project, loading:projectLoading } = useFetchData(`http://localhost:3001/projects/${projectId}`);
     const {isAuthed, isLeadOfProject} = useCheckAuthorization();
     const {isAuthed:canMakeTicket, isAuthedToMakeTicket} =  useCheckAuthorization();
+    const userPortraitStyle = "text-[80px] text-primary";
 
     useEffect(()=>{
         if(!projectLoading){
@@ -23,7 +28,18 @@ const ProjectPage = ()=>{
         } 
         
     },[projectLoading])
-    
+
+    interface IUserPortraits {
+        Administrator: JSX.Element,
+        Project_Lead: JSX.Element,
+        Developer: JSX.Element
+    }
+
+    const userPortraits:IUserPortraits = {
+        Administrator: <FontAwesomeIcon icon={faUserShield} className={userPortraitStyle}/>,
+        Project_Lead: <FontAwesomeIcon icon={faUserTie} className={userPortraitStyle}/>,
+        Developer: <FontAwesomeIcon icon={faUserCog} className={userPortraitStyle}/>,
+    }
 
     const handleTicketsDisplay = (e:React.MouseEvent<HTMLElement>)=>{
         setToggleTickets((prevState)=> prevState ? false : true);
@@ -41,29 +57,54 @@ const ProjectPage = ()=>{
             </>
         )
     }
-    
+    <p className="project-date-created">{project.date_created}</p>
+
     return (
         projectLoading ?
-        <ContentLoading backgroundColor="bg-white" /> :
-        <div className="project-landing-page ">
+        <ContentLoading backgroundColor="bg-white" /> : //24 headers DM Sans Bold 16 Reg DM Sans gap-3
+        <div className="flex  flex-col gap-8 p-7">
             {!project.author && !project.project_lead?
-                <>Loading Content</> :
+            <>Loading Content</> :
             <>
-                <h1 className="project-title">{project.title}</h1>
+                <h1 className="font-primary text-5xl font-extrabold">{project.title}</h1>
                 
-                <div>
-                    <p>Created By</p>
-                    <p>{project.author.fullName}</p>
+                <div className="flex  flex-col gap-2">
+                    <h2 className="flex flex-col font-secondary text-2xl font-bold">Created By</h2>
+                    <p className="font-secondary">{project.author.fullName}</p>
                 </div>
-                
-                <p className="project-description">{project.description}</p>
-                <p className="project-date-created">Started on: {project.date_created}</p>
-                <p className="project-date-created">Project Lead: {project.project_lead.fullName}</p>
-                
-                <p>Developers:</p>
-                {project.developers_assigned_to.map((developer:any)=>{
-                    return(<p className="developer-name" key={crypto.randomUUID()}>{developer.fullName}</p>)
-                })}
+                <div className="flex  flex-col gap-2">
+                    <h2 className="flex flex-col font-secondary text-2xl font-bold">Started On</h2>
+                    <p className="project-date-created">{date.format( new Date(project.date_created), 'MMMM DD, YYYY')}</p>
+                </div>
+                <div className="flex  flex-col gap-2">
+                    <h2 className="flex flex-col font-secondary text-2xl font-bold">Overview</h2>
+                    <p className="font-secondary">{project.description}</p>
+                </div>
+                <div className="flex  flex-col gap-2">
+                    <h2 className="flex flex-col font-secondary text-2xl font-bold">Team</h2>
+                    <div className="grid grid-flow-col justify-between">
+                        <div className="text-center">
+                            <Link to={project.project_lead.url} >
+                                {userPortraits["Project_Lead"]}
+                                <h1 className="text-2xl font-semibold">{project.project_lead.fullName}</h1>
+                                <p className="text-base font-semibold">{project.project_lead.role.split('_').join(' ')}</p>
+                            </Link>
+                        </div>
+                        {project.developers_assigned_to.map((developer:any)=>{
+                            return(
+                                <Link to={project.project_lead.url} key={crypto.randomUUID()}>
+                                    <div className="text-center">
+                                        {userPortraits["Developer"]}
+                                        <h1 className="text-2xl font-semibold">{developer.fullName}</h1>
+                                        <p className="text-base font-semibold">{developer.role.split('_').join(' ')}</p>
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </div>
+                {/* return(<p className="developer-name" key={crypto.randomUUID()}>{developer.fullName}</p>) */}
+
                 {isAuthed && alterationButtons()}
                 <FormButton content={toggleTickets ? "Hide Tickets" : "View Tickets"} handler={handleTicketsDisplay} />
                 {/* {canMakeTicket && <TicketForm project={project}/>} */}
