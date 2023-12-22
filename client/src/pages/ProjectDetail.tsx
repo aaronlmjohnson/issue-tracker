@@ -12,6 +12,7 @@ import FormButton from "../components/FormButton";
 
 const ProjectPage = ()=>{
     const {project, loading} = useProjectInfo();
+    
     const {developers, loading:usersLoading} = useUserInfo();
     const {data:lead, loading:leadLoading} = useFetchData(`http://localhost:3001/users/${project.project_lead}`);//should be populated in project
     const [toggleTickets, setToggleTickets] = useState(false);
@@ -24,6 +25,7 @@ const ProjectPage = ()=>{
         if(!loading){
             isLeadOfProject(project.project_lead);
             isAuthedToMakeTicket(project);
+            console.log(project);
         } 
         
     },[loading])

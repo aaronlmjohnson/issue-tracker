@@ -10,18 +10,21 @@ import CancelButton from "../components/CancelButton";
 import FormError from "../components/FormError";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import FormElement from "../components/FormElement";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProjectForm = (props:any)=>{
     const {developers, leads, loading} = useUserInfo();
     const { submitForm, error} = useFormSubmit();
     const [developerNames, setDeveloperNames] = useState<string[]>([]);
     const {activeForm, updateTarget} = useActiveFormContext();
+    const {user} = useAuthContext();
 
     const {handleChange, form, setForm} = useFormHandler({
         title: "",
         description:"",
         project_lead: "",
         developers_assigned_to: [],
+        author: user.user._id
     });
 
     useEffect(()=>{

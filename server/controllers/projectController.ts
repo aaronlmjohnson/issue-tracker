@@ -10,6 +10,9 @@ const projectController = ()=> {
     const getAll = asyncHandler(async(req, res, next)=>{
         try{
             const projects = await Project.find({})
+            .populate('author')
+            .populate('developers_assigned_to')
+            .populate('project_lead')
             .sort({title: 1})
             .exec();
             if(!projects){
@@ -54,7 +57,11 @@ const projectController = ()=> {
     });
 
     const get = asyncHandler(async(req, res, next)=>{
-        const project = await Project.findById(req.params.id).exec();
+        const project = await Project.findById(req.params.id)
+        .populate('author')
+        .populate('developers_assigned_to')
+        .populate('project_lead')
+        .exec();
 
         if(!project){
             const error = new Error("Project not found");
