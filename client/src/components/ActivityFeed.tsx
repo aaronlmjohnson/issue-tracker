@@ -10,7 +10,7 @@ interface IActivity {
 }
 
 const ActivityFeed = ()=>{
-    const {data:activities, loading:activitiesLoading} = useFetchData("http://localhost:3001/activities");
+    const {data:activities, loading:activitiesLoading} = useFetchData("/activities");
 
     const colors = ["text-shade-0", "text-shade-1", "text-shade-2", "text-shade-3", "text-shade-4"]
     return(

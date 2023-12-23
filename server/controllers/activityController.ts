@@ -10,7 +10,6 @@ const activityController = ()=>{
             const activities = await Activity.find({}).limit(15).sort({createdAt: -1});
             if(!activities) throw Error("No activities found");
             res.status(200).json(activities);
-
         }catch(e){
             res.status(400).send({error: e.message});
             return next(e);

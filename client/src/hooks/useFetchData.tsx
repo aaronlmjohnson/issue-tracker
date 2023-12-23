@@ -3,17 +3,18 @@ import { useAuthContext } from './useAuthContext';
 import { useNavigate } from 'react-router-dom';
 
 
-export const useFetchData = (url:string, unAuth = false)=>{
-    const [data, setData] = useState<any>([]);//<{title:string}>({title:""})
+export const useFetchData = (path:string, unAuth = false)=>{
+    const [data, setData] = useState<any>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const { user, loading:userDataLoading } = useAuthContext();
+    const url = process.env.REACT_APP_DEV_DOMAIN + path;
     const navigate = useNavigate();
 
     useEffect(()=>{
         if(userDataLoading) return;
         unAuth ? unAuthRefetch(url) : refetch(url);   
-    }, [url, userDataLoading]);
+    }, [path, userDataLoading]);
 
     const refetch = async (url:string)=>{
         try{
@@ -27,7 +28,10 @@ export const useFetchData = (url:string, unAuth = false)=>{
 
             if(!response.ok) 
                 throw Error(response.status);
+                console.log(response);
+
             const apiData = await response.json();
+
             setData(apiData);
         }catch(e){
             console.error(e);
@@ -43,7 +47,6 @@ export const useFetchData = (url:string, unAuth = false)=>{
         try{
             setLoading(true);
             const response:any = await fetch(url);
-
             if(!response.ok) 
                 throw Error(response.status);
             const apiData = await response.json();

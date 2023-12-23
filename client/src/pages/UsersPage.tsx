@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUserTie, faUserCog, faUserShield} from '@fortawesome/free-solid-svg-icons';
 
 const UsersPage = (props:any)=>{
-    const {data:users, loading} = useFetchData(`http://localhost:3001/users`);
+    const {data:users, loading} = useFetchData(`/users`);
     const userPortraitStyle = "text-[80px] text-primary";
     interface IUserPortraits {
         Administrator: JSX.Element,

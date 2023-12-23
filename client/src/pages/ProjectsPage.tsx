@@ -5,7 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { IProject } from '../lib/types';
 
 const ProjectsPage = ()=>{
-    const { data:projects, loading:projectsLoading, error } = useFetchData("http://localhost:3001/projects");
+    const { data:projects, loading:projectsLoading, error } = useFetchData("/projects");
     const {loading:navbarContentLoading} = useAuthContext();
 
     return(
