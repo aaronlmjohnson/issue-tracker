@@ -6,7 +6,7 @@ const useProjectInfo = ()=>{
 
 
     
-    const {data:project, loading, error} = useFetchData(`http://localhost:3001/projects/${"lol"}`);
+    const {data:project, loading, error} = useFetchData(`/projects/${"lol"}`);
 
     return{
         project,

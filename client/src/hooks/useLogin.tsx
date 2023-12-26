@@ -12,10 +12,11 @@ export const useLogin = ()=>{
         email:String,
         password:string,
     }
-    const login = async(form:LoginFormObj, url="")=>{
+    const login = async(form:LoginFormObj, path:string = '')=>{
         setIsLoading(true);
         setError("");
-        const response = await fetch(url || `http://localhost:3001/users/login`, {
+        const url = process.env.REACT_APP_DEV_DOMAIN + (path || '/users/login');
+        const response = await fetch(url, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

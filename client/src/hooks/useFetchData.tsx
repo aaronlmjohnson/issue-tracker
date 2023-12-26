@@ -28,7 +28,6 @@ export const useFetchData = (path:string, unAuth = false)=>{
 
             if(!response.ok) 
                 throw Error(response.status);
-                console.log(response);
 
             const apiData = await response.json();
 

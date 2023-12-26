@@ -38,7 +38,7 @@ const displayLogin = ()=>{
 }
 
 const SignUp = (props: any)=>{
-    const {data:roles, loading:rolesLoading} = useFetchData("http://localhost:3001/users/roles", true);
+    const {data:roles, loading:rolesLoading} = useFetchData("/users/roles", true);
     
     return (
         rolesLoading ? 

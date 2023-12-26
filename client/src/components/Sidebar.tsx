@@ -9,7 +9,7 @@ const Sidebar = (props:any)=>{
     const projectsIcon = <FontAwesomeIcon icon={faDiagramProject} className="text-white text-2xl"/>
     const ticketsIcon = <FontAwesomeIcon icon={faClipboardList} className="text-white text-2xl"/>
 
-    const logo = <FontAwesomeIcon icon={faBug} className="flex rotate-45 text-white logo"/>
+    const logo = <FontAwesomeIcon icon={faBug} className="flex rotate-45 text-white logo sm:text-4xl md:text-sm"/>
     return(
         <nav className="flex flex-col bg-primary text-white h-screen  sticky top-0 w-1/6 ">
             {/* <div className="bg-primary w-16 flex h-screen flex-col gap-y-16">

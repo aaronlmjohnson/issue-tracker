@@ -27,6 +27,7 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
+console.log(port);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -93,5 +94,6 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
+  console.log(bind);
   debug('Listening on ' + bind);
 }

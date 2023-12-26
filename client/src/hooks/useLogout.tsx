@@ -11,7 +11,7 @@ export const useLogout = ()=>{
 
     const logout = ()=>{
         console.log(`${localStorage.getItem('user')} has logged out.`);
-        submitForm({}, 'http://localhost:3001/users/logout');
+        submitForm({}, '/users/logout');
         localStorage.removeItem('user');
         dispatch({type:"LOGOUT"});
         navigate('/login');
