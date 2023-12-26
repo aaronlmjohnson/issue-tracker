@@ -13,7 +13,7 @@ const GuestLoginForm = ()=>{
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
-        login(form, "http://localhost:3001/users/guest-login");
+        login(form, "/users/guest-login");
     }
 
     return (

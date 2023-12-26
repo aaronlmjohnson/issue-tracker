@@ -4,7 +4,7 @@ import date from 'date-and-time';
 
 const UserDetail = (props:any)=>{
     const { userId } = useParams();
-    const {data:user, loading} = useFetchData(`http://localhost:3001/users/${userId}`);
+    const {data:user, loading} = useFetchData(`/users/${userId}`);
 
     return(
         !loading && <div className="p-7 flex flex-col gap-5">
