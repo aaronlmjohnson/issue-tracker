@@ -11,10 +11,11 @@ export const useFormSubmit = ()=>{
     const { user, loading:userDataLoading } = useAuthContext();
     const { reset } = useActiveFormContext();
 
-    const submitForm = async(data:any, url:string, method="POST")=>{
+    const submitForm = async(data:any, path:string, method="POST")=>{
         setIsLoading(true);
         setError("");
-
+        const url = process.env.REACT_APP_DEV_DOMAIN + path;
+        console.log(url);
         const response = await fetch(url, {
             method: method,
             headers: {

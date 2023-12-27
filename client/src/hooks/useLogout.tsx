@@ -4,13 +4,11 @@ import { redirect, useNavigate } from 'react-router-dom';
 import { useFormSubmit } from './useFormSubmit';
 
 export const useLogout = ()=>{
-
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
     const { submitForm } = useFormSubmit();
 
     const logout = ()=>{
-        console.log(`${localStorage.getItem('user')} has logged out.`);
         submitForm({}, '/users/logout');
         localStorage.removeItem('user');
         dispatch({type:"LOGOUT"});
