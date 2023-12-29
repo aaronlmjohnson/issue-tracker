@@ -9,9 +9,9 @@ const Sidebar = (props:any)=>{
     const projectsIcon = <FontAwesomeIcon icon={faDiagramProject} className="text-white text-2xl"/>
     const ticketsIcon = <FontAwesomeIcon icon={faClipboardList} className="text-white text-2xl"/>
 
-    const logo = <FontAwesomeIcon icon={faBug} className="flex rotate-45 text-white logo sm:text-4xl md:text-sm"/>
+    const logo = <FontAwesomeIcon icon={faBug} className="flex rotate-45 text-white logo"/>
     return(
-        <nav className="flex flex-col bg-primary text-white h-screen  sticky top-0 w-1/6 ">
+        <nav className="flex flex-col bg-primary text-white p-5">
             {/* <div className="bg-primary w-16 flex h-screen flex-col gap-y-16">
                 <div className="mx-auto my-6">
                     {logo}
@@ -25,7 +25,7 @@ const Sidebar = (props:any)=>{
 
             </div> */}
             {/* add media query for logo */}
-                    <div className="flex gap-3 items-center justify-center logo"> 
+                    <div className="flex gap-3 items-center justify-center sm:text-4xl logo"> 
                         {logo}
                         <h1 className=" font-secondary logo font-bold sm:block hidden">Tracker</h1>
                     </div>

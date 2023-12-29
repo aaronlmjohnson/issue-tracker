@@ -15,6 +15,13 @@
     font-size: clamp(1.25rem, 2.5vw, 3rem);
 }
 
+@media (max-width: 640px) {
+    .logo{
+        font-size: 3rem;
+    }
+}
+
+
 .submit-one{
     @apply bg-primary;
     @apply text-white;
