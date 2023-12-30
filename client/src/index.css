@@ -15,6 +15,10 @@
     font-size: clamp(1.25rem, 2.5vw, 3rem);
 }
 
+.sidebarlink{
+    font-size: clamp(1rem, 1vw, 2rem);
+}
+
 @media (max-width: 640px) {
     .logo{
         font-size: 3rem;

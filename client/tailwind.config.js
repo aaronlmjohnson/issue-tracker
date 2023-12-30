@@ -18,7 +18,8 @@ module.exports = {
       },
       gridTemplateColumns:{
         'two': 'repeat(2, 40%)',
-        'five': 'repeat(5, max-content)'
+        'five': 'repeat(5, max-content)',
+        'sidebarlinks': '4rem 1fr 1rem'
       },
       height: {
         'navbar': '3rem',
