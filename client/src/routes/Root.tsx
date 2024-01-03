@@ -15,6 +15,7 @@ const Root = ()=>{
             <div className={`absolute top-0 left-0 bg-black/60 w-screen  ${activeForm === "none" ? 'hidden' : ''}`}></div> 
             <div className="flex ">
                 <Sidebar 
+                    sidebarVisible={sidebarVisible}
                 />
                 <div className="flex flex-col w-screen">
                     <Navbar 
