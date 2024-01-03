@@ -7,6 +7,12 @@ import { useEffect, useState } from "react";
 interface IProps{
     icon: IconDefinition,
     section: string,
+    dropdown: ILinkObj[]
+}
+
+interface ILinkObj {
+    name: string,
+    link: string
 }
 
 const SidebarLink = (props:IProps)=>{
@@ -29,8 +35,10 @@ const SidebarLink = (props:IProps)=>{
                 
                 <span><FontAwesomeIcon icon={faCaretRight} /></span>
             </button>
-            <div className={`${displayDropdown ? '' : 'hidden'} `}>
-                dropdown content
+            <div className={`${displayDropdown ? '' : 'hidden'} text-center py-4 flex flex-col gap-1`}>
+                {props.dropdown.map((linkObj:ILinkObj)=>{
+                    return  <Link to={linkObj.link}>{linkObj.name}</Link>
+                })}
             </div>
         </li>
     )

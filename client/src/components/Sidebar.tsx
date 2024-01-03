@@ -5,7 +5,6 @@ import SidebarLinks from './SidebarLinks';
 
 const Sidebar = (props:any)=>{
     const logo = <FontAwesomeIcon icon={faBug} className="flex rotate-45 text-white"/>
-    //change css styles depending on if sidebar is visible or not
     
     return(
         <nav className={`${!props.sidebarVisible ? 'hidden' : ''}  bg-primary text-white p-5 sm:sticky fixed  h-screen top-0`}>

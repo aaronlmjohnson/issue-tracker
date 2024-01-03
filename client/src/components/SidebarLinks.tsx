@@ -8,18 +8,39 @@ const SidebarLinks = ()=>{
             <SidebarLink 
                 icon = {faHouse}
                 section = {"Dashboard"}
+                dropdown = {
+                    [
+                        {name:"Home", link:"/"}
+                    ]
+                }
             />
             <SidebarLink 
                 icon = {faUser}
                 section = {"Accounts"}
+                dropdown = {
+                    [
+                        {name:"All Accounts", link:"/users"},
+                    ]
+                }
             />
             <SidebarLink 
                 icon = {faDiagramProject}
                 section = {"Projects"}
+                dropdown = {
+                    [
+                        {name:"All Projects", link:"/projects"},
+                        {name:"Add Project", link:"/projects/create"}
+                    ]
+                }
             />
             <SidebarLink 
                 icon = {faClipboardList}
                 section = {"Tickets"}
+                dropdown = {
+                    [
+                        {name:"All Tickets", link:"/tickets"}
+                    ]
+                }
             />
             
         </ul>
