@@ -16,7 +16,7 @@ const ProjectPage = ()=>{
     const { projectId } = useParams();
     const [toggleTickets, setToggleTickets] = useState(false);
 
-    const {data:project, loading:projectLoading } = useFetchData(`http://localhost:3001/projects/${projectId}`);
+    const {data:project, loading:projectLoading } = useFetchData(`/projects/${projectId}`);
     const {isAuthed, isLeadOfProject} = useCheckAuthorization();
     const {isAuthed:canMakeTicket, isAuthedToMakeTicket} =  useCheckAuthorization();
     const userPortraitStyle = "text-[80px] text-primary";
@@ -56,7 +56,7 @@ const ProjectPage = ()=>{
                         formObj  = {project}
                         formName= {"update-project"}
                     />
-                    <DeleteButton obj = {project} url={`http://localhost:3001/projects/${project._id}/delete`}/>
+                    <DeleteButton obj = {project} url={`/projects/${project._id}/delete`}/>
                 </div>
             </div>
         )

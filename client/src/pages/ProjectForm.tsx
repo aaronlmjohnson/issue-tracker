@@ -38,8 +38,9 @@ const ProjectForm = (props:any)=>{
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
-        if(updateTarget === null) submitForm(form, "http://localhost:3001/projects/create");
-        else submitForm(form, `http://localhost:3001/projects/${updateTarget._id}/update`, "PATCH");  
+        console.log(updateTarget);
+        if(updateTarget === null) submitForm(form, "/projects/create");
+        else submitForm(form, `/projects/${updateTarget._id}/update`, "PATCH");  
     }
 
     const inputs = [

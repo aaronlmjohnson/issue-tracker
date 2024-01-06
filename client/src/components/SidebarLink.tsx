@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import CreateButton from "./CreateButton";
 
 interface IProps{
     icon: IconDefinition,
@@ -39,6 +40,10 @@ const SidebarLink = (props:IProps)=>{
                 {props.dropdown.map((linkObj:ILinkObj)=>{
                     return  <Link to={linkObj.link}>{linkObj.name}</Link>
                 })}
+                <CreateButton
+                    formName={"create-project"}
+                    buttonText={"Add Project"}
+                />
             </div>
         </li>
     )
