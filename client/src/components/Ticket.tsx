@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFetchData } from '../hooks/useFetchData';
 import TicketDetail from './TicketDetail';
 
 const Ticket = (props:any)=>{
     const { ticket } = props;
-    const {data:author, loading:authorLoading} = useFetchData(`http://localhost:3001/users/${ticket.author}`);
+
+
+    const {data:author, loading:authorLoading} = useFetchData(`/users/${ticket.author._id}`);
     const [toggleDetail, setToggleDetail] = useState(false);
 
     const handleTicketDetail = ()=>{
