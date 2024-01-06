@@ -17,7 +17,7 @@ const CreateButton = (props:IProps)=>{
     }
 
     return (
-        <button className="text-white"onClick={handleFormDisplay}> 
+        <button className="text-white" onClick={handleFormDisplay}> 
             {buttonText}
         </button>
     )
