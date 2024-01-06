@@ -16,7 +16,7 @@ const Root = ()=>{
                 <Sidebar 
                     sidebarVisible={sidebarVisible}
                 />
-                <div className="flex flex-col w-screen">
+                <div className={`flex flex-col w-screen ${activeForm !== "none" ? "h-screen overflow-hidden" : ""}`}>
                     <Navbar 
                         setSidebarVisible={setSidebarVisible}
                     />
