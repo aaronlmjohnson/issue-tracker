@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
@@ -6,15 +6,8 @@ import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import FormDisplay from "../components/FormDisplay";
 
 const Root = ()=>{
-
-   
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const {activeForm} = useActiveFormContext();
-
-    useEffect(()=>{
-        console.log(activeForm);
-    },[activeForm])
-
 
     return (
         <>

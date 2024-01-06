@@ -12,11 +12,12 @@ const Checkboxes = (props:any)=>{
     },[])
 
     const handleCheckbox = (e:any, i:number)=>{
-        const isChecked = !selectedOptions.includes(e.target.value);
-        setCheckState((prevState:string[])=>{
-            const newState = isChecked ? [...prevState, e.target.value] :
-                    prevState.filter((value)=> value !== e.target.value);
+        const isChecked = selectedOptions.includes(e.target.value);
 
+        setCheckState((prevState:string[])=>{
+            const newState = isChecked ?  
+                    prevState.filter((value)=> value !== e.target.value) : //if previously checked then uncheck and remove from state else check and add to state
+                    [...prevState, e.target.value];
             setter({...form, [checkboxProperty]:newState})
             return newState;
         });        

@@ -29,10 +29,12 @@ const ProjectForm = (props:any)=>{
 
     useEffect(()=>{
         if(activeForm === "update-project"){
-            setForm(updateTarget);
-            if(updateTarget)
-                if("developers_assigned_to" in updateTarget)
-                    setDeveloperNames(updateTarget.developers_assigned_to); //should just populate developer names in project to avoid this
+            if(updateTarget){
+                if("developers_assigned_to" in updateTarget){
+                    setDeveloperNames(updateTarget.developers_assigned_to.map((dev:any)=>dev._id));
+                    setForm({...updateTarget, developers_assigned_to:updateTarget.developers_assigned_to.map((dev:any)=> dev._id)})
+                }
+            }
         }
     }, [updateTarget]);
 
@@ -64,7 +66,7 @@ const ProjectForm = (props:any)=>{
             forValue={"project-lead"}
             options={leads}
             optionsKey={"fullName"}
-            selected = {form.project_lead}
+            selected = {form.project_lead._id}
             label={"Project Lead"}
             placeholder={"Select the Project Lead"}
             setter={(e: any )=> {handleChange(e, "project_lead")}}                
