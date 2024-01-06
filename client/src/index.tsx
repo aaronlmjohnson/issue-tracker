@@ -12,7 +12,7 @@ import UserDetail from './components/UserDetail';
 import Dashboard from './pages/Dashboard';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetail from './pages/ProjectDetail';
-import AllTickets from './pages/AllTickets';
+import AllTickets from './pages/TicketsPage';
 import Page401 from './pages/errorPages/401';
 import { ActiveFormContextProvider } from './context/ActiveFormContext';
 
