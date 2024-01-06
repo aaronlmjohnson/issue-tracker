@@ -1,6 +1,8 @@
 
 import { faHouse, faUser, faDiagramProject, faClipboardList, faBug } from '@fortawesome/free-solid-svg-icons';
 import SidebarLink from './SidebarLink';
+import { Link } from 'react-router-dom';
+import CreateButton from './CreateButton';
 
 const SidebarLinks = ()=>{        
     return(
@@ -10,7 +12,7 @@ const SidebarLinks = ()=>{
                 section = {"Dashboard"}
                 dropdown = {
                     [
-                        {name:"Home", link:"/"}
+                        <Link to={"/"}>{"Home"}</Link>
                     ]
                 }
             />
@@ -19,7 +21,7 @@ const SidebarLinks = ()=>{
                 section = {"Accounts"}
                 dropdown = {
                     [
-                        {name:"All Accounts", link:"/users"},
+                        <Link to={"/users"}>{"All Accounts"}</Link>
                     ]
                 }
             />
@@ -28,8 +30,11 @@ const SidebarLinks = ()=>{
                 section = {"Projects"}
                 dropdown = {
                     [
-                        {name:"All Projects", link:"/projects"},
-                        {name:"Add Project", link:"/projects/create"}
+                        <Link to={"/projects"}>{"All Projects"}</Link>,
+                        <CreateButton
+                            formName={"create-project"}
+                            buttonText={"New Project"}
+                        />
                     ]
                 }
             />
@@ -38,7 +43,7 @@ const SidebarLinks = ()=>{
                 section = {"Tickets"}
                 dropdown = {
                     [
-                        {name:"All Tickets", link:"/tickets"}
+                        <Link to={"/tickets"}>{"All Tickets"}</Link>,
                     ]
                 }
             />
