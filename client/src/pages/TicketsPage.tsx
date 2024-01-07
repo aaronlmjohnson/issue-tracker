@@ -3,12 +3,10 @@ import { useFetchData } from "../hooks/useFetchData";
 import Ticket from '../components/Ticket';
 import TicketForm from "../components/TicketForm";
 import { Outlet } from "react-router-dom";
-import { useActiveFormContext } from "../hooks/useActiveFormContext";
 
 const TicketsPage = ()=>{
     const {data:tickets, loading:ticketsLoading, error } = useFetchData("/tickets");
     const [activeTicket, setActiveTicket] = useState(null); //maybe utilize active form instead of active ticket so I can update styling on tickets page
-    const {activeForm, setActiveForm} = useActiveFormContext();
 
     useEffect(()=>{
         console.log(activeTicket);

@@ -6,14 +6,25 @@ import useProjectInfo from "../hooks/useProjectInfo";
 // import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
+import CancelButton from "./CancelButton";
+import { useNavigate } from "react-router-dom";
+
+interface IProps {
+}
 
 const TicketDetail = (props:any)=>{
-    const {activeForm:ticket} = useActiveFormContext();
+    const {activeDetail:ticket} = useActiveFormContext();
     const {isAuthed, isAuthedToEditTicket} = useCheckAuthorization();
-
+    const navigate = useNavigate();
+    useEffect(()=>{
+        if(!ticket) navigate("/tickets");
+        console.log(ticket?.kind);
+        console.log(ticket);
+    }, [ticket])
 
     return(
-        <div className="ticket-detail border-8 absolute">
+        ticket && <div className="ticket-detail border-8 absolute">
+
             {/* <h1>{ticket.title}</h1>
             <p>Added by: {ticket.author.fullName}</p>
             <p>Added on: {ticket.date_created}</p>
@@ -25,6 +36,7 @@ const TicketDetail = (props:any)=>{
             {isAuthed && alterationButtons()}
             {/* {showDeleteConfirmation && confirmationForm()} */}
             {/* {formActive && <TicketForm project = {ticket.project} ticket={ticket} method={"PATCH"}/>} */} 
+            <CancelButton />
         </div>
     )
 }

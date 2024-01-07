@@ -6,14 +6,14 @@ import { useActiveFormContext } from '../hooks/useActiveFormContext';
 
 const Ticket = (props:any)=>{
     const { ticket, setActiveTicket } = props;
-    const {activeForm, setActiveForm} = useActiveFormContext();
+    const {activeDetail, setActiveDetail} = useActiveFormContext();
 
     const {data:author, loading:authorLoading} = useFetchData(`/users/${ticket.author._id}`);
     const [toggleDetail, setToggleDetail] = useState(false);
     const navigate = useNavigate();
 
     const handleTicketDetail = ()=>{
-        setActiveForm(ticket);
+        setActiveDetail(ticket);
         navigate(`/tickets/${ticket._id}`)
     }
     
