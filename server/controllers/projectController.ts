@@ -97,7 +97,8 @@ const projectController = ()=> {
                     date_created: req.body.date_created,
                     project_lead: req.body.project_lead,
                     author: req.body.author,
-                    developers_assigned_to: req.body.developers_assigned_to
+                    developers_assigned_to: req.body.developers_assigned_to,
+                    type:"project"
                 });
 
 
@@ -172,10 +173,10 @@ const projectController = ()=> {
                     project_lead: req.body.project_lead,
                     developers_assigned_to: req.body.developers_assigned_to,
                     _id: req.params.id,
+                    type:"project"
                 });
 
                 await Project.findByIdAndUpdate(req.params.id, project, {});
-                console.log(req.body)
                 const updater = (await User.findById(req.body.loggedInUser)).fullName;
                 const activity = {
                     body: ["", " has updated the project titled ", "", "."],

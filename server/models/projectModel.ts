@@ -9,7 +9,8 @@ interface ProjectDoc {
     project_lead: Schema.Types.ObjectId,
     developers_assigned_to: Schema.Types.ObjectId[],
     author: Schema.Types.ObjectId,
-    _id:String
+    _id:String,
+    type: "project"
 };
 
 interface ProjectVirtuals {
@@ -29,7 +30,8 @@ const projectSchema = new Schema<ProjectDoc, ProjectModel, ProjectVirtuals>({
     date_created: { type: Date, default: Date.now() },
     project_lead: {type: Schema.Types.ObjectId, ref: "User", required: true},
     author:{type: Schema.Types.ObjectId, ref: "User",  required: true},
-    developers_assigned_to: [{type: Schema.Types.ObjectId, ref: "User"}]
+    developers_assigned_to: [{type: Schema.Types.ObjectId, ref: "User"}],
+    type:{type: String, default: "project", required: true}
 }, opts);
 
 projectSchema.virtual("project-lead", {
