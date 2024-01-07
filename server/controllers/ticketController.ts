@@ -138,6 +138,7 @@ const ticketController = ()=> {
                     priority: req.body.priority,
                     status: req.body.status,
                     ticketType: req.body.type,
+                    type:"ticket",
                     assignee: req.body.assignee
                 });
 
@@ -237,6 +238,7 @@ const ticketController = ()=> {
                     status: req.body.status,
                     ticketType: req.body.type,
                     assignee: req.body.assignee,
+                    type: "ticket",
                     _id: req.params.ticketId
                 });
 

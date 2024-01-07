@@ -13,7 +13,8 @@ interface ITicket {
     comments: Schema.Types.ObjectId[],
     priorities: any,
     statuses: any,
-    ticketTypes: any
+    ticketTypes: any,
+    type: "ticket"
 }
 
 const ticketSchema = new Schema<ITicket>({
@@ -39,7 +40,9 @@ const ticketSchema = new Schema<ITicket>({
         default: "Feature",
     },
     assignee:{ type: Schema.Types.ObjectId, ref: "User"},
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment"}]
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment"}],
+    type:{type: String, default: "ticket", required: true}
+
 });
 
 ticketSchema.virtual('priorities').get(function() {
