@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useFetchData } from '../hooks/useFetchData';
 import TicketDetail from './TicketDetail';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useActiveFormContext } from '../hooks/useActiveFormContext';
 
 const Ticket = (props:any)=>{
-    const { ticket } = props;
-
+    const { ticket, setActiveTicket } = props;
+    const {activeForm, setActiveForm} = useActiveFormContext();
 
     const {data:author, loading:authorLoading} = useFetchData(`/users/${ticket.author._id}`);
     const [toggleDetail, setToggleDetail] = useState(false);
+    const navigate = useNavigate();
 
     const handleTicketDetail = ()=>{
-        setToggleDetail((prevState:any) => prevState ? false : true);
+        setActiveForm(ticket);
+        navigate(`/tickets/${ticket._id}`)
     }
     
     return (
@@ -20,7 +24,7 @@ const Ticket = (props:any)=>{
             <p>{ticket.feature}</p>
             <p>{ticket.priority}</p>
             <p>{ticket.status}</p>
-            {toggleDetail && <TicketDetail ticket = {ticket} />}
+            {/* <Outlet context={ticket}/> */}
         </div>
     )
 }

@@ -15,6 +15,8 @@ import ProjectDetail from './pages/ProjectDetail';
 import TicketsPage from './pages/TicketsPage';
 import Page401 from './pages/errorPages/401';
 import { ActiveFormContextProvider } from './context/ActiveFormContext';
+import Ticket from './components/Ticket';
+import TicketDetail from './components/TicketDetail';
 
 /* make sure to embed forms as children under respective parents ex. project form under project route */
 const router = createBrowserRouter([
@@ -46,7 +48,13 @@ const router = createBrowserRouter([
       },
       {
         path:"/tickets",
-        element: <TicketsPage />
+        element: <TicketsPage />,
+        children: [
+          {
+            element: <TicketDetail />,
+            path:"/tickets/:ticketId"
+          }
+        ]
       }
     ]
   },
