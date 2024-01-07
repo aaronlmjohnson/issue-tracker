@@ -5,12 +5,14 @@ import AllProjectTickets from "../components/AllProjectTickets";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import UpdateButton from "../components/UpdateButton";
 import FormButton from "../components/FormButton";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import ContentLoading from "./ContentLoading";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUserTie, faUserCog, faUserShield} from '@fortawesome/free-solid-svg-icons';
 import date from "date-and-time";
 import { Link } from "react-router-dom";
+import { ActiveFormContext } from "../context/ActiveFormContext";
+import { useActiveFormContext } from "../hooks/useActiveFormContext";
 
 const ProjectPage = ()=>{
     const { projectId } = useParams();
@@ -20,6 +22,7 @@ const ProjectPage = ()=>{
     const {isAuthed, isLeadOfProject} = useCheckAuthorization();
     const {isAuthed:canMakeTicket, isAuthedToMakeTicket} =  useCheckAuthorization();
     const userPortraitStyle = "text-[80px] text-primary";
+    const { activeDetail } = useActiveFormContext();
 
     useEffect(()=>{
         if(!projectLoading){
@@ -111,7 +114,8 @@ const ProjectPage = ()=>{
 
                 {isAuthed && alterationButtons()}
                 {/* {canMakeTicket && <TicketForm project={project}/>} */}
-                {toggleTickets && <AllProjectTickets project = {project} />}  
+                {toggleTickets && <AllProjectTickets project = {project} />} 
+                <Outlet context={activeDetail}/> 
             </>}
         </div>
     );
