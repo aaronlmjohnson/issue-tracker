@@ -12,7 +12,8 @@ interface IUser {
     firstName: String,
     roles: String[],
     fullName: String,
-    actions:any
+    actions:any,
+    type: "user"
 }
 
 //remove username 
@@ -31,7 +32,8 @@ const userSchema = new Schema<IUser>({
         enum: ["Administrator", "Project_Lead", "Developer"],
         default: "Developer",
     },
-    date_created: { type: Date, default: Date.now}
+    date_created: { type: Date, default: Date.now},
+    type:{ type: String, default: "user"}
 }, opts);
 
 userSchema.virtual("url").get(function(){

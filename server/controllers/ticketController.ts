@@ -246,7 +246,7 @@ const ticketController = ()=> {
                 const author = (await User.findById(req.body.loggedInUser)).fullName;
 
                 const activity = {
-                    body: ["Ticket titled ","",  "was updated by ", "", "under ", "", "."],
+                    body: ["Ticket titled ","",  "was updated by ", "", " under ", "", "."],
                     emphasisText:[ticket.title, author, projectTitle], 
                 };
                 

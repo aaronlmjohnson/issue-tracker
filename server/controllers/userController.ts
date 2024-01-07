@@ -131,7 +131,8 @@ const userController = ()=>{
                         first_name: req.body.first_name,
                         last_name: req.body.last_name,
                         password: hashedPassword,
-                        role: req.body.role
+                        role: req.body.role,
+                        type: "user"
                     });
                     
                     const result = await user.save();
@@ -187,7 +188,8 @@ const userController = ()=>{
                 first_name: "Guest",
                 last_name: req.body.role,
                 password: "Password1",
-                role: req.body.role
+                role: req.body.role,
+                type: "user"
             });
             await user.save();
         }
