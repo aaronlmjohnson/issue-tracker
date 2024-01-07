@@ -11,6 +11,7 @@ interface IProps {
     const { obj } = props;
     const {activeForm, setActiveForm, setUpdateTarget} = useActiveFormContext();
 
+
     const handleConfirmationDisplay = ()=> {
         setActiveForm("delete-confirmation");
         setUpdateTarget(obj);

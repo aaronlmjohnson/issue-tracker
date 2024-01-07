@@ -22,8 +22,7 @@ const DeleteConfirmation = ()=>{
         if(!updateTarget) return;
         e.preventDefault();
         const endpoint = location.pathname.split('/')[1] + '/' + updateTarget._id;
-        const path = process.env.REACT_APP_DEV_BACKEND_PATH + endpoint + '/delete';
-        
+        const path = '/' + endpoint + '/delete';
         submitForm(updateTarget, path, 'DELETE');
     }
 

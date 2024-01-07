@@ -6,7 +6,6 @@ import UpdateButton from "./UpdateButton";
 
 const ProjectListing = (props:any)=>{
     const { project } = props;
-    const url = `http://localhost:3001/projects/${project._id}/delete`;
     const {isAuthed, isAuthedToEditProject} = useCheckAuthorization();
 
     useEffect(()=>{
@@ -19,7 +18,7 @@ const ProjectListing = (props:any)=>{
                 <UpdateButton formName={"update-project"} formObj={project}/>
                 <DeleteButton 
                     obj = {project}
-                    url={`http://localhost:3001/projects/${project._id}/delete`}
+                    url={`/projects/${project._id}/delete`}
                 />
             </div>
         )
