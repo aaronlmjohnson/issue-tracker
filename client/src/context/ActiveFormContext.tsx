@@ -11,10 +11,10 @@ type TActiveForm = "create-project" |
 interface IActiveFormContext {
     activeForm: TActiveForm | null,
     setActiveForm: React.Dispatch<React.SetStateAction<TActiveForm>>
-    updateTarget: TFormObject
-    setUpdateTarget: React.Dispatch<React.SetStateAction<TFormObject>>
-    activeDetail: TFormObject
-    setActiveDetail: React.Dispatch<React.SetStateAction<TFormObject>>
+    updateTarget: TFormObject | null
+    setUpdateTarget: React.Dispatch<React.SetStateAction<TFormObject | null>>
+    activeDetail: TFormObject | null
+    setActiveDetail: React.Dispatch<React.SetStateAction<TFormObject | null>>
     reset: ()=> void
 
 }
@@ -27,13 +27,13 @@ interface IActiveFormProviderProps{
 
 export const ActiveFormContextProvider = ({children}:IActiveFormProviderProps)=>{
     const [activeForm, setActiveForm] = useState<TActiveForm>("none");
-    const [updateTarget, setUpdateTarget] = useState<TFormObject>({} as TFormObject);
-    const [activeDetail, setActiveDetail] = useState<TFormObject>({} as TFormObject);
+    const [updateTarget, setUpdateTarget] = useState<TFormObject | null>(null);
+    const [activeDetail, setActiveDetail] = useState<TFormObject | null>(null);
 
     const reset = ()=>{
         setActiveForm("none");
-        setActiveDetail({} as TFormObject);
-        setUpdateTarget({} as TFormObject);
+        setActiveDetail(null);
+        setUpdateTarget(null);
     }
 
     return(

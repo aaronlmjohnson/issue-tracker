@@ -1,5 +1,5 @@
 export interface IProject {
-    kind:"project";
+    type:"project";
     _id: string;
     title: string;
     description: string;
@@ -9,7 +9,7 @@ export interface IProject {
 }
 
 export interface IUser {
-    kind:"user";
+    type:"user";
     _id: string;
     email: string;
     first_name: string;
@@ -23,7 +23,7 @@ export interface IUser {
 }
 
 export type ITicket = {
-    kind:"ticket";
+    type:"ticket";
     _id: string;
     title: string;
     description: string;
@@ -32,7 +32,7 @@ export type ITicket = {
     date_created: string;
     priority: string;
     status: string;
-    type: string;
+    ticketType: string;
     assignee: string | null;
     comments: [];
 

@@ -18,7 +18,7 @@ const TicketDetail = (props:any)=>{
     const navigate = useNavigate();
     useEffect(()=>{
         if(!ticket) navigate("/tickets");
-        console.log(ticket?.kind);
+        console.log(ticket?.type);
         console.log(ticket);
     }, [ticket])
 
