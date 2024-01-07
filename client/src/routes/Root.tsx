@@ -7,11 +7,12 @@ import FormDisplay from "../components/FormDisplay";
 
 const Root = ()=>{
     const [sidebarVisible, setSidebarVisible] = useState(true);
-    const {activeForm} = useActiveFormContext();
-
+    
+    const {activeForm, activeDetail} = useActiveFormContext();
     return (
         <>
-            <div className={`absolute top-0 left-0 bg-black/60 w-screen h-screen z-10  ${activeForm === "none" ? 'hidden' : ''}`}></div> 
+            {((activeForm !== "none") || activeDetail)
+             && <div className={`absolute top-0 left-0 bg-black/60 w-screen h-screen z-10`}></div>}
             <div className="flex ">
                 <Sidebar 
                     sidebarVisible={sidebarVisible}

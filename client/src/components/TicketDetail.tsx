@@ -9,33 +9,25 @@ import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import CancelButton from "./CancelButton";
 import { useNavigate } from "react-router-dom";
 
-interface IProps {
-}
-
 const TicketDetail = (props:any)=>{
     const {activeDetail:ticket} = useActiveFormContext();
     const {isAuthed, isAuthedToEditTicket} = useCheckAuthorization();
+
     const navigate = useNavigate();
     useEffect(()=>{
         if(!ticket) navigate("/tickets");
-        console.log(ticket?.type);
-        console.log(ticket);
     }, [ticket])
 
     return(
-        ticket && <div className="ticket-detail border-8 absolute">
-
-            {/* <h1>{ticket.title}</h1>
+        ticket?.type === "ticket" && <div className="ticket-detail border-8 absolute z-50 bg-white top-1/3 left-1/2 -translate-y-1/3 -translate-x-1/2">
+            <h1>{ticket.title}</h1>
             <p>Added by: {ticket.author.fullName}</p>
             <p>Added on: {ticket.date_created}</p>
             <p>{ticket.description}</p>
             <p>Priority: {ticket.priority}</p>
             <p>Status: {ticket.status}</p>
-            <p>{ticket.type}</p>
-            <p>Assigned to: {ticket.assignee ? ticket.assignee.fullName : "Unassigned"}</p>
-            {isAuthed && alterationButtons()}
-            {/* {showDeleteConfirmation && confirmationForm()} */}
-            {/* {formActive && <TicketForm project = {ticket.project} ticket={ticket} method={"PATCH"}/>} */} 
+            <p>{ticket.ticketType}</p>
+            <p>Assigned to: {ticket.assignee ? ticket.assignee.fullName : "Unassigned"}</p> 
             <CancelButton />
         </div>
     )

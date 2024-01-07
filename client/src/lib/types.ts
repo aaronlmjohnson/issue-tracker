@@ -22,7 +22,7 @@ export interface IUser {
 
 }
 
-export type ITicket = {
+export interface ITicket {
     type:"ticket";
     _id: string;
     title: string;
@@ -33,7 +33,7 @@ export type ITicket = {
     priority: string;
     status: string;
     ticketType: string;
-    assignee: string | null;
+    assignee: IUser | null;
     comments: [];
 
 }
