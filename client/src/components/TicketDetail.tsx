@@ -7,15 +7,17 @@ import useProjectInfo from "../hooks/useProjectInfo";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import CancelButton from "./CancelButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const TicketDetail = (props:any)=>{
     const {activeDetail:ticket} = useActiveFormContext();
     const {isAuthed, isAuthedToEditTicket} = useCheckAuthorization();
+    const params = useParams();
 
     const navigate = useNavigate();
     useEffect(()=>{
-        if(!ticket) navigate("/tickets");
+        if(!ticket) 
+            navigate(params.projectId ? `/projects/${params.projectId}` : "/tickets");
     }, [ticket])
 
     return(
