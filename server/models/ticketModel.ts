@@ -8,12 +8,12 @@ interface ITicket {
     author: Schema.Types.ObjectId,
     priority: String,
     status: String,
-    type: String,
+    ticketType: String,
     assignee: Schema.Types.ObjectId,
     comments: Schema.Types.ObjectId[],
     priorities: any,
     statuses: any,
-    types: any
+    ticketTypes: any
 }
 
 const ticketSchema = new Schema<ITicket>({
@@ -33,7 +33,7 @@ const ticketSchema = new Schema<ITicket>({
         enum: ["Not Assigned", "Assigned", "Finished"],
         default: "Not Assigned",
     },
-    type:{
+    ticketType:{
         type: String,
         enum: ["Feature", "Bug"],
         default: "Feature",
@@ -46,8 +46,8 @@ ticketSchema.virtual('priorities').get(function() {
     return ticketSchema.path('priority').options.enum;
 });
 
-ticketSchema.virtual('types').get(function() {
-    return ticketSchema.path('type').options.enum;
+ticketSchema.virtual('ticketTypes').get(function() {
+    return ticketSchema.path('ticketType').options.enum;
 });
 
 ticketSchema.virtual('statuses').get(function() {

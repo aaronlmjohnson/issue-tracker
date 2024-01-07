@@ -60,7 +60,7 @@ const ticketController = ()=> {
     const getTicketEnums = asyncHandler(async(req, res, next)=>{
         const priorities = Ticket.schema.path('priority').options.enum;
         const statuses = Ticket.schema.path('status').options.enum;
-        const types = Ticket.schema.path('type').options.enum;
+        const types = Ticket.schema.path('ticketType').options.enum;
 
         res.status(200).json({priorities, statuses, types});
     });
@@ -115,7 +115,7 @@ const ticketController = ()=> {
         .escape()
         .isLength({min: 1})
         .withMessage("The ticket status wasn't set."),
-        body("type")
+        body("ticketType")
         .trim()
         .escape()
         .isLength({min: 1})
@@ -137,7 +137,7 @@ const ticketController = ()=> {
                     project: req.body.project,
                     priority: req.body.priority,
                     status: req.body.status,
-                    type: req.body.type,
+                    ticketType: req.body.type,
                     assignee: req.body.assignee
                 });
 
@@ -212,7 +212,7 @@ const ticketController = ()=> {
         .escape()
         .isLength({min: 1})
         .withMessage("The ticket status wasn't set."),
-        body("type")
+        body("ticketType")
         .trim()
         .escape()
         .isLength({min: 1})
@@ -235,7 +235,7 @@ const ticketController = ()=> {
                     project: req.body.project,
                     priority: req.body.priority,
                     status: req.body.status,
-                    type: req.body.type,
+                    ticketType: req.body.type,
                     assignee: req.body.assignee,
                     _id: req.params.ticketId
                 });
