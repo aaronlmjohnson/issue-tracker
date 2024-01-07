@@ -5,7 +5,6 @@ const ComboBox = (props:any)=>{
             <label htmlFor={props.forValue} className={""}>{props.label}</label>
 
             <select name={props.forValue } 
-            
                     className="border bg-white w-auto h-12 p-2.5 rounded border-2"
                     id={props.forValue} onChange={props.setter} 
                     value={selected} disabled={disabled || false}

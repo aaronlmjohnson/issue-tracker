@@ -66,7 +66,7 @@ const ProjectForm = (props:any)=>{
             forValue={"project-lead"}
             options={leads}
             optionsKey={"fullName"}
-            selected = {form.project_lead._id}
+            selected = {form.project_lead}
             label={"Project Lead"}
             placeholder={"Select the Project Lead"}
             setter={(e: any )=> {handleChange(e, "project_lead")}}                
