@@ -20,8 +20,8 @@ const SidebarLink = (props:IProps)=>{
     }
 
     return (
-        <li className="py-8">
-            <button className="flex items-center w-full" onClick={toggleDropdown}>
+        <li className="py-8" key={crypto.randomUUID()}>
+            <button className="flex items-center w-full" onClick={toggleDropdown} key={crypto.randomUUID()}>
                 <FontAwesomeIcon icon={props.icon} className="text-white text-2xl w-12 pr-4"/>
                 <span className="flex justify-start w-full">
                     <p className="inline sidebarlink font-bold">

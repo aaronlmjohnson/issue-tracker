@@ -12,7 +12,7 @@ const SidebarLinks = ()=>{
                 section = {"Dashboard"}
                 dropdown = {
                     [
-                        <Link to={"/"}>{"Home"}</Link>
+                        <Link to={"/"} key={crypto.randomUUID()}>{"Home"}</Link>
                     ]
                 }
             />
@@ -21,7 +21,7 @@ const SidebarLinks = ()=>{
                 section = {"Accounts"}
                 dropdown = {
                     [
-                        <Link to={"/users"}>{"All Accounts"}</Link>
+                        <Link to={"/users"} key={crypto.randomUUID()}>{"All Accounts"}</Link>
                     ]
                 }
             />
@@ -30,8 +30,9 @@ const SidebarLinks = ()=>{
                 section = {"Projects"}
                 dropdown = {
                     [
-                        <Link to={"/projects"}>{"All Projects"}</Link>,
+                        <Link to={"/projects"} key={crypto.randomUUID()}>{"All Projects"}</Link>,
                         <CreateButton
+                            key={crypto.randomUUID()}
                             formName={"create-project"}
                             buttonText={"New Project"}
                         />
@@ -43,7 +44,8 @@ const SidebarLinks = ()=>{
                 section = {"Tickets"}
                 dropdown = {
                     [
-                        <Link to={"/tickets"}>{"All Tickets"}</Link>,
+                        <Link to={"/tickets"}
+                        key={crypto.randomUUID()}>{"All Tickets"}</Link>,
                     ]
                 }
             />
