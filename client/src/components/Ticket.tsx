@@ -17,7 +17,7 @@ const Ticket = (props:any)=>{
     const handleTicketDetail = ()=>{
         setActiveDetail(ticket);
         //check and see if path includes project id
-        if(params.projectId) console.log(`redirect to projects/${params.projectId}/tickets/${ticket._id}`);
+        if(params.projectId) navigate(`tickets/${ticket._id}`);
         else navigate(`/tickets/${ticket._id}`)
     }
     
