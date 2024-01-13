@@ -8,6 +8,7 @@ import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import CancelButton from "./CancelButton";
 import { useNavigate, useParams } from "react-router-dom";
+import UpdateButton from "./UpdateButton";
 
 const TicketDetail = (props:any)=>{
     const {activeDetail:ticket} = useActiveFormContext();
@@ -31,6 +32,7 @@ const TicketDetail = (props:any)=>{
             <p>{ticket.ticketType}</p>
             <p>Assigned to: {ticket.assignee ? ticket.assignee.fullName : "Unassigned"}</p> 
             <CancelButton />
+            <UpdateButton formName={"update-ticket"} formObj = {ticket} />
         </div>
     )
 }

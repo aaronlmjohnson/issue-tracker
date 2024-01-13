@@ -12,12 +12,11 @@ import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import { useParams } from "react-router-dom";
 
 const TicketForm = (props:any)=>{
-    const { title } = props;
-    const {activeForm, updateTarget:ticket} = useActiveFormContext();
+    const {updateTarget:ticket} = useActiveFormContext();
     const { user } = useAuthContext();
     const {projectId} = useParams();
 
-    const {data:ticketEnums, loading:enumsLoading} = useFetchData("/tickets/ticket-enums");
+    const {data:ticketEnums} = useFetchData("/tickets/ticket-enums");
     const {data:developers} = useFetchData("/users/developers-by-name");
     const {data:project, loading:projectLoading} = useFetchData(`/projects/${projectId}`);
     const {submitForm} = useFormSubmit();
@@ -33,8 +32,14 @@ const TicketForm = (props:any)=>{
         assignee:"",
         date_created: new Date(Date.now())
     });
+    useEffect(()=>{ 
+        setForm({...form, ...ticket});
+        console.log("form", form);
+        console.log("ticket", ticket);
+    }, []);
 
     useEffect(()=>{
+        if(typeof form.project === "object") setForm({...form, project: form.project._id})
         if(form.assignee && !form.status) 
             setForm({...form, status: ticketEnums.statuses[1]});
     },[ticket, form, projectLoading, project]);
@@ -42,7 +47,11 @@ const TicketForm = (props:any)=>{
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
-        submitForm(form, `/projects/${project._id}/tickets/create`, "POST");
+        if(props.title === "Add Ticket")
+            submitForm(form, `/projects/${project._id}/tickets/create`, "POST");
+        else 
+            submitForm(form, `/projects/${project._id}/tickets/${ticket?._id}/update`, "PATCH");
+
     }
 
     const inputs = [
@@ -100,7 +109,9 @@ const TicketForm = (props:any)=>{
                     setter={(e:Event)=> handleChange(e, "status")}
                     disabled = {false}
             />,
-            <button className="px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary">Add</button>
+            <button className="px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary">
+                {props.title === "Add Ticket" ? "Add" : "Submit"}
+            </button>
             ,
             <CancelButton />
     ]
@@ -108,7 +119,7 @@ const TicketForm = (props:any)=>{
     return (
         <FormElement 
             formObj={form}
-            title={"Add Ticket"}
+            title={props.title}
             method={"POST"}
             inputs={inputs}
             handleSubmit={handleSubmit}

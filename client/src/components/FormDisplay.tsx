@@ -11,6 +11,8 @@ const FormDisplay = ()=>{
         {activeForm === "create-project" && <ProjectForm  title={"Create Project"} />}
         {activeForm === "update-project" && <ProjectForm  title={"Update Project"}/>}
         {activeForm === "create-ticket" && <TicketForm  title={"Create Ticket"}/>}
+        {activeForm === "update-ticket" && <TicketForm  title={"Update Ticket"}/>}
+
 
         {/* {activeForm === "delete-confirmation" && <DeleteConfirmation />} */}
 

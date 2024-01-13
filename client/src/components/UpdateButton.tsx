@@ -15,6 +15,7 @@ const UpdateButton = (props:IUpdateButtonProps)=>{
     const {setActiveForm, setUpdateTarget} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{
+        console.log(formName);
         setActiveForm(formName);
         setUpdateTarget(formObj);
     }
