@@ -2,9 +2,10 @@ import { useActiveFormContext } from "../hooks/useActiveFormContext";
 
 
 const CancelButton = ()=>{
-    const {activeForm, reset} = useActiveFormContext();
+    const {activeForm, activeDetail, reset} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{
+        console.log("activeDetail", activeDetail);
         reset();
     }
 
