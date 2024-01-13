@@ -5,7 +5,6 @@ const CancelButton = ()=>{
     const {activeForm, activeDetail, reset} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{
-        console.log("activeDetail", activeDetail);
         reset();
     }
 
