@@ -15,7 +15,6 @@ export const useFormSubmit = ()=>{
         setIsLoading(true);
         setError("");
         const url = process.env.REACT_APP_DEV_DOMAIN + path;
-        console.log(url);
         const response = await fetch(url, {
             method: method,
             headers: {

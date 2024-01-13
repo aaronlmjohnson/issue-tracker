@@ -20,6 +20,8 @@ router.get('/projects/:projectId/tickets', controller.getAllFromProject);
 router.get('/projects/:projectId/tickets/:ticketId', controller.getTicket);
 
 router.post('/projects/:projectId/tickets/create', controller.createTicket);
+//http://localhost:3001/projects/6599ccd917bca79581c5e3fb/tickets/create
+//http://localhost:3001/projects/65848bf3bd0c0dfb85b308ba/tickets/create
 
 router.delete('/projects/:projectId/tickets/:ticketId/delete', controller.deleteTicket);
 

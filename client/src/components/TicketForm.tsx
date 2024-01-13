@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TextInput from "./TextInput";
 import TextArea from "./TextArea";
 import ComboBox from "./ComboBox";
@@ -17,13 +17,11 @@ const TicketForm = (props:any)=>{
     const { user } = useAuthContext();
     const {projectId} = useParams();
 
-    //const {data:projectOptions, loading:optionsLoading } = useFetchData("/projects/all-project-names");// this returns nothing fix route 
     const {data:ticketEnums, loading:enumsLoading} = useFetchData("/tickets/ticket-enums");
     const {data:developers} = useFetchData("/users/developers-by-name");
     const {data:project, loading:projectLoading} = useFetchData(`/projects/${projectId}`);
-    // const {submitForm} = useFormSubmit();
+    const {submitForm} = useFormSubmit();
 
-    // //if ticket isn't null then I can instantiate with ticket
     const {form, setForm, handleChange} = useFormHandler({
         title:"",
         description:"",
@@ -31,31 +29,23 @@ const TicketForm = (props:any)=>{
         author:user.user._id,
         priority: "",
         status:"",
-        type:"",
+        ticketType:"",
         assignee:"",
         date_created: new Date(Date.now())
     });
 
     useEffect(()=>{
-        if(!projectLoading) console.log(project);
-        if(form.assignee && !form.status) setForm({...form, status: ticketEnums.statuses[1]});
+        if(form.assignee && !form.status) 
+            setForm({...form, status: ticketEnums.statuses[1]});
     },[ticket, form, projectLoading, project]);
-
-    // useEffect(()=>{
-    //     //for when someone is assigned to the project...change form to
-    //     if(form.assignee && !form.status) setForm({...form, status: ticketEnums.statuses[1]});
-    //     //reverse assigned status to not assigned if developer removed
-    // },[form])
 
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
-        // const endpoint = method === "PATCH" ? `${ticket._id}/update` : 'create';
-        // submitForm(form, `http://localhost:3001/projects/${project._id}/tickets/${endpoint}`, method);
+        submitForm(form, `/projects/${project._id}/tickets/create`, "POST");
     }
 
     const inputs = [
-            
         <TextInput 
                 forValue={"ticket-title"}
                 label={"Title:"}
@@ -98,8 +88,8 @@ const TicketForm = (props:any)=>{
                     forValue={"ticket-type"}
                     label={"Type"}
                     options={ticketEnums.types}
-                    selected = {form.type}
-                    setter={(e:Event)=> handleChange(e, "type")}
+                    selected = {form.ticketType}
+                    setter={(e:Event)=> handleChange(e, "ticketType")}
                     disabled = {false}
             />,
             <ComboBox 
