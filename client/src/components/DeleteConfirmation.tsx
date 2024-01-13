@@ -28,6 +28,7 @@ const DeleteConfirmation = ()=>{
 
     return (
        updateTarget && <FormElement 
+        formStyle={"small"}
         title = {"Delete"}
         method={"DELETE"}
         inputs = {inputs}

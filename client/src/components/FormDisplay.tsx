@@ -8,7 +8,7 @@ const FormDisplay = ()=>{
    
     return(
         <>
-        {activeForm === "create-project" && <ProjectForm  title={"Create Project"}/>}
+        {activeForm === "create-project" && <ProjectForm  title={"Create Project"} />}
         {activeForm === "update-project" && <ProjectForm  title={"Update Project"}/>}
         {activeForm === "create-ticket" && <TicketForm  title={"Create Ticket"}/>}
 

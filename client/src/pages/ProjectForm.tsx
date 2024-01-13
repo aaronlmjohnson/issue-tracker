@@ -100,6 +100,7 @@ const ProjectForm = (props:any)=>{
                 method={"POST"}
                 inputs = {inputs}
                 handleSubmit = {handleSubmit}
+                formStyle={"small"}
             /> 
             {error && <FormError error= {error}/>}
         </>

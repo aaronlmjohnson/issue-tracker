@@ -37,9 +37,8 @@ const TicketForm = (props:any)=>{
     });
 
     useEffect(()=>{
-        //console.log(ticket);
-        console.log(form);
         if(!projectLoading) console.log(project);
+        if(form.assignee && !form.status) setForm({...form, status: ticketEnums.statuses[1]});
     },[ticket, form, projectLoading, project]);
 
     // useEffect(()=>{
@@ -56,17 +55,12 @@ const TicketForm = (props:any)=>{
     }
 
     const inputs = [
+            
         <TextInput 
                 forValue={"ticket-title"}
                 label={"Title:"}
                 value={form.title}
                 setter={(e:Event)=> handleChange(e, "title")}
-            />,
-            <TextArea 
-                forValue={"ticket-description"}
-                label={"Description"}
-                value={form.description}
-                setter={(e:Event)=> handleChange(e, "description")}
             />,
             <ComboBox 
                     forValue={"ticket-project-name"}
@@ -76,6 +70,12 @@ const TicketForm = (props:any)=>{
                     selected = {form.project}
                     setter={(e:Event)=> handleChange(e, "project")}
                     disabled = {true}
+            />,
+            <TextArea 
+                forValue={"ticket-description"}
+                label={"Description"}
+                value={form.description}
+                setter={(e:Event)=> handleChange(e, "description")}
             />,
             <ComboBox 
                     forValue={"ticket-priority"}
@@ -95,14 +95,6 @@ const TicketForm = (props:any)=>{
                     disabled = {false}
             />,
             <ComboBox 
-                    forValue={"ticket-status"}
-                    label={"Status"}
-                    options={ticketEnums.statuses}
-                    selected = {form.status}
-                    setter={(e:Event)=> handleChange(e, "status")}
-                    disabled = {false}
-            />,
-            <ComboBox 
                     forValue={"ticket-type"}
                     label={"Type"}
                     options={ticketEnums.types}
@@ -110,7 +102,16 @@ const TicketForm = (props:any)=>{
                     setter={(e:Event)=> handleChange(e, "type")}
                     disabled = {false}
             />,
-            <button>{props.ticket ? "Update" : "Add"}</button>,
+            <ComboBox 
+                    forValue={"ticket-status"}
+                    label={"Status"}
+                    options={ticketEnums.statuses}
+                    selected = {form.status}
+                    setter={(e:Event)=> handleChange(e, "status")}
+                    disabled = {false}
+            />,
+            <button className="px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary">Add</button>
+            ,
             <CancelButton />
     ]
     
@@ -121,6 +122,7 @@ const TicketForm = (props:any)=>{
             method={"POST"}
             inputs={inputs}
             handleSubmit={handleSubmit}
+            formStyle={"large"}
         />
     )
 }

@@ -1,7 +1,7 @@
 const TextArea = (props:any)=>{
 
     return (
-        <div className="flex flex-col ">
+        <div className="flex flex-col col-span-2">
             <label htmlFor={props.forValue} className={"text-area-label"}>{props.label}</label>
             <textarea 
                 name={props.forValue} 
