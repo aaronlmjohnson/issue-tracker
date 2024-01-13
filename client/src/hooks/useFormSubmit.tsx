@@ -9,7 +9,7 @@ export const useFormSubmit = ()=>{
     const navigate = useNavigate();
     const { projectId } = useParams();
     const { user, loading:userDataLoading } = useAuthContext();
-    const { reset } = useActiveFormContext();
+    const { reset, setActiveDetail } = useActiveFormContext();
 
     const submitForm = async(data:any, path:string, method="POST")=>{
         setIsLoading(true);
@@ -34,6 +34,10 @@ export const useFormSubmit = ()=>{
             setIsLoading(false);
             setError("");
             reset();
+            
+            //display the ticket when a ticket is added or updated
+            if(json.ticket) setActiveDetail(json.ticket);
+
             if(method === "DELETE" && projectId) navigate(json.redirectUrl);
             if(method === "PATCH" || method === "DELETE") navigate(0);
             else navigate(json.redirectUrl);

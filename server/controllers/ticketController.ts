@@ -152,7 +152,7 @@ const ticketController = ()=> {
                 };
                 
                 activityController.createActivity(activity);
-                res.status(200).json({redirectUrl: `/projects/${req.params.projectId}/tickets/${ticket._id}`});
+                res.status(200).json({redirectUrl: `/projects/${req.params.projectId}/tickets/${ticket._id}`, ticket});
 
             } catch(err) {
                 res.status(400).send({error: err.message});
