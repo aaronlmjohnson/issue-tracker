@@ -34,8 +34,6 @@ const TicketForm = (props:any)=>{
     });
     useEffect(()=>{ 
         setForm({...form, ...ticket});
-        console.log("form", form);
-        console.log("ticket", ticket);
     }, []);
 
     useEffect(()=>{

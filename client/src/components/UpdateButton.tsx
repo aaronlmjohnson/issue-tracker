@@ -12,10 +12,10 @@ interface IUpdateButtonProps {
 const UpdateButton = (props:IUpdateButtonProps)=>{
     const { formName, formObj} = props;
 
-    const {setActiveForm, setUpdateTarget} = useActiveFormContext();
+    const {setActiveForm, setUpdateTarget, setActiveDetail} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{
-        console.log(formName);
+        setActiveDetail(null);
         setActiveForm(formName);
         setUpdateTarget(formObj);
     }
