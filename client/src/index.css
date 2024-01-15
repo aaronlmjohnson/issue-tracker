@@ -2,31 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-.rotate-45{
+.rotate-45 {
     transform: scale(-1, 1) rotate(45deg);
 }
 
-.portrait-button:hover ~ .dropdown{
+.portrait-button:hover~.dropdown {
     display: hidden;
     background: green;
 }
 
-.logo{
+.logo {
     font-size: clamp(1.25rem, 2.5vw, 3rem);
 }
 
-.sidebarlink{
+.sidebarlink {
     font-size: clamp(1rem, 1vw, 2rem);
 }
 
 @media (max-width: 640px) {
-    .logo{
+    .logo {
         font-size: 3rem;
     }
 }
 
 
-.submit-one{
+.submit-one {
     @apply bg-primary;
     @apply text-white;
     @apply w-auto;
@@ -35,7 +35,7 @@
     @apply rounded;
 }
 
-.submit-two{
+.submit-two {
     @apply px-4;
     @apply py-1;
     @apply border-2;
@@ -48,7 +48,7 @@
     @apply w-1/3;
 }
 
-.button-one{
+.button-one {
     @apply px-4;
     @apply py-1;
     @apply border-2;
@@ -62,19 +62,19 @@
 }
 
 .ticket-detail {
-    @apply flex flex-col bg-white py-8 px-16 gap-8;
+    @apply flex flex-col bg-white py-8 px-16 gap-8 w-fit;
 }
 
 .ticket-detail-listing {
-    @apply bg-white flex justify-between;
+    @apply bg-white flex justify-between ;
 }
 
 .ticket-detail-label {
     @apply text-primary font-bold
 }
 
-.ticket-detail-listing-notes{
-    @apply flex flex-col gap-2;
+.ticket-detail-listing-notes {
+    @apply flex flex-col gap-2 break-words max-w-sm;
 }
 
 .center-screen {
@@ -82,8 +82,3 @@
 }
 
 /* px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary */
-
-
-
-
-

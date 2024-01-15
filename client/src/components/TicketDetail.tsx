@@ -19,11 +19,15 @@ const TicketDetail = (props:any)=>{
 
     return(
         ticket?.type === "ticket" && <ul className="ticket-detail center-screen">
-            <h2 className="text-primary text-2xl font-bold">{ticket.title}</h2>
+            <li className="w-fit">
+                <h2 className="text-primary text-2xl font-bold w-fit">{ticket.title}</h2>
+            </li>
+            
             <TicketDetailListing 
                 label={"Posted By"} 
                 value={ticket.author.fullName}
             />
+            
             <TicketDetailListing 
                 label={"Date Added"} 
                 value={date.format( new Date(ticket.date_created), 'MMMM DD, YYYY')}
@@ -44,15 +48,16 @@ const TicketDetail = (props:any)=>{
                 label={"Assigned to"} 
                 value={ticket.assignee?.fullName}
             />}
+            
+                       
             <TicketDetailListing 
                 label={"Notes"} 
                 value={ticket.description}
             />
-            <div className="flex gap-x-4">
+            <li className="flex gap-x-4 w-1/2">
                 <UpdateButton formName={"update-ticket"} formObj = {ticket} />
                 <CancelButton />
-            </div>           
-            
+            </li>
         </ul>
     )
 }
