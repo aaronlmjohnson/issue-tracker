@@ -1,39 +1,56 @@
 import { useEffect } from "react";
-import useTicketUpdateButton from "../hooks/useTicketUpdateButton";
-import TicketForm from "./TicketForm";
-import TicketDeleteButton from "./TicketDeleteButton";
-import useProjectInfo from "../hooks/useProjectInfo";
-// import useDeleteConfirmation from "../hooks/useDeleteConfirmation";
 import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import CancelButton from "./CancelButton";
 import { useNavigate, useParams } from "react-router-dom";
 import UpdateButton from "./UpdateButton";
+import date from "date-and-time";
+import TicketDetailListing from "./TicketDetailListing";
 
 const TicketDetail = (props:any)=>{
     const {activeDetail:ticket} = useActiveFormContext();
     const {isAuthed, isAuthedToEditTicket} = useCheckAuthorization();
     const params = useParams();
-
     const navigate = useNavigate();
     useEffect(()=>{
         if(!ticket) 
             navigate(params.projectId ? `/projects/${params.projectId}` : "/tickets");
-    }, [ticket])
+    }, [ticket]);
 
     return(
-        ticket?.type === "ticket" && <div className="ticket-detail border-8 absolute z-50 bg-white top-1/3 left-1/2 -translate-y-1/3 -translate-x-1/2">
-            <h1>{ticket.title}</h1>
-            <p>Added by: {ticket.author.fullName}</p>
-            <p>Added on: {ticket.date_created}</p>
-            <p>{ticket.description}</p>
-            <p>Priority: {ticket.priority}</p>
-            <p>Status: {ticket.status}</p>
-            <p>{ticket.ticketType}</p>
-            <p>Assigned to: {ticket.assignee ? ticket.assignee.fullName : "Unassigned"}</p> 
-            <CancelButton />
+        ticket?.type === "ticket" && <ul className="ticket-detail center-screen">
+            <h2>{ticket.title}</h2>
+            <TicketDetailListing 
+                label={"Posted By"} 
+                value={ticket.author.fullName}
+            />
+            <TicketDetailListing 
+                label={"Date Added"} 
+                value={date.format( new Date(ticket.date_created), 'MMMM DD, YYYY')}
+            />
+            <TicketDetailListing 
+                label={"Priority"} 
+                value={ticket.priority}
+            />
+            <TicketDetailListing 
+                label={"Status"} 
+                value={ticket.status}
+            />
+            <TicketDetailListing 
+                label={"Type"} 
+                value={ticket.ticketType}
+            />
+            {ticket.assignee && <TicketDetailListing 
+                label={"Assigned to"} 
+                value={ticket.assignee?.fullName}
+            />}
+            <TicketDetailListing 
+                label={"Notes"} 
+                value={ticket.description}
+            />            
             <UpdateButton formName={"update-ticket"} formObj = {ticket} />
-        </div>
+            <CancelButton />
+        </ul>
     )
 }
 //ticket.assignee.fullName || "Not Assigned"
