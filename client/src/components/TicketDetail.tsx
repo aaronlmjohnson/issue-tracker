@@ -19,7 +19,7 @@ const TicketDetail = (props:any)=>{
 
     return(
         ticket?.type === "ticket" && <ul className="ticket-detail center-screen">
-            <h2>{ticket.title}</h2>
+            <h2 className="text-primary text-2xl font-bold">{ticket.title}</h2>
             <TicketDetailListing 
                 label={"Posted By"} 
                 value={ticket.author.fullName}
@@ -47,9 +47,12 @@ const TicketDetail = (props:any)=>{
             <TicketDetailListing 
                 label={"Notes"} 
                 value={ticket.description}
-            />            
-            <UpdateButton formName={"update-ticket"} formObj = {ticket} />
-            <CancelButton />
+            />
+            <div className="flex gap-x-4">
+                <UpdateButton formName={"update-ticket"} formObj = {ticket} />
+                <CancelButton />
+            </div>           
+            
         </ul>
     )
 }

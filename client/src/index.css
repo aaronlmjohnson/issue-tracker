@@ -62,11 +62,19 @@
 }
 
 .ticket-detail {
-    @apply bg-white ;
+    @apply flex flex-col bg-white py-8 px-16 gap-8;
 }
 
 .ticket-detail-listing {
-    @apply bg-white ;
+    @apply bg-white flex justify-between;
+}
+
+.ticket-detail-label {
+    @apply text-primary font-bold
+}
+
+.ticket-detail-listing-notes{
+    @apply flex flex-col gap-2;
 }
 
 .center-screen {

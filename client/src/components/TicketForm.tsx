@@ -47,7 +47,7 @@ const TicketForm = (props:any)=>{
 
     const handleSubmit = (e:any)=>{
         e.preventDefault();
-        if(props.title === "Add Ticket")
+        if(props.title === "Create Ticket")
             submitForm(form, `/projects/${project._id}/tickets/create`, "POST");
         else 
             submitForm(form, `/projects/${project._id}/tickets/${ticket?._id}/update`, "PATCH");

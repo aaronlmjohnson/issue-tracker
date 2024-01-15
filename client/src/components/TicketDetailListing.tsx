@@ -5,8 +5,8 @@ interface IProps {
 }
 const TicketDetailListing = (props:IProps)=>{
     return (
-        <li>
-            <p>{props.label}</p>
+        <li className={`ticket-detail-listing${props.label === "Notes" ? "-notes" : ""}`}>
+            <p className="ticket-detail-label">{props.label}</p>
             <p>{props.value}</p>
         </li>
     )
