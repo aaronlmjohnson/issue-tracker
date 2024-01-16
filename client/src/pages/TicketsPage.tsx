@@ -11,12 +11,12 @@ const TicketsPage = ()=>{
 
     return(
         
-        <div> 
-            {!ticketsLoading && <div className="all-tickets-page">
+        <> 
+            {!ticketsLoading && <div className="tickets-page p-7">
                 {tickets.map((ticket:any)=> <Ticket ticket={ticket} setActiveTicket={setActiveTicket} key={ticket._id}/>)}
             </div>}
            <Outlet context={activeTicket}/>
-        </div>
+        </>
     )
 }
 
