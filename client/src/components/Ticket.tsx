@@ -5,6 +5,7 @@ import { useActiveFormContext } from '../hooks/useActiveFormContext';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import date from "date-and-time";
 
 const Ticket = (props:any)=>{
     const { ticket, setActiveTicket } = props;
@@ -20,15 +21,28 @@ const Ticket = (props:any)=>{
         if(params.projectId) navigate(`tickets/${ticket._id}`);
         else navigate(`/tickets/${ticket._id}`)
     }
+
+    const handlePriority = ()=>{
+        if(ticket.priority === "High") return "text-high-priority"
+        if(ticket.priority === "Medium") return "text-med-priority"
+        if(ticket.priority === "Low") return "text-low-priority"
+    }
     
     return (
         !authorLoading && <button onClick={handleTicketDetail}>
             <ul className="ticket-listing">
-                <li><p>{ticket.priority}</p></li>
-                <li><h2>{ticket.title}</h2></li>
-                <li><p>{ticket.feature}</p></li>
-                <li><p>{ticket.date_created}</p></li>
-                <li><p>{ticket.status}</p></li>
+                <li>
+                    <FontAwesomeIcon icon={faCircle} className={handlePriority()}/>
+                </li>
+                <li className="row-start-2 col-start-2">
+                    <h2 className="font-bold text-left">{ticket.title}</h2>
+                </li>
+                <li className="row-start-3 col-start-2 text-xs text-left">
+                    <p>{date.format( new Date(ticket.date_created), 'MMMM DD, YYYY')}</p>
+                </li>
+                <li className="row-start-4 col-start-2 w-fit text-xs text-left">
+                    <p>{ticket.status}</p>
+                </li>
             </ul>
         </button>
     )

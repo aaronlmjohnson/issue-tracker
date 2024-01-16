@@ -81,8 +81,15 @@
     @apply absolute top-1/3 left-1/2 -translate-y-1/3 -translate-x-1/2 z-50;
 }
 
+.tickets-page{
+    @apply grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10;
+}
+
 .ticket-listing{
-    @apply bg-white w-fit border-2
+    @apply bg-white w-fit  grid grid-cols-2 p-4 gap-y-3;
+    grid-template-columns: min-content;
+    width: 100%;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
 
 /* px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary */

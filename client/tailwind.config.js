@@ -11,7 +11,7 @@ module.exports = {
         'delete': '#FF0000',
         'non-focus': '#a7a7a7',
         'high-priority':'#ff6961',
-        'med-priority':'fdfd96',
+        'med-priority':'#fdfd96',
         'low-priority':'#77dd77',
         'shade-0': '#26005C',
         'shade-1': '#170038',

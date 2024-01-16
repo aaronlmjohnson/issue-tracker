@@ -10,7 +10,7 @@ const Navbar = (props:any)=>{
     const {user, loading} = useAuthContext();
     
     return( 
-        !loading && <nav className="sticky top-0 bg-white">
+        !loading && <nav className="sticky top-0 bg-white z-50">
             <div className="flex border border-x-0 border-t-0 px-7 py-3 place-content-between">
                 <div className="my-auto" onClick={()=> props.setSidebarVisible((prevState:boolean)=> prevState ? false : true)}>
                     {hamburgerIcon}
