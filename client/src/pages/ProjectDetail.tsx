@@ -25,9 +25,8 @@ const ProjectPage = ()=>{
     const { activeDetail } = useActiveFormContext();
 
     useEffect(()=>{
-        if(!projectLoading){
-            isLeadOfProject(project.project_lead);
-            isAuthedToMakeTicket(project);
+        if(project.length !== 0){
+            isLeadOfProject(project?.project_lead._id);
         } 
         
     },[projectLoading])
@@ -54,7 +53,6 @@ const ProjectPage = ()=>{
             <div className="flex flex-col gap-2">
                 <h2 className="flex flex-col font-secondary text-2xl font-bold">Options</h2>
                 <div className="flex flex-row gap-2">
-                    <FormButton content={toggleTickets ? "Hide Tickets" : "View Tickets"} handler={handleTicketsDisplay} />
                     <UpdateButton 
                         formObj  = {project}
                         formName= {"update-project"}
@@ -111,7 +109,7 @@ const ProjectPage = ()=>{
                     </div>
                 </div>
                 {/* return(<p className="developer-name" key={crypto.randomUUID()}>{developer.fullName}</p>) */}
-
+                <FormButton content={toggleTickets ? "Hide Tickets" : "View Tickets"} handler={handleTicketsDisplay} />
                 {isAuthed && alterationButtons()}
                 {/* {canMakeTicket && <TicketForm project={project}/>} */}
                 {toggleTickets && <AllProjectTickets project = {project} />} 

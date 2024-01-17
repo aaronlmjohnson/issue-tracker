@@ -12,6 +12,9 @@ const useCheckAuthorization = ()=>{
     
     const isLeadOfProject = (providedId:string)=>{
         if(!user) return;
+
+        console.log("is project lead", user.user._id === providedId || user.user.role === "Administrator")
+        console.log("providedId", providedId)
         setIsAuthed(user.user._id === providedId || user.user.role === "Administrator");
     }
 
@@ -19,7 +22,7 @@ const useCheckAuthorization = ()=>{
         if(!user) return;
         if(user.user.role === "Administrator") setIsAuthed(true);
         else if(ticket.author._id === user.user._id) setIsAuthed(true);
-        else if(ticket.project.project_lead === user.user._id) setIsAuthed(true);
+        else if(ticket.project.project_lead._id === user.user._id) setIsAuthed(true);
     }
 
     const isAuthedToMakeTicket = (project:any) =>{
@@ -33,7 +36,7 @@ const useCheckAuthorization = ()=>{
     const isAuthedToEditProject = (project:any)=>{
         if(!user) return;
         if(user.user.role === "Administrator") setIsAuthed(true);
-        else if(project.project_lead === user.user._id) setIsAuthed(true);
+        else if(project.project_lead._id === user.user._id) setIsAuthed(true);
     }
 
     

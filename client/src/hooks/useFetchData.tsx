@@ -41,7 +41,6 @@ export const useFetchData = (path:string, unAuth = false)=>{
         }
     }
 
-    /* Fix for getting roles for Sign up form */
     const unAuthRefetch = async (url:string)=>{
         try{
             setLoading(true);

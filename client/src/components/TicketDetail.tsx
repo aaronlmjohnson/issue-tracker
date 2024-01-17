@@ -13,6 +13,7 @@ const TicketDetail = (props:any)=>{
     const params = useParams();
     const navigate = useNavigate();
     useEffect(()=>{
+        if(ticket) isAuthedToEditTicket(ticket);
         if(!ticket) 
             navigate(params.projectId ? `/projects/${params.projectId}` : "/tickets");
     }, [ticket]);
@@ -55,7 +56,7 @@ const TicketDetail = (props:any)=>{
                 value={ticket.description}
             />
             <li className="flex gap-x-4 w-1/2">
-                <UpdateButton formName={"update-ticket"} formObj = {ticket} />
+                {isAuthed &&<UpdateButton formName={"update-ticket"} formObj = {ticket} />}
                 <CancelButton />
             </li>
         </ul>

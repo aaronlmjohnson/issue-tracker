@@ -1,5 +1,6 @@
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
 import { TFormObject} from "../lib/types";
+
 interface IUpdateButtonProps {
     formName: "none"|
     "create-project" | 
@@ -11,7 +12,6 @@ interface IUpdateButtonProps {
 
 const UpdateButton = (props:IUpdateButtonProps)=>{
     const { formName, formObj} = props;
-
     const {setActiveForm, setUpdateTarget, setActiveDetail} = useActiveFormContext();
 
     const handleFormDisplay = ()=>{

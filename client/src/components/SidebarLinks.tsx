@@ -35,7 +35,7 @@ const SidebarLinks = ()=>{
                             key={crypto.randomUUID()}
                             formName={"create-project"}
                             buttonText={"New Project"}
-                        />
+                        /> 
                     ]
                 }
             />

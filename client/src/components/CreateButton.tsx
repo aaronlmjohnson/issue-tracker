@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
+import useCheckAuthorization from "../hooks/useCheckAuthorization";
 import { TFormObject} from "../lib/types";
 interface IProps {
     formName: "none"|
@@ -9,15 +11,18 @@ interface IProps {
 
 const CreateButton = (props:IProps)=>{
     const { formName, buttonText} = props;
-
+    const { isAuthed, isAdmin } = useCheckAuthorization();
     const {setActiveForm} = useActiveFormContext();
+
+    useEffect(()=> isAdmin(), []);
 
     const handleFormDisplay = ()=>{
         setActiveForm(formName);
     }
 
     return (
-        <button className="text-white" onClick={handleFormDisplay}> 
+
+        isAuthed && <button className="text-white" onClick={handleFormDisplay}> 
             {buttonText}
         </button>
     )
