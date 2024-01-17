@@ -12,7 +12,7 @@ const GuestRoleButton = (props:any)=>{
 
     return (
         <button 
-                className="h-24 font-secondary font-bold text-white text-3xl bg-primary rounded"
+                className={`h-24 font-secondary font-bold text-white text-3xl ${props.isSelected ? "bg-primary-selected" :"bg-primary"} rounded`}
                 onClick={props.setter} 
                 value={props.roleName} 
         >

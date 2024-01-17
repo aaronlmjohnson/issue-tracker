@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useFormHandler from "../hooks/useFormHandler";
 import { useLogin } from "../hooks/useLogin";
 import GuestRoleButton from "./GuestRoleButton";
@@ -25,6 +26,7 @@ const GuestLoginForm = ()=>{
                             setter={(e:any)=> handleChange(e, "role")}
                             key={uuid()}
                             roleName={roleName}
+                            isSelected={form.role === roleName}
                         />
                     )
                 })
