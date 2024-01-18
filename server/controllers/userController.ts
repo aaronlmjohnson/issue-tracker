@@ -8,6 +8,7 @@ import date from "date-and-time";
 
 const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, process.env.SECRET, { expiresIn: '7d' });
 const activityController = activityHandler();
+
 const userController = ()=>{
     const getUsers = asyncHandler(async(req, res, next)=>{
         try{
@@ -94,7 +95,6 @@ const userController = ()=>{
         }
     });
 
-
     const signUp = [
         body("email")
         .custom( async (value) =>{
@@ -178,7 +178,6 @@ const userController = ()=>{
     });
 
     const guestLogin = asyncHandler(async (req, res, next)=>{
-        
         const count = await User.count({first_name:"Guest", last_name:req.body.role}).exec();
         let user = await User.findOne({email:`guest-${req.body.role}-${count - 1}@email.com`});
 
@@ -203,7 +202,6 @@ const userController = ()=>{
 
         activityController.createActivity(activity);
         
-        console.log("welcome", user.url);
         res.status(200).json({user, token, redirectUrl: user.url})
     });
 
