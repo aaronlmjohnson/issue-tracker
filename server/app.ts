@@ -12,7 +12,7 @@ import LocalStratetgy from "passport-local";
 
 import indexRouter from './routes/index';
 import usersRouter from './routes/userRoutes';
-import projectRouter from './routes/projects';
+import projectRouter from './routes/projectRoutes';
 import ticketRouter from './routes/ticketRoutes';
 import activityRouter from './routes/activityRoutes';
 
