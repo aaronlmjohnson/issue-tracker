@@ -100,12 +100,9 @@ const projectController = ()=> {
                     developers_assigned_to: req.body.developers_assigned_to,
                     type:"project"
                 });
-
-
+                
                 await project.save();
-                console.log(project);
                 const author = (await User.findById(project.author)).fullName;
-                //console.log(project);
                 const activity = {
                     body: ["", " has created the project titled ", "", "."],
                     emphasisText:[author, project.title], 
@@ -124,9 +121,7 @@ const projectController = ()=> {
 
     const deletePost = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.body._id).exec();
-        /*** When I add Tickets and Comments, in the future, i'll need to remove them too
-         * when deleting a project
-         */
+
         if(!project){
             const error = new Error("Project not found");
             res.status(404);
@@ -165,7 +160,6 @@ const projectController = ()=> {
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
 
-                //instead of new project find current one
                 const project = new Project({
                     title: req.body.title,
                     description: req.body.description,
