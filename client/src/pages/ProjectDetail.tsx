@@ -66,7 +66,7 @@ const ProjectPage = ()=>{
 
     return (
         projectLoading ?
-        <ContentLoading backgroundColor="bg-white" /> : //24 headers DM Sans Bold 16 Reg DM Sans gap-3
+        <ContentLoading backgroundColor="bg-white" /> :
         <div className="flex  flex-col gap-8 p-7">
             {!project.author && !project.project_lead?
             <>Loading Content</> :

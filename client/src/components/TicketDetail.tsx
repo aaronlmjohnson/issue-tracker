@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import UpdateButton from "./UpdateButton";
 import date from "date-and-time";
 import TicketDetailListing from "./TicketDetailListing";
+import DeleteButton from "./DeleteButton";
 
 const TicketDetail = (props:any)=>{
     const {activeDetail:ticket} = useActiveFormContext();
@@ -57,11 +58,12 @@ const TicketDetail = (props:any)=>{
             />
             <li className="flex gap-x-4 w-1/2">
                 {isAuthed &&<UpdateButton formName={"update-ticket"} formObj = {ticket} />}
+                {isAuthed &&<DeleteButton  obj = {ticket} url={`/projects/${ticket.project._id}/tickets/${ticket._id}/delete`} />}
+
                 <CancelButton />
             </li>
         </ul>
     )
 }
-//ticket.assignee.fullName || "Not Assigned"
 
 export default TicketDetail;

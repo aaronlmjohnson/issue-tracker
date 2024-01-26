@@ -5,11 +5,10 @@ import SubmitButton from "./SubmitButton";
 import { useFormSubmit } from "../hooks/useFormSubmit";
 import { useLocation } from "react-router-dom";
 
-const DeleteConfirmation = ()=>{
+const DeleteConfirmation = ({ url = ""})=>{
     const { updateTarget } = useActiveFormContext();
     const { submitForm } = useFormSubmit();
     const location = useLocation();
-
     const inputs = [
         <h2>Are you sure you want to delete this?</h2>,
         <div className="flex justify-between">
@@ -22,7 +21,7 @@ const DeleteConfirmation = ()=>{
         if(!updateTarget) return;
         e.preventDefault();
         const endpoint = location.pathname.split('/')[1] + '/' + updateTarget._id;
-        const path = '/' + endpoint + '/delete';
+        const path = url || '/' + endpoint + '/delete';
         submitForm(updateTarget, path, 'DELETE');
     }
 
