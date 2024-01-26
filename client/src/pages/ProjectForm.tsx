@@ -32,7 +32,15 @@ const ProjectForm = (props:any)=>{
             if(updateTarget){
                 if("developers_assigned_to" in updateTarget){
                     setDeveloperNames(updateTarget.developers_assigned_to.map((dev:any)=>dev._id));
-                    setForm({...updateTarget, developers_assigned_to:updateTarget.developers_assigned_to.map((dev:any)=> dev._id)})
+
+                    setForm(
+                        {
+                            ...updateTarget, 
+                            developers_assigned_to:updateTarget.developers_assigned_to.map((dev:any)=> dev._id),
+                            project_lead: updateTarget.project_lead._id
+                        }
+                    )
+
                 }
             }
         }
@@ -40,7 +48,7 @@ const ProjectForm = (props:any)=>{
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
-        if(updateTarget === null) submitForm(form, "/projects/create"); // need to adjust this
+        if(updateTarget === null) submitForm(form, "/projects/create"); 
         else submitForm(form, `/projects/${updateTarget._id}/update`, "PATCH");  
     }
 
@@ -65,7 +73,7 @@ const ProjectForm = (props:any)=>{
             forValue={"project-lead"}
             options={leads}
             optionsKey={"fullName"}
-            selected = {form.project_lead}
+            selected = {form.project_lead} 
             label={"Project Lead"}
             placeholder={"Select the Project Lead"}
             setter={(e: any )=> {handleChange(e, "project_lead")}}

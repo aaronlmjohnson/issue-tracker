@@ -4,7 +4,7 @@ export interface IProject {
     title: string;
     description: string;
     date_created: string;
-    project_lead:string;
+    project_lead:IUser;
     developers_assigned_to: string[];
 }
 
