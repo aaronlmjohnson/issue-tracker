@@ -12,7 +12,6 @@ export const useFormSubmit = ()=>{
     const { reset, setActiveDetail } = useActiveFormContext();
 
     const submitForm = async(data:any, path:string, method="POST")=>{
-        console.log(data);
         setIsLoading(true);
         setError("");
         const url = process.env.REACT_APP_DEV_DOMAIN + path;

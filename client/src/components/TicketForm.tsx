@@ -49,7 +49,6 @@ const TicketForm = (props:any)=>{
             submitForm(form, `/projects/${project._id}/tickets/create`, "POST");
         else 
             submitForm(form, `/projects/${project._id}/tickets/${ticket?._id}/update`, "PATCH");
-
     }
 
     const inputs = [

@@ -9,7 +9,6 @@ interface IFormProps {
     handleSubmit: (e: any) => void
 }
 
-
 const FormElement = (props:IFormProps)=>{
 
     const {method, inputs, handleSubmit, formStyle} = props;
