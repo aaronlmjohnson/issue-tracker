@@ -9,17 +9,18 @@ interface IProps {
     url: string
 }
 
- const ProjectDeleteButton = (props:IProps)=> {
+ const DeleteButton = (props:IProps)=> {
     const { obj } = props;
     const { isAdmin, isAuthed } = useCheckAuthorization();
-    const {activeForm, setActiveForm, setUpdateTarget, reset} = useActiveFormContext();
+    const {activeForm, setActiveForm, setUpdateTarget, setActiveDetail, activeDetail} = useActiveFormContext();
+
     useEffect(()=> isAdmin(), []);
 
     const handleConfirmationDisplay = ()=> {
-        //reset();
+        setActiveDetail(null);
         setActiveForm("delete-confirmation");
-        console.log(obj);
         setUpdateTarget(obj);
+
     };
 
     return(
@@ -27,10 +28,8 @@ interface IProps {
             <button className="px-4 py-1 border-2 border-delete rounded-lg font-secondary font-bold text-base text-delete" onClick={handleConfirmationDisplay}>
                 Delete
             </button>
-            {activeForm === "delete-confirmation" && <DeleteConfirmation url={props.url}/>}
         </>
-        
     )
 }
 
-export default ProjectDeleteButton;
+export default DeleteButton;

@@ -120,6 +120,8 @@ const projectController = ()=> {
     ]
 
     const deletePost = asyncHandler(async(req, res, next)=>{
+        // change method names from DeletePost 
+        // need to delete all project tickets before deleting project
         const project = await Project.findById(req.body._id).exec();
 
         if(!project){

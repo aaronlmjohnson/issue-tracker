@@ -51,7 +51,6 @@ const ProjectForm = (props:any)=>{
             placeholder={"Enter a title"}
             value={form.title}
             setter={(e: any )=> {handleChange(e, "title");}}
-            key={crypto.randomUUID()}
         />,
         <TextArea 
             forValue={"description"}
@@ -61,7 +60,6 @@ const ProjectForm = (props:any)=>{
             cols={30}
             value={form.description}
             setter={(e: any )=> {handleChange(e, "description")}}
-            key={crypto.randomUUID()}
         />,
         <ComboBox 
             forValue={"project-lead"}
@@ -71,7 +69,6 @@ const ProjectForm = (props:any)=>{
             label={"Project Lead"}
             placeholder={"Select the Project Lead"}
             setter={(e: any )=> {handleChange(e, "project_lead")}}
-            key={crypto.randomUUID()}                
         />,
         <Checkboxes
             forValue= {"developers"}
@@ -83,9 +80,8 @@ const ProjectForm = (props:any)=>{
             checkBoxOptions = {developerNames}
             selectedOptions = {form.developers_assigned_to}
             checkboxProperty = {"developers_assigned_to"}
-            key={crypto.randomUUID()}
         />,
-        <div className="flex gap-x-2" key={crypto.randomUUID()}>
+        <div className="flex gap-x-2" >
             <button className="px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary">Submit</button>
             <CancelButton />
         </div>

@@ -9,10 +9,11 @@ import TicketDetailListing from "./TicketDetailListing";
 import DeleteButton from "./DeleteButton";
 
 const TicketDetail = (props:any)=>{
-    const {activeDetail:ticket} = useActiveFormContext();
+    const {activeDetail:ticket, activeForm} = useActiveFormContext();
     const {isAuthed, isAuthedToEditTicket} = useCheckAuthorization();
     const params = useParams();
     const navigate = useNavigate();
+
     useEffect(()=>{
         if(ticket) isAuthedToEditTicket(ticket);
         if(!ticket) 
@@ -20,7 +21,7 @@ const TicketDetail = (props:any)=>{
     }, [ticket]);
 
     return(
-        ticket?.type === "ticket" && <ul className="ticket-detail center-screen">
+        ticket?.type === "ticket" && <ul className={`ticket-detail center-screen  ${activeForm === "delete-confirmation" ? "hidden" : "flex"}flex-col `}>
             <li className="w-fit">
                 <h2 className="text-primary text-2xl font-bold w-fit">{ticket.title}</h2>
             </li>

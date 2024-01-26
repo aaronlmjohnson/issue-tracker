@@ -57,7 +57,6 @@ const TicketForm = (props:any)=>{
                 label={"Title:"}
                 value={form.title}
                 setter={(e:Event)=> handleChange(e, "title")}
-                key={crypto.randomUUID()}
             />,
             <ComboBox 
                     forValue={"ticket-project-name"}
@@ -67,14 +66,12 @@ const TicketForm = (props:any)=>{
                     selected = {form.project}
                     setter={(e:Event)=> handleChange(e, "project")}
                     disabled = {true}
-                    key={crypto.randomUUID()}
             />,
             <TextArea 
                 forValue={"ticket-description"}
                 label={"Description"}
                 value={form.description}
                 setter={(e:Event)=> handleChange(e, "description")}
-                key={crypto.randomUUID()}
             />,
             <ComboBox 
                     forValue={"ticket-priority"}
@@ -83,7 +80,6 @@ const TicketForm = (props:any)=>{
                     selected = {form.priority}
                     setter={(e:Event)=> handleChange(e, "priority")}
                     disabled = {false}
-                    key={crypto.randomUUID()}
             />,
             <ComboBox 
                     forValue={"ticket-assignee"}
@@ -93,7 +89,6 @@ const TicketForm = (props:any)=>{
                     selected = {form.assignee}
                     setter={(e:Event)=> handleChange(e, "assignee")}
                     disabled = {false}
-                    key={crypto.randomUUID()}
             />,
             <ComboBox 
                     forValue={"ticket-type"}
@@ -102,7 +97,6 @@ const TicketForm = (props:any)=>{
                     selected = {form.ticketType}
                     setter={(e:Event)=> handleChange(e, "ticketType")}
                     disabled = {false}
-                    key={crypto.randomUUID()}
             />,
             <ComboBox 
                     forValue={"ticket-status"}
@@ -111,9 +105,8 @@ const TicketForm = (props:any)=>{
                     selected = {form.status}
                     setter={(e:Event)=> handleChange(e, "status")}
                     disabled = {false}
-                    key={crypto.randomUUID()}
             />,
-            <button className="px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary" key={crypto.randomUUID()}>
+            <button className="px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary" >
                 {props.title === "Add Ticket" ? "Add" : "Submit"}
             </button>
             ,

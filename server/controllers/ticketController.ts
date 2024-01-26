@@ -176,7 +176,7 @@ const ticketController = ()=> {
 
                 activityController.createActivity(activity);
             await Ticket.findByIdAndRemove(ticket.id);
-            res.status(200).json({redirectUrl: `/projects/652ff7351c79f67fa29b7ed9/tickets`});
+            res.status(200).json({redirectUrl: `/projects/${ticket.project}`});
         }
     });
 
@@ -251,7 +251,7 @@ const ticketController = ()=> {
                 };
                 
                 activityController.createActivity(activity);
-                res.status(200).json({redirectUrl: `/projects/${req.params.projectId}/tickets/${ticket._id}`});
+                res.status(200).json({redirectUrl: `/projects/${req.params.projectId}/tickets/${ticket._id}`}); 
 
             } catch(err) {
                 res.status(400).send({error: err.message});

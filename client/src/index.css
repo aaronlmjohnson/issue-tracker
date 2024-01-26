@@ -68,7 +68,7 @@
 }
 
 .ticket-detail {
-    @apply flex flex-col bg-white py-8 px-16 gap-8 w-full h-full sm:h-max sm:w-max ;
+    @apply  bg-white py-8 px-16 gap-8 w-full h-full sm:h-max sm:w-max ;
 }
 
 .ticket-detail-listing {
