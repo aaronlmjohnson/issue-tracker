@@ -150,7 +150,6 @@ const ticketController = ()=> {
                     body: ["Ticket titled ", "",  " was added by ", "", "under ", "", "."],
                     emphasisText:[ticket.title, author, projectTitle], 
                 };
-                console.log("ticket", ticket);
                 activityController.createActivity(activity);
                 res.status(200).json({redirectUrl: `/projects/${req.params.projectId}/tickets/${ticket._id}`, ticket});
 

@@ -11,10 +11,10 @@ const Dashboard = ()=>{
         return(
             <div className="flex justify-between">
                 <h1 className="font-primary text-5xl font-extrabold">Recent Activity</h1>
-                <button className="flex font-secondary items-center text-non-focus gap-2.5">
+                {/* <button className="flex font-secondary items-center text-non-focus gap-2.5">
                     view all
                     {arrowDown}
-                </button>
+                </button> */}
             </div>
         )   
     }
