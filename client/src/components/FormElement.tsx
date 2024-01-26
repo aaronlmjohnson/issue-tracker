@@ -15,7 +15,7 @@ const FormElement = (props:IFormProps)=>{
     const smallStyle = "flex flex-col gap-8";
     const largeStyle = "grid p-8 grid-cols-2 gap-4"
     return( 
-        <div className={`form-element`}>
+        <div className={`form-element z-50`}>
             <h1 className="font-primary text-primary text-2xl font-bold">{props.title}</h1>
             <form method={method} className={`${formStyle === "large" ? largeStyle : smallStyle}`} onSubmit={handleSubmit}>
                 {inputs}

@@ -12,7 +12,7 @@ const Root = ()=>{
     return (
         <>
             {((activeForm !== "none") || activeDetail)
-             && <div className={`absolute top-0 left-0 bg-black/60 w-screen h-screen z-50`}></div>}
+             && <div className={`absolute top-0 left-0 bg-black/60 w-screen h-screen z-50 hidden sm:block`}></div>}
             <div className="flex ">
                 <Sidebar 
                     sidebarVisible={sidebarVisible}

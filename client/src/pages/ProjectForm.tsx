@@ -40,7 +40,6 @@ const ProjectForm = (props:any)=>{
 
     const handleSubmit = (e:any)=> {
         e.preventDefault();
-        console.log(updateTarget);
         if(updateTarget === null) submitForm(form, "/projects/create"); // need to adjust this
         else submitForm(form, `/projects/${updateTarget._id}/update`, "PATCH");  
     }

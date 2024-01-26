@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
 const useCheckAuthorization = ()=>{
     const [isAuthed, setIsAuthed] = useState(false);
-    const {user, loading:userLoading} = useAuthContext();
+    const { user } = useAuthContext();
 
     const isAdmin = ()=>{
         if(!user) return;
@@ -12,9 +12,6 @@ const useCheckAuthorization = ()=>{
     
     const isLeadOfProject = (providedId:string)=>{
         if(!user) return;
-
-        console.log("is project lead", user.user._id === providedId || user.user.role === "Administrator")
-        console.log("providedId", providedId)
         setIsAuthed(user.user._id === providedId || user.user.role === "Administrator");
     }
 
@@ -38,8 +35,6 @@ const useCheckAuthorization = ()=>{
         if(user.user.role === "Administrator") setIsAuthed(true);
         else if(project.project_lead._id === user.user._id) setIsAuthed(true);
     }
-
-    
 
     return {
         isLeadOfProject,
