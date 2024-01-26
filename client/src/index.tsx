@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Root from "./routes/Root";
@@ -15,10 +15,8 @@ import ProjectDetail from './pages/ProjectDetail';
 import TicketsPage from './pages/TicketsPage';
 import Page401 from './pages/errorPages/401';
 import { ActiveFormContextProvider } from './context/ActiveFormContext';
-import Ticket from './components/Ticket';
 import TicketDetail from './components/TicketDetail';
 
-/* make sure to embed forms as children under respective parents ex. project form under project route */
 const router = createBrowserRouter([
   {
     path: "/",

@@ -8,9 +8,7 @@ import  ProjectController from "../controllers/projectController";
 
 const controller = ProjectController();
 
-console.log("before auth");
 router.use(requireAuth);
-console.log("post auth");
 router.get('/projects', controller.getAll);
 router.get('/projects/newest', controller.getNewestProjects);
 router.get('/projects/all-project-names', controller.getNamesAndIds);
