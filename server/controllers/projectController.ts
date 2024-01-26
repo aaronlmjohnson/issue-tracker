@@ -56,7 +56,7 @@ const projectController = ()=> {
         
     });
 
-    const get = asyncHandler(async(req, res, next)=>{
+    const getProject = asyncHandler(async(req, res, next)=>{
         const project = await Project.findById(req.params.id)
         .populate('author', {password: 0})
         .populate('developers_assigned_to', {password: 0})
@@ -71,7 +71,7 @@ const projectController = ()=> {
             res.status(200).json(project);
     });
 
-    const createPost = [
+    const createProject = [
         body("title")
         .trim()
         .isLength({min: 1})
@@ -119,7 +119,7 @@ const projectController = ()=> {
         })
     ]
 
-    const deletePost = asyncHandler(async(req, res, next)=>{
+    const deleteProject = asyncHandler(async(req, res, next)=>{
         // change method names from DeletePost 
         // need to delete all project tickets before deleting project
         const project = await Project.findById(req.body._id).exec();
@@ -145,7 +145,7 @@ const projectController = ()=> {
     });
 
 
-    const updatePost = [
+    const updateProject = [
         body("title")
         .trim()
         .isLength({min: 1})
@@ -193,11 +193,11 @@ const projectController = ()=> {
     return{
         getAll,
         getNewestProjects,
-        get,
+        getProject,
         getNamesAndIds,
-        createPost,
-        deletePost,
-        updatePost
+        createProject,
+        deleteProject,
+        updateProject
     };
 }
 
