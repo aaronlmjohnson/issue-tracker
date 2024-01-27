@@ -15,6 +15,7 @@ import projectRouter from './routes/projectRoutes';
 import ticketRouter from './routes/ticketRoutes';
 import activityRouter from './routes/activityRoutes';
 import compression from 'compression';
+import helmet from "helmet";
 
 const app = express();
 
@@ -28,6 +29,7 @@ async function main() {
   await mongoose.connect(connectionString);
 }
 
+app.use(helmet());
 app.use(compression());
 app.use(cors());
 app.use(logger('dev'));
