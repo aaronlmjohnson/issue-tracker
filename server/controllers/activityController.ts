@@ -2,8 +2,10 @@ import Project from "../models/projectModel";
 import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
 import Activity from "../models/activityModel";
+import Debug from "debug";
 
 const activityController = ()=>{
+    const debug = Debug("server:*");
 
     const getActivities = asyncHandler(async(req, res, next)=>{
         try{

@@ -12,7 +12,7 @@ router.post('/login', userController.loginUser);
 router.post('/guest-login', userController.guestLogin);
 router.post('/logout', userController.addActivityForLogout);
 
-router.use(requireAuth);
+// router.use(requireAuth);
 //protected routes
 router.get('/', userController.getUsers);
 router.get('/date-created', userController.newestUsers);

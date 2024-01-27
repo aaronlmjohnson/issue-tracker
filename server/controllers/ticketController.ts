@@ -4,8 +4,12 @@ import {body, validationResult} from "express-validator";
 import Ticket from "../models/ticketModel";
 import User from "../models/userModel";
 import activityHandler from "./activityController";
+import Debug from "debug";
+
 
 const ticketController = ()=> {
+    const debug = Debug("server:*");
+
     const activityController = activityHandler();
     const getAllTickets = asyncHandler(async(req, res, next)=>{
         try{
@@ -21,7 +25,7 @@ const ticketController = ()=> {
             } else
                 res.status(200).json(tickets);
         }catch(e){
-            console.log(e);
+            debug(e);
         }
         
     });
@@ -37,7 +41,7 @@ const ticketController = ()=> {
             } else
                 res.status(200).json(tickets);
         }catch(e){
-            console.log(e);
+            debug(e);
         }
         
     });
@@ -52,7 +56,7 @@ const ticketController = ()=> {
             } else
                 res.status(200).json(projects);
         }catch(e){
-            console.log(e);
+            debug(e);
         }
         
     }); 

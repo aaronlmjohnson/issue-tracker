@@ -3,8 +3,12 @@ import  asyncHandler from "express-async-handler";
 import {body, validationResult} from "express-validator";
 import Activity from "./activityController";
 import User from "../models/userModel";
+import Debug from "debug";
+
 
 const projectController = ()=> {
+    const debug = Debug("server:*");
+
     const activityHandler = Activity();
 
     const getAll = asyncHandler(async(req, res, next)=>{
@@ -20,7 +24,7 @@ const projectController = ()=> {
             } else
                 res.status(200).json(projects);
         }catch(e){
-            console.error(e);
+            debug(e);
         }
         
     });
@@ -35,7 +39,7 @@ const projectController = ()=> {
             } else
                 res.status(200).json(projects);
         }catch(e){
-            console.log(e);
+            debug(e);
         }
         
     }); 
@@ -51,7 +55,7 @@ const projectController = ()=> {
             } else
                 res.status(200).json(projects);
         }catch(e){
-            console.log(e);
+            debug(e);
         }
         
     });
@@ -87,7 +91,6 @@ const projectController = ()=> {
         .withMessage("You must provide a valid id for author"),
         asyncHandler(async (req, res, next)=>{
             const validationErrors = validationResult(req);
-            console.log(req.body);
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);

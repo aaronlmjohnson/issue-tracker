@@ -14,8 +14,7 @@ import Debug from 'debug';
 import http from 'http';
 
 const debug = Debug('server:*');
-debug("booting...");
-console.log("console statement");
+
 /**
  * Get port from environment and store in Express.
  */

@@ -11,16 +11,17 @@ const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, pr
 const activityController = activityHandler();
 
 const userController = ()=>{
-    const debug = Debug("app");
+    const debug = Debug("server:*");
+
     const getUsers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({}, {password: 0});
-            if(!users) throw Error("No users found");
+            if(!users) throw Error("No users found.");
             res.status(200).json(users);
 
         }catch(e){
-            res.status(400).send({error: e.message});
-            console.error("wowee!!!!", e);
+            res.status(404).send({error: e.message});
+            debug(e);
             return next(e);
         }
     });
@@ -28,11 +29,12 @@ const userController = ()=>{
     const newestUsers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({first_name:{$ne:"Guest"}}, {first_name: 1, last_name: 1, date_created: 1}).sort("-date_created").limit(4);
-            if(!users) throw Error("No users found");
+            if(!users) throw Error("Newest users not found.");
             res.status(200).json(users);
 
         }catch(e){
             res.status(400).send({error: e.message});
+            debug(e);
             return next(e);
         }
     });
@@ -44,7 +46,8 @@ const userController = ()=>{
             res.status(200).json(user);
 
         }catch(e){
-            res.status(400).send({error: e.message});
+            res.status(404).send({error: e.message});
+            debug(e);
             return next(e);
         }
     });
@@ -56,7 +59,8 @@ const userController = ()=>{
             res.status(200).json(user.roles);
 
         }catch(e){
-            res.status(400).send({error: e.message});
+            res.status(404).send({error: e.message});
+            debug(e);
             return next(e);
         }
     });
@@ -69,7 +73,8 @@ const userController = ()=>{
             res.status(200).json(users);
 
         }catch(e){
-            res.status(400).send({error: e.message});
+            res.status(404).send({error: e.message});
+            debug(e);
             return next(e);
         }
     });
@@ -82,6 +87,7 @@ const userController = ()=>{
 
         }catch(e){
             res.status(400).send({error: e.message});
+            debug(e);
             return next(e);
         }
     });
@@ -94,6 +100,7 @@ const userController = ()=>{
 
         }catch(e){
             res.status(400).send({error: e.message});
+            debug(e);
             return next(e);
         }
     });
@@ -103,7 +110,7 @@ const userController = ()=>{
         .custom( async (value) =>{
             const existingUser = await User.findOne({email: value}).exec()
             if(existingUser) 
-                throw new Error("Email already exists.")
+                throw new Error("Email already exists.");
         })
         .trim()
         .isLength({min: 1})
@@ -152,6 +159,7 @@ const userController = ()=>{
                 });
             } catch(err) {
                 res.status(400).send({error: err.message});
+                debug(err);
                 return next(err);
             }
         })
@@ -176,7 +184,7 @@ const userController = ()=>{
             res.status(200).json({user, token, redirectUrl: "/"});
         }catch(err){
             // console.error(err);
-            debug("wowee an error");
+            debug(err);
             res.status(400).json({error: err.message});
             return next(err);
         }
