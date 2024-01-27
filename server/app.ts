@@ -9,7 +9,6 @@ import session from "express-session";
 import passport from "passport";
 import LocalStratetgy from "passport-local";
 
-
 import indexRouter from './routes/index';
 import usersRouter from './routes/userRoutes';
 import projectRouter from './routes/projectRoutes';
@@ -20,7 +19,7 @@ const app = express();
 dotenv.config();
 // Set up mongoose connection
 mongoose.set("strictQuery", false);
-const connectionString = process.env.ATLAS_URI || "";
+const connectionString = process.env.MONGO_DB_URI || process.env.DEV_DB_URL;
 
 main().catch((err) => console.log(err));
 async function main() {

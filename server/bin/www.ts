@@ -13,8 +13,9 @@ import app from '../app';
 import Debug from 'debug';
 import http from 'http';
 
-const debug = Debug('server:server');
-
+const debug = Debug('server:*');
+debug("booting...");
+console.log("console statement");
 /**
  * Get port from environment and store in Express.
  */

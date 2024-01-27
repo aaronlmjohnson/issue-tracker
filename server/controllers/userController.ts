@@ -5,11 +5,13 @@ import jwt from 'jsonwebtoken';
 import {body, validationResult} from "express-validator";
 import activityHandler from "./activityController";
 import date from "date-and-time";
+import Debug from "debug";
 
 const createToken = (_id:import("mongoose").Types.ObjectId)=> jwt.sign({_id}, process.env.SECRET, { expiresIn: '7d' });
 const activityController = activityHandler();
 
 const userController = ()=>{
+    const debug = Debug("app");
     const getUsers = asyncHandler(async(req, res, next)=>{
         try{
             const users = await User.find({}, {password: 0});
@@ -18,6 +20,7 @@ const userController = ()=>{
 
         }catch(e){
             res.status(400).send({error: e.message});
+            console.error("wowee!!!!", e);
             return next(e);
         }
     });
@@ -172,6 +175,8 @@ const userController = ()=>{
             activityController.createActivity(activity);
             res.status(200).json({user, token, redirectUrl: "/"});
         }catch(err){
+            // console.error(err);
+            debug("wowee an error");
             res.status(400).json({error: err.message});
             return next(err);
         }

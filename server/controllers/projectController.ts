@@ -20,7 +20,7 @@ const projectController = ()=> {
             } else
                 res.status(200).json(projects);
         }catch(e){
-            console.log(e);
+            console.error(e);
         }
         
     });
