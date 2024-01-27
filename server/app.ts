@@ -14,8 +14,10 @@ import usersRouter from './routes/userRoutes';
 import projectRouter from './routes/projectRoutes';
 import ticketRouter from './routes/ticketRoutes';
 import activityRouter from './routes/activityRoutes';
+import compression from 'compression';
 
 const app = express();
+
 dotenv.config();
 // Set up mongoose connection
 mongoose.set("strictQuery", false);
@@ -26,6 +28,7 @@ async function main() {
   await mongoose.connect(connectionString);
 }
 
+app.use(compression());
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
