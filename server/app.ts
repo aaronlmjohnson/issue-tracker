@@ -16,6 +16,7 @@ import ticketRouter from './routes/ticketRoutes';
 import activityRouter from './routes/activityRoutes';
 import compression from 'compression';
 import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 
@@ -29,6 +30,13 @@ async function main() {
   await mongoose.connect(connectionString);
 }
 
+//limit requests to 30 per minute
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  limit: 30
+})
+
+app.use(limiter);
 app.use(helmet());
 app.use(compression());
 app.use(cors());
