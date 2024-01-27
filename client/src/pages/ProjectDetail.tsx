@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUserTie, faUserCog, faUserShield} from '@fortawesome/free-solid-svg-icons';
 import date from "date-and-time";
 import { Link } from "react-router-dom";
-import { ActiveFormContext } from "../context/ActiveFormContext";
 import { useActiveFormContext } from "../hooks/useActiveFormContext";
 
 const ProjectPage = ()=>{
@@ -97,7 +96,7 @@ const ProjectPage = ()=>{
                         </div>
                         {project.developers_assigned_to.map((developer:any)=>{
                             return(
-                                <Link to={project.project_lead.url} key={crypto.randomUUID()}>
+                                <Link to={developer.url} key={crypto.randomUUID()}>
                                     <div className="text-center">
                                         {userPortraits["Developer"]}
                                         <h1 className="text-2xl font-semibold">{developer.fullName}</h1>
@@ -108,10 +107,8 @@ const ProjectPage = ()=>{
                         })}
                     </div>
                 </div>
-                {/* return(<p className="developer-name" key={crypto.randomUUID()}>{developer.fullName}</p>) */}
                 <FormButton content={toggleTickets ? "Hide Tickets" : "View Tickets"} handler={handleTicketsDisplay} />
                 {isAuthed && alterationButtons()}
-                {/* {canMakeTicket && <TicketForm project={project}/>} */}
                 {toggleTickets && <AllProjectTickets project = {project} />} 
                 <Outlet context={activeDetail}/> 
             </>}
