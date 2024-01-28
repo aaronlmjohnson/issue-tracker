@@ -7,7 +7,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "DEBUG=server:* node dist/src/index.js",
+    "start": "DEBUG=server:* node ./dist/src/index.js",
     "build": "npx tsc",
     "devstart": "nodemon src/index.ts",
     "serverstart": "DEBUG=server:* npm run devstart"
