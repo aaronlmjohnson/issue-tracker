@@ -1,14 +1,3 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
-
-// const app = require('../app');
-// const debug = require('debug')('server:server');
-// const http = require('http');
-
 import app from '../app';
 import Debug from 'debug';
 import http from 'http';
@@ -92,6 +81,6 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
-    : 'port ' + addr.port;
+    : 'port ' + addr?.port;
   debug('Listening on ' + bind);
 }
