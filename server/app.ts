@@ -49,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //API Index Page
 app.get('/', function (req, res) {
-  res.send({ title: 'Issue Tracker' });
+  res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 app.use(activityRouter);
