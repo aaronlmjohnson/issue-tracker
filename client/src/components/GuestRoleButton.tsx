@@ -5,10 +5,12 @@ import { faUserCog } from '@fortawesome/free-solid-svg-icons';
 
 const GuestRoleButton = (props:any)=>{
     let role = null;
-    if(props.roleName === "Administrato") role = faUserShield;
-    if(props.roleName === "Project Lead") role = faUserTie;
+    if(props.roleName === "Administrator") role = faUserShield;
+    else if(props.roleName === "Project_Lead") role = faUserTie;
     else role = faUserCog;
-    const adminIcon = <FontAwesomeIcon icon={role} className="text-white" size="xl"/>
+
+
+    const adminIcon = <FontAwesomeIcon icon={role} className="text-white" size="xl" onClick={(e)=> props.setter(e, "role", "role name")}/>
 
     return (
         <button 
@@ -16,7 +18,7 @@ const GuestRoleButton = (props:any)=>{
                 onClick={props.setter} 
                 value={props.roleName} 
         >
-            {adminIcon}{props.roleName}
+            {adminIcon}{props.roleName.split("_").join(" ")}
         </button>
     );
 }

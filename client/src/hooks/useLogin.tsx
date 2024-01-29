@@ -23,7 +23,7 @@ export const useLogin = ()=>{
             },
             body: JSON.stringify(form),
         })
-
+        console.log(response);
         const json = await response.json();
         if(!response.ok){
             setIsLoading(false);
