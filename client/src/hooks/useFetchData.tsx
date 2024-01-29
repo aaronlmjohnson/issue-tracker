@@ -9,7 +9,6 @@ export const useFetchData = (path:string, unAuth = false)=>{
     const [error, setError] = useState(false);
     const { user, loading:userDataLoading } = useAuthContext();
     const url = (process.env.REACT_APP_PRODUCTION_API || process.env.REACT_APP_DEV_DOMAIN) + path;
-    console.log("url", url);
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -26,7 +25,7 @@ export const useFetchData = (path:string, unAuth = false)=>{
                     'Authorization': `Bearer: ${user.token}`
                 }
             });
-
+            console.log("response", response);
             if(!response.ok) 
                 throw Error(response.status);
 

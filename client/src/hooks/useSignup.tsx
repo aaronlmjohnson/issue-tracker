@@ -7,6 +7,7 @@ export const useSignup = ()=>{
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
+    const path = process.env.REACT_APP_PRODUCTION_API || process.env.REACT_APP_DEV_DOMAIN;
     interface FormObject {
         email:String,
         first_name:String,
@@ -16,8 +17,8 @@ export const useSignup = ()=>{
     }
     const signup = async(form:FormObject)=>{
         setIsLoading(true);
-        setError("");
-        const response = await fetch("http://localhost:3001/users/sign-up", {
+    
+        const response = await fetch(`${path}/users/sign-up`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -29,6 +30,7 @@ export const useSignup = ()=>{
         if(!response.ok){
             setIsLoading(false);
             setError(json.error);
+            console.error(json.error);
         }
 
         if(response.ok){
