@@ -25,7 +25,6 @@ export const useFetchData = (path:string, unAuth = false)=>{
                     'Authorization': `Bearer: ${user.token}`
                 }
             });
-            console.log("response", response);
             if(!response.ok) 
                 throw Error(response.status);
 
