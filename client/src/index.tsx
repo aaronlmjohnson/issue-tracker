@@ -9,7 +9,6 @@ import SignUp from './pages/SignUp';
 import GuestLoginPage from './pages/GuestLoginPage';
 import UsersPage from './pages/UsersPage';
 import UserDetail from './components/UserDetail';
-import Dashboard from './pages/Dashboard';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetail from './pages/ProjectDetail';
 import TicketsPage from './pages/TicketsPage';
@@ -82,6 +81,7 @@ const router = createBrowserRouter([
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+console.log(root);
 root.render(
   // <React.StrictMode>
 
