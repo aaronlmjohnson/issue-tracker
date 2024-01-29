@@ -12,8 +12,8 @@ router.post('/login', userController.loginUser);
 router.post('/guest-login', userController.guestLogin);
 router.post('/logout', userController.addActivityForLogout);
 
-router.use(requireAuth);
-//protected routes
+//router.use(requireAuth);
+
 router.get('/', userController.getUsers);
 router.get('/date-created', userController.newestUsers);
 router.get('/developers', userController.getDevelopers);
