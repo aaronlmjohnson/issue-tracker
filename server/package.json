@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=server:* node ./dist/index.js ",
-    "build": "npx tsc && ls dist",
+    "build": "npm install && npx tsc && ls dist",
     "devstart": "nodemon src/index.ts",
     "serverstart": "DEBUG=server:* npm run devstart"
   },
