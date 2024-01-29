@@ -6,6 +6,7 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons';
 
 import Ticket from './Ticket';
 import TicketForm from "./TicketForm";
+import ContentLoading from "../pages/ContentLoading";
 
 const AllProjectTickets = (props:any)=>{
     const { project } = props;
@@ -13,7 +14,9 @@ const AllProjectTickets = (props:any)=>{
     const {activeForm, updateTarget, setActiveForm} = useActiveFormContext();
     
     return(
-        !ticketsLoading && <div className="tickets-page">
+        ticketsLoading ?
+        <ContentLoading backgroundColor="bg-white" /> :
+        <div className="tickets-page">
             {tickets.map((ticket:ITicket)=> <Ticket ticket={ticket} project={project} key={ticket._id}/>)}
             <button className="flex gap-y-4 justify-center items-center flex-col bg-white drop-shadow-lg" onClick={()=> setActiveForm("create-ticket")}>
                 <p className="text-2xl font-bold text-gray-400">

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useFetchData } from "../hooks/useFetchData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUserTie, faUserCog, faUserShield} from '@fortawesome/free-solid-svg-icons';
+import ContentLoading from "./ContentLoading";
 
 const UsersPage = (props:any)=>{
     const {data:users, loading} = useFetchData(`/users`);
@@ -31,9 +32,12 @@ const UsersPage = (props:any)=>{
     }
 
     return(
-        <div className="p-7 w-full">
+        loading ?
+        <ContentLoading backgroundColor="bg-white" /> :
+        <div className="p-7 w-full h-full">
             <h1 className="font-primary text-5xl font-extrabold">All Accounts</h1>
-            {!loading && <div className="py-12 grid xl:grid-cols-five lg:grid-cols-4 md:grid-cols-3 lg:justify-between gap-y-20">
+            
+            <div className="py-12 grid xl:grid-cols-five lg:grid-cols-4 md:grid-cols-3 lg:justify-between gap-y-20">
                 {users.map((user:IUser)=>{
                     return <div className="text-center" key={user.id}>
                         <Link to={user.url}>
@@ -43,7 +47,7 @@ const UsersPage = (props:any)=>{
                         </Link>
                     </div>
                 })}
-            </div>}
+            </div>
             
         </div>
     );
