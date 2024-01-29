@@ -11,9 +11,11 @@ const TicketsPage = ()=>{
         <> 
             {ticketsLoading ?
             <ContentLoading backgroundColor="bg-white" /> :
-            <div className="tickets-page p-7">
-                <h1 className="font-primary text-5xl font-extrabold">All Projects</h1>
-                {tickets.map((ticket:any)=> <Ticket ticket={ticket} setActiveTicket={setActiveTicket} key={ticket._id}/>)}
+            <div className="tickets-page p-7 flex flex-col">
+                <h1 className="font-primary text-5xl font-extrabold">All Tickets</h1>
+                {
+                    tickets.map((ticket:any)=> <Ticket ticket={ticket} setActiveTicket={setActiveTicket} key={ticket._id}/>)
+                }
             </div>}
            <Outlet context={activeTicket}/>
         </>
