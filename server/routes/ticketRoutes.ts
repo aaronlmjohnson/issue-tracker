@@ -7,7 +7,7 @@ import requireAuth from '../middleware/requireAuth';
 
 const controller = TicketHandler();
 
-router.use(requireAuth);
+//router.use(requireAuth);
 router.get('/tickets', controller.getAllTickets);
 router.get('/tickets/newest', controller.newestTickets);
 router.get('/tickets/ticket-enums', controller.getTicketEnums);

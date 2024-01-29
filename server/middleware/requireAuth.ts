@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 const requireAuth = async (req:any, res:any, next:any)=>{
     const { authorization } = req.headers;
 
-    if(!authorization) return res.status(401).json({error: 'Auth required'});
+    if(!authorization) return res.status(401).json({error: 'Auth required for user routes.'});
     const token = authorization.split(' ')[1];
     dotenv.config();
 
