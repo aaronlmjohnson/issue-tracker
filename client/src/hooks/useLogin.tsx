@@ -15,7 +15,7 @@ export const useLogin = ()=>{
     const login = async(form:LoginFormObj, path:string = '')=>{
         setIsLoading(true);
         setError("");
-        const url = process.env.REACT_APP_DEV_DOMAIN + (path || '/users/login');
+        const url = (process.env.REACT_APP_PRODUCTION_API || process.env.REACT_APP_DEV_DOMAIN) + (path || '/users/login');
         const response = await fetch(url, {
             method: "POST",
             headers: {
