@@ -29,6 +29,10 @@ async function main() {
   await mongoose.connect(connectionString);
 }
 
+app.get('/', function (req, res) {
+  res.send("Issue Tracker Index");
+});
+
 // //limit requests to 30 per minute
 // const limiter = rateLimit({
 //   windowMs: 1 * 60 * 1000,
