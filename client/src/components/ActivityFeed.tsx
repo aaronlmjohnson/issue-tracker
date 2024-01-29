@@ -17,7 +17,7 @@ const ActivityFeed = ()=>{
     return(
         activitiesLoading ?
         <ContentLoading backgroundColor='bg-white' /> :
-         <div className="flex flex-col gap-10 h-fit">
+         <div className="flex flex-col gap-10 h-full p-7">
             <h1 className="font-primary text-5xl font-extrabold">Recent Activity</h1>
 
             {activities.map((activity:IActivity)=> 
