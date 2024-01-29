@@ -1,4 +1,5 @@
 import { useFetchData } from "../hooks/useFetchData";
+import ContentLoading from "../pages/ContentLoading";
 import Activity from "./Activity";
 
 interface IActivity {
@@ -14,7 +15,11 @@ const ActivityFeed = ()=>{
 
     const colors = ["text-shade-0", "text-shade-1", "text-shade-2", "text-shade-3", "text-shade-4"]
     return(
-        !activitiesLoading && <div className="flex flex-col gap-10 h-fit">
+        activitiesLoading ?
+        <ContentLoading backgroundColor='bg-white' /> :
+         <div className="flex flex-col gap-10 h-fit">
+            <h1 className="font-primary text-5xl font-extrabold">Recent Activity</h1>
+
             {activities.map((activity:IActivity)=> 
             <Activity 
                 color={colors[Math.floor(Math.random() * colors.length)]}

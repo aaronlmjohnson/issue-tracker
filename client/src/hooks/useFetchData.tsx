@@ -8,7 +8,8 @@ export const useFetchData = (path:string, unAuth = false)=>{
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const { user, loading:userDataLoading } = useAuthContext();
-    const url = process.env.REACT_APP_DEV_DOMAIN + path;
+    const url = (process.env.REACT_APP_PRODUCTION_API || process.env.REACT_APP_DEV_DOMAIN) + path;
+    console.log("url", url);
     const navigate = useNavigate();
 
     useEffect(()=>{
