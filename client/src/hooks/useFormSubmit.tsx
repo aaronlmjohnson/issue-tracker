@@ -14,7 +14,7 @@ export const useFormSubmit = ()=>{
     const submitForm = async(data:any, path:string, method="POST")=>{
         setIsLoading(true);
         setError("");
-        const url = process.env.REACT_APP_DEV_DOMAIN + path;
+        const url = process.env.REACT_APP_PRODUCTION_API || process.env.REACT_APP_DEV_DOMAIN + path;
         const response = await fetch(url, {
             method: method,
             headers: {
