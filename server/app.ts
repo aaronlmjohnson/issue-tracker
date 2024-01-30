@@ -31,13 +31,13 @@ async function main() {
   await mongoose.connect(connectionString);
 }
 
-//limit requests to 30 per minute
-const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000,
-  limit: 30
-})
+// limit requests to 500 per minute
+// const limiter = rateLimit({
+//   windowMs: 1 * 60 * 1000,
+//   limit: 500
+// })
 
-app.use(limiter);
+//app.use(limiter);
 app.use(helmet());
 app.use(compression());
 app.use(cors());

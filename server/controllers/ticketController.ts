@@ -133,15 +133,7 @@ const ticketController = ()=> {
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
-
-                const placeholderUser = req.body.assignee ? null : new User({ // used for assignee field when none is provided
-                    email: '',
-                    first_name: '',
-                    last_name: '',
-                    password: '',
-                    role: '',
-                    type: "user"
-                });
+                console.log("new ticket", req.body);
                 const ticket = new Ticket({
                     title: req.body.title,
                     description: req.body.description,
@@ -150,9 +142,9 @@ const ticketController = ()=> {
                     project: req.body.project,
                     priority: req.body.priority,
                     status: req.body.status,
-                    ticketType: req.body.type,
+                    ticketType: req.body.ticketType,
                     type:"ticket",
-                    assignee: req.body.assignee || placeholderUser 
+                    assignee: req.body.assignee || null 
                 });
 
                 await ticket.save();
@@ -239,15 +231,6 @@ const ticketController = ()=> {
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
 
-                const placeholderUser = req.body.assignee ? null : new User({
-                        email: '',
-                        first_name: '',
-                        last_name: '',
-                        password: '',
-                        role: '',
-                        type: "user"
-                });
-
                 const ticket = new Ticket({
                     title: req.body.title,
                     description: req.body.description,
@@ -257,12 +240,13 @@ const ticketController = ()=> {
                     priority: req.body.priority,
                     status: req.body.status,
                     ticketType: req.body.type,
-                    assignee: req.body.assignee || placeholderUser,
+                    assignee: req.body.assignee || null,
                     type: "ticket",
                     _id: req.params.ticketId
                 });
 
                 await Ticket.findByIdAndUpdate(req.params.ticketId, ticket, {});
+                const updatedTicket = await Ticket.findById(req.params.ticketId);
 
                 const projectTitle = (await Project.findById(req.params.projectId)).title;
                 const author = (await User.findById(req.body.loggedInUser)).fullName;
