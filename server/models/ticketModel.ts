@@ -9,7 +9,7 @@ interface ITicket {
     priority: String,
     status: String,
     ticketType: String,
-    assignee: Schema.Types.ObjectId | '',
+    assignee: Schema.Types.ObjectId,
     comments: Schema.Types.ObjectId[],
     priorities: any,
     statuses: any,
@@ -39,7 +39,7 @@ const ticketSchema = new Schema<ITicket>({
         enum: ["Feature", "Bug"],
         default: "Feature",
     },
-    assignee:{ type: Schema.Types.Mixed, ref: "User"},
+    assignee:{ type: Schema.Types.ObjectId, ref: "User"},
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment"}],
     type:{type: String, default: "ticket", required: true}
 

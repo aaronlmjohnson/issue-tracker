@@ -133,6 +133,15 @@ const ticketController = ()=> {
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
+
+                const placeholderUser = req.body.assignee ? null : new User({ // used for assignee field when none is provided
+                    email: '',
+                    first_name: '',
+                    last_name: '',
+                    password: '',
+                    role: '',
+                    type: "user"
+                });
                 const ticket = new Ticket({
                     title: req.body.title,
                     description: req.body.description,
@@ -143,7 +152,7 @@ const ticketController = ()=> {
                     status: req.body.status,
                     ticketType: req.body.type,
                     type:"ticket",
-                    assignee: req.body.assignee
+                    assignee: req.body.assignee || placeholderUser 
                 });
 
                 await ticket.save();
@@ -151,7 +160,7 @@ const ticketController = ()=> {
                 const author = (await User.findById(req.body.loggedInUser)).fullName;
 
                 const activity = {
-                    body: ["Ticket titled ", "",  " was added by ", "", "under ", "", "."],
+                    body: ["Ticket titled ", "",  " was added by ", "", " under ", "", "."],
                     emphasisText:[ticket.title, author, projectTitle], 
                 };
                 activityController.createActivity(activity);
@@ -230,6 +239,15 @@ const ticketController = ()=> {
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
 
+                const placeholderUser = req.body.assignee ? null : new User({
+                        email: '',
+                        first_name: '',
+                        last_name: '',
+                        password: '',
+                        role: '',
+                        type: "user"
+                });
+
                 const ticket = new Ticket({
                     title: req.body.title,
                     description: req.body.description,
@@ -239,7 +257,7 @@ const ticketController = ()=> {
                     priority: req.body.priority,
                     status: req.body.status,
                     ticketType: req.body.type,
-                    assignee: req.body.assignee,
+                    assignee: req.body.assignee || placeholderUser,
                     type: "ticket",
                     _id: req.params.ticketId
                 });
