@@ -91,6 +91,11 @@
     @apply grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10;
 }
 
+.sidebar-scroll {
+    scrollbar-color: white #27005d !important;
+    scrollbar-width: thin !important;
+}
+
 .ticket-listing{
     @apply bg-white w-fit  grid grid-cols-2 p-4 gap-y-3;
     grid-template-columns: min-content;
@@ -98,7 +103,3 @@
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
 
-.sidebar-scroll {
-    scrollbar-color: white #27005d;
-    scrollbar-width: thin;
-  }
