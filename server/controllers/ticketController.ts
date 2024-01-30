@@ -14,8 +14,8 @@ const ticketController = ()=> {
     const getAllTickets = asyncHandler(async(req, res, next)=>{
         try{
             const tickets = await Ticket.find({})
-            .populate('author')
-            .populate('assignee')
+            .populate('author', {password: 0})
+            .populate('assignee', {password: 0})
             .populate('project')
             .sort({title: 1})
             .exec();
@@ -74,8 +74,8 @@ const ticketController = ()=> {
         const project = await Project.findById(req.params.projectId).exec();
         if(!project) res.status(404).send("Project Not Found.");
         const tickets = await Ticket.find({project:project._id})
-                                    .populate('author')
-                                    .populate('assignee')
+                                    .populate('author', {password: 0})
+                                    .populate('assignee', {password: 0})
                                     .populate('project')
                                     .sort({title: 1}).exec();
         if(!tickets) res.status(404).send("Tickets Not Found.");
@@ -133,7 +133,6 @@ const ticketController = ()=> {
             try{
                 if(!validationErrors.isEmpty())
                     throw new TypeError(validationErrors.array()[0].msg);
-                console.log("new ticket", req.body);
                 const ticket = new Ticket({
                     title: req.body.title,
                     description: req.body.description,

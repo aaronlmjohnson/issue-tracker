@@ -1,6 +1,5 @@
 const ComboBox = (props:any)=>{
     const {options, selected, disabled, label, placeholder} = props;
-    console.log("option", options);
     return (
         <div className="flex flex-col">
             <label htmlFor={props.forValue} className={""}>{props.label}</label>
