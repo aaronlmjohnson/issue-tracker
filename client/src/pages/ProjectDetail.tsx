@@ -18,14 +18,14 @@ const ProjectPage = ()=>{
     const [toggleTickets, setToggleTickets] = useState(false);
 
     const {data:project, loading:projectLoading } = useFetchData(`/projects/${projectId}`);
-    const {isAuthed, isLeadOfProject} = useCheckAuthorization();
+    const {isAuthed, isAuthor} = useCheckAuthorization();
     const {isAuthed:canMakeTicket, isAuthedToMakeTicket} =  useCheckAuthorization();
     const userPortraitStyle = "text-[80px] text-primary";
     const { activeDetail } = useActiveFormContext();
 
     useEffect(()=>{
         if(project.length !== 0){
-            isLeadOfProject(project?.project_lead._id);
+            isAuthor(project);
         } 
         
     },[projectLoading])

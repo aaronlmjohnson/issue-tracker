@@ -1,6 +1,7 @@
 export interface IProject {
     type:"project";
     _id: string;
+    author: IUser;
     title: string;
     description: string;
     date_created: string;

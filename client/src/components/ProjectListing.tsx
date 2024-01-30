@@ -6,10 +6,10 @@ import UpdateButton from "./UpdateButton";
 
 const ProjectListing = (props:any)=>{
     const { project } = props;
-    const {isAuthed, isAuthedToEditProject} = useCheckAuthorization();
+    const {isAuthed, isAuthor} = useCheckAuthorization();
 
     useEffect(()=>{
-        isAuthedToEditProject(project);
+        isAuthor(project);
     }, []);
 
     const alterationButtons = ()=>{

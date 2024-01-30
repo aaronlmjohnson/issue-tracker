@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+import { IProject } from "../lib/types";
 
 const useCheckAuthorization = ()=>{
     const [isAuthed, setIsAuthed] = useState(false);
@@ -9,6 +10,8 @@ const useCheckAuthorization = ()=>{
         if(!user) return;
         if(user.user.role === "Administrator") setIsAuthed(true);
     }
+
+    const isAuthor = (project:IProject)=> setIsAuthed(project.author._id === user.user._id);
     
     const isLeadOfProject = (providedId:string)=>{
         if(!user) return;
@@ -42,6 +45,7 @@ const useCheckAuthorization = ()=>{
         isAuthedToMakeTicket,
         isAuthedToEditProject,
         isAdmin,
+        isAuthor,
         isAuthed
     }
 }
