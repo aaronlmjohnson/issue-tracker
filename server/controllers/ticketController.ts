@@ -174,7 +174,7 @@ const ticketController = ()=> {
             const ticketTitle = ticket.title;
                 
                 const activity = {
-                    body: ["Ticket titled ","",  "was deleted from ", "", "by ", "", "."],
+                    body: ["Ticket titled ","",  "was deleted from ", "", " by ", "", "."],
                     emphasisText:[ticketTitle, projectTitle, author], 
                 };
 
@@ -251,7 +251,7 @@ const ticketController = ()=> {
                 const author = (await User.findById(req.body.loggedInUser)).fullName;
 
                 const activity = {
-                    body: ["Ticket titled ","",  "was updated by ", "", " under ", "", "."],
+                    body: ["Ticket titled ","",  " was updated by ", "", " under ", "", "."],
                     emphasisText:[ticket.title, author, projectTitle], 
                 };
                 
