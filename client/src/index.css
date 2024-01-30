@@ -98,4 +98,7 @@
     filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
 
-/* px-4 py-1 border-2 border-primary rounded-lg font-secondary font-bold text-base text-primary */
+.sidebar-scroll {
+    scrollbar-color: white #27005d;
+    scrollbar-width: thin;
+  }

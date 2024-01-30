@@ -11,7 +11,7 @@ const Sidebar = (props:any)=>{
     }
     
     return(
-        <nav className={`${props.sidebarVisible ? " hidden sm:block" : " sm:hidden block"} bg-primary text-white p-5 sm:sticky fixed  h-screen top-0 z-40`}>
+        <nav className={`sidebar-scroll ${props.sidebarVisible ? " hidden sm:block" : " sm:hidden block"} bg-primary text-white p-5 sm:sticky fixed  h-screen top-0 z-40 overflow-y-auto`}>
             <div className="flex gap-3 items-center justify-center text-4xl"> 
                 {logo}
                 <h1 className=" font-secondary font-bold">Tracker</h1>
